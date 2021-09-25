@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libmin.h                                           :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:43:16 by esaci            ###   ########.fr       */
+/*   Created: 2020/02/06 22:26:00 by esaci             #+#    #+#             */
+/*   Updated: 2020/02/08 00:20:40 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBMIN_H
-# define LIBMIN_H
+#include "get_next_line.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <readline/readline.h>
-/* # include <readline/history.h> */
-# include <sys/types.h>
-# include <sys/time.h>
-# include <sys/resource.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <dirent.h>
-# include <stdlib.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <curses.h>
-# include <term.h>
+int	ft_flag(char countu[BUFFER_SIZE + 2])
+{
+	if (countu[BUFFER_SIZE + 1] != 'E')
+	{
+		countu[0] = 0;
+		countu[BUFFER_SIZE + 1] = 'E';
+	}
+	else
+		return (1);
+	return (0);
+}
 
-#endif
+int	get_next_line2(int ct, int count2, char *countu)
+{
+	if (ct == -1 || count2 == - 'E')
+		countu[BUFFER_SIZE + 1] = 0;
+	if (ct == -1)
+		return (-1);
+	return (count2 != - 'E');
+}

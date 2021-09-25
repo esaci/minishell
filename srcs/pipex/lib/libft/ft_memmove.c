@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2019/12/02 21:12:43 by esaci             #+#    #+#             */
+/*   Updated: 2019/12/02 21:12:45 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if (envp[0] == NULL)
-	{
+	size_t				count;
+	unsigned char		*dep;
+
+	count = 0;
+	dep = malloc(sizeof(unsigned char *) * len);
+	if (!(dep))
 		return (0);
+	while (count < len)
+	{
+		dep[count] = *(unsigned char *)src;
+		count++;
+		src++;
 	}
-	
-	return (0);
+	count = 0;
+	while (count < len)
+	{
+		*(unsigned char *)dst = dep[count];
+		dst++;
+		count++;
+	}
+	return (dst - count);
 }

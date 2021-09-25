@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libmin.h                                           :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:43:16 by esaci            ###   ########.fr       */
+/*   Created: 2019/10/20 20:04:42 by esaci             #+#    #+#             */
+/*   Updated: 2019/11/24 20:59:23 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBMIN_H
-# define LIBMIN_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <readline/readline.h>
-/* # include <readline/history.h> */
-# include <sys/types.h>
-# include <sys/time.h>
-# include <sys/resource.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <dirent.h>
-# include <stdlib.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <curses.h>
-# include <term.h>
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	int	count;
 
-#endif
+	count = 0;
+	while ((size_t)count < n)
+	{
+		if (s1[count] != s2[count] || !s1[count] || !s2[count])
+			return ((unsigned char)s1[count] - (unsigned char)s2[count]);
+		count++;
+	}
+	return (0);
+}

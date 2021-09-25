@@ -25,21 +25,6 @@ $(NAME) : $(OBJ) $(SRCD)/main.c
 		ranlib $(MIND)$(MIN)
 		$(COMPILE) $(CFLAGS) -o $(NAME) $(SRCD)/main.c  $(MIND)$(MIN)
 
-sanit2: $(NAME2)
-
-$(NAME2) : $(OBJ) $(SRCD)/main.c
-		rm -rf $(NAME)
-		ar rc $(MIND)$(MIN) $(OBJ)
-		ranlib $(MIND)$(MIN)
-		$(COMPILE) $(SANIT2) -o $(NAME) $(SRCD)/main.c  $(MIND)$(MIN)
-
-sanit: $(NAME1)
-
-$(NAME1) : $(OBJ) $(SRCD)/main.c
-		rm -rf $(NAME)
-		ar rc $(MIND)$(MIN) $(OBJ)
-		ranlib $(MIND)$(MIN)
-		$(COMPILE) $(SANIT) -o $(NAME) $(SRCD)/main.c  $(MIND)$(MIN)
 
 clean:
 	rm -rf $(OBJ)

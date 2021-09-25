@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libmin.h                                           :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:43:16 by esaci            ###   ########.fr       */
+/*   Created: 2019/11/24 23:21:49 by esaci             #+#    #+#             */
+/*   Updated: 2019/11/24 23:23:03 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBMIN_H
-# define LIBMIN_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <readline/readline.h>
-/* # include <readline/history.h> */
-# include <sys/types.h>
-# include <sys/time.h>
-# include <sys/resource.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <dirent.h>
-# include <stdlib.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <curses.h>
-# include <term.h>
-
-#endif
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}

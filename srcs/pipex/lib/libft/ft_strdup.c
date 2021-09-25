@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libmin.h                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:43:16 by esaci            ###   ########.fr       */
+/*   Created: 2019/10/21 12:38:26 by esaci             #+#    #+#             */
+/*   Updated: 2019/12/02 21:09:32 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBMIN_H
-# define LIBMIN_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <readline/readline.h>
-/* # include <readline/history.h> */
-# include <sys/types.h>
-# include <sys/time.h>
-# include <sys/resource.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <dirent.h>
-# include <stdlib.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <curses.h>
-# include <term.h>
+char	*ft_strdup(const char *s1)
+{
+	int		count;
+	int		count2;
+	char	*ptr;
 
-#endif
+	count = ft_strlen(s1);
+	ptr = malloc(sizeof(char) * (count + 1));
+	if (!(ptr))
+		return (NULL);
+	count2 = 0;
+	while (s1[count2] != '\0')
+	{
+		ptr[count2] = s1[count2];
+		count2++;
+	}
+	ptr[count2] = '\0';
+	return (ptr);
+}

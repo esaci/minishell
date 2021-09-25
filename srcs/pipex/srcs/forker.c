@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libmin.h                                           :+:      :+:    :+:   */
+/*   forker.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:43:16 by esaci            ###   ########.fr       */
+/*   Created: 2021/07/15 14:18:38 by esaci             #+#    #+#             */
+/*   Updated: 2021/07/15 14:18:40 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBMIN_H
-# define LIBMIN_H
+#include "../lib/libpip.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <readline/readline.h>
-/* # include <readline/history.h> */
-# include <sys/types.h>
-# include <sys/time.h>
-# include <sys/resource.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <dirent.h>
-# include <stdlib.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <curses.h>
-# include <term.h>
+pid_t	forker(t_pip *pip)
+{
+	pid_t	pid;
 
-#endif
+	pid = fork();
+	if (pid == -1)
+	{
+		printf("fork a echoue \n");
+		ft_stop(pip, "pid", NULL, 0);
+	}
+	return (pid);
+}
+
+void	koi(char *str)
+{
+	printf("|%s|\n", str);
+}
+
+void	print_error(char	*ptr)
+{
+	write(2, ptr, ft_strlen(ptr));
+	write(2, "\n", 1);
+}

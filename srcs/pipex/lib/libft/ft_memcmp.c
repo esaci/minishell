@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libmin.h                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:43:16 by esaci            ###   ########.fr       */
+/*   Created: 2019/12/02 21:45:14 by esaci             #+#    #+#             */
+/*   Updated: 2019/12/02 21:45:15 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBMIN_H
-# define LIBMIN_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <readline/readline.h>
-/* # include <readline/history.h> */
-# include <sys/types.h>
-# include <sys/time.h>
-# include <sys/resource.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <dirent.h>
-# include <stdlib.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <curses.h>
-# include <term.h>
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	size_t	count;
+	int		res;
 
-#endif
+	res = 0;
+	count = 0;
+	while (count < n)
+	{
+		if (!(*(unsigned char *)s1 == *(unsigned char *)s2))
+		{
+			res = *(unsigned char *)s1 - *(unsigned char *)s2;
+			return (res);
+		}
+		s1++;
+		s2++;
+		count++;
+	}
+	return (0);
+}

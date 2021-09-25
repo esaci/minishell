@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libmin.h                                           :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:43:16 by esaci            ###   ########.fr       */
+/*   Created: 2019/10/14 21:07:56 by esaci             #+#    #+#             */
+/*   Updated: 2019/11/24 00:44:40 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBMIN_H
-# define LIBMIN_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <readline/readline.h>
-/* # include <readline/history.h> */
-# include <sys/types.h>
-# include <sys/time.h>
-# include <sys/resource.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <dirent.h>
-# include <stdlib.h>
-# include <sys/ioctl.h>
-# include <termios.h>
-# include <curses.h>
-# include <term.h>
+char	*ft_strrchr(const char *s, int c)
+{
+	int	count;
+	int	count2;
 
-#endif
+	count = 0;
+	count2 = 0;
+	while (*(s + count) != '\0')
+	{
+		if (*(s + count) == c)
+			count2 = count;
+		count++;
+	}
+	if (count2 != 0 || (char)s[count2] == c)
+		return ((char *)s + count2);
+	if (c == 0 && (char)s[count] == '\0')
+		return ((char *)s + count);
+	return (NULL);
+}
