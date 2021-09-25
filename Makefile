@@ -49,6 +49,7 @@ clean:
 	rm -rf $(OBJ)
 
 fclean: clean
+	make fclean -C $(LIBFTD)
 	rm -rf $(NAME)
 	rm -rf $(MIND)$(MIN)
 
