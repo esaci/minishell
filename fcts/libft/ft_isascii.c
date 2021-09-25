@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2019/12/02 21:54:42 by esaci             #+#    #+#             */
+/*   Updated: 2019/12/02 21:54:43 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+int	ft_isascii(int c)
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
-	return (0);
-	return (av[ac - 1][0]);
+	if (c < 0 || c > 127)
+		return (0);
+	return (1);
 }

@@ -16,7 +16,9 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <readline/readline.h>
-/* # include <readline/history.h> */
+# include <readline/history.h>
+# include "../fcts/libft/libft.h"
+# include "../fcts/GNL/get_next_line.h"
 # include <sys/types.h>
 # include <sys/time.h>
 # include <sys/resource.h>
@@ -28,5 +30,9 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
+
+int				start_fonction(void);
+int				parser_input(char *ptr);
+int				print_custom(char *str, int fd, int exit_code, int saut_ligne);
 
 #endif

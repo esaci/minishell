@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2019/10/20 20:04:42 by esaci             #+#    #+#             */
+/*   Updated: 2019/11/24 20:59:23 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
+	int	count;
+
+	count = 0;
+	while ((size_t)count < n)
+	{
+		if (s1[count] != s2[count] || !s1[count] || !s2[count])
+			return ((unsigned char)s1[count] - (unsigned char)s2[count]);
+		count++;
+	}
 	return (0);
-	return (av[ac - 1][0]);
 }

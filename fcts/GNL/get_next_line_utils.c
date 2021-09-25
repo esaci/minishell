@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2020/02/06 22:26:00 by esaci             #+#    #+#             */
+/*   Updated: 2020/02/08 00:20:40 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "get_next_line.h"
 
-int	main(int ac, char *av[], char *envp[])
+int	ft_flag(char countu[BUFFER_SIZE + 2])
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
+	if (countu[BUFFER_SIZE + 1] != 'E')
+	{
+		countu[0] = 0;
+		countu[BUFFER_SIZE + 1] = 'E';
+	}
+	else
+		return (1);
 	return (0);
-	return (av[ac - 1][0]);
+}
+
+int	get_next_line2(int ct, int count2, char *countu)
+{
+	if (ct == -1 || count2 == - 'E')
+		countu[BUFFER_SIZE + 1] = 0;
+	if (ct == -1)
+		return (-1);
+	return (count2 != - 'E');
 }

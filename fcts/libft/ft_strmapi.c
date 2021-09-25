@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2019/11/24 22:27:37 by esaci             #+#    #+#             */
+/*   Updated: 2019/11/24 22:48:12 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
-	return (0);
-	return (av[ac - 1][0]);
+	char	*dst;
+	size_t	count;
+
+	dst = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!(dst))
+		return (NULL);
+	count = 0;
+	while (count < ft_strlen(s))
+	{
+		dst[count] = (*f)(count, s[count]);
+		count++;
+	}
+	dst[count] = '\0';
+	return (dst);
 }

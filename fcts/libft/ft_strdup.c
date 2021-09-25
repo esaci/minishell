@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2019/10/21 12:38:26 by esaci             #+#    #+#             */
+/*   Updated: 2019/12/02 21:09:32 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+char	*ft_strdup(const char *s1)
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
-	return (0);
-	return (av[ac - 1][0]);
+	int		count;
+	int		count2;
+	char	*ptr;
+
+	count = ft_strlen(s1);
+	ptr = malloc(sizeof(char) * (count + 1));
+	if (!(ptr))
+		return (NULL);
+	count2 = 0;
+	while (s1[count2] != '\0')
+	{
+		ptr[count2] = s1[count2];
+		count2++;
+	}
+	ptr[count2] = '\0';
+	return (ptr);
 }

@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2019/10/14 21:07:56 by esaci             #+#    #+#             */
+/*   Updated: 2019/11/24 00:44:40 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+char	*ft_strrchr(const char *s, int c)
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
-	return (0);
-	return (av[ac - 1][0]);
+	int	count;
+	int	count2;
+
+	count = 0;
+	count2 = 0;
+	while (*(s + count) != '\0')
+	{
+		if (*(s + count) == c)
+			count2 = count;
+		count++;
+	}
+	if (count2 != 0 || (char)s[count2] == c)
+		return ((char *)s + count2);
+	if (c == 0 && (char)s[count] == '\0')
+		return ((char *)s + count);
+	return (NULL);
 }

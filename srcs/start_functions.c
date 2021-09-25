@@ -1,22 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   start_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2021/09/25 21:35:42 by esaci             #+#    #+#             */
+/*   Updated: 2021/09/25 21:35:43 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/libmin.h"
 
-int	main(int ac, char *av[], char *envp[])
+int	start_fonction(void)
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
+	char	*ptr;
+	char	*str;
+	int		value;
+
+	ptr = 0;
+	ptr = readline("Enter a line: ");
+	while (ft_memcmp(ptr, "exit", 5))
+	{
+		value = parser_input(ptr);
+		if (value)
+		{
+			str = ft_itoa(value);
+			print_custom(str, 1, 0, 1);
+			free(str);
+		}
+		if (ptr[0] != 0)
+			add_history (ptr);
+		if (ptr)
+			free(ptr);
+		rl_on_new_line();
+		ptr = readline("Enter a line: ");
+	}
+	rl_clear_history();
 	return (0);
-	return (av[ac - 1][0]);
 }

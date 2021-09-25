@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2019/10/14 21:48:47 by esaci             #+#    #+#             */
+/*   Updated: 2019/11/24 21:02:52 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
-	return (0);
-	return (av[ac - 1][0]);
+	int	countsrc;
+	int	countdst;
+
+	countdst = 0;
+	countsrc = ft_strlen(src);
+	if ((int)dstsize == 0)
+		return (countsrc);
+	while (countdst < (int)dstsize - 1 && countdst < countsrc)
+	{
+		dst[countdst] = src[countdst];
+		countdst++;
+	}
+	dst[countdst] = '\0';
+	return (countsrc);
 }

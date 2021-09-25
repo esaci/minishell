@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2019/12/02 21:45:14 by esaci             #+#    #+#             */
+/*   Updated: 2019/12/02 21:45:15 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
+	size_t	count;
+	int		res;
+
+	res = 0;
+	count = 0;
+	while (count < n)
+	{
+		if (!(*(unsigned char *)s1 == *(unsigned char *)s2))
+		{
+			res = *(unsigned char *)s1 - *(unsigned char *)s2;
+			return (res);
+		}
+		s1++;
+		s2++;
+		count++;
+	}
 	return (0);
-	return (av[ac - 1][0]);
 }

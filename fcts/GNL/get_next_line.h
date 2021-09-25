@@ -24,8 +24,6 @@
 # include <stdio.h>
 # include <limits.h>
 # include "../libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
 
 int		ft_flag(char countu[BUFFER_SIZE + 2]);
 int		ft_test(int fd, char **line, char *countb, char *countu);

@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Created: 2019/12/02 21:40:23 by esaci             #+#    #+#             */
+/*   Updated: 2019/12/02 21:40:26 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+void	*ft_memccpy(void *dst, const void *src, int c, size_t len)
 {
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	start_fonction();
-	return (0);
-	return (av[ac - 1][0]);
+	size_t	count;
+	void	*dep;
+
+	count = 0;
+	while (count < len)
+	{
+		dep = dst;
+		*(unsigned char *)dst = *(unsigned char *)src;
+		if (*(unsigned char *)src == (unsigned char)c)
+			return (dep + 1);
+		dst++;
+		dep++;
+		count++;
+		src++;
+	}
+	return (NULL);
 }
