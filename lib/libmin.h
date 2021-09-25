@@ -31,8 +31,24 @@
 # include <curses.h>
 # include <term.h>
 
-int				start_fonction(void);
+typedef struct s_pip
+{
+	int		fd[2];
+	int		tmp[2];
+	char	**pathptr;
+	char	**pwd;
+	char	*tmptr;
+	char	**b_ptr;
+	int		errnum;
+	int		b_ac;
+	int		*b_pid;
+	int		*b_pfd1;
+}	t_pip;
+
+int				start_fonction(char *envp[]);
+void			sig_handler();
 int				parser_input(char *ptr);
+int				pipex_custom(int value, char *envp[]);
 int				print_custom(char *str, int fd, int exit_code, int saut_ligne);
 
 #endif

@@ -23,7 +23,9 @@ COMPILE2 = -lreadline -L /Users/esaci/.brew/opt/readline/lib
 SRC =	$(GNLD)get_next_line.c				\
 		$(GNLD)get_next_line_utils.c		\
 		$(SRCD)print_functions.c			\
-		$(SRCD)start_functions.c				\
+		$(SRCD)sig_handler.c				\
+		$(SRCD)start_functions.c			\
+		$(SRCD)custom_pipex.c				\
 		$(SRCD)parser_input.c
 
 OBJ = $(SRC:.c=.o)

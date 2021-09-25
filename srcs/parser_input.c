@@ -12,6 +12,11 @@
 
 #include "../lib/libmin.h"
 
+/* int	is_e(char c, char s, char a, char b)
+{
+	if (c == s && c == )
+} */
+
 int	check_chevron(char *ptr)
 {
 	int	count;

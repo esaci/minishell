@@ -12,29 +12,23 @@
 
 #include "../lib/libmin.h"
 
-int	start_fonction(void)
+int	start_fonction(char *envp[])
 {
-	char	*ptr;
-	char	*str;
 	int		value;
 
-	ptr = 0;
-	ptr = readline("Enter a line: ");
-	while (ft_memcmp(ptr, "exit", 5))
+	readline("Minishell:: ");
+	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
-		value = parser_input(ptr);
+		value = parser_input(rl_line_buffer);
 		if (value)
-		{
-			str = ft_itoa(value);
-			print_custom(str, 1, 0, 1);
-			free(str);
-		}
-		if (ptr[0] != 0)
-			add_history (ptr);
-		if (ptr)
-			free(ptr);
+			value = pipex_custom(value, envp);
+		if (value)
+			print_custom("Echec du pipex", 1, 1, 1);
+		if (rl_line_buffer[0] != 0)
+			add_history (rl_line_buffer);
 		rl_on_new_line();
-		ptr = readline("Enter a line: ");
+		readline("Minishell: ");
+		rl_replace_line(rl_line_buffer, 0);
 	}
 	rl_clear_history();
 	return (0);
