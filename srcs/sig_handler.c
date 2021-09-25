@@ -12,9 +12,12 @@
 
 #include "../lib/libmin.h"
 
-void sig_handler()
+void	*sig_handler()
 {
-    signal(SIGINT, SIG_IGN);
-    signal(SIGTSTP, SIG_IGN);
-    signal(SIGQUIT, SIG_IGN);
+	void	(*sigint_c)(int);
+
+	sigint_c = signal(SIGINT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	return (sigint_c);
 }

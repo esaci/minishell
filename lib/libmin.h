@@ -45,10 +45,10 @@ typedef struct s_pip
 	int		*b_pfd1;
 }	t_pip;
 
-int				start_fonction(char *envp[]);
-void			sig_handler();
-int				parser_input(char *ptr);
-int				pipex_custom(int value, char *envp[]);
-int				print_custom(char *str, int fd, int exit_code, int saut_ligne);
+int					start_fonction(char *envp[]);
+void				*sig_handler();
+int					parser_input(char *ptr);
+int					pipex_custom(int value, char *envp[]);
+int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
 
 #endif

@@ -16,7 +16,7 @@ int	start_fonction(char *envp[])
 {
 	int		value;
 
-	readline("Minishell:: ");
+	readline("Minishell: ");
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
 		value = parser_input(rl_line_buffer);
