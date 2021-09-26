@@ -21,5 +21,6 @@ int	main(int ac, char *av[], char *envp[])
 	sigint_c = sig_handler();
 	start_fonction(envp);
 	return (0);
-	return (av[ac - 1][0]);
+	sigint_c(av[ac - 1][0]);
+	return (0);
 }

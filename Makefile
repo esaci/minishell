@@ -18,7 +18,11 @@ CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
 
 COMPILE1 = -I /Users/esaci/.brew/opt/readline/include
 
+COMPILE1U = -I /usr/include/readline
+
 COMPILE2 = -lreadline -L /Users/esaci/.brew/opt/readline/lib
+
+COMPILE2U = -lreadline -L /usr/include/readline
 
 SRC =	$(GNLD)get_next_line.c				\
 		$(GNLD)get_next_line_utils.c		\
@@ -43,6 +47,16 @@ $(NAME) : $(OBJ) $(SRCD)/main.c
 		rm -f $(LIBFT)
 		ranlib $(MIND)$(MIN)
 		$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2) $(SRCD)/main.c  $(MIND)$(MIN)
+
+ub: $(NAME)
+	$(OBJ) $(SRCD)/main.c
+	rm -rf $(NAME)
+	make -C $(LIBFTD)
+	cp $(LIBFTD)$(LIBFT) $(MIND)$(MIN)
+	ar rc $(MIND)$(MIN) $(OBJ)
+	rm -f $(LIBFT)
+	ranlib $(MIND)$(MIN)
+	$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2U) $(SRCD)/main.c  $(MIND)$(MIN)
 
 
 clean:
