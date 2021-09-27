@@ -43,21 +43,35 @@ TOKENTYPE	lexer_check_type(t_token *tok)
 		return (CHAR_POINT);
 	if (tok->line[0] ==  ' ')
 		return (CHAR_SPACE);
+	if (tok->line[0] ==  '-')
+		return (CHAR_TIRET);
+	if (tok->line[0] ==  '&')
+		return (CHAR_ET);
+	if (tok->line[0] ==  '\0')
+		return (CHAR_Z);
+	if (tok->line[0] ==  ';')
+		return (CHAR_PVIR);
+	if (tok->line[0] ==  '\\')
+		return (CHAR_SLAHV);
+	if (tok->line[0] ==  '\t')
+		return (CHAR_TAB);
+	if (tok->line[0] ==  '\n')
+		return (CHAR_Z);
 	return (CHAR_INUT);
 }
 
 int	lexer_token(t_lexer *lexer, char *str)
 {
-	t_token		*toktmp;
+	t_token		**toktmp;
 
-	toktmp = lexer->tok;
-	while (toktmp)
-		toktmp = toktmp->n_token;
-	toktmp = malloc(sizeof(t_token) * 2);
-	if (!toktmp)
+	toktmp = &(lexer->tok);
+	while (*toktmp)
+		toktmp = &((*toktmp)->n_token);
+	(*toktmp) = malloc(sizeof(t_token) * 2);
+	if (!(*toktmp))
 		return (0);
-	toktmp->line = str;
-	toktmp->type = lexer_check_type(toktmp);
+	(*toktmp)->line = str;
+	(*toktmp)->type = lexer_check_type(*toktmp);
 	return (1);
 }
 

@@ -33,6 +33,7 @@
 
 typedef	enum	TOKENTYPE
 {
+	CHAR_TMP = -1,
 	CHAR_INUT = 1,
 	CHAR_PIPE = '|',
 	CHAR_GUILL = '\"',
@@ -45,6 +46,14 @@ typedef	enum	TOKENTYPE
 	CHAR_PARF = ')',
 	CHAR_POINT = '.',
 	CHAR_SPACE = ' ',
+	CHAR_TIRET = '-',
+	CHAR_ET = '&',
+	CHAR_Z = 0,
+	CHAR_PVIR = ';',
+	CHAR_SLAHV = '\\',
+	CHAR_TAB = '\t',
+	CHAR_NL = '\n',
+	CHAR_ERROR = '!',
 }	TOKENTYPE;
 
 typedef struct s_pip
@@ -81,6 +90,7 @@ t_lexer				*parser_input(t_lexer *lexer);
 t_token				*parser_next_token(t_token *tok);
 int					pipex_custom(int value, char *envp[]);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
+int					print_tokens(t_lexer *l);
 int					free_lexer_tokens(t_lexer *lexer);
 int					init_lexer(t_lexer *lexer);
 int					lexer_start(t_lexer *lexer);

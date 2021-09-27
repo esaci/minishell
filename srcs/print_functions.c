@@ -19,3 +19,17 @@ int	print_custom(char *str, int fd, int exit_code, int saut_ligne)
 		write(fd, "\n", 1);
 	return (exit_code);
 }
+
+int	print_tokens(t_lexer *l)
+{
+	t_token *t;
+
+	t =  l->tok;
+	while (t)
+	{
+		write(1, &t->type, 1);
+		write(1, "\n", 1);
+		t = t->n_token;
+	}
+	return (0);
+}
