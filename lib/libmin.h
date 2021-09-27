@@ -31,6 +31,22 @@
 # include <curses.h>
 # include <term.h>
 
+typedef	enum	TOKENTYPE
+{
+	CHAR_INUT = 1,
+	CHAR_PIPE = '|',
+	CHAR_GUILL = '\"',
+	CHAR_APO = '\'',
+	CHAR_CHEVG = '<',
+	CHAR_CHEVD = '>',
+	CHAR_DOLL = '$',
+	CHAR_INTER = '?',
+	CHAR_PARO = '(',
+	CHAR_PARF = ')',
+	CHAR_POINT = '.',
+	CHAR_SPACE = ' ',
+}	TOKENTYPE;
+
 typedef struct s_pip
 {
 	int		fd[2];
@@ -45,10 +61,27 @@ typedef struct s_pip
 	int		*b_pfd1;
 }	t_pip;
 
+typedef	struct s_token
+{
+	TOKENTYPE	type;
+	char				*line;
+	struct s_token		*n_token;
+}	t_token;
+
+typedef	struct s_lexer
+{
+	t_token		*tok;
+	int			len;
+}	t_lexer;
+
+
 int					start_fonction(char *envp[]);
 void				*sig_handler();
-int					parser_input(char *ptr);
+t_lexer				*parser_input(t_lexer *lexer);
+t_token				*parser_next_token(t_token *tok);
 int					pipex_custom(int value, char *envp[]);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
-
+int					free_lexer_tokens(t_lexer *lexer);
+int					init_lexer(t_lexer *lexer);
+int					lexer_start(t_lexer *lexer);
 #endif

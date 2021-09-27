@@ -12,55 +12,41 @@
 
 #include "../lib/libmin.h"
 
-/* int	is_e(char c, char s, char a, char b)
+t_token	*parser_next_token(t_token *tok)
 {
-	if (c == s && c == )
-} */
+	t_token		*toktmp;
+	TOKENTYPE	tmp;
 
-int	check_chevron(char *ptr)
-{
-	int	count;
-	int	len;
-	int	res;
 
-	res = 0;
-	count = 0;
-	len = ft_strlen(ptr);
-	while (count < len)
-	{
-		if (ptr[count] == '<' || ptr[count] == '>')
-			res++;
-		count++;
-	}
-	return (res);
+	if (!tok)
+		return (NULL);
+	if (tok->type == CHAR_APO)
+		tmp = CHAR_APO;
+	if (tok->type == CHAR_CHEVD)
+		tmp = CHAR_APO | CHAR_CHEVG;
+	return (tok->n_token);
+	toktmp = tok->n_token;
 }
 
-int	check_pipe(char *ptr)
+int	parser_lexer(t_lexer *lexer)
 {
-	int	count;
-	int	len;
-	int	res;
+	t_token		*toktmp;
 
-	res = 0;
-	count = 0;
-	len = ft_strlen(ptr);
-	while (count < len)
+	toktmp = lexer->tok;
+	while (toktmp)
 	{
-		if (ptr[count] == '|')
-			res++;
-		count++;
+		toktmp->n_token = parser_next_token(toktmp);
+		toktmp = toktmp->n_token;
 	}
-	return (res);
+	return (0);
 }
 
-int	parser_input(char *ptr)
+t_lexer	*parser_input(t_lexer *lexer)
 {
-	int	value;
-
-	if (!ptr)
-		return (0);
-	value = 0;
-	value += 10 * check_chevron(ptr);
-	value += 100 * check_pipe(ptr);
-	return (value);
+	init_lexer(lexer);
+	if (lexer_start(lexer))
+		return (NULL);
+	if (parser_lexer(lexer))
+		return (NULL);
+	return (lexer);
 }

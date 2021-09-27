@@ -14,22 +14,28 @@
 
 int	start_fonction(char *envp[])
 {
-	int		value;
+	t_lexer	*lexer;
 
+	lexer = malloc(sizeof(t_lexer) * 2);
+	if (!lexer)
+		return (1);
 	readline("Minishell: ");
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
-		value = parser_input(rl_line_buffer);
-		if (value)
-			value = pipex_custom(value, envp);
-		if (value)
-			print_custom("Echec du pipex", 1, 1, 1);
+		if (!parser_input(lexer))
+		{
+			rl_clear_history();
+			free(lexer);
+			return (print_custom("malloc2", 2, 1, 1));
+		}
 		if (rl_line_buffer[0] != 0)
-			add_history (rl_line_buffer);
+			add_history(rl_line_buffer);
 		rl_on_new_line();
 		readline("Minishell: ");
 		rl_replace_line(rl_line_buffer, 0);
 	}
 	rl_clear_history();
+	free(lexer);
 	return (0);
+	return(envp[0][0]);
 }

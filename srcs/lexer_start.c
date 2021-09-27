@@ -1,0 +1,82 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer_start.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/27 18:38:45 by esaci             #+#    #+#             */
+/*   Updated: 2021/09/27 18:39:01 by esaci            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lib/libmin.h"
+
+int	init_lexer(t_lexer *lexer)
+{
+	lexer->len = 0;
+	lexer->tok = NULL;
+	return (0);
+}
+
+TOKENTYPE	lexer_check_type(t_token *tok)
+{
+	if (tok->line[0] ==  '|')
+		return (CHAR_PIPE);
+	if (tok->line[0] ==  '\"')
+		return (CHAR_GUILL);
+	if (tok->line[0] ==  '\'')
+		return (CHAR_APO);
+	if (tok->line[0] ==  '<')
+		return (CHAR_CHEVG);
+	if (tok->line[0] ==  '>')
+		return (CHAR_CHEVD);
+	if (tok->line[0] ==  '$')
+		return (CHAR_DOLL);
+	if (tok->line[0] ==  '\?')
+		return (CHAR_INTER);
+	if (tok->line[0] ==  '(')
+		return (CHAR_PARO);
+	if (tok->line[0] ==  ')')
+		return (CHAR_PARF);
+	if (tok->line[0] ==  '.')
+		return (CHAR_POINT);
+	if (tok->line[0] ==  ' ')
+		return (CHAR_SPACE);
+	return (CHAR_INUT);
+}
+
+int	lexer_token(t_lexer *lexer, char *str)
+{
+	t_token		*toktmp;
+
+	toktmp = lexer->tok;
+	while (toktmp)
+		toktmp = toktmp->n_token;
+	toktmp = malloc(sizeof(t_token) * 2);
+	if (!toktmp)
+		return (0);
+	toktmp->line = str;
+	toktmp->type = lexer_check_type(toktmp);
+	return (1);
+}
+
+int	lexer_start(t_lexer *lexer)
+{
+	int	count;
+	int	count2;
+
+	count = 0;
+	while(rl_line_buffer[count])
+	{
+		count2 = lexer_token(lexer, rl_line_buffer + count);
+		lexer->len++;
+		if (!count2)
+		{
+			free_lexer_tokens(lexer);
+			return (1);
+		}
+		count += count2;
+	}
+	return (0);
+}

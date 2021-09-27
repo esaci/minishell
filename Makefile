@@ -16,11 +16,11 @@ COMPILE = gcc
 
 CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
 
-COMPILE1 = -I /Users/julpelle/.brew/opt/readline/include
+COMPILE1 = -I /Users/$(USER)/.brew/opt/readline/include
 
 COMPILE1U = -I /usr/include/readline
 
-COMPILE2 = -lreadline -L /Users/esaci/.brew/opt/readline/lib
+COMPILE2 = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 COMPILE2U = -lreadline -L /usr/include/readline
 
@@ -30,7 +30,9 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(SRCD)sig_handler.c				\
 		$(SRCD)start_functions.c			\
 		$(SRCD)custom_pipex.c				\
-		$(SRCD)parser_input.c
+		$(SRCD)parser_input.c				\
+		$(SRCD)lexer_start.c				\
+		$(SRCD)free_functions.c				
 
 OBJ = $(SRC:.c=.o)
 
