@@ -16,7 +16,7 @@ COMPILE = gcc
 
 CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
 
-COMPILE1 = -I /Users/esaci/.brew/opt/readline/include
+COMPILE1 = -I /Users/julpelle/.brew/opt/readline/include
 
 COMPILE1U = -I /usr/include/readline
 
