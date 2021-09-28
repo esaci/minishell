@@ -57,48 +57,43 @@ int	init_lexer(t_lexer *lexer)
 {
 	lexer->len = 0;
 	lexer->tok = NULL;
-	/* lexer->tok = malloc(sizeof(t_token*) * 2); */
-	/* if (!lexer->tok)
-		return (1);
-	lexer->tok->line = rl_line_buffer;
-	lexer->tok->type = lexer_check_type(lexer->tok);
-	lexer->tok->n_token = NULL; */
 	return (0);
 }
 
-int	lexer_token(t_lexer *lexer, char *str)
+t_token	*lexer_token(char *str)
 {
-	t_token		**toktmp;
+	t_token		*toktmp;
 
-	toktmp = &(lexer->tok);
-	while (*toktmp)
-		*toktmp = (*toktmp)->n_token;
-	*toktmp = malloc(sizeof(t_token) * 2);
-	if (!(*toktmp))
-		return (0);
-	(*toktmp)->line = str;
-	(*toktmp)->type = lexer_check_type(*toktmp);
-	(*toktmp)->n_token = NULL;
-	return (1);
-	printf("cque je viens de modif %d vs %d - %s\n", (*toktmp)->type, lexer->tok->type, str);
+	toktmp = malloc(sizeof(t_token) * 2);
+	if (!(toktmp))
+		return (NULL);
+	(toktmp)->line = str;
+	(toktmp)->type = lexer_check_type(toktmp);
+	(toktmp)->n_token = NULL;
+	return (toktmp);
 }
 
 int	lexer_start(t_lexer *lexer)
 {
-	int	count;
-	int	count2;
+	int			count;
+	t_token		**toktmp;
 
-	count = 0;
+	if (!rl_line_buffer)
+		return (1);
+	lexer->tok = lexer_token(rl_line_buffer);
+	count = 1;
+	toktmp = &(lexer->tok->n_token);
 	while(rl_line_buffer[count])
 	{
-		count2 = lexer_token(lexer, rl_line_buffer + count);
+		(*toktmp) = lexer_token(rl_line_buffer + count);
 		lexer->len++;
-		if (!count2)
+		if (!(*toktmp))
 		{
 			free_lexer_tokens(lexer);
 			return (1);
 		}
-		count += count2;
+		toktmp = &((*toktmp)->n_token);
+		count++;
 	}
 	return (0);
 }

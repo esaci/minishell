@@ -19,7 +19,7 @@ int	start_fonction(char *envp[])
 	lexer = malloc(sizeof(t_lexer) * 2);
 	if (!lexer)
 		return (1);
-	readline("Minishell: ");
+	readline("Minishell> ");
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
 		if (!parser_input(lexer))
@@ -31,7 +31,7 @@ int	start_fonction(char *envp[])
 		if (rl_line_buffer[0] != 0)
 			add_history(rl_line_buffer);
 		print_tokens(lexer);
-		readline("Minishell: ");
+		readline("Minishell> ");
 		rl_on_new_line();
 		/* rl_replace_line(rl_line_buffer, 0); */
 	}

@@ -81,8 +81,6 @@ int	parser_lexer(t_lexer *lexer)
 	toktmp = &lexer->tok;
 	while (*toktmp && (*toktmp)->n_token)
 	{
-		if (count)
-			print_custom((*toktmp)->line, 1, 1, 1);
 		(*toktmp)->n_token = parser_next_token(*toktmp);
 		toktmp = &(*toktmp)->n_token;
 		count++;
