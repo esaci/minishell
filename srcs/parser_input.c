@@ -12,20 +12,41 @@
 
 #include "../lib/libmin.h"
 
-t_token	*parser_chevrong(t_token *t)
+t_token	*parser_chevron(t_token *t, TOKENTYPE type)
 {
 	t_token	*tmp;
 
-	if (t->n_token->type == CHAR_CHEVG)
+	if (t->n_token->type == type)
 		return(t->n_token->n_token);
 	else
 	{
 		tmp = t->n_token;
-		while (tmp && tmp->type != CHAR_INUT)
+		while (tmp && tmp->type == CHAR_SPACE)
 			tmp = tmp->n_token;
-		if (!tmp || tmp->type != )
-
 	}
+	return (tmp);
+}
+
+t_token	*parser_in_between(t_token *t, TOKENTYPE type)
+{
+	t_token	*tmp;
+
+	tmp = t->n_token;
+	while (tmp && tmp->type != type)
+		tmp = tmp->n_token;
+	if (!tmp)
+		return (tmp);
+	tmp = tmp->n_token;
+	return (tmp);
+}
+
+t_token	*parser_until_not(t_token *t, TOKENTYPE type)
+{
+	t_token	*tmp;
+
+	tmp = t->n_token;
+	while (tmp && tmp->type == type)
+		tmp = tmp->n_token;
 	return (tmp);
 }
 
@@ -33,39 +54,40 @@ t_token	*parser_next_token(t_token *tok)
 {
 	t_token		*toktmp;
 	TOKENTYPE	tmp;
-	TOKENTYPE	tmp2;
 
 	tmp = CHAR_INUT;
-	tmp2 = CHAR_TMP;
-	if (!tok)
-		return (NULL);
-	if (!tok->n_token)
-		return (NULL);
-	toktmp = tok->n_token;
-	while (toktmp->type == CHAR_SPACE && toktmp)
+	toktmp = tok;
+	while (toktmp && toktmp->type == CHAR_SPACE)
 		toktmp = toktmp->n_token;
 	if (!toktmp)
-		return (NULL);
-	if (tok->n_token && tok->type == CHAR_CHEVG)
-		toktmp = parser_chevrong(tok);
-	else if (tok->type == CHAR_CHEVD)
-	{
-		if (tok->n_token && tok->n_token->type == CHAR_CHEVD)
-			return  (tok->n_token->n_token);
-		return (tok->n_token);
-	}
+		return (toktmp);
+	if (!toktmp->n_token)
+		return (toktmp);
+	if (toktmp->type == CHAR_CHEVG || toktmp->type == CHAR_CHEVD)
+		toktmp = parser_chevron(toktmp, toktmp->type);
+	else if (toktmp->type == CHAR_GUILL || toktmp->type == CHAR_APO)
+		toktmp = parser_in_between(toktmp, toktmp->type);
+	else if (toktmp->type == CHAR_INUT)
+		toktmp = parser_until_not(toktmp, toktmp->type);
+	else
+		toktmp = toktmp->n_token;
 	return (toktmp);
 }
 
 int	parser_lexer(t_lexer *lexer)
 {
 	t_token		**toktmp;
+	int	count; //asupr
 
+	count = 0;
 	toktmp = &lexer->tok;
-	while (*toktmp)
+	while (*toktmp && (*toktmp)->n_token)
 	{
+		if (count)
+			print_custom((*toktmp)->line, 1, 1, 1);
 		(*toktmp)->n_token = parser_next_token(*toktmp);
 		toktmp = &(*toktmp)->n_token;
+		count++;
 	}
 	return (0);
 }
