@@ -53,9 +53,7 @@ t_token	*parser_until_not(t_token *t, TOKENTYPE type)
 t_token	*parser_next_token(t_token *tok)
 {
 	t_token		*toktmp;
-	TOKENTYPE	tmp;
 
-	tmp = CHAR_INUT;
 	toktmp = tok;
 	while (toktmp && toktmp->type == CHAR_SPACE)
 		toktmp = toktmp->n_token;

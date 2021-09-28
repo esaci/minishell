@@ -12,13 +12,6 @@
 
 #include "../lib/libmin.h"
 
-int	init_lexer(t_lexer *lexer)
-{
-	lexer->len = 0;
-	lexer->tok = NULL;
-	return (0);
-}
-
 TOKENTYPE	lexer_check_type(t_token *tok)
 {
 	if (tok->line[0] ==  '|')
@@ -60,19 +53,34 @@ TOKENTYPE	lexer_check_type(t_token *tok)
 	return (CHAR_INUT);
 }
 
+int	init_lexer(t_lexer *lexer)
+{
+	lexer->len = 0;
+	lexer->tok = NULL;
+	/* lexer->tok = malloc(sizeof(t_token*) * 2); */
+	/* if (!lexer->tok)
+		return (1);
+	lexer->tok->line = rl_line_buffer;
+	lexer->tok->type = lexer_check_type(lexer->tok);
+	lexer->tok->n_token = NULL; */
+	return (0);
+}
+
 int	lexer_token(t_lexer *lexer, char *str)
 {
 	t_token		**toktmp;
 
 	toktmp = &(lexer->tok);
 	while (*toktmp)
-		toktmp = &((*toktmp)->n_token);
-	(*toktmp) = malloc(sizeof(t_token) * 2);
+		*toktmp = (*toktmp)->n_token;
+	*toktmp = malloc(sizeof(t_token) * 2);
 	if (!(*toktmp))
 		return (0);
 	(*toktmp)->line = str;
 	(*toktmp)->type = lexer_check_type(*toktmp);
+	(*toktmp)->n_token = NULL;
 	return (1);
+	printf("cque je viens de modif %d vs %d - %s\n", (*toktmp)->type, lexer->tok->type, str);
 }
 
 int	lexer_start(t_lexer *lexer)
