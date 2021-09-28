@@ -47,6 +47,7 @@ $(NAME) : $(OBJ) $(SRCD)/main.c
 		rm -f $(LIBFT)
 		ranlib $(MIND)$(MIN)
 		$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2) $(SRCD)/main.c  $(MIND)$(MIN)
+		
 
 ub: $(NAME)
 	$(OBJ) $(SRCD)/main.c

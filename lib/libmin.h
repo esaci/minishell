@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:43:16 by esaci            ###   ########.fr       */
+/*   Updated: 2021/09/28 12:20:33 by Jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@
 # include <curses.h>
 # include <term.h>
 
+# define SUCCESS 0
+# define ERROR 1
+# define ERROR_INPUT 2
+
+
+// Structures Communes
+
 typedef struct s_pip
 {
 	int		fd[2];
@@ -45,10 +52,28 @@ typedef struct s_pip
 	int		*b_pfd1;
 }	t_pip;
 
+// Structures Jules
+
+
+
+
+
+// Structures Elias
+
+
+
+
+// Fonctions Communes 
+
 int					start_fonction(char *envp[]);
 void				*sig_handler();
 int					parser_input(char *ptr);
 int					pipex_custom(int value, char *envp[]);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
+
+// Fonctions Jules
+
+
+// Fonctions Elias
 
 #endif
