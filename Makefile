@@ -36,6 +36,8 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(SRCD)free_functions.c				\
 		$(SRCD)builtin/ft_menu.c			\
 		$(SRCD)builtin/ft_echo.c			\
+		$(SRCD)tree_input.c					\
+		$(SRCD)free_functions.c
 
 OBJ = $(SRC:.c=.o)
 

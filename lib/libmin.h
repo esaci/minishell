@@ -59,6 +59,15 @@ typedef	enum	TOKENTYPE
 	CHAR_ERROR = '!',
 }	TOKENTYPE;
 
+typedef	enum	NODETYPE
+{
+	NODE_PIPE = 1,
+	NODE_FILEIN = 2,
+	NODE_FILEOUT = 3,
+	NODE_PATHCOM = 4,
+	NODE_ARG = 5,
+}	NODETYPE;
+
 typedef struct s_pip
 {
 	int		fd[2];
@@ -87,6 +96,13 @@ typedef	struct s_lexer
 	char		**buffer;
 }	t_lexer;
 
+typedef	struct s_node
+{
+	NODETYPE		type;
+	char			*str;
+	struct s_node	*before;
+	struct s_node	*after;
+}	t_node;
 
 int					start_fonction(char *envp[]);
 void				*sig_handler();

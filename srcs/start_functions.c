@@ -6,7 +6,7 @@
 /*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 21:35:42 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/29 13:02:17 by Jules            ###   ########.fr       */
+/*   Updated: 2021/09/29 15:28:23 by Jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	start_fonction(char *envp[])
 {
 	t_lexer		*lexer;
 	t_command	*cmd;
+	t_node		*node;
 
+	node = NULL;
 	lexer = malloc(sizeof(t_lexer) * 2);
 	cmd = malloc(sizeof(t_command) * 2);
 	cmd->fd_in = 0;
@@ -33,11 +35,16 @@ int	start_fonction(char *envp[])
 			return (print_custom("malloc2", 2, 1, 1));
 		}
 		exec_command(cmd, lexer->buffer);
+		if (!tree_input(lexer, &node))
+		{
+			rl_clear_history();
+			free(lexer);
+			return (print_custom("malloc2", 2, 1, 1));
+		}
 		if (rl_line_buffer[0] != 0)
 			add_history(rl_line_buffer);
 		readline("Minishell> ");
 		rl_on_new_line();
-		//rl_replace_line(rl_line_buffer, 0);
 	}
 	clear_history();
 	free(lexer);
