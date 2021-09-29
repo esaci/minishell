@@ -81,6 +81,7 @@ typedef	struct s_lexer
 {
 	t_token		*tok;
 	int			len;
+	char		**buffer;
 }	t_lexer;
 
 
@@ -88,6 +89,7 @@ int					start_fonction(char *envp[]);
 void				*sig_handler();
 t_lexer				*parser_input(t_lexer *lexer);
 t_token				*parser_next_token(t_token *tok);
+int					parser_output(t_lexer *lexer);
 int					pipex_custom(int value, char *envp[]);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
 int					print_tokens(t_lexer *l);

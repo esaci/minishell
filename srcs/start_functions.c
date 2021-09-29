@@ -30,7 +30,6 @@ int	start_fonction(char *envp[])
 		}
 		if (rl_line_buffer[0] != 0)
 			add_history(rl_line_buffer);
-		print_tokens(lexer);
 		readline("Minishell> ");
 		rl_on_new_line();
 		/* rl_replace_line(rl_line_buffer, 0); */

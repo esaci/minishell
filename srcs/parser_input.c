@@ -40,12 +40,14 @@ t_token	*parser_in_between(t_token *t, TOKENTYPE type)
 	return (tmp);
 }
 
-t_token	*parser_until_not(t_token *t, TOKENTYPE type)
+t_token	*parser_until_not(t_token *t, TOKENTYPE type, TOKENTYPE type2)
 {
 	t_token	*tmp;
 
 	tmp = t->n_token;
 	while (tmp && tmp->type == type)
+		tmp = tmp->n_token;
+	while (tmp && tmp->type == type2)
 		tmp = tmp->n_token;
 	return (tmp);
 }
@@ -58,15 +60,15 @@ t_token	*parser_next_token(t_token *tok)
 	while (toktmp && toktmp->type == CHAR_SPACE)
 		toktmp = toktmp->n_token;
 	if (!toktmp)
-		return (toktmp);
+		return (NULL);
 	if (!toktmp->n_token)
-		return (toktmp);
+		return (NULL);
 	if (toktmp->type == CHAR_CHEVG || toktmp->type == CHAR_CHEVD)
 		toktmp = parser_chevron(toktmp, toktmp->type);
 	else if (toktmp->type == CHAR_GUILL || toktmp->type == CHAR_APO)
 		toktmp = parser_in_between(toktmp, toktmp->type);
 	else if (toktmp->type == CHAR_INUT)
-		toktmp = parser_until_not(toktmp, toktmp->type);
+		toktmp = parser_until_not(toktmp, toktmp->type, CHAR_SPACE);
 	else
 		toktmp = toktmp->n_token;
 	return (toktmp);
@@ -75,7 +77,7 @@ t_token	*parser_next_token(t_token *tok)
 int	parser_lexer(t_lexer *lexer)
 {
 	t_token		**toktmp;
-	int	count; //asupr
+	int			count;
 
 	count = 0;
 	toktmp = &lexer->tok;
@@ -94,6 +96,8 @@ t_lexer	*parser_input(t_lexer *lexer)
 	if (lexer_start(lexer))
 		return (NULL);
 	if (parser_lexer(lexer))
+		return (NULL);
+	if (parser_output(lexer))
 		return (NULL);
 	return (lexer);
 }
