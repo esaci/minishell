@@ -81,7 +81,6 @@ int	fill_buffer(t_lexer *lexer)
 		if (!lexer->buffer[count])
 			return (1);
 		copy_buffer(lexer->buffer[count], toktmp);
-		printf("Le token n°%d :|%s|\n", count, lexer->buffer[count]);
 		toktmp = toktmp->n_token;
 		count++;
 	}

@@ -12,6 +12,25 @@
 
 #include "../lib/libmin.h"
 
+TOKENTYPE	lexer_check_type2(t_token *tok)
+{
+	if (tok->line[0] ==  '-')
+		return (CHAR_TIRET);
+	if (tok->line[0] ==  '&')
+		return (CHAR_ET);
+	if (tok->line[0] ==  '\0')
+		return (CHAR_Z);
+	if (tok->line[0] ==  ';')
+		return (CHAR_PVIR);
+	if (tok->line[0] ==  '\\')
+		return (CHAR_SLAHV);
+	if (tok->line[0] ==  '\t')
+		return (CHAR_TAB);
+	if (tok->line[0] ==  '\n')
+		return (CHAR_Z);
+	return (CHAR_INUT);
+}
+
 TOKENTYPE	lexer_check_type(t_token *tok)
 {
 	if (tok->line[0] ==  '|')
@@ -36,21 +55,7 @@ TOKENTYPE	lexer_check_type(t_token *tok)
 		return (CHAR_POINT);
 	if (tok->line[0] ==  ' ')
 		return (CHAR_SPACE);
-	if (tok->line[0] ==  '-')
-		return (CHAR_TIRET);
-	if (tok->line[0] ==  '&')
-		return (CHAR_ET);
-	if (tok->line[0] ==  '\0')
-		return (CHAR_Z);
-	if (tok->line[0] ==  ';')
-		return (CHAR_PVIR);
-	if (tok->line[0] ==  '\\')
-		return (CHAR_SLAHV);
-	if (tok->line[0] ==  '\t')
-		return (CHAR_TAB);
-	if (tok->line[0] ==  '\n')
-		return (CHAR_Z);
-	return (CHAR_INUT);
+	return (lexer_check_type2(tok))
 }
 
 int	init_lexer(t_lexer *lexer)

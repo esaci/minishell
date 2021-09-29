@@ -16,13 +16,13 @@ COMPILE = gcc
 
 CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
 
-COMPILE1 =
+COMPILE1 = -I /Users/$(USER)/.brew/opt/readline/include
 
-COMPILE1U =
+COMPILE1U = -I /usr/include/readline
 
-COMPILE2 =
+COMPILE2 = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
-COMPILE2U =
+COMPILE2U = -lreadline -L /usr/include/readline
 
 SRC =	$(GNLD)get_next_line.c				\
 		$(GNLD)get_next_line_utils.c		\
@@ -33,12 +33,13 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(SRCD)parser_input.c				\
 		$(SRCD)parser_output.c				\
 		$(SRCD)lexer_start.c				\
+		$(SRCD)tree_input.c					\
 		$(SRCD)free_functions.c
 
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c
-	$(COMPILE) $(CFLAGS) -c $< -L/usr/include -lreadline -o $@
+	$(COMPILE) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
@@ -49,7 +50,7 @@ $(NAME) : $(OBJ) $(SRCD)/main.c
 		ar rc $(MIND)$(MIN) $(OBJ)
 		rm -f $(LIBFT)
 		ranlib $(MIND)$(MIN)
-		$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2) $(SRCD)/main.c  $(MIND)$(MIN) -L/usr/include -lreadline
+		$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2) $(SRCD)/main.c  $(MIND)$(MIN)
 
 ub: $(NAME)
 	$(OBJ) $(SRCD)/main.c

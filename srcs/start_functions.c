@@ -15,7 +15,9 @@
 int	start_fonction(char *envp[])
 {
 	t_lexer	*lexer;
+	t_node	*node;
 
+	node = NULL;
 	lexer = malloc(sizeof(t_lexer) * 2);
 	if (!lexer)
 		return (1);
@@ -28,11 +30,16 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc2", 2, 1, 1));
 		}
+		if (!tree_input(lexer, &node))
+		{
+			rl_clear_history();
+			free(lexer);
+			return (print_custom("malloc2", 2, 1, 1));
+		}
 		if (rl_line_buffer[0] != 0)
 			add_history(rl_line_buffer);
 		readline("Minishell> ");
 		rl_on_new_line();
-		/* rl_replace_line(rl_line_buffer, 0); */
 	}
 	rl_clear_history();
 	free(lexer);
