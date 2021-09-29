@@ -23,13 +23,16 @@ int	print_custom(char *str, int fd, int exit_code, int saut_ligne)
 int	print_tokens(t_lexer *l)
 {
 	t_token *t;
+	int count;
 
+	count = 0;
 	t =  l->tok;
 	while (t)
 	{
-		write(1, &t->type, 1);
+		write(1, l->buffer[count], ft_strlen(l->buffer[count]));
 		write(1, "\n", 1);
 		t = t->n_token;
+		count++;
 	}
 	return (0);
 }

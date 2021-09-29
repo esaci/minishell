@@ -18,7 +18,7 @@ NODETYPE	ti_check_type(t_lexer *l, t_token *t)
 
 	if (t->type == CHAR_PIPE)
 		return (NODE_PIPE);
-	if (t->type == CHAR_CHEVD)
+	if (t->type == CHAR_CHEVD || t->type == CHAR_CHEVG)
 	{
 		if (!t->n_token)
 			return (NODE_ERROR);
@@ -45,9 +45,7 @@ int	tree_init_node(t_lexer *l, t_node **node)
 	if (!l->tok)
 		return (0);
 	t = l->tok;
-	n = *node;
 	n2 = *node;
-	n->before = NULL;
 	count = 0;
 	while (t)
 	{
@@ -59,8 +57,13 @@ int	tree_init_node(t_lexer *l, t_node **node)
 		if (count)
 		{
 			n2->after = n;
+			n->before = n2;
+			n->after = NULL;
+			n->str = l->buffer[count];
 			n2 = n;
 		}
+		else
+			*node = n;
 		t = t->n_token;
 		count++;
 	}
