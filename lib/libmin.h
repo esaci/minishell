@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:43:16 by esaci            ###   ########.fr       */
+/*   Updated: 2021/09/29 12:08:08 by Jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
+
+// Lib Jules
+# include "lib_jules.h"
 
 typedef	enum	TOKENTYPE
 {
@@ -96,4 +99,5 @@ int					print_tokens(t_lexer *l);
 int					free_lexer_tokens(t_lexer *lexer);
 int					init_lexer(t_lexer *lexer);
 int					lexer_start(t_lexer *lexer);
+
 #endif
