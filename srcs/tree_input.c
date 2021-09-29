@@ -59,11 +59,15 @@ int	tree_init_node(t_lexer *l, t_node **node)
 			n2->after = n;
 			n->before = n2;
 			n->after = NULL;
-			n->str = l->buffer[count];
 			n2 = n;
 		}
 		else
+		{
 			*node = n;
+			n->before = NULL;
+			n->after = NULL;
+			n2 = n;
+		}
 		t = t->n_token;
 		count++;
 	}

@@ -44,8 +44,6 @@ void	ft_menu(t_command *cmd)
 {
 	if (ft_strncmp(cmd->name, "echo", 4) == 0)
 		ft_echo(cmd);
-	else
-		;
 }
 
 void	ft_show_double(char **av)
