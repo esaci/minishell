@@ -55,13 +55,14 @@ TOKENTYPE	lexer_check_type(t_token *tok)
 		return (CHAR_POINT);
 	if (tok->line[0] ==  ' ')
 		return (CHAR_SPACE);
-	return (lexer_check_type2(tok))
+	return (lexer_check_type2(tok));
 }
 
 int	init_lexer(t_lexer *lexer)
 {
 	lexer->len = 0;
 	lexer->tok = NULL;
+	lexer->buffer = NULL;
 	return (0);
 }
 

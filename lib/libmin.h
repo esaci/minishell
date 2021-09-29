@@ -61,6 +61,7 @@ typedef	enum	TOKENTYPE
 
 typedef	enum	NODETYPE
 {
+	NODE_ERROR = 0,
 	NODE_PIPE = 1,
 	NODE_FILEIN = 2,
 	NODE_FILEOUT = 3,
@@ -109,11 +110,12 @@ void				*sig_handler();
 t_lexer				*parser_input(t_lexer *lexer);
 t_token				*parser_next_token(t_token *tok);
 int					parser_output(t_lexer *lexer);
+int					fill_buffer(t_lexer *lexer);
 int					pipex_custom(int value, char *envp[]);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
 int					print_tokens(t_lexer *l);
 int					free_lexer_tokens(t_lexer *lexer);
 int					init_lexer(t_lexer *lexer);
 int					lexer_start(t_lexer *lexer);
-
+t_node				*tree_input(t_lexer *lexer, t_node **node);
 #endif

@@ -34,12 +34,12 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc2", 2, 1, 1));
 		}
-		exec_command(cmd, lexer->buffer);
+		/* exec_command(cmd, lexer->buffer); */
 		if (!tree_input(lexer, &node))
 		{
 			rl_clear_history();
 			free(lexer);
-			return (print_custom("malloc2", 2, 1, 1));
+			return (print_custom("malloc3", 2, 1, 1));
 		}
 		if (rl_line_buffer[0] != 0)
 			add_history(rl_line_buffer);

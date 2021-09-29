@@ -72,6 +72,8 @@ int	fill_buffer(t_lexer *lexer)
 	t_token		*toktmp;
 	int			len;
 
+	if (lexer->buffer)
+		free(lexer->buffer);
 	toktmp = lexer->tok;
 	count = 0;
 	while (toktmp)
