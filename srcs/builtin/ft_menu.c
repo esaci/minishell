@@ -6,7 +6,7 @@
 /*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:55:38 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/29 15:09:55 by Jules            ###   ########.fr       */
+/*   Updated: 2021/09/29 15:20:24 by Jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_iscommand(char *cmd)
 		i++;
 	}
 	if (i == sizeof(builtin) / sizeof(*builtin))
-		printf("Command not found\n");
+		printf(RED"%s : Command not found\n"RESET, cmd);
 	return (-1);
 }
 
