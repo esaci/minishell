@@ -12,7 +12,7 @@ LIBFTD = ./fcts//libft/
 
 SRCD = ./srcs/
 
-COMPILE = gcc -fsanitize=address -g3
+COMPILE = gcc
 
 CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
 
@@ -54,17 +54,6 @@ $(NAME) : $(OBJ) $(SRCD)/main.c
 		rm -f $(LIBFT)
 		ranlib $(MIND)$(MIN)
 		$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2) $(SRCD)/main.c  $(MIND)$(MIN)
-
-ub: $(NAME)
-	$(OBJ) $(SRCD)/main.c
-	rm -rf $(NAME)
-	make -C $(LIBFTD)
-	cp $(LIBFTD)$(LIBFT) $(MIND)$(MIN)
-	ar rc $(MIND)$(MIN) $(OBJ)
-	rm -f $(LIBFT)
-	ranlib $(MIND)$(MIN)
-	$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2U) $(SRCD)/main.c  $(MIND)$(MIN)
-
 
 clean:
 	rm -rf $(OBJ)
