@@ -20,8 +20,6 @@ TOKENTYPE	lexer_check_type2(t_token *tok)
 		return (CHAR_ET);
 	if (tok->line[0] ==  '\0')
 		return (CHAR_Z);
-	if (tok->line[0] ==  ';')
-		return (CHAR_PVIR);
 	if (tok->line[0] ==  '\\')
 		return (CHAR_SLAHV);
 	if (tok->line[0] ==  '\t')

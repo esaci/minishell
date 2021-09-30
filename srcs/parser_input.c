@@ -17,7 +17,10 @@ t_token	*parser_chevron(t_token *t, TOKENTYPE type)
 	t_token	*tmp;
 
 	if (t->n_token->type == type)
+	{
+		t->type = t->type - 1;
 		return(t->n_token->n_token);
+	}
 	else
 	{
 		tmp = t->n_token;

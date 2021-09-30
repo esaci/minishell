@@ -17,13 +17,15 @@ int	poutput_strlen(t_token *tok)
 	int	count;
 	char	c;
 
+	count = 0;
 	if (!tok->n_token)
 		c = '\0';
 	else if (tok->n_token->type == CHAR_INUT || tok->n_token->type == CHAR_TIRET)
 		c = ' ';
+	else if(tok->type == CHAR_APO || tok->type == CHAR_GUILL)
+		c = tok->line[count++];
 	else
 		c = tok->n_token->line[0];
-	count = 0;
 	while(tok->line[count] && tok->line[count] != c)
 		count++;
 	return (count);
@@ -39,6 +41,23 @@ int	copy_buffer(char *buff, t_token *tok)
 		c = '\0';
 	else if (tok->n_token->type == CHAR_INUT || tok->n_token->type == CHAR_TIRET)
 		c = ' ';
+	else if (tok->type == CHAR_DCHEVD || tok->type == CHAR_DCHEVG)
+	{
+		buff[count++] = tok->line[0];
+		buff[count++] = tok->line[1];
+		return (count);
+	}
+	else if(tok->type == CHAR_APO || tok->type == CHAR_GUILL)
+	{
+		buff[count++] = tok->line[0];
+		c = tok->line[0];
+	}
+	else if (tok->line[0] == tok->n_token->line[0])
+	{
+		buff[0] = tok->line[0];
+		buff[1] = 0;
+		return (1);
+	}
 	else
 		c = tok->n_token->line[0];
 	while(tok->line[count] && tok->line[count] != c)
@@ -64,7 +83,7 @@ int	malloc_buffer(t_lexer *lexer)
 		toktmp = toktmp->n_token;
 		count++;
 	}
-	lexer->buffer = malloc(sizeof(char*) * (count + 1));
+	lexer->buffer = malloc(sizeof(char*) * (count + 2));
 	if (!lexer->buffer)
 		return (1);
 	return (0);
