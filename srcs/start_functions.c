@@ -26,6 +26,8 @@ int	start_fonction(char *envp[])
 	if (!lexer)
 		return (1);
 	readline("Minishell> ");
+	if (rl_line_buffer[0] == '\0')
+		return (0);
 	while (ft_memcmp(rl_line_buffer, "exit", 4))
 	{
 		if (!parser_input(lexer))
@@ -41,10 +43,10 @@ int	start_fonction(char *envp[])
 			return (print_custom("malloc3", 2, 1, 1));
 		} */
 /* 		exec_command(cmd, lexer->buffer); */
-		if (rl_line_buffer[0] != 0)
-			add_history(rl_line_buffer);
 		print_tokens(lexer);
 		readline("Minishell> ");
+		if (rl_line_buffer[0] == '\0')
+			break ;
 		rl_on_new_line();
 	}
 	clear_history();

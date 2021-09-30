@@ -12,7 +12,7 @@ LIBFTD = ./fcts//libft/
 
 SRCD = ./srcs/
 
-COMPILE = gcc
+COMPILE = gcc -fsanitize=address
 
 CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
 

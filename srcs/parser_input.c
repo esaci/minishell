@@ -62,7 +62,9 @@ t_token *parser_until_space(t_token *tok)
 	tmp = tok->n_token;
 	while (tmp && tmp->type != CHAR_SPACE)
 		tmp = tmp->n_token;
-	return (tmp);
+	if (!tmp)
+		return (tmp);
+	return (tmp->n_token);
 }
 
 t_token	*parser_next_token(t_token *tok)

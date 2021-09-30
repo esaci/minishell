@@ -54,7 +54,6 @@ typedef	enum	TOKENTYPE
 	CHAR_TIRET = '-',
 	CHAR_ET = '&',
 	CHAR_Z = 0,
-	CHAR_SLAHV = '\\',
 	CHAR_TAB = '\t',
 	CHAR_NL = '\n',
 	CHAR_ERROR = '!',
