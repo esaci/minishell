@@ -6,7 +6,7 @@
 /*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:25:17 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/29 15:01:22 by Jules            ###   ########.fr       */
+/*   Updated: 2021/09/29 23:32:22 by Jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@
 
 // Jules
 
+typedef struct	s_list	t_list;
+
+typedef struct	s_list
+{
+	char	*content;
+	t_list	*next;
+
+}	t_list;
+
 typedef struct	s_command
 {
 	char	*name;
@@ -54,6 +63,27 @@ int		check_arg(char	*str);
 int		ft_echo_check(t_command *cmd);
 void	ft_echo(t_command *cmd);
 
+void	ft_pwd(t_command *cmd);
+
+void	ft_cd(t_command *cmd);
+
+t_list	*convert_tab_list(char *table[]);
+t_list	**ft_envp(char *envp[], char *content, t_list *env);
+
 void	ft_show_double(char **av);
+
+// LST BONUS
+void	ft_lstadd_back(t_list **alst, t_list *new);
+void	ft_lst_pushback(t_list **list, char *content);
+void	ft_lstadd_front(t_list **alst, t_list *new);
+void	recursive_clear(t_list *ptr, void (*del)(void*));
+void	ft_lstclear(t_list **lst, void (*del)(void*));
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list	*ft_lstnew(void *content);
+int		ft_lstsize(t_list *lst);
+void	ft_lst_show(t_list *list);
 
 #endif
