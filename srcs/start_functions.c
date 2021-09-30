@@ -16,7 +16,6 @@ int	start_fonction(char *envp[])
 {
 	t_lexer		*lexer;
 	t_command	*cmd;
-	t_list		*env;
 
 	lexer = malloc(sizeof(t_lexer) * 2);
 	cmd = malloc(sizeof(t_command) * 2);
@@ -33,7 +32,6 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc2", 2, 1, 1));
 		}
-		env = *ft_init_env(envp);
 		//fill_env(envp);
 		exec_command(cmd, lexer->buffer);
 		if (rl_line_buffer[0] != 0)

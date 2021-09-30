@@ -69,10 +69,6 @@ void	ft_cd(t_command *cmd);
 
 t_list	*convert_tab_list(char *table[]);
 t_list	**ft_envp(char *envp[], char *content, t_list *env);
-void	init_env(int ac, char *av[], char *envp[]);
-t_list	*ft_envgetall(void);
-void	add_env_variable(char *var);
-t_list	**ft_get_env_var(void);
 void	ft_env(t_command *cmd);
 
 
