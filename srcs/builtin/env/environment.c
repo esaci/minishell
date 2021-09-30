@@ -42,7 +42,7 @@ t_list	**ft_envp(char *envp[], char *content, t_list *env)
 		environment = env;
 	return (&environment);
 }
-
+/*
 char	*get_environment(char *str)
 {
 	t_list	*env;
@@ -60,3 +60,4 @@ char	*get_environment(char *str)
 	}
 	return (NULL);
 }
+*/
