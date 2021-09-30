@@ -40,7 +40,9 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(SRCD_BUILT)ft_echo.c				\
 		$(SRCD_BUILT)ft_pwd.c				\
 		$(SRCD_BUILT)ft_cd.c				\
-		$(SRCD_BUILT)environment.c			\
+		$(SRCD_BUILT)ft_env.c				\
+		$(SRCD_BUILT)env/environment.c					\
+		$(SRCD_BUILT)env/init_env.c					\
 		$(SRCD_BUILT)lst_functions/ft_lstadd_back.c		\
 		$(SRCD_BUILT)lst_functions/ft_lstadd_front.c	\
 		$(SRCD_BUILT)lst_functions/ft_lstclear.c		\

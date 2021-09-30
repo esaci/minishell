@@ -6,7 +6,7 @@
 /*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:25:17 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/29 23:32:22 by Jules            ###   ########.fr       */
+/*   Updated: 2021/09/30 14:43:05 by Jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,15 @@ void	ft_cd(t_command *cmd);
 
 t_list	*convert_tab_list(char *table[]);
 t_list	**ft_envp(char *envp[], char *content, t_list *env);
+void	init_env(int ac, char *av[], char *envp[]);
+t_list	*ft_envgetall(void);
+void	add_env_variable(char *var);
+t_list	**ft_get_env_var(void);
+void	ft_env(t_command *cmd);
 
+
+t_list	**ft_init_env(char *envp[]);
+void	fill_env(char *envp[]);
 void	ft_show_double(char **av);
 
 // LST BONUS

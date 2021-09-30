@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/30 14:36:48 by Jules            ###   ########.fr       */
+/*   Created: 2021/09/30 12:36:15 by Jules             #+#    #+#             */
+/*   Updated: 2021/09/30 12:39:58 by Jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "../../../lib/lib_jules.h"
 
-int	main(int ac, char *av[], char *envp[])
+void	init_env(int ac, char *av[], char *envp[])
 {
-	void	(*sigint_c)(int);
+	(void)ac;
+	(void)av;
+	ft_envp(envp, NULL, NULL);
+}
 
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	//init_env(ac, av, envp);
-	sigint_c = sig_handler();
-	start_fonction(envp);
-	return (0);
-	sigint_c(av[ac - 1][0]);
-	return (0);
+t_list	*ft_envgetall(void)
+{
+	return (*ft_envp(NULL, NULL, NULL));
+}
+
+void	add_env_variable(char *var)
+{
+	ft_envp(NULL, var, NULL);
+}
+
+t_list	**ft_get_env_var(void)
+{
+	return (ft_envp(NULL, NULL, NULL));
 }

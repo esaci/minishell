@@ -6,7 +6,7 @@
 /*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:55:38 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/29 23:26:16 by Jules            ###   ########.fr       */
+/*   Updated: 2021/09/30 12:47:26 by Jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	ft_menu(t_command *cmd)
 		ft_pwd(cmd);
 	if (!ft_strncmp(cmd->name, "cd", 3))
 		ft_cd(cmd);
+	if (!ft_strncmp(cmd->name, "env", 3))
+		ft_env(cmd);
 	else
 		;
 }

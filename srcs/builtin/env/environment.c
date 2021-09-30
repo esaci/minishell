@@ -6,11 +6,11 @@
 /*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:24:28 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/29 23:32:15 by Jules            ###   ########.fr       */
+/*   Updated: 2021/09/30 14:11:58 by Jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../lib/lib_jules.h"
+#include "../../../lib/lib_jules.h"
 
 t_list	*convert_tab_list(char *table[])
 {
@@ -27,6 +27,8 @@ t_list	*convert_tab_list(char *table[])
 	return (list);
 }
 
+// Fonction Principale
+
 t_list	**ft_envp(char *envp[], char *content, t_list *env)
 {
 	static t_list	*environment;
@@ -41,9 +43,20 @@ t_list	**ft_envp(char *envp[], char *content, t_list *env)
 	return (&environment);
 }
 
-/*
-void	get_environment(char *str)
+char	*get_environment(char *str)
 {
-	
+	t_list	*env;
+
+	env = ft_envgetall();
+	while (env)
+	{
+		if (ft_strlen(env->content) > ft_strlen(str))
+		{
+			if (ft_strncmp(env->content, str, ft_strlen(str) == 0)
+				&& *(env->content) + ft_strlen(str) == '=')
+				return (env->content + ft_strlen(str) + 1);
+		}
+		env = env->next;
+	}
+	return (NULL);
 }
-*/
