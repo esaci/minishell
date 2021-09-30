@@ -17,11 +17,13 @@ int	poutput_strlen(t_token *tok)
 	int	count;
 	char	c;
 
-	count = 0;
 	if (!tok->n_token)
 		c = '\0';
+	else if (tok->n_token->type == CHAR_INUT || tok->n_token->type == CHAR_TIRET)
+		c = ' ';
 	else
 		c = tok->n_token->line[0];
+	count = 0;
 	while(tok->line[count] && tok->line[count] != c)
 		count++;
 	return (count);
@@ -35,6 +37,8 @@ int	copy_buffer(char *buff, t_token *tok)
 	count = 0;
 	if (!tok->n_token)
 		c = '\0';
+	else if (tok->n_token->type == CHAR_INUT || tok->n_token->type == CHAR_TIRET)
+		c = ' ';
 	else
 		c = tok->n_token->line[0];
 	while(tok->line[count] && tok->line[count] != c)

@@ -52,6 +52,16 @@ t_token	*parser_until_not(t_token *t, TOKENTYPE type, TOKENTYPE type2)
 	return (tmp);
 }
 
+t_token *parser_until_space(t_token *tok)
+{
+	t_token *tmp;
+
+	tmp = tok->n_token;
+	while (tmp && tmp->type != CHAR_SPACE)
+		tmp = tmp->n_token;
+	return (tmp);
+}
+
 t_token	*parser_next_token(t_token *tok)
 {
 	t_token		*toktmp;
@@ -69,6 +79,8 @@ t_token	*parser_next_token(t_token *tok)
 		toktmp = parser_in_between(toktmp, toktmp->type);
 	else if (toktmp->type == CHAR_INUT)
 		toktmp = parser_until_not(toktmp, toktmp->type, CHAR_SPACE);
+	else if (toktmp->type == CHAR_TIRET)
+		toktmp = parser_until_space(toktmp);
 	else
 		toktmp = toktmp->n_token;
 	return (toktmp);
@@ -76,15 +88,15 @@ t_token	*parser_next_token(t_token *tok)
 
 int	parser_lexer(t_lexer *lexer)
 {
-	t_token		**toktmp;
+	t_token		*toktmp;
 	int			count;
 
 	count = 0;
-	toktmp = &lexer->tok;
-	while (*toktmp && (*toktmp)->n_token)
+	toktmp = lexer->tok;
+	while (toktmp)
 	{
-		(*toktmp)->n_token = parser_next_token(*toktmp);
-		toktmp = &(*toktmp)->n_token;
+		toktmp->n_token = parser_next_token(toktmp);
+		toktmp = toktmp->n_token;
 		count++;
 	}
 	return (0);
@@ -97,7 +109,7 @@ t_lexer	*parser_input(t_lexer *lexer)
 		return (NULL);
 	if (parser_lexer(lexer))
 		return (NULL);
-	if (parser_output(lexer))
+	if (parser_output(lexer)) // check ici
 		return (NULL);
 	return (lexer);
 }
