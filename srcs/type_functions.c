@@ -40,11 +40,6 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t)
 	char	*tmp;
 
 	tmp = parse_is_command(t->line , l, 0);
-	write(1, "C UNE COMMANDE ? : ", 19);
-	write(1, t->line, ft_strlen(t->line));
-	write(1, " vs : ", 6);
-	write(1, tmp, ft_strlen(tmp));
-	write(1, "\n", 1);
 	if (!access(tmp, F_OK))
 	{
 		write(1, "C UNE COMMANDE !\n", 17);

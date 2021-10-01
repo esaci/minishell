@@ -30,24 +30,25 @@ char	*copieur(char *s)
 	return (str);
 }
 
-char	*parse_path2(char *arg_list, t_lexer *l)
+char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l)
 {
 	char	*ptr;
 	int		tmp;
 
-	ptr = ft_strjoin(l->pwd[0], arg_list);
+	ptr = ft_strjoin(l->pwd[0], ptr2);
 	tmp = access(ptr, F_OK);
 	if (tmp == 0)
 	{
-		if (arg_list[1] == '.')
+		if (ptr2[1] == '.')
 		{
 			free(ptr);
-			ptr = ft_strjoin(l->pwd[0], arg_list + 2);
+			ptr = ft_strjoin(l->pwd[0], ptr2 + 2);
 		}
-		free(arg_list);
+		free(ptr2);
 		return (ptr);
 	}
 	free(ptr);
+	free(ptr2);
 	return (arg_list);
 }
 
@@ -55,14 +56,21 @@ char	*parse_is_command(char *arg_list, t_lexer *l, int count)
 {
 	int		tmp;
 	char	*ptr;
+	char	*ptr2;
 
 	tmp = access(arg_list, F_OK);
 	if (tmp == 0)
 		return (arg_list);
+	ptr2 = copieur(arg_list);
+	if (ptr2[0] != '/')
+	{
+		free(ptr2);
+		ptr2 = ft_strjoin("/", arg_list);
+	}
 	tmp = 1;
 	while (l->pathptr[count] && tmp != 0)
 	{
-		ptr = ft_strjoin(l->pathptr[count], arg_list);
+		ptr = ft_strjoin(l->pathptr[count], ptr2);
 		tmp = access(ptr, F_OK);
 		if (tmp != 0)
 			free(ptr);
@@ -70,8 +78,8 @@ char	*parse_is_command(char *arg_list, t_lexer *l, int count)
 	}
 	if (tmp == 0)
 	{
-		free(arg_list);
+		free(ptr2);
 		return (ptr);
 	}
-	return (parse_path2(arg_list, l));
+	return (parse_path2(arg_list, ptr2, l));
 }
