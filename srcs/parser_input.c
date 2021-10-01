@@ -107,14 +107,14 @@ int	parser_lexer(t_lexer *lexer)
 	return (0);
 }
 
-t_lexer	*parser_input(t_lexer *lexer)
+t_lexer	*parser_input(t_lexer *lexer, char **envp)
 {
-	init_lexer(lexer);
+	init_lexer(lexer, envp);
 	if (lexer_start(lexer))
 		return (NULL);
 	if (parser_lexer(lexer))
 		return (NULL);
-	if (parser_output(lexer)) // check ici
+	if (parser_output(lexer))
 		return (NULL);
 	return (lexer);
 }

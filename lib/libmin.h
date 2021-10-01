@@ -57,6 +57,7 @@ typedef	enum	TOKENTYPE
 	CHAR_TAB = '\t',
 	CHAR_NL = '\n',
 	CHAR_ERROR = '!',
+	CHAR_ARG = 'E',
 }	TOKENTYPE;
 
 typedef	enum	NODETYPE
@@ -64,9 +65,11 @@ typedef	enum	NODETYPE
 	NODE_ERROR = 0,
 	NODE_PIPE = 1,
 	NODE_FILEIN = 2,
-	NODE_FILEOUT = 3,
-	NODE_PATHCOM = 4,
-	NODE_ARG = 5,
+	NODE_DFILEIN = 3,
+	NODE_FILEOUT = 4,
+	NODE_DFILEOUT = 5,
+	NODE_PATHCOM = 6,
+	NODE_ARG = 7,
 }	NODETYPE;
 
 typedef struct s_pip
@@ -90,24 +93,28 @@ typedef	struct s_token
 	struct s_token		*n_token;
 }	t_token;
 
-typedef	struct s_lexer
-{
-	t_token		*tok;
-	int			len;
-	char		**buffer;
-}	t_lexer;
-
 typedef	struct s_node
 {
 	NODETYPE		type;
 	char			*str;
-	struct s_node	*before;
-	struct s_node	*after;
+	struct s_node	*right;
+	struct s_node	*left;
 }	t_node;
+
+typedef	struct s_lexer
+{
+	t_token		*tok;
+	t_node		*node;
+	int			len;
+	char		**buffer;
+	char		**envp;
+	char		**pathptr;
+	char		**pwd;
+}	t_lexer;
 
 int					start_fonction(char *envp[]);
 void				*sig_handler();
-t_lexer				*parser_input(t_lexer *lexer);
+t_lexer				*parser_input(t_lexer *lexer, char **envp);
 t_token				*parser_next_token(t_token *tok);
 int					parser_output(t_lexer *lexer);
 int					fill_buffer(t_lexer *lexer);
@@ -115,7 +122,12 @@ int					pipex_custom(int value, char *envp[]);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
 int					print_tokens(t_lexer *l);
 int					free_lexer_tokens(t_lexer *lexer);
-int					init_lexer(t_lexer *lexer);
+int					init_lexer(t_lexer *lexer, char **envp);
 int					lexer_start(t_lexer *lexer);
-t_node				*tree_input(t_lexer *lexer, t_node **node);
+t_node				*tree_input(t_lexer *lexer);
+char				*parse_is_command(char *arg_list, t_lexer *l, int count);
+NODETYPE			is_any_chevron(t_token *t);
+NODETYPE			is_any_command(t_lexer *l, t_token *t);
+
 #endif
+

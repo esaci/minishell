@@ -14,28 +14,23 @@
 
 NODETYPE	ti_check_type(t_lexer *l, t_token *t)
 {
-	t_token *tmp;
-
 	if (t->type == CHAR_PIPE)
 		return (NODE_PIPE);
-	if (t->type == CHAR_CHEVD || t->type == CHAR_CHEVG)
+	if (is_any_chevron(t))
 	{
 		if (!t->n_token)
 			return (NODE_ERROR);
 		if (t->n_token->type != CHAR_INUT)
 			return (NODE_ERROR);
-		tmp = t->n_token;
-		t->n_token = tmp->n_token;
-		free(tmp);
-		fill_buffer(l);
-		return (NODE_FILEOUT);
+		t->n_token->type = CHAR_ARG;
+		return (is_any_chevron(t));
 	}
-	if (t->type == CHAR_CHEVG)
-		return (NODE_ERROR);
+	if (t->type == CHAR_INUT)
+		return (is_any_command(l, t));
 	return (NODE_ARG);
 }
 
-int	tree_init_node(t_lexer *l, t_node **node)
+int	tree_init_node(t_lexer *l)
 {
 	int			count;
 	t_token		*t;
@@ -45,27 +40,25 @@ int	tree_init_node(t_lexer *l, t_node **node)
 	if (!l->tok)
 		return (0);
 	t = l->tok;
-	n2 = *node;
 	count = 0;
 	while (t)
 	{
 		n = malloc(sizeof(t_node) * 2);
 		if (!n)
 			return (1);
-		n->str = l->buffer[count];
 		n->type = ti_check_type(l, t);
 		if (count)
 		{
-			n2->after = n;
-			n->before = n2;
-			n->after = NULL;
+			n2->right = n;
+			n->left = n2;
+			n->right = NULL;
 			n2 = n;
 		}
 		else
 		{
-			*node = n;
-			n->before = NULL;
-			n->after = NULL;
+			l->node = n;
+			n->left = NULL;
+			n->right = NULL;
 			n2 = n;
 		}
 		t = t->n_token;
@@ -74,9 +67,9 @@ int	tree_init_node(t_lexer *l, t_node **node)
 	return (0);
 }
 
-t_node	*tree_input(t_lexer *lexer, t_node **node)
+t_node	*tree_input(t_lexer *lexer)
 {
-	if (tree_init_node(lexer, node))
+	if (tree_init_node(lexer))
 		return (NULL);
-	return (*node);
+	return (lexer->node);
 }

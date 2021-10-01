@@ -28,6 +28,8 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(GNLD)get_next_line_utils.c		\
 		$(SRCD)print_functions.c			\
 		$(SRCD)sig_handler.c				\
+		$(SRCD)type_functions.c				\
+		$(SRCD)parse_is_command.c			\
 		$(SRCD)start_functions.c			\
 		$(SRCD)custom_pipex.c				\
 		$(SRCD)parser_input.c				\
