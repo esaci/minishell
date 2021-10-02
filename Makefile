@@ -29,6 +29,7 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(SRCD)print_functions.c			\
 		$(SRCD)sig_handler.c				\
 		$(SRCD)type_functions.c				\
+		$(SRCD)search_functions.c				\
 		$(SRCD)parse_is_command.c			\
 		$(SRCD)start_functions.c			\
 		$(SRCD)custom_pipex.c				\
@@ -39,6 +40,7 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(SRCD)builtin/ft_menu.c			\
 		$(SRCD)builtin/ft_echo.c			\
 		$(SRCD)tree_input.c					\
+		$(SRCD)tree_define.c				\
 		$(SRCD)free_functions.c
 
 OBJ = $(SRC:.c=.o)

@@ -39,6 +39,8 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t)
 {
 	char	*tmp;
 
+	if (t->type != CHAR_INUT)
+		return (NODE_ERROR);
 	tmp = parse_is_command(t->line , l, 0);
 	if (!access(tmp, F_OK))
 	{
@@ -50,4 +52,18 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t)
 		return (NODE_PATHCOM);
 	}
 	return (NODE_ERROR);
+}
+
+
+int	is_redirection(t_node *n2)
+{
+	if (!n2)
+		return (0);
+	if ((n2->type != NODE_DFILEIN || n2->type != NODE_PIPE))
+		return (1);
+	if (n2->type != NODE_DFILEOUT || n2->type == NODE_FILEIN)
+		return (1);
+	if (n2->type == NODE_FILEOUT)
+		return (1);
+	return (0);
 }

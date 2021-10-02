@@ -63,13 +63,14 @@ typedef	enum	TOKENTYPE
 typedef	enum	NODETYPE
 {
 	NODE_ERROR = 0,
-	NODE_PIPE = 1,
-	NODE_FILEIN = 2,
-	NODE_DFILEIN = 3,
-	NODE_FILEOUT = 4,
-	NODE_DFILEOUT = 5,
-	NODE_PATHCOM = 6,
-	NODE_ARG = 7,
+	NODE_PIPE = '|',
+	NODE_FILEIN = '<',
+	NODE_DFILEIN = '=',
+	NODE_FILEOUT = '>',
+	NODE_DFILEOUT = '?',
+	NODE_PATHCOM = 'C',
+	NODE_NOCOM = 'N',
+	NODE_ARG = 'A',
 }	NODETYPE;
 
 typedef struct s_pip
@@ -96,7 +97,7 @@ typedef	struct s_token
 typedef	struct s_node
 {
 	NODETYPE		type;
-	char			*str;
+	char			**str;
 	struct s_node	*right;
 	struct s_node	*left;
 }	t_node;
@@ -128,6 +129,11 @@ t_node				*tree_input(t_lexer *lexer);
 char				*parse_is_command(char *arg_list, t_lexer *l, int count);
 NODETYPE			is_any_chevron(t_token *t);
 NODETYPE			is_any_command(t_lexer *l, t_token *t);
-
+int					is_redirection(t_node *n2);
+int					search_pipe(t_node *n, t_token *t, t_lexer *l);
+int					search_command(t_node *n, t_token *t, t_lexer *l);
+int					tree_define_left(t_node *n, t_token *t, t_lexer *l);
+int					tree_define_right(t_node *n, t_token *t, t_lexer *l);
+int					search_infile(t_node *n, t_token *t, t_lexer *l);
 #endif
 

@@ -12,7 +12,7 @@
 
 #include "../lib/libmin.h"
 
-NODETYPE	ti_check_type(t_lexer *l, t_token *t)
+NODETYPE	tree_check_type(t_lexer *l, t_token *t)
 {
 	if (t->type == CHAR_PIPE)
 		return (NODE_PIPE);
@@ -30,28 +30,65 @@ NODETYPE	ti_check_type(t_lexer *l, t_token *t)
 	return (NODE_ARG);
 }
 
-int	tree_init_node(t_lexer *l)
+t_node	*tree_parser_node(t_node *n, t_node *oldnode)
 {
-	t_token		*t;
+	t_node	*tmp;
 
-	if (!l->tok)
-		return (0);
-	t = l->tok;
-	n = malloc(sizeof(t_node) * 2);
 	if (!n)
-		return (1);
-	while (t && t->type != CHAR_PIPE)
+		return (oldnode);
+	if (is_redirection(n->left) && is_redirection(n->right))
+		return (NULL);
+	tmp = tree_parser_node(n->left, n);
+	if (tmp)
+		return ( tree_parser_node(n->left, n));
+	tmp = tree_parser_node(n->right, n);
+	if (tmp)
+		return (tree_parser_node(n->right, n));
+	return (NULL);
+}
+
+t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
+{
+	t_token		*tmp;
+	t_node		*n;
+
+	n = tree_parser_node(*node, *node);
+	if (!n)
+	{
+		n = malloc(sizeof(t_node) * 2);
+		if (!n)
+			return (NULL);
+		n->left = NULL;
+		n->right = NULL;
+		*node = n;
+	}
+	if (search_pipe(n, t, l))
+		return (NULL);
+	if (!n->left)
+	{
+		if (tree_define_left(n, t, l))
+			return (1);
+	}
+	if (!n->right)
+	{
+		if (tree_define_right(n, t, l))
+			return (1);
+	}
+	while (t && (t->type != CHAR_PIPE))
 		t = t->n_token;
-	if (!t)
-		tree_state1(l->tok);
-	tree_state2(l->tok);
-	
-	return (0);
+	if (t)
+		t = t->n_token;
+	return (t);
 }
 
 t_node	*tree_input(t_lexer *lexer)
 {
-	if (tree_init_node(lexer))
-		return (NULL);
+	t_token	*t;
+	t_node	**node;
+
+	node = &(lexer->node);
+	t = lexer->tok;
+	while (t)
+		t = tree_init_node(lexer, t, node);
 	return (lexer->node);
 }
