@@ -60,6 +60,12 @@ t_token *parser_until_space(t_token *tok)
 	t_token *tmp;
 
 	tmp = tok->n_token;
+	if (tok->type == CHAR_PIPE)
+	{
+		while (tmp && tmp->type == CHAR_SPACE)
+			tmp = tmp->n_token;
+		return (tmp);
+	}
 	while (tmp && tmp->type != CHAR_SPACE)
 		tmp = tmp->n_token;
 	if (!tmp)
@@ -84,7 +90,7 @@ t_token	*parser_next_token(t_token *tok)
 		toktmp = parser_in_between(toktmp, toktmp->type);
 	else if (toktmp->type == CHAR_INUT)
 		toktmp = parser_until_not(toktmp, toktmp->type, CHAR_SPACE);
-	else if (toktmp->type == CHAR_TIRET)
+	else if (toktmp->type == CHAR_TIRET || toktmp->type ==  CHAR_PIPE)
 		toktmp = parser_until_space(toktmp);
 	else
 		toktmp = toktmp->n_token;

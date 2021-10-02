@@ -31,6 +31,7 @@ int	start_fonction(char *envp[])
 {
 	t_lexer		*lexer;
 	t_command	*cmd;
+	char		*ptr;
 	cmd = malloc(sizeof(t_command) * 2);
 	cmd->fd_in = 0;
 	cmd->fd_out = 1;
@@ -39,35 +40,39 @@ int	start_fonction(char *envp[])
 	if (!lexer)
 		return (1);
 	envp_init(envp, lexer);
-	readline("Minishell> ");
+	readline("Minishell$ ");
 	if (rl_line_buffer[0] == '\0')
-		return (0);
+		return (print_custom("Minishell$ exit", 1, 0, 1));
 	while (ft_memcmp(rl_line_buffer, "exit", 4))
 	{
+		add_history (rl_line_buffer);
 		if (!parser_input(lexer, envp))
 		{
 			clear_history();
 			free(lexer);
 			return (print_custom("malloc2", 2, 1, 1));
 		}
-		if (!tree_input(lexer))
+/* 		if (!tree_input(lexer))
 		{
 			rl_clear_history();
 			free(lexer->pwd);
 			free(lexer->pathptr);
 			free(lexer);
 			return (print_custom("malloc3", 2, 1, 1));
-		}
+		} */
 /* 		exec_command(cmd, lexer->buffer); */
 		print_tokens(lexer);
-		readline("Minishell> ");
+		readline("Minishell$ ");
 		if (rl_line_buffer[0] == '\0')
 			break ;
 		rl_on_new_line();
 	}
+	ptr = "";
+	if (!rl_line_buffer[0])
+		ptr = "Minishell$ exit\n";
 	clear_history();
 	free(lexer->pwd);
 	free(lexer->pathptr);
 	free(lexer);
-	return (0);
+	return (print_custom(ptr , 1, 0, 0));
 }

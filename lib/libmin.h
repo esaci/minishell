@@ -37,7 +37,7 @@
 typedef	enum	TOKENTYPE
 {
 	CHAR_TMP = -1,
-	CHAR_INUT = 1,
+	CHAR_INUT = 'I',
 	CHAR_PIPE = '|',
 	CHAR_GUILL = '\"',
 	CHAR_APO = '\'',
