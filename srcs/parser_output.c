@@ -74,7 +74,6 @@ int	copy_buffer(char *buff, t_token *tok)
 	}
 	else
 		c = tok->n_token->line[0];
-	printf("1: %s\n2: %c\n3: %c\n\n", tok->line, c, tok->type);
 	while(tok->line[count2] && tok->line[count2] != c)
 	{
 		if ((tok->type != CHAR_APO && tok->type != CHAR_GUILL) && tok->line[count2] == ' ')
