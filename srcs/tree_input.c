@@ -49,7 +49,6 @@ t_node	*tree_parser_node(t_node *n, t_node *oldnode)
 
 t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
 {
-	t_token		*tmp;
 	t_node		*n;
 
 	n = tree_parser_node(*node, *node);
@@ -67,12 +66,12 @@ t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
 	if (!n->left)
 	{
 		if (tree_define_left(n, t, l))
-			return (1);
+			return (NULL);
 	}
 	if (!n->right)
 	{
 		if (tree_define_right(n, t, l))
-			return (1);
+			return (NULL);
 	}
 	while (t && (t->type != CHAR_PIPE))
 		t = t->n_token;

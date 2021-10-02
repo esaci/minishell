@@ -38,3 +38,30 @@ int	print_tokens(t_lexer *l)
 	}
 	return (0);
 }
+
+int	print_node(t_node *node)
+{
+	int		count;
+	t_node	*node2;
+
+	write(1, &node->type, 1);
+	write(1, "\n", 1);
+	node2 = node;
+	if (node->type == NODE_PIPE)
+		node = node->left;
+	if (node->type != NODE_PATHCOM)
+		return (0);
+	count = 0;
+	while (node->str[count])
+		count += print_custom(node->str[count], 1, 1, 2);
+	count = 0;
+	while (node->left->str[count])
+		count += print_custom(node->left->str[count], 1, 1, 2);
+	count = 0;
+	while (node->right->str[count])
+		count += print_custom(node->right->str[count], 1, 1, 2);
+	node = node2->right;
+	if (node2->type == NODE_PIPE)
+		print_node(node2->right);
+	return (0);
+}

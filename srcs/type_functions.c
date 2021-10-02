@@ -67,3 +67,18 @@ int	is_redirection(t_node *n2)
 		return (1);
 	return (0);
 }
+
+int	get_buffer_count(t_lexer *l, t_token *t)
+{
+	t_token *tmp;
+	int		count;
+	
+	count = 0;
+	tmp = l->tok;
+	while (tmp && tmp != t)
+	{
+		tmp = tmp->n_token;
+		count++;
+	}
+	return (count);
+}

@@ -19,19 +19,18 @@ int	tree_define_left(t_node *n, t_token *t, t_lexer *l)
 	left = malloc(sizeof(t_node) * 2);
 	if (!left)
 		return (1);
+	left->left = NULL;
+	left->right = NULL;
 	n->left = left;
 	if (n->type == NODE_PIPE)
 	{
+		left->str = NULL;
 		if (search_command(left, t, l))
 			return (1);
-		left->left = NULL;
-		left->right = NULL;
 		return (0);
 	}
 	if (search_infile(left, t, l))
 		return (1);
-	left->left = NULL;
-	left->right = NULL;
 	return (0);
 }
 
@@ -39,5 +38,20 @@ int	tree_define_right(t_node *n, t_token *t, t_lexer *l)
 {
 	t_node *right;
 
-	right = malloc(sizeof())
+	right = malloc(sizeof(t_node) * 2);
+	if (!right)
+		return (1);
+	right->left = NULL;
+	right->right = NULL;
+	n->right = right;
+	if (n->type == NODE_PIPE)
+	{
+		right->str = NULL;
+		if (search_pipe(right, t, l))
+			return (1);
+		return (0);
+	}
+	if (search_outfile(right, t, l))
+		return (1);
+	return (0);
 }

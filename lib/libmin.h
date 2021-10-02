@@ -122,6 +122,7 @@ int					fill_buffer(t_lexer *lexer);
 int					pipex_custom(int value, char *envp[]);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
 int					print_tokens(t_lexer *l);
+int					print_node(t_node *node);
 int					free_lexer_tokens(t_lexer *lexer);
 int					init_lexer(t_lexer *lexer, char **envp);
 int					lexer_start(t_lexer *lexer);
@@ -135,5 +136,7 @@ int					search_command(t_node *n, t_token *t, t_lexer *l);
 int					tree_define_left(t_node *n, t_token *t, t_lexer *l);
 int					tree_define_right(t_node *n, t_token *t, t_lexer *l);
 int					search_infile(t_node *n, t_token *t, t_lexer *l);
+int					search_outfile(t_node *n, t_token *t, t_lexer *l);
+int					get_buffer_count(t_lexer *l, t_token *t);
 #endif
 
