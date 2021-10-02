@@ -32,38 +32,20 @@ NODETYPE	ti_check_type(t_lexer *l, t_token *t)
 
 int	tree_init_node(t_lexer *l)
 {
-	int			count;
 	t_token		*t;
-	t_node		*n;
-	t_node		*n2;
 
 	if (!l->tok)
 		return (0);
 	t = l->tok;
-	count = 0;
-	while (t)
-	{
-		n = malloc(sizeof(t_node) * 2);
-		if (!n)
-			return (1);
-		n->type = ti_check_type(l, t);
-		if (count)
-		{
-			n2->right = n;
-			n->left = n2;
-			n->right = NULL;
-			n2 = n;
-		}
-		else
-		{
-			l->node = n;
-			n->left = NULL;
-			n->right = NULL;
-			n2 = n;
-		}
+	n = malloc(sizeof(t_node) * 2);
+	if (!n)
+		return (1);
+	while (t && t->type != CHAR_PIPE)
 		t = t->n_token;
-		count++;
-	}
+	if (!t)
+		tree_state1(l->tok);
+	tree_state2(l->tok);
+	
 	return (0);
 }
 
