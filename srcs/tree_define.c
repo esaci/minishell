@@ -24,6 +24,7 @@ int	tree_define_left(t_node *n, t_token *t, t_lexer *l)
 	left->left = NULL;
 	left->right = NULL;
 	n->left = left;
+	left->str = NULL;
 	if (n->type == NODE_PIPE)
 	{
 		left->str = NULL;
@@ -48,6 +49,7 @@ int	tree_define_right(t_node *n, t_token *t, t_lexer *l)
 	right->left = NULL;
 	right->right = NULL;
 	n->right = right;
+	right->str = NULL;
 	if (n->type == NODE_PIPE)
 	{
 		right->str = NULL;

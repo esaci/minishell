@@ -44,30 +44,41 @@ int	print_node(t_node *node)
 	int		count;
 	int		count2;
 
-	return (0);
 	count = 0;
-	while (node && node->right)
+	while (node)
 	{
 		printf("Node n`%d type: %c\n", count, node->type);
 		count2 = 0;
 		while (node->str[count2])
 			printf("%s\n", node->str[count2++]);
-		printf("Node n`%d GAUCHE type: %c\n", count, node->left->type);
+		if (!node->left)
+			break ;
+		printf("GAUCHE type: %c\n", node->left->type);
 		count2 = 0;
 		while (node->left->str[count2])
 			printf("%s\n", node->left->str[count2++]);
 		if (node->left->left)
 		{
-			printf("Node n`%d GAUCHE INPUT type: %c\n", count, node->left->left->type);
+			printf("GAUCHE GAUCHE INPUT type: %c\n", node->left->left->type);
 			count2 = 0;
 			while (node->left->left->str[count2])
 				printf("%s\n", node->left->left->str[count2++]);
-			printf("Node n`%d GAUCHE OUTPUT type: %c\n", count, node->left->right->type);
+			printf("DROITE DROITE OUTPUT type: %c\n", node->left->right->type);
 			count2 = 0;
 			while (node->left->right->str[count2])
 				printf("%s\n", node->left->right->str[count2++]);
 		}
-		node = node->right;
+		if (node->right->type == NODE_FILEOUT)
+		{
+			printf("DROITE OUTPUT type: %c\n", node->right->type);
+			count2 = 0;
+			while (node->right->str[count2])
+				printf("%s\n", node->right->str[count2++]);
+			node = node->right->right;
+		}
+		else
+			node = node->right;
+		count++;
 	}
 	return (0);
 }

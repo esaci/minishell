@@ -42,11 +42,8 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t)
 	if (t->type != CHAR_INUT)
 		return (NODE_ERROR);
 	tmp = parse_is_command(l->buffer[get_buffer_count(l, t)] , l, 0);
-	print_custom(l->buffer[get_buffer_count(l, t)], 1, 1, 1);
 	if (!access(tmp, F_OK))
 	{
-		write(1, "C UNE COMMANDE !\n", 17);
-		print_custom(tmp, 1, 1, 1);
 		l->buffer[get_buffer_count(l, t)] = tmp;
 		fill_buffer(l);
 		if (t->n_token && is_arg(t->n_token))
@@ -83,4 +80,20 @@ int	get_buffer_count(t_lexer *l, t_token *t)
 		count++;
 	}
 	return (count);
+}
+
+char	*first_false_command(t_token *t, t_lexer *l)
+{
+	t_token	*tmp;
+
+	while (t && t->type != CHAR_INUT)
+	{
+		tmp = t;
+		t = t->n_token;
+	}
+	if (!t)
+		return ("");
+	if (!is_any_chevron(tmp) && !is_arg(t))
+		return (l->buffer[get_buffer_count(l, t)]);
+	return (first_false_command(t->n_token, l));
 }

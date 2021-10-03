@@ -14,29 +14,46 @@
 
 int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 {
-	int	count;
+	int		count;
+	int		count2;
+	t_token	*tmp;
 
-	count = get_buffer_count(l, t);
+	tmp = t;
 	n->str = malloc(sizeof(char*) * (3));
 	if (!n->str)
 		return (1);
 	n->str[2] = 0;
+	n->str[0] = NULL;
+	count2 = 0;
 	while (t && t->type != CHAR_PIPE)
 	{
+		count = get_buffer_count(l, t);
 		if (is_any_command(l, t))
+		{
 			n->str[0] = l->buffer[count];
+			if (!count2)
+				count2 = 1;
+		}
 		if (t->type == CHAR_ARG)
+		{
 			n->str[1] = l->buffer[count];
+			count2 = 2;
+		}
 		count++;
 		t = t->n_token;
 	}
+	if (!count2)
+		n->str[count2++] = first_false_command(tmp, l);
+	n->str[count2] = NULL;
 	return (0);
 }
 
 int	search_command(t_node *n, t_token *t, t_lexer *l)
 {
 	NODETYPE	tmp;
+	t_token		*tmp2;
 
+	tmp2 = t;
 	tmp = 0;
 	while (t && t->type != CHAR_PIPE)
 	{
@@ -52,23 +69,29 @@ int	search_command(t_node *n, t_token *t, t_lexer *l)
 		n->type = NODE_NOCOM;
 	if (n->str)
 		return (0);
-	if (search_node_str_com(n, t, l))
+	if (search_node_str_com(n, tmp2, l))
 		return (1);
 	return (0);
 }
 
 int	search_pipe(t_node *n, t_token *t, t_lexer *l)
 {
+	t_token *tmp;
+
+	tmp = t;
 	while (t && t->type != CHAR_PIPE)
 		t = t->n_token;
 	if (t)
 	{
 		n->type = NODE_PIPE;
-		n->str = NULL;
+		n->str = malloc(sizeof(char*) * 1);
+		if (!n->str)
+			return (1);
+		n->str[0] = 0;
 	}
 	else
 	{
-		if (search_command(n, t, l))
+		if (search_command(n, tmp, l))
 			return (1);
 	}
 	return (0);

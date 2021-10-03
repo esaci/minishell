@@ -18,11 +18,9 @@ CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
 
 COMPILE1 = -I /Users/$(USER)/.brew/opt/readline/include
 
-COMPILE1U = -I /usr/include/readline
 
 COMPILE2 = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
-COMPILE2U = -lreadline -L /usr/include/readline
 
 SRC =	$(GNLD)get_next_line.c				\
 		$(GNLD)get_next_line_utils.c		\

@@ -138,5 +138,6 @@ int					tree_define_right(t_node *n, t_token *t, t_lexer *l);
 int					search_infile(t_node *n, t_token *t, t_lexer *l);
 int					search_outfile(t_node *n, t_token *t, t_lexer *l);
 int					get_buffer_count(t_lexer *l, t_token *t);
+char				*first_false_command(t_token *t, t_lexer *l);
 #endif
 

@@ -64,19 +64,15 @@ t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
 {
 	t_node		*n;
 
-	n = tree_parser_node(node); // Bien defini
+	n = tree_parser_node(node);
 	if (!n)
 		return (NULL);
-	if (search_pipe(n, t, l)) // Bien defini
+	if (search_pipe(n, t, l))
 		return (NULL);
 	if (tree_define_left(n, t, l))
 		return (NULL);
 	if (tree_define_right(n, t, l))
 		return (NULL);
-	printf("Node n`%d type: %c\n", 0, (*node)->type);
-/* 	int count2 = 0;
-	while ((*node)->str[count2])
-		printf("%s\n", (*node)->str[count2++]); */
 	while (t && (t->type != CHAR_PIPE))
 		t = t->n_token;
 	if (t)
@@ -92,9 +88,8 @@ t_node	*tree_input(t_lexer *lexer)
 	node = &(lexer->node);
 	t = lexer->tok;
 	while (t)
-	{
 		t = tree_init_node(lexer, t, node);
-		/* printf("Node n`%d type: %c\n", 0, (*node)->type); */
-	}
+	if (check_state_nodes(l))
+		return (NULL);
 	return (lexer->node);
 }
