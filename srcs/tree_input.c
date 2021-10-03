@@ -30,28 +30,10 @@ NODETYPE	tree_check_type(t_lexer *l, t_token *t)
 	return (NODE_ARG);
 }
 
-t_node	*tree_parser_node(t_node *n, t_node *oldnode)
+t_node	*tree_parser_node(t_node *n)
 {
 	t_node	*tmp;
 
-	if (!n)
-		return (oldnode);
-	if (is_redirection(n->left) && is_redirection(n->right))
-		return (NULL);
-	tmp = tree_parser_node(n->left, n);
-	if (tmp)
-		return ( tree_parser_node(n->left, n));
-	tmp = tree_parser_node(n->right, n);
-	if (tmp)
-		return (tree_parser_node(n->right, n));
-	return (NULL);
-}
-
-t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
-{
-	t_node		*n;
-
-	n = tree_parser_node(*node, *node);
 	if (!n)
 	{
 		n = malloc(sizeof(t_node) * 2);
@@ -59,20 +41,37 @@ t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
 			return (NULL);
 		n->left = NULL;
 		n->right = NULL;
-		*node = n;
+		n->str = NULL;
+		n->type = NODE_ERROR;
 	}
-	if (search_pipe(n, t, l))
+	tmp = n;
+	while (tmp->left && (tmp->left->type == NODE_PATHCOM || tmp->left->type == NODE_NOCOM))
+	{
+		tmp = tmp->right;
+		if (tmp->right->type == NODE_FILEOUT || tmp->right->type == NODE_DFILEOUT)
+			return (NULL);
+		if (!tmp->right)
+		{
+			print_custom("Erreur Parsing node, tmp->right n'a pas ete defini alors qu'il aurait du l'etre", 1, 0, 1);
+			return (NULL);
+		}
+	}
+	return (tmp);
+}
+
+t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
+{
+	t_node		*n;
+
+	n = tree_parser_node(*node); // Bien defini
+	if (!n)
 		return (NULL);
-	if (!n->left)
-	{
-		if (tree_define_left(n, t, l))
-			return (NULL);
-	}
-	if (!n->right)
-	{
-		if (tree_define_right(n, t, l))
-			return (NULL);
-	}
+	if (search_pipe(n, t, l)) // Bien defini
+		return (NULL);
+	if (tree_define_left(n, t, l))
+		return (NULL);
+	if (tree_define_right(n, t, l))
+		return (NULL);
 	while (t && (t->type != CHAR_PIPE))
 		t = t->n_token;
 	if (t)

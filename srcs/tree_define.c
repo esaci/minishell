@@ -16,6 +16,8 @@ int	tree_define_left(t_node *n, t_token *t, t_lexer *l)
 {
 	t_node	*left;
 
+	if (n->left)
+		return (0);
 	left = malloc(sizeof(t_node) * 2);
 	if (!left)
 		return (1);
@@ -38,6 +40,8 @@ int	tree_define_right(t_node *n, t_token *t, t_lexer *l)
 {
 	t_node *right;
 
+	if (n->right)
+		return (0);
 	right = malloc(sizeof(t_node) * 2);
 	if (!right)
 		return (1);

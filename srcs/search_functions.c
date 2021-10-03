@@ -99,6 +99,9 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 			count2 = get_buffer_count(l, t);
 			n->str[count] = l->buffer[count2];
 			count++;
+			n->type = NODE_FILEIN;
+			if (t->type == CHAR_DCHEVG)
+				n->type = NODE_DFILEIN;
 		}
 		t = t->n_token;
 	}
@@ -137,6 +140,9 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 			count2 = get_buffer_count(l, t);
 			n->str[count] = l->buffer[count2];
 			count++;
+			n->type = NODE_FILEOUT;
+			if (t->type == CHAR_DCHEVD)
+				n->type = NODE_DFILEOUT;
 		}
 		t = t->n_token;
 	}
@@ -146,6 +152,8 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 		n->type = NODE_FILEOUT;
 		n->str[0] = "/dev/stdout";
 		n->str[1] = 0;
+		n->right = NULL;
+		n->left = NULL;
 	}
 	return (0);
 }
