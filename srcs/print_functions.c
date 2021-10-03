@@ -29,6 +29,9 @@ int	print_tokens(t_lexer *l)
 	t =  l->tok;
 	while (t)
 	{
+		print_custom("type: ", 1, 1, 0);
+		write(1, &t->type, 1);
+		write(1, "  ", 2);
 		write(1, "|", 1);
 		write(1, l->buffer[count], ft_strlen(l->buffer[count]));
 		write(1, "|", 1);

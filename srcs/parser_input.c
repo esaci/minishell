@@ -42,6 +42,8 @@ t_token	*parser_in_between(t_token *t, TOKENTYPE type)
 	if (!tmp)
 		return (tmp);
 	tmp = tmp->n_token;
+	while (tmp && tmp->type == CHAR_SPACE)
+		tmp = tmp->n_token;
 	return (tmp);
 }
 
