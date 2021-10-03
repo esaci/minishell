@@ -86,6 +86,7 @@ char	*first_false_command(t_token *t, t_lexer *l)
 {
 	t_token	*tmp;
 
+	tmp = t;
 	while (t && t->type != CHAR_INUT)
 	{
 		tmp = t;

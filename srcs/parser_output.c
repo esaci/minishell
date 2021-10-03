@@ -22,7 +22,7 @@ int	poutput_strlen(t_token *tok)
 		count++;
 	if (!tok->n_token)
 		c = '\0';
-	else if (tok->n_token->type == CHAR_INUT || tok->n_token->type == CHAR_TIRET)
+	else if (tok->n_token->type == CHAR_INUT || tok->n_token->type == CHAR_TIRET || tok->n_token->type  == CHAR_ARG)
 		c = ' ';
 	else if ((tok->type == CHAR_APO || tok->type == CHAR_GUILL) && tok->line[count])
 	{
@@ -64,7 +64,7 @@ int	copy_buffer(char *buff, t_token *tok)
 		c = ' ';
 	else if (tok->type == CHAR_CHEVD || tok->type == CHAR_CHEVG)
 		c = tok->n_token->line[0];
-	else if (tok->n_token->type == CHAR_INUT || tok->type == CHAR_TIRET)
+	else if (tok->n_token->type == CHAR_INUT || tok->type == CHAR_TIRET || tok->n_token->type  == CHAR_ARG)
 		c = ' ';
 	else if (tok->line[count] == tok->n_token->line[count2])
 	{

@@ -19,7 +19,8 @@ int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 	t_token	*tmp;
 
 	tmp = t;
-	n->str = malloc(sizeof(char*) * (3));
+	count2 = nbr_com(l, t);
+	n->str = malloc(sizeof(char*) * (count2 + 3));
 	if (!n->str)
 		return (1);
 	n->str[2] = 0;
@@ -30,14 +31,13 @@ int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 		count = get_buffer_count(l, t);
 		if (is_any_command(l, t))
 		{
-			n->str[0] = l->buffer[count];
-			if (!count2)
-				count2 = 1;
+			n->str[count2] = l->buffer[count];
+			count2++;
 		}
 		if (t->type == CHAR_ARG)
 		{
-			n->str[1] = l->buffer[count];
-			count2 = 2;
+			n->str[count2] = l->buffer[count];
+			count2++;
 		}
 		count++;
 		t = t->n_token;
