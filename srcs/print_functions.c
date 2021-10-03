@@ -70,6 +70,7 @@ int	print_node(t_node *node)
 	{
 		if (node->type == NODE_FILEOUT)
 			break ;
+		write(1, &node->type, 1);
 		print_str_node(node, " Node :\n", count);
 		if (!node->left)
 			break ;

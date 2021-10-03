@@ -67,8 +67,6 @@ int	search_command(t_node *n, t_token *t, t_lexer *l)
 		n->type = NODE_PATHCOM;
 	else
 		n->type = NODE_NOCOM;
-	if (n->str)
-		return (0);
 	if (search_node_str_com(n, tmp2, l))
 		return (1);
 	return (0);
