@@ -47,9 +47,6 @@ typedef	enum	TOKENTYPE
 	CHAR_CHEVD = '>',
 	CHAR_DOLL = '$',
 	CHAR_INTER = '?',
-	CHAR_PARO = '(',
-	CHAR_PARF = ')',
-	CHAR_POINT = '.',
 	CHAR_SPACE = ' ',
 	CHAR_TIRET = '-',
 	CHAR_ET = '&',
@@ -123,6 +120,7 @@ int					pipex_custom(int value, char *envp[]);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
 int					print_tokens(t_lexer *l);
 int					print_node(t_node *node);
+int					print_str_node(t_node *n, char *str, int count2);
 int					free_lexer_tokens(t_lexer *lexer);
 int					init_lexer(t_lexer *lexer, char **envp);
 int					lexer_start(t_lexer *lexer);
@@ -133,8 +131,10 @@ NODETYPE			is_any_command(t_lexer *l, t_token *t);
 int					is_redirection(t_node *n2);
 int					search_pipe(t_node *n, t_token *t, t_lexer *l);
 int					search_command(t_node *n, t_token *t, t_lexer *l);
+void				add_path(char **ptr, t_token *t, t_lexer *l);
 int					tree_define_left(t_node *n, t_token *t, t_lexer *l);
 int					tree_define_right(t_node *n, t_token *t, t_lexer *l);
+int					tree_define_command(t_node *n, t_token *t, t_lexer *l);
 int					search_infile(t_node *n, t_token *t, t_lexer *l);
 int					search_outfile(t_node *n, t_token *t, t_lexer *l);
 int					get_buffer_count(t_lexer *l, t_token *t);

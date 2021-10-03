@@ -43,12 +43,6 @@ TOKENTYPE	lexer_check_type(t_token *tok)
 		return (CHAR_DOLL);
 	if (tok->line[0] ==  '\?')
 		return (CHAR_INTER);
-	if (tok->line[0] ==  '(')
-		return (CHAR_PARO);
-	if (tok->line[0] ==  ')')
-		return (CHAR_PARF);
-	if (tok->line[0] ==  '.')
-		return (CHAR_POINT);
 	if (tok->line[0] ==  ' ')
 		return (CHAR_SPACE);
 	return (lexer_check_type2(tok));

@@ -39,44 +39,48 @@ int	print_tokens(t_lexer *l)
 	return (0);
 }
 
+int	print_str_node(t_node *n, char *str, int count2)
+{
+	int		count;
+	char	*ptr;
+
+	if (count2)
+	{
+		ptr = ft_itoa(count2);
+		print_custom(ptr, 1, 1, 0);
+		free(ptr);
+	}
+	if (str)
+		print_custom(str, 1, 1, 0);
+	count = 0;
+	while (n->str[count])
+		count += print_custom(n->str[count], 1, 1, 1);
+	return (1);
+}
+
 int	print_node(t_node *node)
 {
 	int		count;
-	int		count2;
 
-	count = 0;
+	count = 1;
 	while (node)
 	{
 		if (node->type == NODE_FILEOUT)
 			break ;
-		printf("Node n`%d type: %c\n", count, node->type);
-		count2 = 0;
-		while (node->str[count2])
-			printf("%s\n", node->str[count2++]);
+		print_str_node(node, " Node :\n", count);
 		if (!node->left)
 			break ;
-		printf("GAUCHE type: %c\n", node->left->type);
-		count2 = 0;
-		while (node->left->str[count2])
-			printf("%s\n", node->left->str[count2++]);
-		if (node->left->left)
+		print_str_node(node->left, " Gauche :\n", count);
+		if (node->left->type != NODE_FILEIN && node->left->type != NODE_DFILEIN)
 		{
-			printf("GAUCHE GAUCHE INPUT type: %c\n", node->left->left->type);
-			count2 = 0;
-			while (node->left->left->str[count2])
-				printf("%s\n", node->left->left->str[count2++]);
-			printf("DROITE DROITE OUTPUT type: %c\n", node->left->right->type);
-			count2 = 0;
-			while (node->left->right->str[count2])
-				printf("%s\n", node->left->right->str[count2++]);
+			count++;
+			print_str_node(node->left->left, " Gauche :\n", count);
+			print_str_node(node->left->right, " Droite :\n", count);
 		}
-		if (node->right->type == NODE_FILEOUT)
+		if (node->right->type == NODE_FILEOUT || node->right->type == NODE_DFILEOUT)
 		{
-			printf("DROITE OUTPUT type: %c\n", node->right->type);
-			count2 = 0;
-			while (node->right->str[count2])
-				printf("%s\n", node->right->str[count2++]);
-			node = node->right->right;
+			print_str_node(node->right, " Droite :\n", count);
+			node = NULL;
 		}
 		else
 			node = node->right;

@@ -19,6 +19,8 @@ t_token	*parser_chevron(t_token *t, TOKENTYPE type)
 	if (t->n_token->type == type)
 	{
 		t->type = t->type - 1;
+		while (t->n_token->n_token && t->n_token->n_token->type == CHAR_SPACE)
+			t->n_token->n_token = t->n_token->n_token->n_token;
 		return(t->n_token->n_token);
 	}
 	else

@@ -125,6 +125,7 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 			n->type = NODE_FILEIN;
 			if (t->type == CHAR_DCHEVG)
 				n->type = NODE_DFILEIN;
+			add_path(&n->str[count++], t, l);
 		}
 		t = t->n_token;
 	}
@@ -141,7 +142,6 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 {
 	int	count;
-	int	count2;
 	t_token	*tmp;
 
 	tmp = t;
@@ -152,7 +152,7 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 			count++;
 		tmp = tmp->n_token;
 	}
-	n->str = malloc(sizeof(char*) * (count + 2));
+	n->str = malloc(sizeof(char*) * ((count*2) + 2));
 	if (!n->str)
 		return (1);
 	count = 0;
@@ -160,12 +160,12 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 	{
 		if (t->type == CHAR_CHEVD || t->type == CHAR_DCHEVD)
 		{
-			count2 = get_buffer_count(l, t);
-			n->str[count] = l->buffer[count2];
+			n->str[count] = l->buffer[get_buffer_count(l, t)];
 			count++;
 			n->type = NODE_FILEOUT;
 			if (t->type == CHAR_DCHEVD)
 				n->type = NODE_DFILEOUT;
+			add_path(&n->str[count++], t, l);
 		}
 		t = t->n_token;
 	}
