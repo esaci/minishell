@@ -89,7 +89,7 @@ t_node	*tree_input(t_lexer *lexer)
 	t = lexer->tok;
 	while (t)
 		t = tree_init_node(lexer, t, node);
-	if (check_state_nodes(l))
-		return (NULL);
+/* 	if (output_state_nodes(l))
+		return (NULL); */
 	return (lexer->node);
 }

@@ -39,6 +39,7 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(SRCD)builtin/ft_echo.c			\
 		$(SRCD)tree_input.c					\
 		$(SRCD)tree_define.c				\
+		$(SRCD)tree_output.c 				\
 		$(SRCD)free_functions.c
 
 OBJ = $(SRC:.c=.o)

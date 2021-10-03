@@ -57,7 +57,5 @@ int	tree_define_right(t_node *n, t_token *t, t_lexer *l)
 			return (1);
 		return (0);
 	}
-	if (search_outfile(right, t, l))
-		return (1);
 	return (0);
 }

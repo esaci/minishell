@@ -47,6 +47,8 @@ int	print_node(t_node *node)
 	count = 0;
 	while (node)
 	{
+		if (node->type == NODE_FILEOUT)
+			break ;
 		printf("Node n`%d type: %c\n", count, node->type);
 		count2 = 0;
 		while (node->str[count2])
