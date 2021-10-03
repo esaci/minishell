@@ -42,9 +42,11 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t)
 	if (t->type != CHAR_INUT)
 		return (NODE_ERROR);
 	tmp = parse_is_command(l->buffer[get_buffer_count(l, t)] , l, 0);
+	print_custom(l->buffer[get_buffer_count(l, t)], 1, 1, 1);
 	if (!access(tmp, F_OK))
 	{
 		write(1, "C UNE COMMANDE !\n", 17);
+		print_custom(tmp, 1, 1, 1);
 		l->buffer[get_buffer_count(l, t)] = tmp;
 		fill_buffer(l);
 		if (t->n_token && is_arg(t->n_token))

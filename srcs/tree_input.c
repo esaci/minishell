@@ -30,21 +30,22 @@ NODETYPE	tree_check_type(t_lexer *l, t_token *t)
 	return (NODE_ARG);
 }
 
-t_node	*tree_parser_node(t_node *n)
+t_node	*tree_parser_node(t_node **n)
 {
 	t_node	*tmp;
 
-	if (!n)
+	if (!(*n))
 	{
-		n = malloc(sizeof(t_node) * 2);
-		if (!n)
+		(*n) = malloc(sizeof(t_node) * 2);
+		if (!*n)
 			return (NULL);
-		n->left = NULL;
-		n->right = NULL;
-		n->str = NULL;
-		n->type = NODE_ERROR;
+		(*n)->left = NULL;
+		(*n)->right = NULL;
+		(*n)->str = NULL;
+		(*n)->type = NODE_ERROR;
+		return ((*n));
 	}
-	tmp = n;
+	tmp = (*n)->right;
 	while (tmp->left && (tmp->left->type == NODE_PATHCOM || tmp->left->type == NODE_NOCOM))
 	{
 		tmp = tmp->right;
@@ -63,7 +64,7 @@ t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
 {
 	t_node		*n;
 
-	n = tree_parser_node(*node); // Bien defini
+	n = tree_parser_node(node); // Bien defini
 	if (!n)
 		return (NULL);
 	if (search_pipe(n, t, l)) // Bien defini
@@ -72,6 +73,10 @@ t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
 		return (NULL);
 	if (tree_define_right(n, t, l))
 		return (NULL);
+	printf("Node n`%d type: %c\n", 0, (*node)->type);
+/* 	int count2 = 0;
+	while ((*node)->str[count2])
+		printf("%s\n", (*node)->str[count2++]); */
 	while (t && (t->type != CHAR_PIPE))
 		t = t->n_token;
 	if (t)
@@ -87,6 +92,9 @@ t_node	*tree_input(t_lexer *lexer)
 	node = &(lexer->node);
 	t = lexer->tok;
 	while (t)
+	{
 		t = tree_init_node(lexer, t, node);
+		/* printf("Node n`%d type: %c\n", 0, (*node)->type); */
+	}
 	return (lexer->node);
 }

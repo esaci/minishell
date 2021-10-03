@@ -44,6 +44,7 @@ int	print_node(t_node *node)
 	int		count;
 	int		count2;
 
+	return (0);
 	count = 0;
 	while (node && node->right)
 	{
