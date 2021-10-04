@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "../../lib/libmin.h"
 
 NODETYPE	tree_check_type(t_lexer *l, t_token *t)
 {
@@ -26,7 +26,7 @@ NODETYPE	tree_check_type(t_lexer *l, t_token *t)
 		return (is_any_chevron(t));
 	}
 	if (t->type == CHAR_INUT)
-		return (is_any_command(l, t));
+		return (is_any_command(l, t, t));
 	return (NODE_ARG);
 }
 

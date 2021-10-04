@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "../../lib/libmin.h"
 /* print_custom(*ptr, 1, 1,1); */
 void	add_path(char **ptr, t_token *t, t_lexer *l)
 {

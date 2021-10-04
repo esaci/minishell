@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "../../lib/libmin.h"
 
 void	envp_init(char **envp, t_lexer *l)
 {

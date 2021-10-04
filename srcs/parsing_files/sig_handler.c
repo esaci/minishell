@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   custom_pipex.c                                     :+:      :+:    :+:   */
+/*   sig_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/25 23:17:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/25 23:17:46 by esaci            ###   ########.fr       */
+/*   Created: 2021/09/26 00:13:38 by esaci             #+#    #+#             */
+/*   Updated: 2021/09/26 00:13:41 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "../../lib/libmin.h"
 
-void	init_pip(t_pip *pip, int value)
+void	*sig_handler()
 {
-	pip->b_ac = value; //juste pour pa erreur
-}
+	void	(*sigint_c)(int);
 
-int	pipex_custom(int value, char *envp[])
-{
-	t_pip pip;
-
-	init_pip(&pip, value);
-	return (0);
-	if (envp[0])
-		return (0);
+	sigint_c = signal(SIGINT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	return (sigint_c);
 }

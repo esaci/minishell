@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "../../lib/libmin.h"
 
 TOKENTYPE	lexer_check_type2(t_token *tok)
 {

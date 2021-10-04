@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "../../lib/libmin.h"
 
 int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 {

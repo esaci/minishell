@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
+#include "../../lib/libmin.h"
 
 int	print_custom(char *str, int fd, int exit_code, int saut_ligne)
 {

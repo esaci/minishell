@@ -11,7 +11,8 @@ LIBFT = libft.a
 LIBFTD = ./fcts//libft/
 
 SRCD = ./srcs/
-
+SRCPARSING = parsing_files/
+SRCBUILTIN = builtin/
 COMPILE = gcc -fsanitize=address
 
 CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
@@ -22,26 +23,25 @@ COMPILE1 = -I /Users/$(USER)/.brew/opt/readline/include
 COMPILE2 = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 
-SRC =	$(GNLD)get_next_line.c				\
-		$(GNLD)get_next_line_utils.c		\
-		$(SRCD)print_functions.c			\
-		$(SRCD)sig_handler.c				\
-		$(SRCD)type_functions.c				\
-		$(SRCD)search_functions.c			\
-		$(SRCD)fast_functions.c				\
-		$(SRCD)parse_is_command.c			\
-		$(SRCD)start_functions.c			\
-		$(SRCD)custom_pipex.c				\
-		$(SRCD)parser_input.c				\
-		$(SRCD)parser_output.c				\
-		$(SRCD)lexer_start.c				\
-		$(SRCD)free_functions.c				\
-		$(SRCD)builtin/ft_menu.c			\
-		$(SRCD)builtin/ft_echo.c			\
-		$(SRCD)tree_input.c					\
-		$(SRCD)tree_define.c				\
-		$(SRCD)tree_output.c 				\
-		$(SRCD)free_functions.c
+SRC =	$(GNLD)get_next_line.c							\
+		$(GNLD)get_next_line_utils.c					\
+		$(SRCD)$(SRCPARSING)print_functions.c			\
+		$(SRCD)$(SRCPARSING)sig_handler.c				\
+		$(SRCD)$(SRCPARSING)type_functions.c			\
+		$(SRCD)$(SRCPARSING)search_functions.c			\
+		$(SRCD)$(SRCPARSING)fast_functions.c			\
+		$(SRCD)$(SRCPARSING)parse_is_command.c			\
+		$(SRCD)$(SRCPARSING)start_functions.c			\
+		$(SRCD)$(SRCPARSING)parser_input.c				\
+		$(SRCD)$(SRCPARSING)parser_output.c				\
+		$(SRCD)$(SRCPARSING)lexer_start.c				\
+		$(SRCD)$(SRCPARSING)free_functions.c			\
+		$(SRCD)$(SRCBUILTIN)ft_menu.c					\
+		$(SRCD)$(SRCBUILTIN)ft_echo.c					\
+		$(SRCD)$(SRCPARSING)tree_input.c				\
+		$(SRCD)$(SRCPARSING)tree_define.c				\
+		$(SRCD)$(SRCPARSING)tree_output.c 				\
+		$(SRCD)$(SRCPARSING)free_functions.c
 
 OBJ = $(SRC:.c=.o)
 
