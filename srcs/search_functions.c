@@ -18,6 +18,8 @@ int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 	int		count2;
 	t_token	*tmp;
 
+	if (n->type != NODE_PATHCOM)
+		return (0);
 	tmp = t;
 	count2 = nbr_com(l, t);
 	n->str = malloc(sizeof(char*) * (count2 + 3));
@@ -66,7 +68,7 @@ int	search_command(t_node *n, t_token *t, t_lexer *l)
 	if (tmp)
 		n->type = NODE_PATHCOM;
 	else
-		n->type = NODE_NOCOM;
+		no_com_fill(n, l, tmp2);
 	if (search_node_str_com(n, tmp2, l))
 		return (1);
 	return (0);

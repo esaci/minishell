@@ -23,5 +23,37 @@ int	nbr_com(t_lexer *l, t_token *t)
 			count++;
 		t = t->n_token;
 	}
-	return (count);
+	return (count * 2);
+}
+
+void	no_com_fill(t_node *n, t_lexer *l, t_token *t)
+{
+	t_token *tmp;
+	int		count;
+	t_token *tmp2;
+
+	tmp2 = t;
+	n->type = NODE_NOCOM;
+	tmp = t;
+	count = 0;
+	while(t)
+	{
+		if (t->type == CHAR_INUT && !is_any_chevron(tmp))
+			count++;
+		tmp = t;
+		t = t->n_token;
+	}
+	n->str = malloc(sizeof(char*) * (count + 3));
+	if (!n->str)
+		return;
+	tmp = tmp2;
+	count = 0;
+	while (tmp2)
+	{
+		if (tmp2->type == CHAR_INUT && !is_any_chevron(tmp))
+			n->str[count++] = l->buffer[get_buffer_count(l, tmp2)];
+		tmp = tmp2;
+		tmp2 = tmp2->n_token;
+	}
+	n->str[count] = NULL;
 }
