@@ -48,14 +48,14 @@ t_node	*tree_parser_node(t_node **n)
 	tmp = (*n)->right;
 	while (tmp->left && (tmp->left->type == NODE_PATHCOM || tmp->left->type == NODE_NOCOM))
 	{
-		tmp = tmp->right;
-		if (tmp->right->type == NODE_FILEOUT || tmp->right->type == NODE_DFILEOUT)
-			return (NULL);
 		if (!tmp->right)
 		{
 			print_custom("Erreur Parsing node, tmp->right n'a pas ete defini alors qu'il aurait du l'etre", 1, 0, 1);
 			return (NULL);
 		}
+		tmp = tmp->right;
+		if (tmp->right && (tmp->right->type == NODE_FILEOUT || tmp->right->type == NODE_DFILEOUT))
+			return (NULL);
 	}
 	return (tmp);
 }
@@ -91,7 +91,7 @@ t_node	*tree_input(t_lexer *lexer)
 	t = lexer->tok;
 	while (t)
 		t = tree_init_node(lexer, t, node);
-/* 	if (output_state_nodes(l))
+/* 	if (tree_output(l))
 		return (NULL); */
 	return (lexer->node);
 }

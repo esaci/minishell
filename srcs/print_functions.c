@@ -77,9 +77,12 @@ int	print_node(t_node *node)
 		print_str_node(node->left, " Gauche :\n", count);
 		if (node->left->type != NODE_FILEIN && node->left->type != NODE_DFILEIN)
 		{
-			count++;
+			write(1, "{\n", 2);
+			write(1, &node->type, 1);
+			print_str_node(node, " Commande :\n", count);
 			print_str_node(node->left->left, " Gauche :\n", count);
 			print_str_node(node->left->right, " Droite :\n", count);
+			write(1, "}\n", 2);
 		}
 		if (node->right->type == NODE_FILEOUT || node->right->type == NODE_DFILEOUT)
 		{
@@ -89,6 +92,8 @@ int	print_node(t_node *node)
 		else
 			node = node->right;
 		count++;
+		if (node)
+			print_custom("1 Droite :", 1, 1, 1);
 	}
 	return (0);
 }
