@@ -11,8 +11,13 @@ LIBFT = libft.a
 LIBFTD = ./fcts//libft/
 
 SRCD = ./srcs/
+
 SRCPARSING = parsing_files/
+
 SRCBUILTIN = builtin/
+
+SRCEXEC = exec_files/
+
 COMPILE = gcc -fsanitize=address
 
 CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
@@ -41,7 +46,10 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCPARSING)tree_input.c				\
 		$(SRCD)$(SRCPARSING)tree_define.c				\
 		$(SRCD)$(SRCPARSING)tree_output.c 				\
-		$(SRCD)$(SRCPARSING)free_functions.c
+		$(SRCD)$(SRCPARSING)free_functions.c			\
+		$(SRCD)$(SRCEXEC)exec_input.c					\
+		$(SRCD)$(SRCEXEC)exec_com.c						\
+		$(SRCD)$(SRCEXEC)exec_pipe.c
 
 OBJ = $(SRC:.c=.o)
 

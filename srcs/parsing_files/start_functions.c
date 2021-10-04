@@ -60,9 +60,16 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc3", 2, 1, 1));
 		}
-/* 		exec_command(cmd, lexer->buffer); */
 		print_tokens(lexer);
 		print_node(lexer->node);
+		if (!exec_input(lexer))
+		{
+			rl_clear_history();
+			free(lexer->pwd);
+			free(lexer->pathptr);
+			free(lexer);
+			return (print_custom("malloc4", 2, 1, 1));
+		}
 		readline("Minishell$ ");
 		if (!rl_line_buffer[0])
 			break ;

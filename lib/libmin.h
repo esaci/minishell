@@ -33,6 +33,7 @@
 
 // Lib Jules
 # include "lib_jules.h"
+# include "libmin_exec.h"
 
 typedef	enum	TOKENTYPE
 {
