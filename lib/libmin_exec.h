@@ -13,7 +13,4 @@
 #ifndef	LIBMIN_EXEC_H
 # define LIBMIN_EXEC_H
 
-int					exec_input(t_lexer *l);
-t_node				*exec_pipe(t_lexerr *l, t_node *n);
-int					exec_com(t_lexer *l, t_node *n);
 #endif

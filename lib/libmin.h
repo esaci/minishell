@@ -143,5 +143,9 @@ char				*first_false_command(t_token *t, t_lexer *l);
 int					nbr_com(t_lexer *l, t_token *t);
 void				no_com_fill(t_node *n, t_lexer *l, t_token *t);
 int					is_arg(t_token *t);
+int					exec_input(t_lexer *l);
+t_node				*exec_pipe(t_lexerr *l, t_node *n);
+int					exec_com(t_lexer *l, t_node *n);
+
 #endif
 
