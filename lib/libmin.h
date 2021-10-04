@@ -127,7 +127,7 @@ int					lexer_start(t_lexer *lexer);
 t_node				*tree_input(t_lexer *lexer);
 char				*parse_is_command(char *arg_list, t_lexer *l, int count);
 NODETYPE			is_any_chevron(t_token *t);
-NODETYPE			is_any_command(t_lexer *l, t_token *t);
+NODETYPE			is_any_command(t_lexer *l, t_token *t, t_token *oldt);
 int					is_redirection(t_node *n2);
 int					search_pipe(t_node *n, t_token *t, t_lexer *l);
 int					search_command(t_node *n, t_token *t, t_lexer *l);
@@ -141,5 +141,6 @@ int					get_buffer_count(t_lexer *l, t_token *t);
 char				*first_false_command(t_token *t, t_lexer *l);
 int					nbr_com(t_lexer *l, t_token *t);
 void				no_com_fill(t_node *n, t_lexer *l, t_token *t);
+int					is_arg(t_token *t);
 #endif
 

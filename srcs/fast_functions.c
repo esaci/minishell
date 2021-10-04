@@ -14,13 +14,18 @@
 
 int	nbr_com(t_lexer *l, t_token *t)
 {
-	int	count;
+	int		count;
+	t_token *tmp2;
 
 	count = 0;
+	tmp2 = t;
 	while (t && t->type != CHAR_PIPE)
 	{
-		if (is_any_command(l, t))
+		if (is_any_command(l, t, tmp2))
+		{
 			count++;
+		}
+		tmp2 = t;
 		t = t->n_token;
 	}
 	return (count * 2);

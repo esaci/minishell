@@ -35,14 +35,14 @@ int	is_arg(t_token *t)
 	return (0);
 }
 
-NODETYPE	is_any_command(t_lexer *l, t_token *t)
+NODETYPE	is_any_command(t_lexer *l, t_token *t, t_token *oldt)
 {
 	char	*tmp;
 
 	if (t->type != CHAR_INUT)
 		return (NODE_ERROR);
 	tmp = parse_is_command(l->buffer[get_buffer_count(l, t)] , l, 0);
-	if (!access(tmp, F_OK))
+	if (!access(tmp, F_OK) && !is_any_chevron(oldt))
 	{
 		l->buffer[get_buffer_count(l, t)] = tmp;
 		fill_buffer(l);

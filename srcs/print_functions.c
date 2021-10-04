@@ -64,6 +64,7 @@ int	print_str_node(t_node *n, char *str, int count2)
 int	print_node(t_node *node)
 {
 	int		count;
+	char	*ptr;
 
 	count = 1;
 	while (node)
@@ -93,7 +94,12 @@ int	print_node(t_node *node)
 			node = node->right;
 		count++;
 		if (node)
-			print_custom("1 Droite :", 1, 1, 1);
+		{
+			ptr = ft_itoa(count);
+			print_custom(ptr, 1, 1, 0);
+			free(ptr);
+			print_custom(" Droite :", 1, 1, 1);
+		}
 	}
 	return (0);
 }
