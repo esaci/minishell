@@ -49,6 +49,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCPARSING)free_functions.c			\
 		$(SRCD)$(SRCEXEC)exec_input.c					\
 		$(SRCD)$(SRCEXEC)exec_com.c						\
+		$(SRCD)$(SRCEXEC)init_pip.c						\
 		$(SRCD)$(SRCEXEC)exec_pipe.c
 
 OBJ = $(SRC:.c=.o)

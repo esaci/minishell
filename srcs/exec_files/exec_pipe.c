@@ -12,9 +12,9 @@
 
 #include "../../lib/libmin.h"
 
-t_node	*exec_pipe(t_lexerr *l, t_node *n)
+t_node	*exec_pipe(t_lexer *l, t_node *n)
 {
-	exec_com(l, n->left);
+	l->pip->ppd
 	while (n && n->type != NODE_PIPE)
 		n = n->right;
 	return (n);

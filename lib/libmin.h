@@ -73,16 +73,12 @@ typedef	enum	NODETYPE
 
 typedef struct s_pip
 {
-	int		fd[2];
 	int		tmp[2];
-	char	**pathptr;
-	char	**pwd;
 	char	*tmptr;
-	char	**b_ptr;
 	int		errnum;
-	int		b_ac;
-	int		*b_pid;
-	int		*b_pfd1;
+	int		*pid;
+	int		*pfd;
+	int		*ppd;
 }	t_pip;
 
 typedef	struct s_token
@@ -106,6 +102,7 @@ typedef	struct s_lexer
 	t_node		*node;
 	int			len;
 	char		**buffer;
+	t_pip		*pip;
 	char		**envp;
 	char		**pathptr;
 	char		**pwd;
@@ -144,8 +141,9 @@ int					nbr_com(t_lexer *l, t_token *t);
 void				no_com_fill(t_node *n, t_lexer *l, t_token *t);
 int					is_arg(t_token *t);
 int					exec_input(t_lexer *l);
-t_node				*exec_pipe(t_lexerr *l, t_node *n);
+t_node				*exec_pipe(t_lexer *l, t_node *n);
 int					exec_com(t_lexer *l, t_node *n);
-
+int					init_pip(t_lexer *l);
+int					free_pip(t_lexer *l, int exit);
 #endif
 

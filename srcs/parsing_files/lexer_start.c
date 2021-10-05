@@ -55,6 +55,7 @@ int	init_lexer(t_lexer *lexer, char **envp)
 	lexer->tok = NULL;
 	lexer->buffer = NULL;
 	lexer->node = NULL;
+	lexer->pip = NULL;
 	return (0);
 }
 

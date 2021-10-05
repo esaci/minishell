@@ -23,6 +23,6 @@ int	exec_com(t_lexer *l, t_node *n)
 		return(print_custom(" command not found\n"));
 	}
 	while (n)
-		ft_strjoin(ptr, )
+		ft_strjoin(ptr, );
 	return (0);
 }

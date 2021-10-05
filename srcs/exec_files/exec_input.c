@@ -18,12 +18,14 @@ int	exec_input(t_lexer *l)
 
 	if (!l || !l->node || !l->tok)
 		return (0);
+	if (init_pip(l))
+		return (1);
 	n = l->node;
 	while (n && n->type == NODE_PIPE)
-	{
-		n = exec_pipe(l , n);
-	}
+		n = exec_pipe(l, n);
 	if (!exec_com(l, n))
 		return (1);
+	free(l->pip);
+	l->pip = NULL;
 	return (0);
 }
