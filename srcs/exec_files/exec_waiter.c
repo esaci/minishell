@@ -19,7 +19,6 @@ int	waiter_input(t_lexer *l, int count)
 	if (WIFEXITED(l->pip->tmp[1]))
 	{
 		l->pip->tmp[0] = WEXITSTATUS(l->pip->tmp[1]);
-		printf("error %d\n", l->pip->tmp[0]);
 	}
 	return (0);
 }

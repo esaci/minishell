@@ -28,7 +28,6 @@ char	*join_two_array(char *ptr, const char *ptr2)
 
 int	exec_com(t_lexer *l, t_node *n, int count)
 {
-	int	count2;
 	int	tmp;
 
 	if (n->type != NODE_NOCOM && n->type != NODE_PATHCOM)
@@ -36,8 +35,8 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		printf("gros soucis, une non commamde a ete envoye dans exec_com\n");
 		exit(1);
 	}
-	l->pip->pid[count + 1] = fork();
-	if (!l->pip->pid[count + 1])
+	l->pip->pid[count] = fork();
+	if (!l->pip->pid[count])
 	{
 		tmp = access(n->str[0], X_OK);
 		if (tmp)
@@ -45,12 +44,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			print_custom(n->str[0], 2, 1, 0);
 			return(print_custom(" command not found\n", 2, 1, 1));
 		}
-		count2 = 0;
-		/* while (n->right->str[count2])
-		{
-			if (n->right->type == NODE_)
-		} */
-		if (execve(n->str[0], n->str, l->envp))
+		if (execve(n->str[0], n->str, l->envp) == -1)
 		{
 			printf("error comm\n");
 			exit (1);

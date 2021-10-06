@@ -16,6 +16,7 @@ int	exec_input(t_lexer *l)
 {
 	t_node	*n;
 	int		count;
+	int		count2;
 
 	if (!l || !l->node || !l->tok)
 		return (0);
@@ -25,14 +26,15 @@ int	exec_input(t_lexer *l)
 	count = 0;
 	while (n && n->type == NODE_PIPE)
 	{
+		printf("je passe par un pipe\n");
 		n = exec_pipe(l, n);
-		count++;
+		count += 2;
 	}
-	if (!exec_com(l, n,  count))
+	if (exec_com(l, n,  count++))
 		return (1);
-	count = 0;
-	while (l->pip->pid[count] != -2)
-		waiter_input(l, count);
+	count2 = 0;
+	while (count2 < count)
+		waiter_input(l, count2++);
 	free(l->pip);
 	l->pip = NULL;
 	return (0);
