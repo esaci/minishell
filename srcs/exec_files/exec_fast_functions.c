@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_input.c                                       :+:      :+:    :+:   */
+/*   exec_fast_functions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 19:50:15 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/04 19:50:41 by esaci            ###   ########.fr       */
+/*   Created: 2021/10/05 17:26:50 by esaci             #+#    #+#             */
+/*   Updated: 2021/10/05 17:26:52 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-int	exec_input(t_lexer *l)
+int	id_pipe(t_lexer *l, t_node *n)
 {
-	t_node	*n;
+	t_node	*tmp;
 	int		count;
 
-	if (!l || !l->node || !l->tok)
-		return (0);
-	if (init_pip(l))
-		return (1);
-	n = l->node;
+	tmp = l->node;
 	count = 0;
-	while (n && n->type == NODE_PIPE)
+	while (tmp && tmp != n)
 	{
-		n = exec_pipe(l, n);
 		count++;
+		tmp = tmp->right;
 	}
-	if (!exec_com(l, n,  count))
-		return (1);
-	free(l->pip);
-	l->pip = NULL;
-	return (0);
+	return (count);
 }

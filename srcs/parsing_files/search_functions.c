@@ -15,67 +15,58 @@
 int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 {
 	int		count;
-	int		count2;
-	t_token	*tmp;
-	t_token *tmp2;
+	t_token *tmp;
 
-	if (n->type != NODE_PATHCOM)
+	if (n->type != NODE_NOCOM && n->type != NODE_PATHCOM)
 		return (0);
+	count = 1;
 	tmp = t;
-	count2 = nbr_com(l, t);
-	n->str = malloc(sizeof(char*) * (count2 + 3));
-	if (!n->str)
-		return (1);
-	n->str[2] = 0;
-	n->str[0] = NULL;
-	count2 = 0;
-	tmp2 = t;
 	while (t && t->type != CHAR_PIPE)
 	{
-		count = get_buffer_count(l, t);
-		if (is_any_command(l, t, tmp2))
+		if ((t->type == CHAR_INUT  && !is_any_chevron(tmp)) || (is_arg(t) == 1))
 		{
-			n->str[count2] = l->buffer[count];
-			count2++;
+			n->str[count] = l->buffer[get_buffer_count(l, t)];
+			count++;
 		}
-		if (t->type == CHAR_ARG && !is_any_chevron(tmp2))
-		{
-			n->str[count2] = l->buffer[count];
-			count2++;
-		}
-		count++;
-		tmp2 = t;
+		tmp = t;
 		t = t->n_token;
 	}
-	if (!count2)
-		n->str[count2++] = first_false_command(tmp, l);
-	n->str[count2] = NULL;
+	n->str[count] = NULL;
 	return (0);
+	return(l->buffer[0][0]);
 }
 
 int	search_command(t_node *n, t_token *t, t_lexer *l)
 {
-	NODETYPE	tmp;
-	t_token		*tmp2;
-	t_token		*tmp3;
+	t_token *tmp;
+	t_token	*tmp2;
+	int		count;
 
+	tmp = t;
 	tmp2 = t;
-	tmp3 = t;
-	tmp = 0;
-	while (t && t->type != CHAR_PIPE)
+	while (t && (t->type != CHAR_INUT) && is_any_chevron(tmp) && !is_arg(t))
 	{
-		if (t->type == CHAR_INUT)
-			tmp = is_any_command(l, t, tmp3);
-		if (tmp)
-			break ;
-		tmp3 = t;
+		tmp = t;
 		t = t->n_token;
 	}
-	if (tmp)
+	if (!t)
+	{
+		n->type = NODE_NOCOM;
+		no_com_fill(n, l, tmp2);
+		return (0);
+	}
+	count = nbr_com(l, tmp2);
+	n->str = malloc(sizeof(char*) * (count + 3));
+	if (!n->str)
+		return (1);
+	n->str[count] = NULL;
+	n->str[0] = l->buffer[get_buffer_count(l, t)];
+	count = is_any_command(l, t, tmp);
+	if (count)
 		n->type = NODE_PATHCOM;
 	else
-		no_com_fill(n, l, tmp2);
-	if (search_node_str_com(n, tmp2, l))
+		n->type = NODE_NOCOM;
+	if (search_node_str_com(n, t->n_token, l))
 		return (1);
 	return (0);
 }

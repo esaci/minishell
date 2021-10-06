@@ -28,7 +28,9 @@ NODETYPE	is_any_chevron(t_token *t)
 
 int	is_arg(t_token *t)
 {
-	if (t->type == CHAR_INUT || t->type == CHAR_APO)
+	if (t->type == CHAR_INUT)
+		return (2);
+	if (t->type == CHAR_APO)
 		return (1);
 	if (t->type == CHAR_TIRET || t->type == CHAR_GUILL)
 		return (1);
@@ -45,9 +47,7 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t, t_token *oldt)
 	if (!access(tmp, F_OK) && !is_any_chevron(oldt))
 	{
 		l->buffer[get_buffer_count(l, t)] = tmp;
-		fill_buffer(l);
-		if (t->n_token && is_arg(t->n_token))
-			t->n_token->type = CHAR_ARG;
+		t = t->n_token;
 		return (NODE_PATHCOM);
 	}
 	return (NODE_ERROR);
@@ -85,7 +85,7 @@ int	get_buffer_count(t_lexer *l, t_token *t)
 char	*first_false_command(t_token *t, t_lexer *l)
 {
 	t_token	*tmp;
-
+	t_token *tmp2;
 	tmp = t;
 	while (t && t->type != CHAR_INUT)
 	{
@@ -95,6 +95,17 @@ char	*first_false_command(t_token *t, t_lexer *l)
 	if (!t)
 		return ("");
 	if (!is_any_chevron(tmp) && !is_arg(t))
+	{
+		tmp2 = t;
+		t = t->n_token;
+		while (t)
+		{
+			if (!is_arg(t) && !is_any_chevron(tmp))
+				t->n_token->type = CHAR_ARG;
+			tmp2 = t;
+			t = t->n_token;
+		}
 		return (l->buffer[get_buffer_count(l, t)]);
+	}
 	return (first_false_command(t->n_token, l));
 }

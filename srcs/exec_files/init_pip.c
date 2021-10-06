@@ -44,7 +44,7 @@ int	init_pip2(t_lexer *l)
 	count2 = 0;
 	while(count2 < count)
 	{
-		if (pipe(pip->ppd + (count2 * 2)) == -1)
+		if (pipe(l->pip->ppd + (count2 * 2)) == -1)
 			return(free_pip(l, 1));
 		count++;
 	}
@@ -67,7 +67,7 @@ int	init_pip(t_lexer *l)
 		count++;
 		n = n->right;
 	}
-	l->pip->pid = malloc(sizeof(int) * (count + 1));
+	l->pip->pid = malloc(sizeof(int) * ((count*2) + 2));
 	if (!l->pip->pid)
 		return (1);
 	l->pip->pfd = malloc(sizeof(int) * (count * 2));
@@ -78,6 +78,6 @@ int	init_pip(t_lexer *l)
 	}
 	count2 = 0;
 	while (count2 < count)
-		pip->pid[count2++] = -2;
+		l->pip->pid[count2++] = -2;
 	return (init_pip2(l));
 }

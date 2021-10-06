@@ -12,9 +12,9 @@
 
 #include "../../lib/libmin.h"
 
-TOKENTYPE	lexer_check_type2(t_token *tok)
+TOKENTYPE	lexer_check_type2(t_token *tok, char *oldstr)
 {
-	if (tok->line[0] ==  '-')
+	if (tok->line[0] ==  '-' && (oldstr[0] == CHAR_SPACE))
 		return (CHAR_TIRET);
 	if (tok->line[0] ==  '&')
 		return (CHAR_ET);
@@ -27,7 +27,7 @@ TOKENTYPE	lexer_check_type2(t_token *tok)
 	return (CHAR_INUT);
 }
 
-TOKENTYPE	lexer_check_type(t_token *tok)
+TOKENTYPE	lexer_check_type(t_token *tok, char *oldstr)
 {
 	if (tok->line[0] ==  '|')
 		return (CHAR_PIPE);
@@ -45,7 +45,7 @@ TOKENTYPE	lexer_check_type(t_token *tok)
 		return (CHAR_INTER);
 	if (tok->line[0] ==  ' ')
 		return (CHAR_SPACE);
-	return (lexer_check_type2(tok));
+	return (lexer_check_type2(tok, oldstr));
 }
 
 int	init_lexer(t_lexer *lexer, char **envp)
@@ -59,7 +59,7 @@ int	init_lexer(t_lexer *lexer, char **envp)
 	return (0);
 }
 
-t_token	*lexer_token(char *str)
+t_token	*lexer_token(char *str, char *oldstr)
 {
 	t_token		*toktmp;
 
@@ -67,7 +67,7 @@ t_token	*lexer_token(char *str)
 	if (!(toktmp))
 		return (NULL);
 	(toktmp)->line = str;
-	(toktmp)->type = lexer_check_type(toktmp);
+	(toktmp)->type = lexer_check_type(toktmp, oldstr);
 	(toktmp)->n_token = NULL;
 	return (toktmp);
 }
@@ -79,12 +79,12 @@ int	lexer_start(t_lexer *lexer)
 
 	if (!rl_line_buffer)
 		return (1);
-	lexer->tok = lexer_token(rl_line_buffer);
+	lexer->tok = lexer_token(rl_line_buffer, rl_line_buffer);
 	count = 1;
 	toktmp = &(lexer->tok->n_token);
 	while(rl_line_buffer[count])
 	{
-		(*toktmp) = lexer_token(rl_line_buffer + count);
+		(*toktmp) = lexer_token(rl_line_buffer + count, rl_line_buffer + count - 1);
 		lexer->len++;
 		if (!(*toktmp))
 		{

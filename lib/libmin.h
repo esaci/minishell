@@ -142,8 +142,11 @@ void				no_com_fill(t_node *n, t_lexer *l, t_token *t);
 int					is_arg(t_token *t);
 int					exec_input(t_lexer *l);
 t_node				*exec_pipe(t_lexer *l, t_node *n);
-int					exec_com(t_lexer *l, t_node *n);
+int					exec_com(t_lexer *l, t_node *n, int count);
 int					init_pip(t_lexer *l);
 int					free_pip(t_lexer *l, int exit);
+int					id_pipe(t_lexer *l, t_node *n);
+int					full_close(t_lexer *l);
+int					full_free(t_lexer *l);
 #endif
 

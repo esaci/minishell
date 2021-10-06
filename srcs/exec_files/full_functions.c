@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_input.c                                       :+:      :+:    :+:   */
+/*   full_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 19:50:15 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/04 19:50:41 by esaci            ###   ########.fr       */
+/*   Created: 2021/10/05 22:32:27 by esaci             #+#    #+#             */
+/*   Updated: 2021/10/05 22:32:30 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-int	exec_input(t_lexer *l)
+int	full_close(t_lexer *l)
 {
 	t_node	*n;
 	int		count;
+	int		count2;
 
-	if (!l || !l->node || !l->tok)
-		return (0);
-	if (init_pip(l))
-		return (1);
 	n = l->node;
 	count = 0;
-	while (n && n->type == NODE_PIPE)
+	while (n)
 	{
-		n = exec_pipe(l, n);
-		count++;
+		if (n->type == NODE_PIPE)
+			count++;
+		n = n->right;
 	}
-	if (!exec_com(l, n,  count))
-		return (1);
-	free(l->pip);
-	l->pip = NULL;
+	count2 = 0;
+	while (count2 < count)
+	{
+		close(l->pip->ppd[count2]);
+		count2++;
+	}
 	return (0);
+}
+
+int	full_free(t_lexer *l)
+{
+	free_lexer_tokens(l);
+	return (free_pip(l, 0));
 }

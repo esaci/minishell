@@ -15,20 +15,15 @@
 int	nbr_com(t_lexer *l, t_token *t)
 {
 	int		count;
-	t_token *tmp2;
 
 	count = 0;
-	tmp2 = t;
 	while (t && t->type != CHAR_PIPE)
 	{
-		if (is_any_command(l, t, tmp2))
-		{
-			count++;
-		}
-		tmp2 = t;
+		count++;
 		t = t->n_token;
 	}
-	return (count * 2);
+	return (count);
+	return (l->tok->line[0]);
 }
 
 void	no_com_fill(t_node *n, t_lexer *l, t_token *t)
@@ -37,6 +32,8 @@ void	no_com_fill(t_node *n, t_lexer *l, t_token *t)
 	int		count;
 	t_token *tmp2;
 
+	if (n->type == NODE_PIPE)
+		return ;
 	tmp2 = t;
 	n->type = NODE_NOCOM;
 	tmp = t;
