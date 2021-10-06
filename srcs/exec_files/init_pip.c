@@ -12,6 +12,20 @@
 
 #include "../../lib/libmin.h"
 
+int	count_right_nodes(t_lexer *l)
+{
+	t_node	*n;
+	int		count;
+	n = l->node;
+	count = 0;
+	while (n)
+	{
+		count++;
+		n = n->right;
+	}
+	return (count);
+}
+
 int	free_pip(t_lexer *l, int exit)
 {
 	free(l->pip->pid);
@@ -61,13 +75,8 @@ int	init_pip(t_lexer *l)
 	if (!l->pip)
 		return (1);
 	n = l->node;
-	count = 0;
-	while (n)
-	{
-		count++;
-		n = n->right;
-	}
-	l->pip->pid = malloc(sizeof(int) * ((count*2) + 2));
+	count = count_right_nodes(l);
+	l->pip->pid = malloc(sizeof(int) * ((count * 2) + 2));
 	if (!l->pip->pid)
 		return (1);
 	l->pip->pfd = malloc(sizeof(int) * (count * 2));

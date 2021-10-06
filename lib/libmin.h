@@ -148,5 +148,7 @@ int					free_pip(t_lexer *l, int exit);
 int					id_pipe(t_lexer *l, t_node *n);
 int					full_close(t_lexer *l);
 int					full_free(t_lexer *l);
+int					count_right_nodes(t_lexer *l);
+int					waiter_input(t_lexer *l, int count);
 #endif
 

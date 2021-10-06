@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_input.c                                       :+:      :+:    :+:   */
+/*   exec_waiter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 19:50:15 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/04 19:50:41 by esaci            ###   ########.fr       */
+/*   Created: 2021/10/06 18:21:19 by esaci             #+#    #+#             */
+/*   Updated: 2021/10/06 18:21:21 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-int	exec_input(t_lexer *l)
+int	waiter_input(t_lexer *l, int count)
 {
-	t_node	*n;
-	int		count;
-
-	if (!l || !l->node || !l->tok)
-		return (0);
-	if (init_pip(l))
-		return (1);
-	n = l->node;
-	count = 0;
-	while (n && n->type == NODE_PIPE)
+	l->pip->tmp[0] = 0;
+	waitpid(l->pip->pid[count], &(l->pip->tmp[1]), 0);
+	if (WIFEXITED(l->pip->tmp[1]))
 	{
-		n = exec_pipe(l, n);
-		count++;
+		l->pip->tmp[0] = WEXITSTATUS(l->pip->tmp[1]);
+		printf("error %d\n", l->pip->tmp[0]);
 	}
-	if (!exec_com(l, n,  count))
-		return (1);
-	count = 0;
-	while (l->pip->pid[count] != -2)
-		waiter_input(l, count);
-	free(l->pip);
-	l->pip = NULL;
 	return (0);
 }
