@@ -13,12 +13,14 @@
 #ifndef LIBMIN_H
 # define LIBMIN_H
 
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../fcts/libft/libft.h"
 # include "../fcts/GNL/get_next_line.h"
+# include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/time.h>
 # include <sys/resource.h>
@@ -114,7 +116,6 @@ t_lexer				*parser_input(t_lexer *lexer, char **envp);
 t_token				*parser_next_token(t_token *tok);
 int					parser_output(t_lexer *lexer);
 int					fill_buffer(t_lexer *lexer);
-int					pipex_custom(int value, char *envp[]);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
 int					print_tokens(t_lexer *l);
 int					print_node(t_node *node);
@@ -142,7 +143,7 @@ void				no_com_fill(t_node *n, t_lexer *l, t_token *t);
 int					is_arg(t_token *t);
 int					exec_input(t_lexer *l);
 t_node				*exec_pipe(t_lexer *l, t_node *n);
-int					exec_com(t_lexer *l, t_node *n, int count);
+int					exec_com(t_lexer *l, t_node *n, int count, int count2);
 int					init_pip(t_lexer *l);
 int					free_pip(t_lexer *l, int exit);
 int					id_pipe(t_lexer *l, t_node *n);
@@ -150,5 +151,9 @@ int					full_close(t_lexer *l);
 int					full_free(t_lexer *l);
 int					count_right_nodes(t_lexer *l);
 int					waiter_input(t_lexer *l, int count);
+int					count_file_redirection(t_node *left, t_node *right);
+int					open_infiles(t_node *n,  t_lexer *l);
+int					open_outfiles(t_node *n,  t_lexer *l);
+int					exec_in_heredoc(char *limiter);
 #endif
 

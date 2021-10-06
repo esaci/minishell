@@ -21,16 +21,20 @@ int	exec_input(t_lexer *l)
 	if (!l || !l->node || !l->tok)
 		return (0);
 	if (init_pip(l))
+	{
+		print_custom("init_pipe error", 1, 1, 1);
 		return (1);
+	}
 	n = l->node;
 	count = 0;
+	count2 = 0;
 	while (n && n->type == NODE_PIPE)
 	{
-		printf("je passe par un pipe\n");
+		count2 = id_pipe(l, n);
 		n = exec_pipe(l, n);
 		count += 2;
 	}
-	if (exec_com(l, n,  count++))
+	if (exec_com(l, n,  count++, count2))
 		return (1);
 	count2 = 0;
 	while (count2 < count)

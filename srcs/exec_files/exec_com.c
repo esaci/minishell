@@ -26,10 +26,11 @@ char	*join_two_array(char *ptr, const char *ptr2)
 	return (ptr);
 }
 
-int	exec_com(t_lexer *l, t_node *n, int count)
+int	exec_com(t_lexer *l, t_node *n, int count, int count2)
 {
 	int	tmp;
-
+	int	fd[2];
+	int	len;
 	if (n->type != NODE_NOCOM && n->type != NODE_PATHCOM)
 	{
 		printf("gros soucis, une non commamde a ete envoye dans exec_com\n");
@@ -38,17 +39,23 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	l->pip->pid[count] = fork();
 	if (!l->pip->pid[count])
 	{
+		len = count_file_redirection(n->right, n->left);
+		l->pip->pfd = malloc(sizeof(int) * (len + 1));
+		if (!l->pip->pfd)
+			exit(print_custom("malloc dans exec-com error", 2, 1, 1));
+		fd[0] = open_infiles(n->left,  l);
+		/* fd[1] = open_outfiles(n->right, l);
+		if (fd[0] < 0 || fd[1] < 0)
+			exit(check_order_redirection(l,  count)); */
 		tmp = access(n->str[0], X_OK);
 		if (tmp)
 		{
 			print_custom(n->str[0], 2, 1, 0);
-			return(print_custom(" command not found\n", 2, 1, 1));
+			exit(print_custom(" command not found", 2, 1, 1));
 		}
 		if (execve(n->str[0], n->str, l->envp) == -1)
-		{
-			printf("error comm\n");
-			exit (1);
-		}
+			exit(print_custom("error comm", 2, 1, 1));
 	}
 	return (0);
+	return (count2);
 }

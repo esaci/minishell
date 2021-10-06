@@ -60,8 +60,8 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc3", 2, 1, 1));
 		}
-/* 		print_tokens(lexer);
-		print_node(lexer->node); */
+		print_tokens(lexer);
+		print_node(lexer->node);
 		if (exec_input(lexer))
 		{
 			rl_clear_history();

@@ -29,7 +29,6 @@ int	count_right_nodes(t_lexer *l)
 int	free_pip(t_lexer *l, int exit)
 {
 	free(l->pip->pid);
-	free(l->pip->pfd);
 	free(l->pip->ppd);
 	return (exit);
 }
@@ -52,7 +51,6 @@ int	init_pip2(t_lexer *l)
 	if (!l->pip->ppd)
 	{
 		free(l->pip->pid);
-		free(l->pip->pfd);
 		return (1);
 	}
 	count2 = 0;
@@ -79,12 +77,6 @@ int	init_pip(t_lexer *l)
 	l->pip->pid = malloc(sizeof(int) * ((count * 2) + 10));
 	if (!l->pip->pid)
 		return (1);
-	l->pip->pfd = malloc(sizeof(int) * (count * 2));
-	if(!l->pip->pfd)
-	{
-		free(l->pip->pid);
-		return (1);
-	}
 	count2 = 0;
 	while (count2 < (count * 2 + 9))
 		l->pip->pid[count2++] = -2;
