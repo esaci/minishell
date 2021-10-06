@@ -23,7 +23,7 @@ int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 	tmp = t;
 	while (t && t->type != CHAR_PIPE)
 	{
-		if ((t->type == CHAR_INUT  && !is_any_chevron(tmp)) || (is_arg(t) == 1))
+		if ((t->type == CHAR_INUT && !is_any_chevron(tmp)) || is_arg(t))
 		{
 			n->str[count] = l->buffer[get_buffer_count(l, t)];
 			count++;
@@ -44,7 +44,7 @@ int	search_command(t_node *n, t_token *t, t_lexer *l)
 
 	tmp = t;
 	tmp2 = t;
-	while (t && (t->type != CHAR_INUT) && is_any_chevron(tmp) && !is_arg(t))
+	while (t && ((t->type != CHAR_INUT || is_any_chevron(tmp)) || (!is_arg(t))))
 	{
 		tmp = t;
 		t = t->n_token;
