@@ -75,19 +75,20 @@ int	print_node(t_node *node)
 		print_str_node(node, " Node :\n", count);
 		if (!node->left)
 			break ;
-		print_str_node(node->left, " Gauche :\n", count);
 		if (node->left->type != NODE_FILEIN && node->left->type != NODE_DFILEIN)
 		{
 			write(1, "{\n", 2);
-			write(1, &node->type, 1);
-			print_str_node(node, " Commande :\n", count);
-			print_str_node(node->left->left, " Gauche :\n", count);
-			print_str_node(node->left->right, " Droite :\n", count);
+			write(1, &node->left->type, 1);
+			print_str_node(node->left, " Commande a Gauche :\n", count);
+			print_str_node(node->left->left, " Infile Commande :\n", count);
+			print_str_node(node->left->right, " Outfile Commande :\n", count);
 			write(1, "}\n", 2);
 		}
+		else
+			print_str_node(node->left, " Infile Commande :\n", count);
 		if (node->right->type == NODE_FILEOUT || node->right->type == NODE_DFILEOUT)
 		{
-			print_str_node(node->right, " Droite :\n", count);
+			print_str_node(node->right, " Outfile Commande :\n", count);
 			node = NULL;
 		}
 		else
@@ -98,7 +99,7 @@ int	print_node(t_node *node)
 			ptr = ft_itoa(count);
 			print_custom(ptr, 1, 1, 0);
 			free(ptr);
-			print_custom(" Droite :", 1, 1, 1);
+			print_custom(" Droite Pipe/Commande:", 1, 1, 1);
 		}
 	}
 	return (0);

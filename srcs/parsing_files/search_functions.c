@@ -55,17 +55,17 @@ int	search_command(t_node *n, t_token *t, t_lexer *l)
 		no_com_fill(n, l, tmp2);
 		return (0);
 	}
+	count = is_any_command(l, t, tmp);
+	if (count)
+		n->type = NODE_PATHCOM;
+	else
+		n->type = NODE_NOCOM;
 	count = nbr_com(l, tmp2);
 	n->str = malloc(sizeof(char*) * (count + 3));
 	if (!n->str)
 		return (1);
 	n->str[count] = NULL;
 	n->str[0] = l->buffer[get_buffer_count(l, t)];
-	count = is_any_command(l, t, tmp);
-	if (count)
-		n->type = NODE_PATHCOM;
-	else
-		n->type = NODE_NOCOM;
 	if (search_node_str_com(n, t->n_token, l))
 		return (1);
 	return (0);
