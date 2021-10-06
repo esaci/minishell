@@ -47,6 +47,10 @@ int	exec_com(t_lexer *l, t_node *n, int count, int count2)
 		/* fd[1] = open_outfiles(n->right, l);
 		if (fd[0] < 0 || fd[1] < 0)
 			exit(check_order_redirection(l,  count)); */
+		if (fd[0] < 0)
+			exit(print_custom("temporaire here_doc fonctione pas", 2, 1, 1));
+		if (fd[0])
+			dup2(fd[0], STDIN_FILENO);
 		tmp = access(n->str[0], X_OK);
 		if (tmp)
 		{
