@@ -3,27 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:51:18 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/29 16:34:36 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/04 19:20:11 by julespellet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/lib_jules.h"
 
-int	check_arg(char	*str)
+// PARSING 2
+
+int	check_flag(t_command *cmd)
 {
-	if (!str)
-		return (-1);
-	else if (!ft_strncmp(str, "|", 1) || !ft_strncmp(str, "&", 1) || !ft_strncmp(str, "\n", 1))
-		return (-1);
-	else
-		return (1);
+	int	i;
+
+	i = 0;
+	(void)cmd;
+	return (i);
 }
+
+void	ft_echo(t_command *cmd)
+{
+	int	flag;
+
+	flag = 0;
+	check_flag(cmd);
+}
+
+/*
+// PARSING 1
 
 int	ft_echo_check(t_command *cmd)
 {
+	printf("ECHO CHECK 0 OK\n");
 	if (!ft_strncmp(*cmd->args, "\n", 2))
 		return (ERROR);
 	if (!ft_strncmp(*cmd->args, "-", 2))
@@ -39,8 +52,9 @@ void	ft_print_echo(t_command *cmd)
 	int	i;
 
 	i = 0;
-	while (check_arg(cmd->args[i]) == 1)
+	while (cmd->args[i] != NULL)
 	{
+		printf("TEST\n");
 		write(cmd->fd_out, cmd->args[i], ft_strlen(cmd->args[i]));
 		i++;
 	}
@@ -49,6 +63,7 @@ void	ft_print_echo(t_command *cmd)
 void	ft_echo(t_command *cmd)
 {
 	cmd->flag = 0;
+	printf("TEST 0 ECHO : OK\n");
 	if (ft_echo_check(cmd) == SUCCESS)
 	{
 		cmd->args = (cmd->args + 1);
@@ -62,6 +77,8 @@ void	ft_echo(t_command *cmd)
 	else
 		cmd->args = cmd->args_cpy;
 	ft_print_echo(cmd);
-	if (cmd->flag != 1)
+	if (cmd->flag != 1 || !cmd->args)
 		write(cmd->fd_out, "\n", 1);
+	// /exit(1);
 }
+*/

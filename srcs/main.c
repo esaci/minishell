@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/30 14:36:48 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/04 12:23:08 by julespellet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char *av[], char *envp[])
 
 	if (envp[0] == NULL)
 		return (print_custom("Manque Envp\n", 2, 1, 1));
-	//init_env(ac, av, envp);
+	ft_init_env(envp);
 	sigint_c = sig_handler();
 	start_fonction(envp);
 	return (0);

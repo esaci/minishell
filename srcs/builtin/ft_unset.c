@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/04 14:15:50 by julpelle          #+#    #+#             */
-/*   Updated: 2021/09/29 22:18:35 by Jules            ###   ########.fr       */
+/*   Created: 2021/10/04 12:59:59 by julespellet       #+#    #+#             */
+/*   Updated: 2021/10/04 13:00:22 by julespellet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../lib/lib_jules.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void    ft_unset(t_command *cmd)
 {
-	if (!del || !lst)
-		return ;
-	(*del)(lst->content);
-	free(lst);
+    return ;
 }

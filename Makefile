@@ -43,16 +43,7 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(SRCD_BUILT)ft_env.c				\
 		$(SRCD_BUILT)env/environment.c					\
 		$(SRCD_BUILT)env/init_env.c					\
-		$(SRCD_BUILT)lst_functions/ft_lstadd_back.c		\
-		$(SRCD_BUILT)lst_functions/ft_lstadd_front.c	\
-		$(SRCD_BUILT)lst_functions/ft_lstclear.c		\
-		$(SRCD_BUILT)lst_functions/ft_lstdelone.c		\
-		$(SRCD_BUILT)lst_functions/ft_lstiter.c			\
-		$(SRCD_BUILT)lst_functions/ft_lstlast.c			\
-		$(SRCD_BUILT)lst_functions/ft_lstmap.c			\
-		$(SRCD_BUILT)lst_functions/ft_lstnew.c			\
-		$(SRCD_BUILT)lst_functions/ft_lstsize.c			\
-		$(SRCD_BUILT)lst_functions/ft_lst_show.c			\
+		$(SRCD_BUILT)env/utils_env.c					\
 
 OBJ = $(SRC:.c=.o)
 

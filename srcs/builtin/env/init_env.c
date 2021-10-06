@@ -3,22 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 12:36:15 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/30 12:39:58 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/04 13:47:37 by julespellet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../lib/lib_jules.h"
 
-t_list	**ft_init_env(char *envp[])
+void	ft_init_env(char *envp[])
 {
-	t_list	**env;
-	
-	env = NULL;
-	printf("Test 1: %s\n", *envp);
-	*env = ft_lstnew((void *)*envp);
-	printf("Test 2: %s\n", (*env)->content);
-	return (env);
+	printf("Check INIT\n");
+	ft_envp(envp, NULL, NULL);
+}
+
+void	ft_add_env(char *to_add)
+{
+	ft_envp(NULL, to_add, NULL);
+}
+
+t_list	**ft_getaddenv(void)
+{
+	return (ft_envp(NULL, NULL, NULL));
+}
+
+t_list	*ft_getallenv(void)
+{
+	printf("Check GET ENV\n");
+	return (*ft_envp(NULL, NULL, NULL));
 }

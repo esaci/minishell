@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/04 14:14:49 by julpelle          #+#    #+#             */
-/*   Updated: 2021/09/29 22:18:18 by Jules            ###   ########.fr       */
+/*   Created: 2021/10/04 12:15:17 by julespellet       #+#    #+#             */
+/*   Updated: 2021/10/04 12:15:22 by julespellet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../lib/lib_jules.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *new)
+void	*ft_alloc(size_t size)
 {
-	if (alst && new)
-	{
-		new->next = *alst;
-		*alst = new;
-	}
+	void	*ptr;
+
+	ptr = ft_alloc_mem(size, 0, NULL, 0);
+	return (ptr);
+}
+
+void	ft_free_ptr(void **addr)
+{
+	ft_alloc_mem(0, 0, addr, 0);
+}
+
+void	ft_destroy_exit(int exit_code)
+{
+	ft_alloc_mem(0, 1, NULL, exit_code);
 }

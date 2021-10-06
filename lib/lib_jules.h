@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_jules.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:25:17 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/30 14:43:05 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/04 12:57:50 by julespellet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct	s_list
 {
 	char	*content;
 	t_list	*next;
-
 }	t_list;
 
 typedef struct	s_command
@@ -58,8 +57,7 @@ typedef struct s_builtin
 }	t_builtin;
 
 
-void	exec_command(t_command *cmd, char **buffer);
-int		check_arg(char	*str);
+int		exec_command(char **buffer);
 int		ft_echo_check(t_command *cmd);
 void	ft_echo(t_command *cmd);
 
@@ -72,11 +70,25 @@ t_list	**ft_envp(char *envp[], char *content, t_list *env);
 void	ft_env(t_command *cmd);
 
 
-t_list	**ft_init_env(char *envp[]);
-void	fill_env(char *envp[]);
-void	ft_show_double(char **av);
+//void	fill_env(char *envp[]);
+//void	ft_show_double(char **av);
+
+//ENVIRONMENT
+t_list	**ft_envp(char *envp[], char *content, t_list *env);
+char	*ft_getenv(char *key);
+void	ft_init_env(char *envp[]);
+void	ft_add_env(char *to_add);
+t_list	**ft_getaddenv(void);
+t_list	*ft_getallenv(void);
+t_list	*ft_new_list_elem(char *content);
+
 
 // LST BONUS
+t_list  *ft_new_elem(char *content);
+void	ft_lst_pushback(t_list **lst, char *content);
+t_list	*ft_tab_to_lst(char **table);
+
+
 void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lst_pushback(t_list **list, char *content);
 void	ft_lstadd_front(t_list **alst, t_list *new);

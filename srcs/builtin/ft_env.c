@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 22:55:51 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/30 14:45:36 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/04 12:33:43 by julespellet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/lib_jules.h"
 
+/*
 t_list	**ft_init_env(char *envp[])
 {
 	t_list	**env;
@@ -43,14 +44,13 @@ void	fill_env(char *envp[])
 		i++;
 	}
 }
+*/
 
 void	ft_env(t_command *cmd)
 {
-	(void)cmd;
-	/*
 	t_list	*env;
 	
-	env = ft_envgetall();
+	env = ft_getallenv();
 	while (env)
 	{
 		if (ft_strchr(env->content, '='))
@@ -60,5 +60,4 @@ void	ft_env(t_command *cmd)
 		}
 		env = env->next;
 	}
-	*/
 }
