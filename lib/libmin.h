@@ -142,8 +142,8 @@ int					nbr_com(t_lexer *l, t_token *t);
 void				no_com_fill(t_node *n, t_lexer *l, t_token *t);
 int					is_arg(t_token *t);
 int					exec_input(t_lexer *l);
-t_node				*exec_pipe(t_lexer *l, t_node *n);
-int					exec_com(t_lexer *l, t_node *n, int count, int count2);
+t_node				*exec_pipe(t_lexer *l, t_node *n, int count);
+int					exec_com(t_lexer *l, t_node *n, int count);
 int					init_pip(t_lexer *l);
 int					free_pip(t_lexer *l, int exit);
 int					id_pipe(t_lexer *l, t_node *n);
@@ -156,5 +156,6 @@ char				*open_infiles(t_node *n, int *fd);
 char				*open_outfiles(t_node *n, int *fd);
 int					check_order_redirection(t_lexer *l, char **ptr);
 int					exec_in_heredoc(char *limiter);
+int					last_pipe(t_lexer *l);
 #endif
 

@@ -27,14 +27,9 @@ int	exec_input(t_lexer *l)
 	}
 	n = l->node;
 	count = 0;
-	count2 = 0;
 	while (n && n->type == NODE_PIPE)
-	{
-		count2 = id_pipe(l, n);
-		n = exec_pipe(l, n);
-		count += 2;
-	}
-	if (exec_com(l, n,  count++, count2))
+		n = exec_pipe(l, n, count++);
+	if (exec_com(l, n,  count++))
 		return (1);
 	count2 = 0;
 	while (count2 < count)

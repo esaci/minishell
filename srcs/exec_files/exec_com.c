@@ -12,21 +12,22 @@
 
 #include "../../lib/libmin.h"
 
-char	*join_two_array(char *ptr, const char *ptr2)
+int		last_pipe(t_lexer *l)
 {
-	int	count;
+	int		count;
+	t_node	*n;
 
+	n = l->node;
 	count = 0;
-	while (ptr2[count])
+	while (n->type == CHAR_PIPE)
 	{
-		ptr[count] = ptr2[count];
+		n = n->right;
 		count++;
 	}
-	ptr[count] = 0;
-	return (ptr);
+	return (count);
 }
 
-int	exec_com(t_lexer *l, t_node *n, int count, int count2)
+int	exec_com(t_lexer *l, t_node *n, int count)
 {
 	int	tmp;
 	int	fd[2];
@@ -38,9 +39,14 @@ int	exec_com(t_lexer *l, t_node *n, int count, int count2)
 		printf("gros soucis, une non commamde a ete envoye dans exec_com\n");
 		exit(1);
 	}
-	l->pip->pid[count] = fork();
+	if (count == last_pipe(l))
+		l->pip->pid[count] = fork();
+	else
+		l->pip->pid[count] = 0;
 	if (!l->pip->pid[count])
 	{
+		if (count != 0)
+			dup2(l->pip->ppd[count - 1], STDIN_FILENO);
 		ptr = malloc(sizeof(char*) * 3);
 		if (!ptr)
 			exit(1);
@@ -68,5 +74,4 @@ int	exec_com(t_lexer *l, t_node *n, int count, int count2)
 			exit(print_custom("error comm", 2, 1, 1));
 	}
 	return (0);
-	return (count2);
 }
