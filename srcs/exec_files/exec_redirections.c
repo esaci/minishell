@@ -35,13 +35,12 @@ int	count_file_redirection(t_node *left, t_node *right)
 	return  (count + count2);
 }
 
-int	open_infiles(t_node *n,  t_lexer *l)
+char	*open_infiles(t_node *n, int *fd)
 {
-	int	fd;
 	int	count;
 	int	oldfd;
 
-	fd = 0;
+	*fd = 0;
 	count = 0;
 	oldfd = 0;
 	while (n->str[count] && (!ft_memcmp(n->str[count], "<", ft_strlen(n->str[count])) ||
@@ -51,28 +50,56 @@ int	open_infiles(t_node *n,  t_lexer *l)
 			break ;
 		if (!ft_memcmp(n->str[count], "<", ft_strlen(n->str[count])))
 		{
-			handle_old_fd(oldfd, fd);
+			handle_old_fd(oldfd, *fd);
 			oldfd = 1;
-			fd = open(n->str[count + 1], O_RDONLY);
-			if (fd < 0)
-				return (-count - 1);
+			*fd = open(n->str[count + 1], O_RDONLY);
+			if (*fd < 0)
+				return (n->str[count + 1]);
 		}
-		if (!ft_memcmp(n->str[count], "<<", ft_strlen(n->str[count])))
+		else if (!ft_memcmp(n->str[count], "<<", ft_strlen(n->str[count])))
 		{
-			handle_old_fd(oldfd, fd);
+			handle_old_fd(oldfd, *fd);
 			oldfd = 2;
 			exec_in_heredoc(n->str[count+1]);
-			fd = open("./srcs/here_doc_file", O_RDWR);
+			*fd = open("./srcs/here_doc_file", O_RDWR);
+			if (*fd < 0)
+				return (n->str[count + 1]);
 		}
+		else
+			break;
 		count += 2;
 	}
-	return (fd);
-	return (l->buffer[0][0]);
+	return (NULL);
 }
 
-int	open_outfiles(t_node *n,  t_lexer *l)
+char	*open_outfiles(t_node *n,  t_lexer *l, int *fd)
 {
-	return (0);
+	return (NULL);
 	if (n->right)
-		return (l->buffer[0][0]);
+		return (&l->buffer[0][*fd]);
+}
+
+int	check_order_redirection(t_lexer *l, char **ptr)
+{
+	int		count;
+
+	count = 0;
+	while (l->buffer[count])
+	{
+		if (!ft_memcmp(ptr[0], l->buffer[count], ft_strlen(l->buffer[count])
+			&& (ft_strlen(l->buffer[count]) == ft_strlen(ptr[0]))))
+		{
+			print_custom(ptr[0], 1, 1, 0);
+			print_custom(" file can't be read/write", 1, 1, 1);
+			return (EXIT_FAILURE);
+		}
+		if (!ft_memcmp(ptr[1], l->buffer[count], ft_strlen(l->buffer[count])
+			&& (ft_strlen(l->buffer[count]) == ft_strlen(ptr[1]))))
+		{
+			print_custom(ptr[1], 1, 1, 0);
+			print_custom(" file can't be read/write", 1, 1, 1);
+			return (EXIT_FAILURE);
+		}
+	}
+	return(EXIT_FAILURE);
 }

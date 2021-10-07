@@ -152,8 +152,9 @@ int					full_free(t_lexer *l);
 int					count_right_nodes(t_lexer *l);
 int					waiter_input(t_lexer *l, int count);
 int					count_file_redirection(t_node *left, t_node *right);
-int					open_infiles(t_node *n,  t_lexer *l);
-int					open_outfiles(t_node *n,  t_lexer *l);
+char				*open_infiles(t_node *n, int *fd);
+char				*open_outfiles(t_node *n,  t_lexer *l, int *fd);
+int					check_order_redirection(t_lexer *l, char **ptr);
 int					exec_in_heredoc(char *limiter);
 #endif
 

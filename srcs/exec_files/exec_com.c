@@ -31,6 +31,8 @@ int	exec_com(t_lexer *l, t_node *n, int count, int count2)
 	int	tmp;
 	int	fd[2];
 	int	len;
+	char **ptr;
+
 	if (n->type != NODE_NOCOM && n->type != NODE_PATHCOM)
 	{
 		printf("gros soucis, une non commamde a ete envoye dans exec_com\n");
@@ -39,16 +41,20 @@ int	exec_com(t_lexer *l, t_node *n, int count, int count2)
 	l->pip->pid[count] = fork();
 	if (!l->pip->pid[count])
 	{
+		ptr = malloc(sizeof(char*) * 3);
+		if (!ptr)
+			exit(1);
+		ptr[2] = NULL;
 		len = count_file_redirection(n->right, n->left);
 		l->pip->pfd = malloc(sizeof(int) * (len + 1));
 		if (!l->pip->pfd)
 			exit(print_custom("malloc dans exec-com error", 2, 1, 1));
-		fd[0] = open_infiles(n->left,  l);
-		/* fd[1] = open_outfiles(n->right, l);
+		ptr[0] = open_infiles(n->left, &(fd[0]));
+		ptr[1] = open_outfiles(n->right, l, &(fd[1]));
 		if (fd[0] < 0 || fd[1] < 0)
-			exit(check_order_redirection(l,  count)); */
-		if (fd[0] < 0)
-			exit(print_custom("temporaire here_doc fonctione pas", 2, 1, 1));
+			exit(check_order_redirection(l, ptr));
+		if (fd[1] != 1)
+			dup2(fd[1], STDOUT_FILENO);
 		if (fd[0])
 			dup2(fd[0], STDIN_FILENO);
 		tmp = access(n->str[0], X_OK);
