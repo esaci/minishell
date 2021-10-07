@@ -50,7 +50,7 @@ int	exec_com(t_lexer *l, t_node *n, int count, int count2)
 		if (!l->pip->pfd)
 			exit(print_custom("malloc dans exec-com error", 2, 1, 1));
 		ptr[0] = open_infiles(n->left, &(fd[0]));
-		ptr[1] = open_outfiles(n->right, l, &(fd[1]));
+		ptr[1] = open_outfiles(n->right, &(fd[1]));
 		if (fd[0] < 0 || fd[1] < 0)
 			exit(check_order_redirection(l, ptr));
 		if (fd[1] != 1)
@@ -60,7 +60,8 @@ int	exec_com(t_lexer *l, t_node *n, int count, int count2)
 		tmp = access(n->str[0], X_OK);
 		if (tmp)
 		{
-			print_custom(n->str[0], 2, 1, 0);
+			if (n->str[0])
+				print_custom(n->str[0], 2, 1, 0);
 			exit(print_custom(" command not found", 2, 1, 1));
 		}
 		if (execve(n->str[0], n->str, l->envp) == -1)

@@ -16,6 +16,7 @@ int	count_right_nodes(t_lexer *l)
 {
 	t_node	*n;
 	int		count;
+	
 	n = l->node;
 	count = 0;
 	while (n)

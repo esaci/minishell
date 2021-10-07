@@ -72,11 +72,42 @@ char	*open_infiles(t_node *n, int *fd)
 	return (NULL);
 }
 
-char	*open_outfiles(t_node *n,  t_lexer *l, int *fd)
+char	*open_outfiles(t_node *n, int *fd)
 {
+	int	count;
+	int	oldfd;
+
+	*fd = 0;
+	count = 0;
+	oldfd = 0;
+	while (n->str[count] && (!ft_memcmp(n->str[count], ">", ft_strlen(n->str[count])) ||
+			!ft_memcmp(n->str[count], ">>", ft_strlen(n->str[count]))))
+	{
+		if (!n->str[count + 1])
+			break ;
+		if (!ft_memcmp(n->str[count], ">", ft_strlen(n->str[count])))
+		{
+			handle_old_fd(oldfd, *fd);
+			oldfd = 1;
+			*fd = open(n->str[count + 1],
+				O_WRONLY | O_CREAT | O_TRUNC, 0777);
+			if (*fd < 0)
+				return (n->str[count + 1]);
+		}
+		else if (!ft_memcmp(n->str[count], ">>", ft_strlen(n->str[count])))
+		{
+			handle_old_fd(oldfd, *fd);
+			oldfd = 1;
+			*fd = open(n->str[count + 1],
+				O_WRONLY | O_CREAT | O_APPEND, 0777);
+			if (*fd < 0)
+				return (n->str[count + 1]);
+		}
+		else
+			break;
+		count += 2;
+	}
 	return (NULL);
-	if (n->right)
-		return (&l->buffer[0][*fd]);
 }
 
 int	check_order_redirection(t_lexer *l, char **ptr)

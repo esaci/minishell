@@ -100,6 +100,8 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 	int	count2;
 	t_token	*tmp;
 
+	n->left = NULL;
+	n->right = NULL;
 	tmp = t;
 	count = 0;
 	while (tmp && tmp->type != CHAR_PIPE)
@@ -141,6 +143,8 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 	int	count;
 	t_token	*tmp;
 
+	n->left = NULL;
+	n->right = NULL;
 	tmp = t;
 	count = 0;
 	while (tmp && tmp->type != CHAR_PIPE)
