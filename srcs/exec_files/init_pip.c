@@ -59,7 +59,7 @@ int	init_pip2(t_lexer *l)
 	{
 		if (pipe(l->pip->ppd + (count2 * 2)) == -1)
 			return(free_pip(l, 1));
-		count++;
+		count2++;
 	}
 	return (0);
 }
