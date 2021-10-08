@@ -34,7 +34,6 @@ int	exec_input(t_lexer *l)
 	count2 = 0;
 	while (count2 < count)
 		waiter_input(l, count2++);
-	free(l->pip);
-	l->pip = NULL;
+	close_pipes(l);
 	return (0);
 }

@@ -103,7 +103,7 @@ char	*open_outfiles(t_node *n, int *fd)
 	int	count;
 	int	oldfd;
 
-	*fd = 0;
+	*fd = 1;
 	count = 0;
 	oldfd = 0;
 	while (n->str[count] && (!ft_memcmp(n->str[count], ">", ft_strlen(n->str[count])) ||

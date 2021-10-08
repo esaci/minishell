@@ -144,6 +144,7 @@ int					exec_input(t_lexer *l);
 t_node				*exec_pipe(t_lexer *l, t_node *n, int count);
 int					exec_com(t_lexer *l, t_node *n, int count);
 int					init_pip(t_lexer *l);
+void				close_pipes(t_lexer *l);
 int					free_pip(t_lexer *l, int exit);
 int					id_pipe(t_lexer *l, t_node *n);
 int					full_close(t_lexer *l);

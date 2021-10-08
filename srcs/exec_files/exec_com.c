@@ -39,14 +39,17 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		printf("gros soucis, une non commamde a ete envoye dans exec_com\n");
 		exit(1);
 	}
-	if (count == last_pipe(l))
+	if (last_pipe(l) == 0 || count == last_pipe(l))
+	{
+		print_custom("Derniere fonction", 2, 1, 1);
 		l->pip->pid[count] = fork();
+	}
 	else
 		l->pip->pid[count] = 0;
 	if (!l->pip->pid[count])
 	{
-		if (count != 0)
-			dup2(l->pip->ppd[count - 1], STDIN_FILENO);
+		if (count != 0 && count == last_pipe(l))
+			dup2(l->pip->ppd[(count - 1) * 2], STDIN_FILENO);
 		ptr = malloc(sizeof(char*) * 3);
 		if (!ptr)
 			exit(1);
@@ -60,9 +63,20 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		if (fd[0] < 0 || fd[1] < 0)
 			exit(check_order_redirection(l, ptr));
 		if (fd[1] != 1)
+		{
+			print_custom("Redirection vers", 2, 1, 0);
+			print_custom(ptr[1], 2, 1, 1);
 			dup2(fd[1], STDOUT_FILENO);
-		if (fd[0])
+			close(fd[1]);
+		}
+		if (fd[0] != 0)
+		{
+			print_custom("Redirection vers", 2, 1, 0);
+			print_custom(ptr[0], 2, 1, 1);
 			dup2(fd[0], STDIN_FILENO);
+			close(fd[0]);
+		}
+		close_pipes(l);
 		tmp = access(n->str[0], X_OK);
 		if (tmp)
 		{
