@@ -49,7 +49,10 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	if (!l->pip->pid[count])
 	{
 		if (count != 0 && count == last_pipe(l))
+		{
+			close(l->pip->ppd[((count - 1) * 2) + 1]);
 			dup2(l->pip->ppd[(count - 1) * 2], STDIN_FILENO);
+		}
 		ptr = malloc(sizeof(char*) * 3);
 		if (!ptr)
 			exit(1);

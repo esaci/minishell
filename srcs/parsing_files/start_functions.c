@@ -40,7 +40,8 @@ int	start_fonction(char *envp[])
 	if (!lexer)
 		return (1);
 	envp_init(envp, lexer);
-	readline("Minishell$ ");
+	ptr = readline("Minishell$ ");
+	free(ptr);
 	if (!rl_line_buffer[0])
 		return (print_custom("Minishell$ exit", 1, 0, 1));
 	while (ft_memcmp(rl_line_buffer, "exit", 4))
@@ -70,7 +71,8 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc4", 2, 1, 1));
 		}
-		readline("Minishell$ ");
+		ptr = readline("Minishell$ ");
+		free(ptr);
 		rl_on_new_line();
 		if (!rl_line_buffer[0])
 			break ;

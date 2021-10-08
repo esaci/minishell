@@ -97,10 +97,10 @@ void	close_pipes(t_lexer *l)
 		n = n->right;
 	}
 	count2 = 0;
-	while(count2 <= ((count + 3)* 2))
+	while(count2 <	((count + 3)* 2))
 		close(l->pip->ppd[count2++]);
-	free(l->pip->pid);
+/* 	free(l->pip->pid);
 	free(l->pip->ppd);
 	free(l->pip);
-	l->pip = NULL;
+	l->pip = NULL; */
 }
