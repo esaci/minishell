@@ -12,6 +12,32 @@
 
 #include "../../lib/libmin.h"
 
+int	check_order_redirection(t_lexer *l, char **ptr)
+{
+	int		count;
+
+	count = 0;
+	while (l->buffer[count])
+	{
+		if (ptr[0] && !ft_memcmp(ptr[0], l->buffer[count], ft_strlen(l->buffer[count])
+			&& (ft_strlen(l->buffer[count]) == ft_strlen(ptr[0]))))
+		{
+			print_custom(ptr[0], 1, 1, 0);
+			print_custom(" file can't be read/write", 1, 1, 1);
+			return (EXIT_FAILURE);
+		}
+		if (ptr[1] && !ft_memcmp(ptr[1], l->buffer[count], ft_strlen(l->buffer[count])
+			&& (ft_strlen(l->buffer[count]) == ft_strlen(ptr[1]))))
+		{
+			print_custom(ptr[1], 1, 1, 0);
+			print_custom(" file can't be read/write", 1, 1, 1);
+			return (EXIT_FAILURE);
+		}
+		count++;
+	}
+	return(EXIT_FAILURE);
+}
+
 void	handle_old_fd(int oldfd, int fd)
 {
 	if (!oldfd)
@@ -108,29 +134,4 @@ char	*open_outfiles(t_node *n, int *fd)
 		count += 2;
 	}
 	return (NULL);
-}
-
-int	check_order_redirection(t_lexer *l, char **ptr)
-{
-	int		count;
-
-	count = 0;
-	while (l->buffer[count])
-	{
-		if (!ft_memcmp(ptr[0], l->buffer[count], ft_strlen(l->buffer[count])
-			&& (ft_strlen(l->buffer[count]) == ft_strlen(ptr[0]))))
-		{
-			print_custom(ptr[0], 1, 1, 0);
-			print_custom(" file can't be read/write", 1, 1, 1);
-			return (EXIT_FAILURE);
-		}
-		if (!ft_memcmp(ptr[1], l->buffer[count], ft_strlen(l->buffer[count])
-			&& (ft_strlen(l->buffer[count]) == ft_strlen(ptr[1]))))
-		{
-			print_custom(ptr[1], 1, 1, 0);
-			print_custom(" file can't be read/write", 1, 1, 1);
-			return (EXIT_FAILURE);
-		}
-	}
-	return(EXIT_FAILURE);
 }

@@ -16,13 +16,7 @@ TOKENTYPE	lexer_check_type2(t_token *tok, char *oldstr)
 {
 	if (tok->line[0] ==  '-' && (oldstr[0] == CHAR_SPACE))
 		return (CHAR_TIRET);
-	if (tok->line[0] ==  '&')
-		return (CHAR_ET);
 	if (tok->line[0] ==  '\0')
-		return (CHAR_Z);
-	if (tok->line[0] ==  '\t')
-		return (CHAR_TAB);
-	if (tok->line[0] ==  '\n')
 		return (CHAR_Z);
 	return (CHAR_INUT);
 }

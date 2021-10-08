@@ -52,7 +52,6 @@ typedef	enum	TOKENTYPE
 	CHAR_INTER = '?',
 	CHAR_SPACE = ' ',
 	CHAR_TIRET = '-',
-	CHAR_ET = '&',
 	CHAR_Z = 0,
 	CHAR_TAB = '\t',
 	CHAR_NL = '\n',
