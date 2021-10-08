@@ -85,7 +85,7 @@ int	get_buffer_count(t_lexer *l, t_token *t)
 char	*first_false_command(t_token *t, t_lexer *l)
 {
 	t_token	*tmp;
-	t_token *tmp2;
+
 	tmp = t;
 	while (t && t->type != CHAR_INUT)
 	{
@@ -96,13 +96,11 @@ char	*first_false_command(t_token *t, t_lexer *l)
 		return ("");
 	if (!is_any_chevron(tmp) && !is_arg(t))
 	{
-		tmp2 = t;
 		t = t->n_token;
 		while (t)
 		{
 			if (!is_arg(t) && !is_any_chevron(tmp))
 				t->n_token->type = CHAR_ARG;
-			tmp2 = t;
 			t = t->n_token;
 		}
 		return (l->buffer[get_buffer_count(l, t)]);

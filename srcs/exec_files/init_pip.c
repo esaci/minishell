@@ -66,14 +66,12 @@ int	init_pip2(t_lexer *l)
 
 int	init_pip(t_lexer *l)
 {
-	t_node *n;
 	int	count;
 	int	count2;
 
 	l->pip = malloc(sizeof(t_pip) * 2);
 	if (!l->pip)
 		return (1);
-	n = l->node;
 	count = count_right_nodes(l);
 	l->pip->pid = malloc(sizeof(int) * ((count * 2) + 10));
 	if (!l->pip->pid)

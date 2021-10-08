@@ -27,6 +27,7 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 			dup2(l->pip->ppd[in], STDIN_FILENO);
 		dup2(l->pip->ppd[out], STDOUT_FILENO);
 		exit_code = exec_com(l, n->left, count);
+		exit(exit_code);
 	}
 	n = n->right;
 	return (n);

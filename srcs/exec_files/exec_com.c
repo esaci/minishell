@@ -19,7 +19,7 @@ int		last_pipe(t_lexer *l)
 
 	n = l->node;
 	count = 0;
-	while (n->type == CHAR_PIPE)
+	while (n->type == NODE_PIPE)
 	{
 		n = n->right;
 		count++;
