@@ -113,6 +113,7 @@ int					start_fonction(char *envp[]);
 void				*sig_handler();
 t_lexer				*parser_input(t_lexer *lexer, char **envp);
 t_token				*parser_next_token(t_token *tok);
+t_token				*check_apo(t_token *t);
 int					parser_output(t_lexer *lexer);
 int					fill_buffer(t_lexer *lexer);
 int					print_custom(char *str, int fd, int exit_code, int saut_ligne);

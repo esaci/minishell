@@ -12,6 +12,39 @@
 
 #include "../../lib/libmin.h"
 
+void	replace_for_arg(char *str)
+{
+	int	count;
+
+	count = 0;
+	while (str[count + 1])
+	{
+		str[count] = str[count + 1];
+		count++;
+	}
+	str[count - 1] = '\0';
+}
+
+void	check_for_arg(char **str)
+{
+	int	count;
+
+	count = 0;
+	while (str && str[count])
+	{
+		if (str[count][0] == '\'' || str[count][0] == '\"')
+		{
+			if (ft_strlen(str[count]) > 2)
+			{
+				if (str[count][0] == str[count][ft_strlen(str[count]) - 1])
+					replace_for_arg(str[count]);
+			}
+		}
+		count++;
+	}
+
+}
+
 int		last_pipe(t_lexer *l)
 {
 	int		count;
@@ -64,15 +97,11 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			exit(check_order_redirection(l, ptr));
 		if (fd[1] != 1)
 		{
-			print_custom("Redirection vers", 2, 1, 0);
-			print_custom(ptr[1], 2, 1, 1);
 			dup2(fd[1], STDOUT_FILENO);
 			close(fd[1]);
 		}
 		if (fd[0] != 0)
 		{
-			print_custom("Redirection vers", 2, 1, 0);
-			print_custom(ptr[0], 2, 1, 1);
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 		}
@@ -84,6 +113,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 				print_custom(n->str[0], 2, 1, 0);
 			exit(print_custom(" command not found", 2, 1, 1));
 		}
+		check_for_arg(n->str);
 		if (execve(n->str[0], n->str, l->envp) == -1)
 			exit(print_custom("error comm", 2, 1, 1));
 	}

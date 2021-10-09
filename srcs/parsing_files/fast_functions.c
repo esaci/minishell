@@ -59,3 +59,22 @@ void	no_com_fill(t_node *n, t_lexer *l, t_token *t)
 	}
 	n->str[count] = NULL;
 }
+
+t_token	*check_apo(t_token *t)
+{
+	char	c;
+	int		count;
+
+	if (t->line[0] != '\'' && t->line[0] != '\"')
+		return (NULL);
+	c = t->line[0];
+	count = 1;
+	while (t->line[count] && t->line[count] != c)
+		count++;
+	if (!t->line[count])
+	{
+		t->type = CHAR_INUT;
+		return (parser_next_token(t));
+	}
+	return (NULL);
+}
