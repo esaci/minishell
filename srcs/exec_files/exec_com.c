@@ -41,7 +41,10 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	if (!l->pip->pid[count])
 	{
 		if (!n || (n->type != NODE_NOCOM && n->type != NODE_PATHCOM))
-			exit(print_custom("empty pipe", 2, 1, 1));
+		{
+			if (count == last_pipe(l))
+				exit(print_custom("Empty pipe", 2, 1, 1));
+		}
 		if (count != 0 && count == last_pipe(l))
 		{
 			close(l->pip->ppd[((count - 1) * 2) + 1]);
@@ -54,7 +57,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		len = count_file_redirection(n->right, n->left);
 		l->pip->pfd = malloc(sizeof(int) * (len + 1));
 		if (!l->pip->pfd)
-			exit(print_custom("malloc dans exec-com error", 2, 1, 1));
+			exit(print_custom("Malloc dans exec-com error", 2, 1, 1));
 		ptr[0] = open_infiles(n->left, &(fd[0]));
 		ptr[1] = open_outfiles(n->right, &(fd[1]));
 		if (fd[0] < 0 || fd[1] < 0)
