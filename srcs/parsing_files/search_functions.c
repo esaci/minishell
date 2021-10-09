@@ -23,8 +23,9 @@ int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 	tmp = t;
 	while (t && t->type != CHAR_PIPE)
 	{
-		if ((t->type == CHAR_INUT && !is_any_chevron(tmp)) || is_arg(t))
+		if ((t->type == CHAR_INUT && !is_any_chevron(tmp)) || (is_arg(t) == 1))
 		{
+			printf("comprends pas pk ya ca %s\n", l->buffer[get_buffer_count(l, t)]);
 			n->str[count] = l->buffer[get_buffer_count(l, t)];
 			count++;
 		}
