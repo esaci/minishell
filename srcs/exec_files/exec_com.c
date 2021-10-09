@@ -19,7 +19,7 @@ int		last_pipe(t_lexer *l)
 
 	n = l->node;
 	count = 0;
-	while (n->type == NODE_PIPE)
+	while (n && n->type == NODE_PIPE)
 	{
 		n = n->right;
 		count++;
@@ -34,20 +34,14 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	int	len;
 	char **ptr;
 
-	if (n->type != NODE_NOCOM && n->type != NODE_PATHCOM)
-	{
-		printf("gros soucis, une non commamde a ete envoye dans exec_com\n");
-		exit(1);
-	}
 	if (last_pipe(l) == 0 || count == last_pipe(l))
-	{
-		print_custom("Derniere fonction", 2, 1, 1);
 		l->pip->pid[count] = fork();
-	}
 	else
 		l->pip->pid[count] = 0;
 	if (!l->pip->pid[count])
 	{
+		if (!n || (n->type != NODE_NOCOM && n->type != NODE_PATHCOM))
+			exit(print_custom("empty pipe", 2, 1, 1));
 		if (count != 0 && count == last_pipe(l))
 		{
 			close(l->pip->ppd[((count - 1) * 2) + 1]);
