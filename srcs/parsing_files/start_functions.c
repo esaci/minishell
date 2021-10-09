@@ -61,16 +61,16 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc3", 2, 1, 1));
 		}
-		print_tokens(lexer);
-		print_node(lexer->node);
-/* 		if (exec_input(lexer))
+/* 		print_tokens(lexer);
+		print_node(lexer->node); */
+		if (exec_input(lexer))
 		{
 			rl_clear_history();
 			free(lexer->pwd);
 			free(lexer->pathptr);
 			free(lexer);
 			return (print_custom("malloc4", 2, 1, 1));
-		} */
+		}
 		ptr = readline("Minishell$ ");
 		free(ptr);
 		rl_on_new_line();
