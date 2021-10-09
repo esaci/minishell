@@ -60,7 +60,7 @@ void	no_com_fill(t_node *n, t_lexer *l, t_token *t)
 	n->str[count] = NULL;
 }
 
-t_token	*check_apo(t_token *t)
+t_token	*check_apo(t_token *t, int mode)
 {
 	char	c;
 	int		count;
@@ -74,7 +74,9 @@ t_token	*check_apo(t_token *t)
 	if (!t->line[count])
 	{
 		t->type = CHAR_INUT;
-		return (parser_next_token(t));
+		if (mode)
+			return (parser_next_token(t));
+		return (t);
 	}
 	return (NULL);
 }

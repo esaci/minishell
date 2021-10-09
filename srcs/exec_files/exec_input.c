@@ -31,9 +31,13 @@ int	exec_input(t_lexer *l)
 		n = exec_pipe(l, n, count++);
 	if (exec_com(l, n,  count++))
 		return (1);
-	close_pipes(l);
+	close_pipes(l, 0);
 	count2 = 0;
 	while (count2 < count)
 		waiter_input(l, count2++);
+	free(l->pip->pid);
+	free(l->pip->ppd);
+	free(l->pip);
+	l->pip = NULL;
 	return (0);
 }

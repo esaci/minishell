@@ -36,7 +36,7 @@ t_token	*parser_in_between(t_token *t, TOKENTYPE type)
 {
 	t_token	*tmp;
 
-	tmp = check_apo(t);
+	tmp = check_apo(t, 1);
 	if (tmp)
 		return (tmp);
 	tmp = t->n_token;

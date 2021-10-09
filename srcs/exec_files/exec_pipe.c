@@ -17,7 +17,12 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 	int	exit_code;
 	int	in;
 	int	out;
+	int	fd[2];
 
+	if (fd[1] != 1)
+		close(fd[1]);
+	if (fd[0] != 0)
+		close(fd[0]);
 	l->pip->pid[count] = fork();
 	if (!l->pip->pid[count])
 	{

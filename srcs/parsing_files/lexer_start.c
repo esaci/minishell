@@ -14,6 +14,12 @@
 
 TOKENTYPE	lexer_check_type2(t_token *tok, char *oldstr)
 {
+	if (tok->line[0] ==  '$')
+		return (CHAR_DOLL);
+	if (tok->line[0] ==  '\?')
+		return (CHAR_INTER);
+	if (tok->line[0] ==  ' ')
+		return (CHAR_SPACE);
 	if (tok->line[0] ==  '-' && (oldstr[0] == CHAR_SPACE))
 		return (CHAR_TIRET);
 	if (tok->line[0] ==  '\0')
@@ -26,19 +32,21 @@ TOKENTYPE	lexer_check_type(t_token *tok, char *oldstr)
 	if (tok->line[0] ==  '|')
 		return (CHAR_PIPE);
 	if (tok->line[0] ==  '\"')
-		return (CHAR_GUILL);
+	{
+		if (!check_apo(tok, 0))
+			return (CHAR_GUILL);
+		return (CHAR_INUT);
+	}
 	if (tok->line[0] ==  '\'')
-		return (CHAR_APO);
+	{
+		if (!check_apo(tok, 0))
+			return (CHAR_APO);
+		return (CHAR_INUT);
+	}
 	if (tok->line[0] ==  '<')
 		return (CHAR_CHEVG);
 	if (tok->line[0] ==  '>')
 		return (CHAR_CHEVD);
-	if (tok->line[0] ==  '$')
-		return (CHAR_DOLL);
-	if (tok->line[0] ==  '\?')
-		return (CHAR_INTER);
-	if (tok->line[0] ==  ' ')
-		return (CHAR_SPACE);
 	return (lexer_check_type2(tok, oldstr));
 }
 
@@ -56,11 +64,15 @@ int	init_lexer(t_lexer *lexer, char **envp)
 t_token	*lexer_token(char *str, char *oldstr)
 {
 	t_token		*toktmp;
+	int			count;
 
 	toktmp = malloc(sizeof(t_token) * 2);
 	if (!(toktmp))
 		return (NULL);
-	(toktmp)->line = str;
+	count = 0;
+	while (str && str[count] == ' ')
+		count++;
+	(toktmp)->line = str + count;
 	(toktmp)->type = lexer_check_type(toktmp, oldstr);
 	(toktmp)->n_token = NULL;
 	return (toktmp);

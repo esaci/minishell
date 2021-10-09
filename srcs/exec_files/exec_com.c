@@ -77,6 +77,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		{
 			if (count == last_pipe(l))
 				exit(print_custom("Empty pipe", 2, 1, 1));
+			exit(1);
 		}
 		if (count != 0 && count == last_pipe(l))
 		{
@@ -105,13 +106,16 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 		}
-		close_pipes(l);
+		close_pipes(l, 1);
 		tmp = access(n->str[0], X_OK);
 		if (tmp)
 		{
 			if (n->str[0])
+			{
 				print_custom(n->str[0], 2, 1, 0);
-			exit(print_custom(" command not found", 2, 1, 1));
+				exit(print_custom(" command not found", 2, 1, 1));
+			}
+			exit(0);
 		}
 		check_for_arg(n->str);
 		if (execve(n->str[0], n->str, l->envp) == -1)

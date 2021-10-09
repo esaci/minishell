@@ -82,7 +82,7 @@ int	init_pip(t_lexer *l)
 	return (init_pip2(l));
 }
 
-void	close_pipes(t_lexer *l)
+void	close_pipes(t_lexer *l, int mode)
 {
 	int		count;
 	int		count2;
@@ -99,8 +99,10 @@ void	close_pipes(t_lexer *l)
 	count2 = 0;
 	while(count2 <	((count + 3)* 2))
 		close(l->pip->ppd[count2++]);
-/* 	free(l->pip->pid);
+	if (!mode)
+		return ;
+	free(l->pip->pid);
 	free(l->pip->ppd);
 	free(l->pip);
-	l->pip = NULL; */
+	l->pip = NULL;
 }
