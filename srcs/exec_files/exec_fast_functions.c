@@ -44,9 +44,9 @@ t_token	*get_token_buffer(t_lexer *l, char *str)
 
 	tmp = l->tok;
 	count = 0;
-	while (l && l->buffer && l->buffer[count])
+	while (str && l && l->buffer && l->buffer[count])
 	{
-		if (!ft_memcmp(l->buffer[count], str, ft_strlen(str) + 1))
+		if (!ft_memcmp(l->buffer[count], str, ft_strlen(str)))
 			break;
 		tmp = tmp->n_token;
 		count++;
@@ -66,18 +66,18 @@ char	*merge_twoarray(char *s, char *d)
 	ptr = malloc(sizeof(char) * (count + 1));
 	count = 0;
 	count2 = 0;
-	while (s[count])
+	while (s && s[count])
 	{
 		ptr[count] = s[count];
 		count++;
 	}
-	while (d[count2])
+	while (d && d[count2])
 	{
 		ptr[count + count2] = d[count2];
 		count2++;
 	}
 	ptr[count + count2] = 0;
-	free(s);
-	free(d);
+/* 	free(s);
+	free(d); */
 	return (ptr);
 }

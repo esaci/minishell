@@ -44,7 +44,7 @@ int	search_command(t_node *n, t_token *t, t_lexer *l)
 
 	tmp = t;
 	tmp2 = t;
-	while (t && ((t->type != CHAR_INUT || is_any_chevron(tmp)) || (!is_arg(t))))
+	while (t && (is_any_chevron(tmp) || !is_arg(t)))
 	{
 		tmp = t;
 		t = t->n_token;

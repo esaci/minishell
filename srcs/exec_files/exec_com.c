@@ -18,48 +18,42 @@ int	join_close_token(t_lexer *l, char **str, int count)
 	t_token	*t;
 	t_token	*t2;
 
+	count2 = 0;
 	if (count)
 	{
-		print_custom("rentre dans premiere partie de join_close", 2, 1, 1);
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count - 1]);
-		count2 = 0;
-		if ((t2->line[ft_strlen(str[count - 1] + 1)] != ' ' && compatibility_arg(t->type)))
+		if ((t2->line[ft_strlen(str[count - 1]) + 1] != ' ' && compatibility_arg(t->type)))
 		{
 			str[count - 1] = merge_twoarray(str[count - 1], str[count]);
-			if (!str[count - 1])
-				return (1);
 			str[count] = NULL;
 			count2 = count;
-			while (str[count2 + 1])
+			while (str[count2] && str[count2 + 1])
 			{
 				str[count2] = str[count2 + 1];
 				count2++;
 			}
 			str[count2] = NULL;
+			if (t2->n_token && t2->n_token->n_token)
 			t2->n_token = t2->n_token->n_token;
 		}
 	}
 	if (count != ft_strlen_double(str))
 	{
-		print_custom("rentre dans deuxieme partie de join_close", 2, 1, 1);
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count + 1]);
-		count2 = 0;
-		if ((t2->line[ft_strlen(str[count + 1] + 1)] != ' ' && compatibility_arg(t->type)))
+		if ((t2->line[ft_strlen(str[count + 1]) + 1] != ' ' && compatibility_arg(t->type)))
 		{
-			str[count + 1] = merge_twoarray(str[count + 1], str[count]);
-			if (!str[count + 1])
-				return (1);
-			str[count + 1] = NULL;
+			str[count] = merge_twoarray(str[count], str[count + 1]);
 			count2 = count;
-			while (str[count2 + 2])
+			while (str[count2] && str[count2 + 1] && str[count2 + 2])
 			{
 				str[count2 + 1] = str[count2 + 2];
 				count2++;
 			}
 			str[count2 + 1] = NULL;
-			t->n_token = t->n_token->n_token;
+			if (t->n_token && t->n_token->n_token)
+				t->n_token = t->n_token->n_token;
 		}
 	}
 	return (0);

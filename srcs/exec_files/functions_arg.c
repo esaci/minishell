@@ -37,7 +37,8 @@ void	check_for_arg(char **str, t_lexer *l)
 		{
 			if (ft_strlen(str[count]) > 2)
 			{
-				get_token_buffer(l, str[count])->type = CHAR_INUT;
+				if (get_token_buffer(l, str[count]))
+					get_token_buffer(l, str[count])->type = CHAR_INUT;
 				if (str[count][0] == str[count][ft_strlen(str[count]) - 1])
 				{
 					remove_for_arg(str[count]);
