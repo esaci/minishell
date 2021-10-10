@@ -26,3 +26,58 @@ int	id_pipe(t_lexer *l, t_node *n)
 	}
 	return (count);
 }
+
+int	ft_strlen_double(char **str)
+{
+	int	count;
+
+	count = 0;
+	while (str && str[count])
+		count++;
+	return (count);
+}
+
+t_token	*get_token_buffer(t_lexer *l, char *str)
+{
+	t_token	*tmp;
+	int		count;
+
+	tmp = l->tok;
+	count = 0;
+	while (l && l->buffer && l->buffer[count])
+	{
+		if (!ft_memcmp(l->buffer[count], str, ft_strlen(str) + 1))
+			break;
+		tmp = tmp->n_token;
+		count++;
+	}
+	return (tmp);
+}
+
+char	*merge_twoarray(char *s, char *d)
+{
+	int		count;
+	int		count2;
+	char	*ptr;
+
+	if (!s && !d)
+		return (NULL);
+	count = ft_strlen(s) + ft_strlen(d);
+	ptr = malloc(sizeof(char) * (count + 1));
+	count = 0;
+	count2 = 0;
+	while (s[count])
+	{
+		ptr[count] = s[count];
+		count++;
+	}
+	while (d[count2])
+	{
+		ptr[count + count2] = d[count2];
+		count2++;
+	}
+	ptr[count + count2] = 0;
+	free(s);
+	free(d);
+	return (ptr);
+}

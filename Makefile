@@ -10,6 +10,10 @@ LIBFT = libft.a
 
 LIBFTD = ./fcts//libft/
 
+COMPILE = gcc
+
+CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
+
 SRCD = ./srcs/
 
 SRCPARSING = parsing_files/
@@ -17,15 +21,6 @@ SRCPARSING = parsing_files/
 SRCBUILTIN = builtin/
 
 SRCEXEC = exec_files/
-
-COMPILE = gcc -fsanitize=address
-
-CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
-
-COMPILE1 = -I /Users/$(USER)/.brew/opt/readline/include
-
-
-COMPILE2 = -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 
 SRC =	$(GNLD)get_next_line.c							\
@@ -50,6 +45,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCEXEC)full_functions.c				\
 		$(SRCD)$(SRCEXEC)exec_input.c					\
 		$(SRCD)$(SRCEXEC)exec_com.c						\
+		$(SRCD)$(SRCEXEC)functions_arg.c				\
 		$(SRCD)$(SRCEXEC)init_pip.c						\
 		$(SRCD)$(SRCEXEC)exec_fast_functions.c			\
 		$(SRCD)$(SRCEXEC)exec_waiter.c					\
@@ -60,7 +56,7 @@ SRC =	$(GNLD)get_next_line.c							\
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c
-	$(COMPILE) $(CFLAGS) -c $< -o $@
+	$(COMPILE) $(CFLAGS) -c $< -L/usr/include -lreadline -o $@
 
 all: $(NAME)
 
@@ -71,7 +67,18 @@ $(NAME) : $(OBJ) $(SRCD)/main.c
 		ar rc $(MIND)$(MIN) $(OBJ)
 		rm -f $(LIBFT)
 		ranlib $(MIND)$(MIN)
-		$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2) $(SRCD)/main.c  $(MIND)$(MIN)
+		$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2) $(SRCD)/main.c  $(MIND)$(MIN) -L/usr/include -lreadline
+
+ub: $(NAME)
+	$(OBJ) $(SRCD)/main.c
+	rm -rf $(NAME)
+	make -C $(LIBFTD)
+	cp $(LIBFTD)$(LIBFT) $(MIND)$(MIN)
+	ar rc $(MIND)$(MIN) $(OBJ)
+	rm -f $(LIBFT)
+	ranlib $(MIND)$(MIN)
+	$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2U) $(SRCD)/main.c  $(MIND)$(MIN)
+
 
 clean:
 	rm -rf $(OBJ)

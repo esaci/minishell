@@ -35,7 +35,6 @@
 
 // Lib Jules
 # include "lib_jules.h"
-# include "libmin_exec.h"
 
 typedef	enum	TOKENTYPE
 {
@@ -144,10 +143,15 @@ int					is_arg(t_token *t);
 int					exec_input(t_lexer *l);
 t_node				*exec_pipe(t_lexer *l, t_node *n, int count);
 int					exec_com(t_lexer *l, t_node *n, int count);
+int					join_close_token(t_lexer *l, char **str, int count);
 int					init_pip(t_lexer *l);
 void				close_pipes(t_lexer *l, int mode);
 int					free_pip(t_lexer *l, int exit);
 int					id_pipe(t_lexer *l, t_node *n);
+int					ft_strlen_double(char **str);
+char				*merge_twoarray(char *s, char *d);
+int					compatibility_arg(TOKENTYPE type);
+t_token				*get_token_buffer(t_lexer *l, char *str);
 int					full_close(t_lexer *l);
 int					full_free(t_lexer *l);
 int					count_right_nodes(t_lexer *l);
@@ -158,5 +162,8 @@ char				*open_outfiles(t_node *n, int *fd);
 int					check_order_redirection(t_lexer *l, char **ptr);
 int					exec_in_heredoc(char *limiter);
 int					last_pipe(t_lexer *l);
+void				remove_for_arg(char *str);
+void				check_for_arg(char **str, t_lexer *l);
+void				correct_name(t_lexer *l, char *str);
 #endif
 

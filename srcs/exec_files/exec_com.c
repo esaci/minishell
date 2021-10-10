@@ -12,37 +12,57 @@
 
 #include "../../lib/libmin.h"
 
-void	replace_for_arg(char *str)
+int	join_close_token(t_lexer *l, char **str, int count)
 {
-	int	count;
+	int		count2;
+	t_token	*t;
+	t_token	*t2;
 
-	count = 0;
-	while (str[count + 1])
+	if (count)
 	{
-		str[count] = str[count + 1];
-		count++;
-	}
-	str[count - 1] = '\0';
-}
-
-void	check_for_arg(char **str)
-{
-	int	count;
-
-	count = 0;
-	while (str && str[count])
-	{
-		if (str[count][0] == '\'' || str[count][0] == '\"')
+		print_custom("rentre dans premiere partie de join_close", 2, 1, 1);
+		t = get_token_buffer(l, str[count]);
+		t2 = get_token_buffer(l, str[count - 1]);
+		count2 = 0;
+		if ((t2->line[ft_strlen(str[count - 1] + 1)] != ' ' && compatibility_arg(t->type)))
 		{
-			if (ft_strlen(str[count]) > 2)
+			str[count - 1] = merge_twoarray(str[count - 1], str[count]);
+			if (!str[count - 1])
+				return (1);
+			str[count] = NULL;
+			count2 = count;
+			while (str[count2 + 1])
 			{
-				if (str[count][0] == str[count][ft_strlen(str[count]) - 1])
-					replace_for_arg(str[count]);
+				str[count2] = str[count2 + 1];
+				count2++;
 			}
+			str[count2] = NULL;
+			t2->n_token = t2->n_token->n_token;
 		}
-		count++;
 	}
-
+	if (count != ft_strlen_double(str))
+	{
+		print_custom("rentre dans deuxieme partie de join_close", 2, 1, 1);
+		t = get_token_buffer(l, str[count]);
+		t2 = get_token_buffer(l, str[count + 1]);
+		count2 = 0;
+		if ((t2->line[ft_strlen(str[count + 1] + 1)] != ' ' && compatibility_arg(t->type)))
+		{
+			str[count + 1] = merge_twoarray(str[count + 1], str[count]);
+			if (!str[count + 1])
+				return (1);
+			str[count + 1] = NULL;
+			count2 = count;
+			while (str[count2 + 2])
+			{
+				str[count2 + 1] = str[count2 + 2];
+				count2++;
+			}
+			str[count2 + 1] = NULL;
+			t->n_token = t->n_token->n_token;
+		}
+	}
+	return (0);
 }
 
 int		last_pipe(t_lexer *l)
@@ -107,17 +127,18 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			close(fd[0]);
 		}
 		close_pipes(l, 1);
+		check_for_arg(n->str, l);
 		tmp = access(n->str[0], X_OK);
 		if (tmp)
 		{
 			if (n->str[0])
 			{
+				correct_name(l, n->str[0]);
 				print_custom(n->str[0], 2, 1, 0);
 				exit(print_custom(" command not found", 2, 1, 1));
 			}
 			exit(0);
 		}
-		check_for_arg(n->str);
 		if (execve(n->str[0], n->str, l->envp) == -1)
 			exit(print_custom("error comm", 2, 1, 1));
 	}

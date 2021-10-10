@@ -41,10 +41,12 @@ int	start_fonction(char *envp[])
 		return (1);
 	envp_init(envp, lexer);
 	ptr = readline("Minishell$ ");
-	free(ptr);
-	if (!rl_line_buffer[0])
+	if (ptr[0] == EOF)
+	{
+		free(ptr);
 		return (print_custom("Minishell$ exit", 1, 0, 1));
-	while (ft_memcmp(rl_line_buffer, "exit", 4))
+	}
+	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
 		add_history (rl_line_buffer);
 		if (!parser_input(lexer, envp))
@@ -72,14 +74,21 @@ int	start_fonction(char *envp[])
 			return (print_custom("malloc4", 2, 1, 1));
 		}
 		ptr = readline("Minishell$ ");
-		free(ptr);
 		rl_on_new_line();
-		if (!rl_line_buffer[0])
+		if (ptr[0] == EOF)
 			break ;
+		free(ptr);
 	}
-	ptr = "";
-	if (!rl_line_buffer[0])
+	if (ptr[0] == EOF)
+	{
+		free(ptr);
 		ptr = "Minishell$ exit\n";
+	}
+	else
+	{
+		free(ptr);
+		ptr = "";
+	}
 	clear_history();
 	free(lexer->pwd);
 	free(lexer->pathptr);
