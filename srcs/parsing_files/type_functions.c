@@ -58,9 +58,9 @@ int	is_redirection(t_node *n2)
 {
 	if (!n2)
 		return (0);
-	if ((n2->type != NODE_DFILEIN || n2->type != NODE_PIPE))
+	if ((n2->type == NODE_DFILEIN || n2->type == NODE_PIPE))
 		return (1);
-	if (n2->type != NODE_DFILEOUT || n2->type == NODE_FILEIN)
+	if (n2->type == NODE_DFILEOUT || n2->type == NODE_FILEIN)
 		return (1);
 	if (n2->type == NODE_FILEOUT)
 		return (1);

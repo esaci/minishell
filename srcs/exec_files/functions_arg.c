@@ -54,9 +54,13 @@ void	check_for_arg(char **str, t_lexer *l)
 
 void	correct_name(t_lexer *l, char *str)
 {
-	int	count;
+	int		count;
+	t_token	*t;
 
-	return ;
+	if (str[0] != '/')
+		return ;
+	return;
+	(void)t;
 	(void)l;
 	(void)str;
 	(void)count;
