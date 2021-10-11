@@ -1,19 +1,20 @@
 #include "../../lib/libmin.h"
 
-int	compatibility_arg(TOKENTYPE type)
+int	compatibility_arg(TOKENTYPE type, int mode)
 {
 	if (type == CHAR_INUT || type == CHAR_TIRET)
 		return (1);
 	if (type == CHAR_ARG || type == CHAR_TIRET)
 		return (1);
-	if (type == CHAR_APO || type == CHAR_GUILL)
+	if ((type == CHAR_APO || type == CHAR_GUILL) && !mode)
 		return (1);
 	if (type == CHAR_SPACE)
 		return (1);
 	return (0);
+	return (mode);
 }
 
-void	remove_for_arg(char *str)
+char	*remove_for_arg(char *str)
 {
 	int	count;
 
@@ -24,9 +25,10 @@ void	remove_for_arg(char *str)
 		count++;
 	}
 	str[count - 1] = '\0';
+	return (str);
 }
 
-void	check_for_arg(char **str, t_lexer *l)
+void	check_for_arg(char **str, t_lexer *l, t_node *n)
 {
 	int	count;
 
@@ -35,13 +37,15 @@ void	check_for_arg(char **str, t_lexer *l)
 	{
 		if (str[count][0] == '\'' || str[count][0] == '\"')
 		{
-			if (ft_strlen(str[count]) > 2)
+			if (ft_strlen(str[count]) >= 2)
 			{
 				if (get_token_buffer(l, str[count]))
 					get_token_buffer(l, str[count])->type = CHAR_INUT;
+				if (get_token_buffer(l, str[count]))
+					printf("Jai mis en inut |%s|\n", get_token_buffer(l, str[count])->line);
 				if (str[count][0] == str[count][ft_strlen(str[count]) - 1])
 				{
-					remove_for_arg(str[count]);
+					n->str[count] = remove_for_arg(str[count]);
 					if (join_close_token(l, str, count))
 						exit(print_custom("Malloc during token arg", 2, 1, 1));
 				}

@@ -23,7 +23,7 @@ int	join_close_token(t_lexer *l, char **str, int count)
 	{
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count - 1]);
-		if ((t2->line[ft_strlen(str[count - 1])] != ' ' && compatibility_arg(t2->type)))
+		if ((t2->line[ft_strlen(str[count - 1])] != ' ' && compatibility_arg(t2->type, 0)))
 		{
 			str[count - 1] = merge_twoarray(str[count - 1], str[count]);
 			str[count] = NULL;
@@ -42,7 +42,7 @@ int	join_close_token(t_lexer *l, char **str, int count)
 	{
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count + 1]);
-		if ((t->line[ft_strlen(str[count]) + 2] != ' ' && compatibility_arg(t2->type)))
+		if ((t->line[ft_strlen(str[count]) + 2] != ' ' && compatibility_arg(t2->type, 1)))
 		{
 			str[count] = merge_twoarray(str[count], str[count + 1]);
 			count2 = count;
@@ -121,7 +121,8 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			close(fd[0]);
 		}
 		close_pipes(l, 1);
-		check_for_arg(n->str, l);
+		check_for_arg(n->str, l, n);
+		n->str[0] = parse_is_command(n->str[0], l, 0);
 		tmp = access(n->str[0], X_OK);
 		if (tmp)
 		{
