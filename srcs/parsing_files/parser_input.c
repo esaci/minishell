@@ -97,7 +97,7 @@ t_token	*parser_next_token(t_token *tok)
 		toktmp = parser_in_between(toktmp, toktmp->type);
 	else if (toktmp->type == CHAR_INUT)
 		toktmp = parser_until_not(toktmp, toktmp->type, CHAR_SPACE);
-	else if (toktmp->type == CHAR_TIRET || toktmp->type ==  CHAR_PIPE)
+	else if (toktmp->type == CHAR_TIRET || toktmp->type ==  CHAR_PIPE || toktmp->type == CHAR_DOLL)
 		toktmp = parser_until_space(toktmp);
 	else
 		toktmp = toktmp->n_token;

@@ -104,3 +104,23 @@ int	print_node(t_node *node)
 	}
 	return (0);
 }
+
+int	print_env(t_lexer *l)
+{
+	int		count;
+	char	*ptr;
+
+	count = 0;
+	while (l->buffer && l->buffer[count])
+	{
+		if (l->buffer[count][0] == '$')
+			break;
+		count++;
+	}
+	if (l->buffer && l->buffer[count])
+	{
+		ptr = getenv((l->buffer[count]) + 1);
+		printf("l'environnement de %s : %s\n", (l->buffer[count]) + 1, ptr);
+	}
+	return (0);
+}

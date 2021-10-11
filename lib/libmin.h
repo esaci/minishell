@@ -165,5 +165,6 @@ int					last_pipe(t_lexer *l);
 void				remove_for_arg(char *str);
 void				check_for_arg(char **str, t_lexer *l);
 void				correct_name(t_lexer *l, char *str);
+int					print_env(t_lexer *l);
 #endif
 
