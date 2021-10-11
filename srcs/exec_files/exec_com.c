@@ -23,7 +23,7 @@ int	join_close_token(t_lexer *l, char **str, int count)
 	{
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count - 1]);
-		if ((t2->line[ft_strlen(str[count - 1]) + 1] != ' ' && compatibility_arg(t->type)))
+		if ((t2->line[ft_strlen(str[count - 1])] != ' ' && compatibility_arg(t2->type)))
 		{
 			str[count - 1] = merge_twoarray(str[count - 1], str[count]);
 			str[count] = NULL;
@@ -42,7 +42,7 @@ int	join_close_token(t_lexer *l, char **str, int count)
 	{
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count + 1]);
-		if ((t2->line[ft_strlen(str[count + 1]) + 1] != ' ' && compatibility_arg(t->type)))
+		if ((t->line[ft_strlen(str[count]) + 2] != ' ' && compatibility_arg(t2->type)))
 		{
 			str[count] = merge_twoarray(str[count], str[count + 1]);
 			count2 = count;
