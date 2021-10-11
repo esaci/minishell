@@ -41,10 +41,10 @@ int	start_fonction(char *envp[])
 		return (1);
 	envp_init(envp, lexer);
 	ptr = readline("Minishell$ ");
-	if (ptr[0] == EOF)
+	if (!ptr || ptr[0] == EOF)
 	{
 		free(ptr);
-		return (print_custom("Minishell$ exit", 1, 0, 1));
+		return (print_custom("\nMinishell$ exit", 1, 0, 1));
 	}
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
@@ -76,14 +76,14 @@ int	start_fonction(char *envp[])
 		} */
 		ptr = readline("Minishell$ ");
 		rl_on_new_line();
-		if (ptr[0] == EOF)
+		if (!ptr || ptr[0] == EOF)
 			break ;
 		free(ptr);
 	}
 	if (ptr[0] == EOF)
 	{
 		free(ptr);
-		ptr = "Minishell$ exit\n";
+		ptr = "\nMinishell$ exit\n";
 	}
 	else
 	{
