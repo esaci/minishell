@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_menu.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:55:38 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/04 13:37:16 by julespellet      ###   ########.fr       */
+/*   Updated: 2021/10/07 09:40:53 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_iscommand(char *cmd)
 	i = 0;
 	while (i < sizeof(builtin) / sizeof(*builtin))
 	{
-		if (!ft_strncmp(cmd, builtin[i].str, ft_max(builtin[i].str, cmd) - 1))
+		if (!ft_strncmp(cmd, builtin[i].str, ft_strlen(builtin[i].str)))
 		{
 			printf("Command is "GREEN"%s\n"RESET, builtin[i].str);
 			return (i);

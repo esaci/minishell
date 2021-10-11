@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 18:38:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/27 18:39:01 by esaci            ###   ########.fr       */
+/*   Updated: 2021/10/11 17:17:47 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ TOKENTYPE	lexer_check_type(t_token *tok)
 		return (CHAR_PVIR);
 	if (tok->line[0] ==  '\\')
 		return (CHAR_SLAHV);
-	if (tok->line[0] ==  '\t')
-		return (CHAR_TAB);
-	if (tok->line[0] ==  '\n')
-		return (CHAR_Z);
 	return (CHAR_INUT);
 }
 

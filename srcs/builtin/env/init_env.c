@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 12:36:15 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/04 13:47:37 by julespellet      ###   ########.fr       */
+/*   Updated: 2021/10/06 14:47:00 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_init_env(char *envp[])
 {
-	printf("Check INIT\n");
 	ft_envp(envp, NULL, NULL);
 }
 
@@ -30,6 +29,5 @@ t_list	**ft_getaddenv(void)
 
 t_list	*ft_getallenv(void)
 {
-	printf("Check GET ENV\n");
 	return (*ft_envp(NULL, NULL, NULL));
 }

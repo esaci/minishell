@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:24:28 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/04 12:50:53 by julespellet      ###   ########.fr       */
+/*   Updated: 2021/10/06 14:48:43 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,14 @@ t_list	**ft_envp(char *envp[], char *content, t_list *env)
 {
 	static t_list	*environment = NULL;
 
-	printf("CHECK FT_ENVP : ");
 	if (envp != NULL)
 		environment = ft_tab_to_lst(envp);
 	else if (content != NULL)
 		ft_lst_pushback(&environment, content);
 	else if (env != NULL)
 		environment = env;
-	if (environment != NULL)
-		printf("OK OUFFFF \n");
-	else
-		printf("MERDEEEE \n");
 	return (&environment);
 }
-
-char	*ft_getenv(char *key)
-{
-	t_list	*env;
-
-	env = ft_getallenv();
-	while (env)
-	{
-		if (ft_strlen(env->content) > ft_strlen(key))
-		{
-			if (ft_strncmp(env->content, key, ft_strlen(key)) == 0
-				&& *(env->content + ft_strlen(key)) == '=')
-				return (env->content + ft_strlen(key) + 1);
-		}
-		env = env->next;
-	}
-	return (NULL);
-}
-
 
 /*
 char	*get_environment(char *str)

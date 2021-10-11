@@ -41,9 +41,10 @@ SRC =	$(GNLD)get_next_line.c				\
 		$(SRCD_BUILT)ft_pwd.c				\
 		$(SRCD_BUILT)ft_cd.c				\
 		$(SRCD_BUILT)ft_env.c				\
-		$(SRCD_BUILT)env/environment.c					\
-		$(SRCD_BUILT)env/init_env.c					\
-		$(SRCD_BUILT)env/utils_env.c					\
+		$(SRCD_BUILT)env/environment.c		\
+		$(SRCD_BUILT)env/init_env.c			\
+		$(SRCD_BUILT)env/utils_env.c		\
+		$(SRCD_BUILT)env/delete_variable.c	\
 
 OBJ = $(SRC:.c=.o)
 

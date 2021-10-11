@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_jules.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julespelletier <julespelletier@student.    +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:25:17 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/04 12:57:50 by julespellet      ###   ########.fr       */
+/*   Updated: 2021/10/06 14:21:56 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,11 @@ t_list	**ft_envp(char *envp[], char *content, t_list *env);
 char	*ft_getenv(char *key);
 void	ft_init_env(char *envp[]);
 void	ft_add_env(char *to_add);
+char    *ft_getenv(char *variable);
 t_list	**ft_getaddenv(void);
 t_list	*ft_getallenv(void);
 t_list	*ft_new_list_elem(char *content);
-
+void    ft_delete_variable(char *variable);
 
 // LST BONUS
 t_list  *ft_new_elem(char *content);

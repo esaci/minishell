@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/29 12:08:08 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/11 17:17:32 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ typedef	enum	TOKENTYPE
 	CHAR_Z = 0,
 	CHAR_PVIR = ';',
 	CHAR_SLAHV = '\\',
-	CHAR_TAB = '\t',
-	CHAR_NL = '\n',
 	CHAR_ERROR = '!',
 }	TOKENTYPE;
 
