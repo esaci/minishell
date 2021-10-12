@@ -40,7 +40,7 @@ t_token	*parser_in_between(t_token *t, TOKENTYPE type)
 	if (tmp)
 		return (tmp);
 	tmp = t->n_token;
-	while (tmp && tmp->type != type)
+	while (tmp && tmp->line[0] != type)
 		tmp = tmp->n_token;
 	if (!tmp)
 		return (tmp);

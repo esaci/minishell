@@ -4,7 +4,7 @@ int	compatibility_arg(TOKENTYPE type, int mode)
 {
 	if (type == CHAR_INUT || type == CHAR_TIRET)
 		return (1);
-	if (type == CHAR_ARG || type == CHAR_TIRET)
+	if (type == CHAR_ARG)
 		return (1);
 	if ((type == CHAR_APO || type == CHAR_GUILL) && !mode)
 		return (1);
@@ -41,8 +41,6 @@ void	check_for_arg(char **str, t_lexer *l, t_node *n)
 			{
 				if (get_token_buffer(l, str[count]))
 					get_token_buffer(l, str[count])->type = CHAR_INUT;
-				if (get_token_buffer(l, str[count]))
-					printf("Jai mis en inut |%s|\n", get_token_buffer(l, str[count])->line);
 				if (str[count][0] == str[count][ft_strlen(str[count]) - 1])
 				{
 					n->str[count] = remove_for_arg(str[count]);

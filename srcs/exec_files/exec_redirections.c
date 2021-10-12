@@ -43,8 +43,6 @@ void	handle_old_fd(int oldfd, int fd)
 	if (!oldfd)
 		return ;
 	close(fd);
-	if (oldfd == 2)
-		unlink("./srcs/here_doc_file");
 }
 
 int	count_file_redirection(t_node *left, t_node *right)
@@ -90,6 +88,7 @@ char	*open_infiles(t_node *n, int *fd)
 			*fd = open("./srcs/here_doc_file", O_RDWR);
 			if (*fd < 0)
 				return (n->str[count + 1]);
+			unlink("./srcs/here_doc_file");
 		}
 		else
 			break;

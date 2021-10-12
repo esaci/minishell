@@ -17,14 +17,19 @@ int	join_close_token(t_lexer *l, char **str, int count)
 	int		count2;
 	t_token	*t;
 	t_token	*t2;
+	int		ad;
 
 	count2 = 0;
-	if (count)
+	if (count && ft_strlen(str[count]) > 1)
 	{
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count - 1]);
-		if ((t2->line[ft_strlen(str[count - 1])] != ' ' && compatibility_arg(t2->type, 0)))
+		ad = 0;
+		if (t2->line[0] != str[count - 1][0])
+			ad = 2;
+		if ((t2->line[ft_strlen(str[count - 1]) + ad] != ' ' && compatibility_arg(t2->type, 0)))
 		{
+			printf("j'ai ce char |%c| ver 1\n", t2->line[ft_strlen(str[count - 1]) + ad]);
 			str[count - 1] = merge_twoarray(str[count - 1], str[count]);
 			str[count] = NULL;
 			count2 = count;
@@ -35,15 +40,16 @@ int	join_close_token(t_lexer *l, char **str, int count)
 			}
 			str[count2] = NULL;
 			if (t2->n_token && t2->n_token->n_token)
-			t2->n_token = t2->n_token->n_token;
+				t2->n_token = t2->n_token->n_token;
 		}
 	}
-	if (count != ft_strlen_double(str))
+	if (count < ft_strlen_double(str) && ft_strlen(str[count]) > 1)
 	{
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count + 1]);
-		if ((t->line[ft_strlen(str[count]) + 2] != ' ' && compatibility_arg(t2->type, 1)))
+		if ((t->line[ft_strlen(str[count]) + 2] != ' ' && t->line[ft_strlen(str[count]) + 2] != '\0' && compatibility_arg(t2->type, 1)))
 		{
+			printf("j'ai ce char |%c| ver 2\n", t->line[ft_strlen(str[count]) + 2]);
 			str[count] = merge_twoarray(str[count], str[count + 1]);
 			count2 = count;
 			while (str[count2] && str[count2 + 1] && str[count2 + 2])
@@ -124,7 +130,8 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		check_for_arg(n->str, l, n);
 		n->str[0] = parse_is_command(n->str[0], l, 0);
 		tmp = access(n->str[0], X_OK);
-		if (tmp)
+		printf("tmp vaut %d\n", tmp);
+		if (tmp || ft_strlen(n->str[0]) == 0)
 		{
 			if (n->str[0])
 			{
@@ -133,6 +140,12 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 				exit(print_custom(" command not found", 2, 1, 1));
 			}
 			exit(0);
+		}
+		int j = 0;
+		while (n->str[j])
+		{
+			printf("%d: |%s|\n", j, n->str[j]);
+			j++;
 		}
 		if (execve(n->str[0], n->str, l->envp) == -1)
 			exit(print_custom("error comm", 2, 1, 1));
