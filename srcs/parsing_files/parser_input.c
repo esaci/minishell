@@ -20,14 +20,14 @@ t_token	*parser_chevron(t_token *t, TOKENTYPE type)
 	{
 		t->type = t->type - 1;
 		while (t->n_token->n_token && t->n_token->n_token->type == CHAR_SPACE)
-			t->n_token->n_token = t->n_token->n_token->n_token;
+			t->n_token->n_token = unlink_free_return(t->n_token->n_token, 1);
 		return(t->n_token->n_token);
 	}
 	else
 	{
 		tmp = t->n_token;
 		while (tmp && tmp->type == CHAR_SPACE)
-			tmp = tmp->n_token;
+			tmp = unlink_free_return(tmp, 1);
 	}
 	return (tmp);
 }
@@ -41,12 +41,12 @@ t_token	*parser_in_between(t_token *t, TOKENTYPE type)
 		return (tmp);
 	tmp = t->n_token;
 	while (tmp && tmp->line[0] != type)
-		tmp = tmp->n_token;
+		tmp = unlink_free_return(tmp, 1);
 	if (!tmp)
 		return (tmp);
 	tmp = tmp->n_token;
 	while (tmp && tmp->type == CHAR_SPACE)
-		tmp = tmp->n_token;
+		tmp = unlink_free_return(tmp, 1);
 	return (tmp);
 }
 
@@ -56,9 +56,9 @@ t_token	*parser_until_not(t_token *t, TOKENTYPE type, TOKENTYPE type2)
 
 	tmp = t->n_token;
 	while (tmp && tmp->type == type)
-		tmp = tmp->n_token;
+		tmp = unlink_free_return(tmp, 1);
 	while (tmp && tmp->type == type2)
-		tmp = tmp->n_token;
+		tmp = unlink_free_return(tmp, 1);
 	return (tmp);
 }
 

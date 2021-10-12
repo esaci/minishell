@@ -20,20 +20,20 @@ int	poutput_strlen(t_token *tok)
 	count = 0;
 	while(tok && tok->line[count] == ' ')
 		count++;
-	if (!tok->n_token)
-		c = '\0';
-	else if ((tok->type == CHAR_APO || tok->type == CHAR_GUILL) && tok->line[count])
+	if ((tok->type == CHAR_APO || tok->type == CHAR_GUILL) && tok->line[count])
 	{
 		c = tok->line[count];
 		count++;
 	}
+	else if (!tok->n_token)
+		c = '\0';
 	else if (tok->n_token->type == CHAR_INUT || tok->n_token->type == CHAR_TIRET || tok->n_token->type  == CHAR_ARG || tok->n_token->type == CHAR_DOLL)
 		c = ' ';
 	else
 		c = tok->n_token->line[count];
 	while(tok->line[count] && tok->line[count] != c)
 		count++;
-	return (count);
+	return (count + 10);
 }
 
 int	copy_buffer(char *buff, t_token *tok)
@@ -113,6 +113,7 @@ int	malloc_buffer(t_lexer *lexer)
 	if (!lexer->buffer)
 		return (1);
 	return (0);
+	return (count2);
 }
 
 int	fill_buffer(t_lexer *lexer)

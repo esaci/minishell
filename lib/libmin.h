@@ -48,7 +48,6 @@ typedef	enum	TOKENTYPE
 	CHAR_DCHEVD = 61,
 	CHAR_CHEVD = '>',
 	CHAR_DOLL = '$',
-	CHAR_INTER = '?',
 	CHAR_SPACE = ' ',
 	CHAR_TIRET = '-',
 	CHAR_Z = 0,
@@ -107,6 +106,7 @@ typedef	struct s_lexer
 	char		**envp;
 	char		**pathptr;
 	char		**pwd;
+	int			flagr;
 }	t_lexer;
 
 int					start_fonction(char *envp[]);
@@ -130,7 +130,7 @@ NODETYPE			is_any_command(t_lexer *l, t_token *t, t_token *oldt);
 int					is_redirection(t_node *n2);
 int					search_pipe(t_node *n, t_token *t, t_lexer *l);
 int					search_command(t_node *n, t_token *t, t_lexer *l);
-void				add_path(char **ptr, t_token *t, t_lexer *l);
+int					add_path(char **ptr, t_token *t, t_lexer *l);
 int					tree_define_left(t_node *n, t_token *t, t_lexer *l);
 int					tree_define_right(t_node *n, t_token *t, t_lexer *l);
 int					tree_define_command(t_node *n, t_token *t, t_lexer *l);

@@ -16,8 +16,6 @@ TOKENTYPE	lexer_check_type2(t_token *tok, char *oldstr)
 {
 	if (tok->line[0] ==  '$')
 		return (CHAR_DOLL);
-	if (tok->line[0] ==  '\?')
-		return (CHAR_INTER);
 	if (tok->line[0] ==  ' ')
 		return (CHAR_SPACE);
 	if (tok->line[0] ==  '-' && (oldstr[0] == CHAR_SPACE))
@@ -59,6 +57,7 @@ int	init_lexer(t_lexer *lexer, char **envp)
 	lexer->node = NULL;
 	lexer->pip = NULL;
 	lexer->c_tok = NULL;
+	lexer->flagr = 0;
 	return (0);
 }
 
@@ -84,6 +83,7 @@ int	lexer_start(t_lexer *lexer)
 	while (rl_line_buffer && rl_line_buffer[mode] == ' ')
 		mode++;
 	lexer->tok = lexer_token(rl_line_buffer + mode, rl_line_buffer + mode);
+	mode++;
 	toktmp = &(lexer->tok->n_token);
 	while(rl_line_buffer[mode])
 	{

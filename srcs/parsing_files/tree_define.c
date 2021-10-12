@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
-/* print_custom(*ptr, 1, 1,1); */
-void	add_path(char **ptr, t_token *t, t_lexer *l)
+
+int	add_path(char **ptr, t_token *t, t_lexer *l)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (!t || !t->n_token)
 	{
@@ -22,7 +22,7 @@ void	add_path(char **ptr, t_token *t, t_lexer *l)
 		if (!tmp)
 		{
 			*ptr = NULL;
-			return ;
+			return (1);
 		}
 		tmp[0] = '\0';
 		*ptr = tmp;
@@ -35,11 +35,13 @@ void	add_path(char **ptr, t_token *t, t_lexer *l)
 			if (!tmp)
 			{
 				*ptr = NULL;
-				return ;
+				return (1);
 			}
-			tmp[0] = '\0';
-			*ptr = tmp;
+			l->flagr = 1;
+			print_custom(l->buffer[get_buffer_count(l, t)], 2, 1, 0);
+			return (print_custom(" syntax error", 2, 1, 1));
 		}
+	return (0);
 }
 
 int	tree_define_left(t_node *n, t_token *t, t_lexer *l)

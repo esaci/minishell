@@ -57,17 +57,17 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc2", 2, 1, 1));
 		}
-		print_tokens(lexer);
+/* 		print_tokens(lexer); */
 		tree_input(lexer);
-/* 		if (exec_input(lexer))
+		if (exec_input(lexer))
 		{
 			rl_clear_history();
 			double_free(lexer->pwd);
 			double_free(lexer->pathptr);
 			free(lexer);
 			return (print_custom("malloc4", 2, 1, 1));
-		} */
-		print_node(lexer->node);
+		}
+		/* print_node(lexer->node); */
 /* 		print_env(lexer); */
 		rl_line_buffer[1] = '\0';
 		free(ptr);

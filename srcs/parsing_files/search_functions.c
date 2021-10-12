@@ -124,7 +124,8 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 			n->type = NODE_FILEIN;
 			if (t->type == CHAR_DCHEVG)
 				n->type = NODE_DFILEIN;
-			add_path(&n->str[count++], t, l);
+			if (add_path(&n->str[count++], t, l))
+				return (2);
 		}
 		t = t->n_token;
 	}
@@ -166,7 +167,8 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 			n->type = NODE_FILEOUT;
 			if (t->type == CHAR_DCHEVD)
 				n->type = NODE_DFILEOUT;
-			add_path(&n->str[count++], t, l);
+			if (add_path(&n->str[count++], t, l))
+				return (2);
 		}
 		t = t->n_token;
 	}

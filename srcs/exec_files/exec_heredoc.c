@@ -22,6 +22,8 @@ int	exec_in_heredoc(char *limiter)
 		exit(print_custom("here_doc file can't be read/write", 2, 1, 1));
 	while (get_next_line(0, &ptr) > 0)
 	{
+		rl_line_buffer[0] = '>';
+		rl_line_buffer[1] = 0;
 		if (!ft_memcmp(ptr, limiter, ft_strlen(ptr))
 			&& ft_strlen(limiter) == ft_strlen(ptr))
 			break ;
