@@ -94,6 +94,7 @@ int	copy_buffer(char *buff, t_token *tok)
 int	malloc_buffer(t_lexer *lexer)
 {
 	int	count;
+	int	count2;
 	t_token		*toktmp;
 
 	toktmp = lexer->tok;
@@ -105,7 +106,10 @@ int	malloc_buffer(t_lexer *lexer)
 		toktmp = toktmp->n_token;
 		count++;
 	}
-	lexer->buffer = malloc(sizeof(char*) * (count + 2));
+	lexer->buffer = malloc(sizeof(char*) * (count + 3));
+	count2 = 0;
+	while (count2 < (count + 2))
+		lexer->buffer[count2++] = NULL;
 	if (!lexer->buffer)
 		return (1);
 	return (0);

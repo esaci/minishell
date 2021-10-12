@@ -99,6 +99,7 @@ typedef	struct s_node
 typedef	struct s_lexer
 {
 	t_token		*tok;
+	t_token		*c_tok;
 	t_node		*node;
 	int			len;
 	char		**buffer;
@@ -166,5 +167,8 @@ void				check_for_arg(char **str, t_lexer *l, t_node *n);
 int					compatibility_arg(TOKENTYPE type, int mode);
 void				correct_name(t_lexer *l, char *str);
 int					print_env(t_lexer *l);
+int					double_free(char **str);
+int					free_lexer_nodes(t_lexer *l);
+t_token				*unlink_free_return(t_token *t, int skip);
 #endif
 

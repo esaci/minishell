@@ -19,7 +19,7 @@ int	free_lexer_tokens(t_lexer *lexer)
 	int			count;
 
 	count = 0;
-	if (!lexer)
+	if (!lexer || !lexer->tok)
 		return (count);
 	ltmp = lexer->tok;
 	while (ltmp)
@@ -29,5 +29,81 @@ int	free_lexer_tokens(t_lexer *lexer)
 		ltmp = ltmp2;
 		count++;
 	}
+	if (!lexer->buffer)
+		return (count);
+	count = 0;
+	while (lexer->buffer[count] != NULL)
+	{
+		free(lexer->buffer[count]);
+		count++;
+	}
+	free(lexer->buffer);
 	return (count);
+}
+
+int	free_lexer_nodes(t_lexer *l)
+{
+	t_node	*n;
+	t_node	*oldnode;
+
+	return (0);
+	n = l->node;
+	while (n)
+	{
+		oldnode = n;
+		if (n->type == NODE_FILEOUT || !n->left)
+		{
+			free(n);
+			break ;
+		}
+		if (n->left->type != NODE_FILEIN && n->left->type != NODE_DFILEIN)
+		{
+			free(n->left->left);
+			free(n->left->right);
+			free(n->left);
+		}
+		free(n->left);
+		if (n->right && (n->right->type == NODE_FILEOUT || n->right->type == NODE_DFILEOUT))
+		{
+			free(n->right);
+			break;
+		}
+		else
+			n = n->right;
+		free(oldnode);
+	}
+	return (0);
+}
+
+int	double_free(char **str)
+{
+	int	count;
+
+	if (!str)
+		return (0);
+	count = 0;
+	while (str[count])
+		count++;
+	while (count >= 0)
+		free(str[count--]);
+	free(str);
+	return (0);
+}
+
+t_token	*unlink_free_return(t_token *t, int skip)
+{
+	t_token *oldt;
+	int		count;
+
+	if (!t)
+		return (t);
+	count = 0;
+	while (t && count < skip)
+	{
+		oldt = t;
+		t = t->n_token;
+		free(oldt);
+		count++;
+	}
+	return (t);
 }

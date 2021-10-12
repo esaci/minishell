@@ -138,12 +138,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			}
 			exit(0);
 		}
-		int j = 0;
-		while (n->str[j])
-		{
-			printf("%d: |%s|\n", j, n->str[j]);
-			j++;
-		}
 		if (execve(n->str[0], n->str, l->envp) == -1)
 			exit(print_custom("error comm", 2, 1, 1));
 	}
