@@ -29,7 +29,6 @@ int	join_close_token(t_lexer *l, char **str, int count)
 			ad = 2;
 		if ((t2->line[ft_strlen(str[count - 1]) + ad] != ' ' && compatibility_arg(t2->type, 0)))
 		{
-			printf("j'ai ce char |%c| ver 1\n", t2->line[ft_strlen(str[count - 1]) + ad]);
 			str[count - 1] = merge_twoarray(str[count - 1], str[count]);
 			str[count] = NULL;
 			count2 = count;
@@ -49,7 +48,6 @@ int	join_close_token(t_lexer *l, char **str, int count)
 		t2 = get_token_buffer(l, str[count + 1]);
 		if ((t->line[ft_strlen(str[count]) + 2] != ' ' && t->line[ft_strlen(str[count]) + 2] != '\0' && compatibility_arg(t2->type, 1)))
 		{
-			printf("j'ai ce char |%c| ver 2\n", t->line[ft_strlen(str[count]) + 2]);
 			str[count] = merge_twoarray(str[count], str[count + 1]);
 			count2 = count;
 			while (str[count2] && str[count2 + 1] && str[count2 + 2])
@@ -130,7 +128,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		check_for_arg(n->str, l, n);
 		n->str[0] = parse_is_command(n->str[0], l, 0);
 		tmp = access(n->str[0], X_OK);
-		printf("tmp vaut %d\n", tmp);
 		if (tmp || ft_strlen(n->str[0]) == 0)
 		{
 			if (n->str[0])
