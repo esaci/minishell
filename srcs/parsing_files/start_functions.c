@@ -81,7 +81,7 @@ int	start_fonction(char *envp[])
 			break ;
 		free(ptr);
 	}
-	if (ptr[0] == EOF)
+	if (!ptr || ptr[0] == EOF)
 	{
 		free(ptr);
 		ptr = "\nMinishell$ exit\n";
