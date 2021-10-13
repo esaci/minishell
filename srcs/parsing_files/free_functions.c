@@ -85,9 +85,7 @@ int	double_free(char **str)
 		return (0);
 	count = 0;
 	while (str[count])
-		count++;
-	while (count >= 0)
-		free(str[count--]);
+		free(str[count++]);
 	free(str);
 	return (0);
 }

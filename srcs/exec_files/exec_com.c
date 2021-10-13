@@ -124,9 +124,14 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 		}
+		free(ptr[0]);
+		free(ptr[1]);
 		close_pipes(l, 1);
 		check_for_arg(n->str, l, n);
-		n->str[0] = parse_is_command(n->str[0], l, 0);
+		ptr[0] = parse_is_command(n->str[0], l, 0);
+		free(n->str[0]);
+		n->str[0] = ptr[0];
+		free(ptr);
 		tmp = access(n->str[0], X_OK);
 		if (tmp || ft_strlen(n->str[0]) == 0)
 		{
@@ -143,6 +148,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		if (execve(n->str[0], n->str, l->envp) == -1)
 		{
 			double_free(n->str);
+			small_free(l, NULL, NULL, 1);
 			exit(print_custom("error comm", 2, 1, 1));
 		}
 	}

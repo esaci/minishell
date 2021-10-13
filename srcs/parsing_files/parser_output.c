@@ -113,7 +113,6 @@ int	malloc_buffer(t_lexer *lexer)
 	if (!lexer->buffer)
 		return (1);
 	return (0);
-	return (count2);
 }
 
 int	fill_buffer(t_lexer *lexer)
