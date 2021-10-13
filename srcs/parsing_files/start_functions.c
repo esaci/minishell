@@ -84,10 +84,8 @@ int	start_fonction(char *envp[])
 	free_lexer_nodes(lexer);
 	free_lexer_tokens(lexer, 0);
 	free(lexer);
+	free(ptr);
 	if (ft_memcmp(rl_line_buffer, "exit", 5))
-	{
-		free(ptr);
 		return (print_custom("\nMinishell$ exit" , 1, 0, 1));
-	}
 	return (print_custom("" , 1, 0, 0));
 }

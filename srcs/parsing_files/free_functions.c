@@ -53,21 +53,27 @@ int	free_lexer_nodes(t_lexer *l)
 		oldnode = n;
 		if (n->type == NODE_FILEOUT || !n->left)
 		{
+			free(n->str);
 			free(n);
 			break ;
 		}
 		if (n->left->type != NODE_FILEIN && n->left->type != NODE_DFILEIN)
 		{
+			free(n->left->left->str);
 			free(n->left->left);
+			free(n->left->right->str);
 			free(n->left->right);
 		}
+		free(n->left->str);
 		free(n->left);
 		if (n->right && (n->right->type == NODE_FILEOUT || n->right->type == NODE_DFILEOUT))
 		{
+			free(n->right->str);
 			free(n->right);
 			break;
 		}
 		n = n->right;
+		free(oldnode->str);
 		free(oldnode);
 	}
 	init_lexer(l, NULL);

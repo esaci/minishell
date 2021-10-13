@@ -37,6 +37,6 @@ int	full_close(t_lexer *l)
 
 int	full_free(t_lexer *l)
 {
-	free_lexer_tokens(l);
+	free_lexer_tokens(l, 1);
 	return (free_pip(l, 0));
 }
