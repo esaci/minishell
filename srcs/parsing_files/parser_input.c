@@ -86,7 +86,7 @@ t_token	*parser_next_token(t_token *tok)
 
 	toktmp = tok;
 	while (toktmp && toktmp->type == CHAR_SPACE)
-		toktmp = toktmp->n_token;
+		toktmp = unlink_free_return(toktmp, 1);
 	if (!toktmp)
 		return (NULL);
 	if (!toktmp->n_token)
