@@ -16,12 +16,9 @@ int	free_lexer_tokens(t_lexer *lexer, int mode)
 {
 	t_token		*ltmp;
 	t_token		*ltmp2;
-	int			count;
 
-	(void)mode;
-	count = 0;
 	if (!lexer)
-		return (count);
+		return (mode);
 	if (lexer->tok)
 	{
 		ltmp = lexer->tok;
@@ -30,16 +27,18 @@ int	free_lexer_tokens(t_lexer *lexer, int mode)
 			ltmp2 = ltmp->n_token;
 			free(ltmp);
 			ltmp = ltmp2;
-			count++;
 		}
 	}
 	if (!lexer->buffer)
-		return (count);
-	double_free(lexer->buffer);
-	return (count);
+		return (mode);
+	while (lexer->buffer[mode])
+		free(lexer->buffer[mode++]);
+	free(lexer->buffer);
+	/* double_free(lexer->buffer); */
+	return (mode);
 }
 
-int	free_lexer_nodes(t_lexer *l)
+int	free_lexer_nodes(t_lexer *l, int mode)
 {
 	t_node	*n;
 	t_node	*oldnode;
@@ -73,7 +72,8 @@ int	free_lexer_nodes(t_lexer *l)
 		free(oldnode->str);
 		free(oldnode);
 	}
-	init_lexer(l, NULL);
+	if (mode)
+		init_lexer(l, NULL);
 	return (0);
 }
 

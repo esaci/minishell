@@ -168,7 +168,7 @@ int					compatibility_arg(TOKENTYPE type, int mode);
 void				correct_name(t_lexer *l, char *str);
 int					print_env(t_lexer *l);
 int					double_free(char **str);
-int					free_lexer_nodes(t_lexer *l);
+int					free_lexer_nodes(t_lexer *l, int mode);
 t_token				*unlink_free_return(t_token *t, int skip);
 int					small_free(t_lexer *l, void *ptr, void *ptr2, int mode);
 #endif

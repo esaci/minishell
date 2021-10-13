@@ -75,7 +75,7 @@ int	start_fonction(char *envp[])
 /* 		print_env(lexer); */
 		rl_line_buffer[1] = '\0';
 		free(ptr);
-		free_lexer_nodes(lexer);
+		free_lexer_nodes(lexer, 1);
 		free_lexer_tokens(lexer, 1);
 		ptr = readline("Minishell$ ");
 		rl_on_new_line();
@@ -85,7 +85,7 @@ int	start_fonction(char *envp[])
 	clear_history();
 	double_free(lexer->pwd);
 	double_free(lexer->pathptr);
-	free_lexer_nodes(lexer);
+	free_lexer_nodes(lexer, 1);
 	free_lexer_tokens(lexer, 0);
 	free(lexer);
 	free(ptr);

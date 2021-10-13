@@ -84,6 +84,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	int		fd[2];
 /* 	int		len; */
 	char	**ptr;
+	char	*str;
 
 	if (last_pipe(l) == 0 || count == last_pipe(l))
 		l->pip->pid[count] = fork();
@@ -129,7 +130,8 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		close_pipes(l, 1);
 		check_for_arg(n->str, l, n);
-		n->str[0] = parse_is_command(n->str[0], l, 0, 1);
+		str = parse_is_command(n->str[0], l, 0, 1);
+		n->str[0] = str;
 		tmp = access(n->str[0], X_OK);
 		if (tmp || ft_strlen(n->str[0]) == 0)
 		{
@@ -137,10 +139,10 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			{
 				correct_name(l, n->str[0]);
 				print_custom(n->str[0], 2, 1, 0);
-				double_free(n->str);
+				small_free(l, NULL, NULL, 1);
 				exit(print_custom(" command not found", 2, 1, 1));
 			}
-			double_free(n->str);
+			small_free(l, NULL, NULL, 1);
 			exit(0);
 		}
 		if (execve(n->str[0], n->str, l->envp) == -1)
