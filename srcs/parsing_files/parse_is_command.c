@@ -30,7 +30,7 @@ char	*copieur(char *s)
 	return (str);
 }
 
-char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l)
+char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l, int mode)
 {
 	char	*ptr;
 	int		tmp;
@@ -45,14 +45,19 @@ char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l)
 			ptr = ft_strjoin(l->pwd[0], ptr2 + 2);
 		}
 		free(ptr2);
+		if (mode)
+			free(arg_list);
 		return (ptr);
 	}
 	free(ptr);
 	free(ptr2);
-	return (copieur(arg_list));
+	ptr = copieur(arg_list);
+	if (mode)
+		free(arg_list);
+	return (ptr);
 }
 
-char	*parse_is_command(char *arg_list, t_lexer *l, int count)
+char	*parse_is_command(char *arg_list, t_lexer *l, int count, int mode)
 {
 	int		tmp;
 	char	*ptr;
@@ -76,7 +81,9 @@ char	*parse_is_command(char *arg_list, t_lexer *l, int count)
 	if (tmp == 0)
 	{
 		free(ptr2);
+		if (mode)
+			free(arg_list);
 		return (ptr);
 	}
-	return (parse_path2(arg_list, ptr2, l));
+	return (parse_path2(arg_list, ptr2, l, mode));
 }

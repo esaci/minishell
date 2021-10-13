@@ -124,7 +124,7 @@ int					free_lexer_tokens(t_lexer *lexer, int mode);
 int					init_lexer(t_lexer *lexer, char **envp);
 int					lexer_start(t_lexer *lexer);
 t_node				*tree_input(t_lexer *lexer);
-char				*parse_is_command(char *arg_list, t_lexer *l, int count);
+char				*parse_is_command(char *arg_list, t_lexer *l, int count, int mode);
 NODETYPE			is_any_chevron(t_token *t);
 NODETYPE			is_any_command(t_lexer *l, t_token *t, t_token *oldt);
 int					is_redirection(t_node *n2);

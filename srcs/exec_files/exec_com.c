@@ -82,7 +82,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 {
 	int		tmp;
 	int		fd[2];
-	int		len;
+/* 	int		len; */
 	char	**ptr;
 
 	if (last_pipe(l) == 0 || count == last_pipe(l))
@@ -106,14 +106,17 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		if (!ptr)
 			exit(1);
 		ptr[2] = NULL;
-		len = count_file_redirection(n->right, n->left);
+/* 		len = count_file_redirection(n->right, n->left);
 		l->pip->pfd = malloc(sizeof(int) * (len + 1));
 		if (!l->pip->pfd)
-			exit(print_custom("Malloc dans exec-com error", 2, 1, 1));
+			exit(print_custom("Malloc dans exec-com error", 2, 1, 1)); */
 		ptr[0] = open_infiles(n->left, &(fd[0]));
 		ptr[1] = open_outfiles(n->right, &(fd[1]));
 		if (fd[0] < 0 || fd[1] < 0)
 			exit(check_order_redirection(l, ptr));
+		free(ptr[0]);
+		free(ptr[1]);
+		free(ptr);
 		if (fd[1] != 1)
 		{
 			dup2(fd[1], STDOUT_FILENO);
@@ -124,14 +127,9 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 		}
-		free(ptr[0]);
-		free(ptr[1]);
 		close_pipes(l, 1);
 		check_for_arg(n->str, l, n);
-		ptr[0] = parse_is_command(n->str[0], l, 0);
-		free(n->str[0]);
-		n->str[0] = ptr[0];
-		free(ptr);
+		n->str[0] = parse_is_command(n->str[0], l, 0, 1);
 		tmp = access(n->str[0], X_OK);
 		if (tmp || ft_strlen(n->str[0]) == 0)
 		{
@@ -139,7 +137,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			{
 				correct_name(l, n->str[0]);
 				print_custom(n->str[0], 2, 1, 0);
-				double_free(n->str);
+/* 				small_free() */
 				exit(print_custom(" command not found", 2, 1, 1));
 			}
 			double_free(n->str);
@@ -148,7 +146,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		if (execve(n->str[0], n->str, l->envp) == -1)
 		{
 			double_free(n->str);
-			small_free(l, NULL, NULL, 1);
 			exit(print_custom("error comm", 2, 1, 1));
 		}
 	}

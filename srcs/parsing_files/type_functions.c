@@ -43,7 +43,7 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t, t_token *oldt)
 
 	if (t->type != CHAR_INUT)
 		return (NODE_ERROR);
-	tmp = parse_is_command(l->buffer[get_buffer_count(l, t)] , l, 0);
+	tmp = parse_is_command(l->buffer[get_buffer_count(l, t)] , l, 0, 0);
 	if (!access(tmp, F_OK) && !is_any_chevron(oldt))
 	{
 		free(tmp);
