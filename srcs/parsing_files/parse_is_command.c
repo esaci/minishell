@@ -52,7 +52,6 @@ char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l, int mode)
 	free(ptr);
 	free(ptr2);
 	ptr = copieur(arg_list);
-	/* return (ptr); */
 	if (mode)
 		free(arg_list);
 	return (ptr);

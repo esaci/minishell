@@ -82,7 +82,7 @@ int	start_fonction(char *envp[])
 		if (!ptr || ptr[0] == EOF)
 			break ;
 	}
-	clear_history();
+	rl_clear_history();
 	double_free(lexer->pwd);
 	double_free(lexer->pathptr);
 	free_lexer_nodes(lexer, 1);

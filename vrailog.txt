@@ -1,0 +1,27 @@
+==147178== 9 bytes in 1 blocks are still reachable in loss record 5 of 63
+==147178==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==147178==    by 0x10ED2B: copieur (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x10EE6B: parse_path2 (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x10EFA1: parse_is_command (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x10C067: exec_com (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x10B7CE: exec_input (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x109C73: start_fonction (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x109442: main (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+
+==147178== 32 bytes in 1 blocks are still reachable in loss record 16 of 63
+==147178==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==147178==    by 0x10E526: search_command (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x10E668: search_pipe (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x10B26A: tree_init_node (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x10B355: tree_input (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x109C67: start_fonction (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x109442: main (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+
+==147178== 64 bytes in 1 blocks are still reachable in loss record 20 of 63
+==147178==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==147178==    by 0x10B0FD: tree_parser_node (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x10B23E: tree_init_node (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x10B355: tree_input (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x109C67: start_fonction (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+==147178==    by 0x109442: main (in /mnt/nfs/homes/esaci/Desktop/minishell/minishell)
+

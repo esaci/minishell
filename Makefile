@@ -12,7 +12,7 @@ LIBFTD = ./fcts//libft/
 
 COMPILE = gcc
 
-CFLAGS = -Werror -Wextra -Wall $(COMPILE1)
+CFLAGS = -Werror -Wextra -Wall -g $(COMPILE1)
 
 SRCD = ./srcs/
 
