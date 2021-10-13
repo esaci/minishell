@@ -70,14 +70,14 @@ t_token *parser_until_space(t_token *tok)
 	if (tok->type == CHAR_PIPE)
 	{
 		while (tmp && tmp->type == CHAR_SPACE)
-			tmp = tmp->n_token;
+			tmp = unlink_free_return(tmp, 1);
 		return (tmp);
 	}
 	while (tmp && tmp->type != CHAR_SPACE)
-		tmp = tmp->n_token;
+		tmp = unlink_free_return(tmp, 1);
 	if (!tmp)
 		return (tmp);
-	return (tmp->n_token);
+	return (unlink_free_return(tmp, 1));
 }
 
 t_token	*parser_next_token(t_token *tok)

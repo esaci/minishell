@@ -44,7 +44,7 @@ int	start_fonction(char *envp[])
 		double_free(lexer->pathptr);
 		free(lexer);
 		free(ptr);
-		return (print_custom("\nMinishell$ exit1", 1, 0, 1));
+		return (print_custom("\nMinishell$ exit", 1, 0, 1));
 	}
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
@@ -83,6 +83,9 @@ int	start_fonction(char *envp[])
 	double_free(lexer->pathptr);
 	free(lexer);
 	if (ft_memcmp(rl_line_buffer, "exit", 5))
+	{
 		free(ptr);
-	return (print_custom("\nMinishell$ exit\n" , 1, 0, 0));
+		return (print_custom("\nMinishell$ exit" , 1, 0, 1));
+	}
+	return (print_custom("" , 1, 0, 0));
 }
