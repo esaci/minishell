@@ -16,6 +16,7 @@ void	envp_init(char **envp, t_lexer *l)
 {
 	int	count;
 
+	l->tok = NULL;
 	count = 0;
 	while (envp[count])
 	{
@@ -57,7 +58,7 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc2", 2, 1, 1));
 		}
-/* 		print_tokens(lexer); */
+		print_tokens(lexer);
 		tree_input(lexer);
 		if (exec_input(lexer))
 		{
@@ -67,6 +68,7 @@ int	start_fonction(char *envp[])
 			free(lexer);
 			return (print_custom("malloc4", 2, 1, 1));
 		}
+		print_tokens(lexer);
 		/* print_node(lexer->node); */
 /* 		print_env(lexer); */
 		rl_line_buffer[1] = '\0';

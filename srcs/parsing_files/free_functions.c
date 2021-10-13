@@ -20,25 +20,22 @@ int	free_lexer_tokens(t_lexer *lexer, int mode)
 
 	(void)mode;
 	count = 0;
-	if (!lexer || !lexer->tok)
+	if (!lexer)
 		return (count);
-	ltmp = lexer->tok;
-	while (ltmp)
+	if (lexer->tok)
 	{
-		ltmp2 = ltmp->n_token;
-		free(ltmp);
-		ltmp = ltmp2;
-		count++;
+		ltmp = lexer->tok;
+		while (ltmp)
+		{
+			ltmp2 = ltmp->n_token;
+			free(ltmp);
+			ltmp = ltmp2;
+			count++;
+		}
 	}
 	if (!lexer->buffer)
 		return (count);
-	count = 0;
-	while (lexer->buffer[count] != NULL)
-	{
-		free(lexer->buffer[count]);
-		count++;
-	}
-	free(lexer->buffer);
+	double_free(lexer->buffer);
 	return (count);
 }
 
