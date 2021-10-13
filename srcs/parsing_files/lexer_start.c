@@ -91,7 +91,7 @@ int	lexer_start(t_lexer *lexer)
 		lexer->len++;
 		if (!(*toktmp))
 		{
-			free_lexer_tokens(lexer);
+			free_lexer_tokens(lexer, 1);
 			return (1);
 		}
 		toktmp = &((*toktmp)->n_token);

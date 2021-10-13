@@ -49,7 +49,7 @@ char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l)
 	}
 	free(ptr);
 	free(ptr2);
-	return (arg_list);
+	return (copieur(arg_list));
 }
 
 char	*parse_is_command(char *arg_list, t_lexer *l, int count)

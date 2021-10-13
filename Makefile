@@ -42,6 +42,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCPARSING)tree_define.c				\
 		$(SRCD)$(SRCPARSING)tree_output.c 				\
 		$(SRCD)$(SRCPARSING)free_functions.c			\
+		$(SRCD)$(SRCPARSING)small_free_functions.c			\
 		$(SRCD)$(SRCEXEC)full_functions.c				\
 		$(SRCD)$(SRCEXEC)exec_input.c					\
 		$(SRCD)$(SRCEXEC)exec_com.c						\

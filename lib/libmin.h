@@ -120,7 +120,7 @@ int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
 int					print_tokens(t_lexer *l);
 int					print_node(t_node *node);
 int					print_str_node(t_node *n, char *str, int count2);
-int					free_lexer_tokens(t_lexer *lexer);
+int					free_lexer_tokens(t_lexer *lexer, int mode);
 int					init_lexer(t_lexer *lexer, char **envp);
 int					lexer_start(t_lexer *lexer);
 t_node				*tree_input(t_lexer *lexer);

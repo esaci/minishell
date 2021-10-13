@@ -38,7 +38,7 @@ int	start_fonction(char *envp[])
 	envp_init(envp, lexer);
 	ptr = NULL;
 	ptr = readline("Minishell$ ");
-	if (!ptr || ptr[0] == EOF)
+	if (!ptr || ptr[0] == EOF || !ft_memcmp(rl_line_buffer, "exit", 5))
 	{
 		double_free(lexer->pwd);
 		double_free(lexer->pathptr);
@@ -72,7 +72,7 @@ int	start_fonction(char *envp[])
 		rl_line_buffer[1] = '\0';
 		free(ptr);
 		free_lexer_nodes(lexer);
-		free_lexer_tokens(lexer);
+		free_lexer_tokens(lexer, 1);
 		ptr = readline("Minishell$ ");
 		rl_on_new_line();
 		if (!ptr || ptr[0] == EOF)
@@ -81,6 +81,8 @@ int	start_fonction(char *envp[])
 	clear_history();
 	double_free(lexer->pwd);
 	double_free(lexer->pathptr);
+	free_lexer_nodes(lexer);
+	free_lexer_tokens(lexer, 0);
 	free(lexer);
 	if (ft_memcmp(rl_line_buffer, "exit", 5))
 	{

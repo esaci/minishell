@@ -46,10 +46,12 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t, t_token *oldt)
 	tmp = parse_is_command(l->buffer[get_buffer_count(l, t)] , l, 0);
 	if (!access(tmp, F_OK) && !is_any_chevron(oldt))
 	{
+		free(tmp);
 /* 		l->buffer[get_buffer_count(l, t)] = tmp; */
 		t = t->n_token;
 		return (NODE_PATHCOM);
 	}
+	free(tmp);
 	return (NODE_ERROR);
 }
 

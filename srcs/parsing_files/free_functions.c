@@ -12,12 +12,13 @@
 
 #include "../../lib/libmin.h"
 
-int	free_lexer_tokens(t_lexer *lexer)
+int	free_lexer_tokens(t_lexer *lexer, int mode)
 {
 	t_token		*ltmp;
 	t_token		*ltmp2;
 	int			count;
 
+	(void)mode;
 	count = 0;
 	if (!lexer || !lexer->tok)
 		return (count);
@@ -46,7 +47,6 @@ int	free_lexer_nodes(t_lexer *l)
 	t_node	*n;
 	t_node	*oldnode;
 
-	return (0);
 	n = l->node;
 	while (n)
 	{
@@ -60,7 +60,6 @@ int	free_lexer_nodes(t_lexer *l)
 		{
 			free(n->left->left);
 			free(n->left->right);
-			free(n->left);
 		}
 		free(n->left);
 		if (n->right && (n->right->type == NODE_FILEOUT || n->right->type == NODE_DFILEOUT))
@@ -68,10 +67,10 @@ int	free_lexer_nodes(t_lexer *l)
 			free(n->right);
 			break;
 		}
-		else
-			n = n->right;
+		n = n->right;
 		free(oldnode);
 	}
+	init_lexer(l, NULL);
 	return (0);
 }
 
