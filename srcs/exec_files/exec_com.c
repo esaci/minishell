@@ -137,7 +137,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			{
 				correct_name(l, n->str[0]);
 				print_custom(n->str[0], 2, 1, 0);
-/* 				small_free() */
+				double_free(n->str);
 				exit(print_custom(" command not found", 2, 1, 1));
 			}
 			double_free(n->str);
