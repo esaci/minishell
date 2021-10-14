@@ -24,18 +24,21 @@ int	check_order_redirection(t_lexer *l, char **ptr)
 		{
 			print_custom(ptr[0], 1, 1, 0);
 			print_custom(" file can't be read/write", 1, 1, 1);
-			return (EXIT_FAILURE);
+			double_free(ptr);
+			return (small_free(l, NULL, NULL, 0));
 		}
 		if (ptr[1] && !ft_memcmp(ptr[1], l->buffer[count], ft_strlen(l->buffer[count])
 			&& (ft_strlen(l->buffer[count]) == ft_strlen(ptr[1]))))
 		{
 			print_custom(ptr[1], 1, 1, 0);
 			print_custom(" file can't be read/write", 1, 1, 1);
-			return (EXIT_FAILURE);
+			double_free(ptr);
+			return (small_free(l, NULL, NULL, 0));
 		}
 		count++;
 	}
-	return(EXIT_FAILURE);
+	double_free(ptr);
+	return(small_free(l, NULL, NULL, 0));
 }
 
 void	handle_old_fd(int oldfd, int fd)

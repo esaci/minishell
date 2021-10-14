@@ -104,7 +104,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		ptr = malloc(sizeof(char*) * 3);
 		if (!ptr)
-			exit(1);
+			exit(small_free(l, NULL, NULL, 0));
 		ptr[2] = NULL;
 		ptr[0] = open_infiles(n->left, &(fd[0]));
 		ptr[1] = open_outfiles(n->right, &(fd[1]));
