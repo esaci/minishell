@@ -21,7 +21,7 @@ t_token	*parser_chevron(t_token *t, TOKENTYPE type)
 		t->type = t->type - 1;
 		while (t->n_token->n_token && t->n_token->n_token->type == CHAR_SPACE)
 			t->n_token->n_token = unlink_free_return(t->n_token->n_token, 1);
-		return(t->n_token->n_token);
+		return(unlink_free_return(t->n_token, 1));
 	}
 	else
 	{
