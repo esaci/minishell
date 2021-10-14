@@ -165,7 +165,7 @@ int					last_pipe(t_lexer *l);
 char				*remove_for_arg(char *str);
 void				check_for_arg(char **str, t_lexer *l, t_node *n);
 int					compatibility_arg(TOKENTYPE type, int mode);
-void				correct_name(t_lexer *l, char *str);
+int					correct_name(t_lexer *l, t_token *t);
 int					print_env(t_lexer *l);
 int					double_free(char **str);
 int					free_lexer_nodes(t_lexer *l, int mode);

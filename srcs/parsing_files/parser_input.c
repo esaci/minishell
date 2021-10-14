@@ -44,7 +44,7 @@ t_token	*parser_in_between(t_token *t, TOKENTYPE type)
 		tmp = unlink_free_return(tmp, 1);
 	if (!tmp)
 		return (tmp);
-	tmp = tmp->n_token;
+	tmp = unlink_free_return(tmp, 1);
 	while (tmp && tmp->type == CHAR_SPACE)
 		tmp = unlink_free_return(tmp, 1);
 	return (tmp);

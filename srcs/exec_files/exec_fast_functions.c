@@ -77,7 +77,19 @@ char	*merge_twoarray(char *s, char *d)
 		count2++;
 	}
 	ptr[count + count2] = 0;
-/* 	free(s);
-	free(d); */
+	free(s);
+	/* free(d); */
 	return (ptr);
+}
+
+void	fast_replacement(char **str, int count)
+{
+	int	count2;
+
+	count2 = count;
+	while (str[count2] && str[count2 + 1])
+	{
+		str[count2] = str[count2 + 1];
+		count2++;
+	}
 }
