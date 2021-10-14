@@ -48,7 +48,9 @@ int	copy_buffer(char *buff, t_token *tok)
 		count2++;
 	if (tok->type == CHAR_APO || tok->type == CHAR_GUILL)
 	{
+		buff[count] = tok->line[count2];
 		c = tok->line[count2];
+		count++;
 		count2++;
 	}
 	else if (tok->type == CHAR_DCHEVD || tok->type == CHAR_DCHEVG)
@@ -76,16 +78,15 @@ int	copy_buffer(char *buff, t_token *tok)
 	{
 		if ((tok->type != CHAR_APO && tok->type != CHAR_GUILL) && tok->line[count2] == ' ')
 			break;
-/* 		if (tok->line[count2] != '\"' && tok->line[count2] != '\'') */
 		buff[count] = tok->line[count2];
 		count++;
 		count2++;
 	}
-/* 	if ((tok->type == CHAR_APO || tok->type == CHAR_GUILL) && tok->line[count2])
+	if ((tok->type == CHAR_APO || tok->type == CHAR_GUILL) && tok->line[count2])
 	{
 		buff[count] = tok->line[count2];
 		count++;
-	} */
+	}
 	buff[count] = 0;
 	printf("buff %s\n", buff);
 	return (count);
