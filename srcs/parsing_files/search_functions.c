@@ -81,10 +81,7 @@ int	search_pipe(t_node *n, t_token *t, t_lexer *l)
 	if (t)
 	{
 		n->type = NODE_PIPE;
-		n->str = malloc(sizeof(char*) * 1);
-		if (!n->str)
-			return (1);
-		n->str[0] = 0;
+		n->str = NULL;
 	}
 	else
 	{
@@ -124,8 +121,9 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 			n->type = NODE_FILEIN;
 			if (t->type == CHAR_DCHEVG)
 				n->type = NODE_DFILEIN;
-			if (add_path(&n->str[count++], t, l))
+			if (add_path(&n->str[count], t, l, n->str[count - 1]))
 				return (2);
+			count++;
 		}
 		t = t->n_token;
 	}
@@ -167,8 +165,9 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 			n->type = NODE_FILEOUT;
 			if (t->type == CHAR_DCHEVD)
 				n->type = NODE_DFILEOUT;
-			if (add_path(&n->str[count++], t, l))
+			if (add_path(&n->str[count], t, l, n->str[count - 1]))
 				return (2);
+			count++;
 		}
 		t = t->n_token;
 	}

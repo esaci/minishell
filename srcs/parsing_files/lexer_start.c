@@ -52,15 +52,6 @@ int	init_lexer(t_lexer *lexer, char **envp)
 {
 	lexer->envp = envp;
 	lexer->len = 0;
-	if (lexer->buffer)
-		double_free(lexer->buffer);
-	if (lexer->tok)
-		free(lexer->tok);
-	if (lexer->node)
-	{
-		free(lexer->node->str);
-		free(lexer->node);
-	}
 	lexer->tok = NULL;
 	lexer->buffer = NULL;
 	lexer->node = NULL;

@@ -82,9 +82,8 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 {
 	int		tmp;
 	int		fd[2];
-/* 	int		len; */
+	t_token	*t;
 	char	**ptr;
-	char	*str;
 
 	if (last_pipe(l) == 0 || count == last_pipe(l))
 		l->pip->pid[count] = fork();
@@ -126,8 +125,9 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		close_pipes(l, 1);
 		check_for_arg(n->str, l, n);
-		str = parse_is_command(n->str[0], l, 0, 1);
-		n->str[0] = str;
+		t = get_token_buffer(l, n->str[0]);
+		l->buffer[get_buffer_count(l, t)] = parse_is_command(l->buffer[get_buffer_count(l, t)], l, 0, 1);
+		n->str[0] = l->buffer[get_buffer_count(l, t)];
 		tmp = access(n->str[0], X_OK);
 		if (tmp || ft_strlen(n->str[0]) == 0)
 		{
@@ -135,21 +135,17 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			{
 				correct_name(l, n->str[0]);
 				print_custom(n->str[0], 2, 1, 0);
-				/* double_free(n->str); */
-				small_free(l, NULL, NULL, 1);
-				/* free(n); */
+				small_free(l, NULL, NULL, 0);
 				exit(print_custom(" command not found", 2, 1, 1));
 			}
 			double_free(n->str);
-			/* free(n); */
-			small_free(l, NULL, NULL, 1);
+			small_free(l, NULL, NULL, 0);
 			exit(0);
 		}
 		if (execve(n->str[0], n->str, l->envp) == -1)
 		{
 			double_free(n->str);
-			/* free(n); */
-			small_free(l, NULL, NULL, 1);
+			small_free(l, NULL, NULL, 0);
 			exit(print_custom("error comm", 2, 1, 1));
 		}
 	}

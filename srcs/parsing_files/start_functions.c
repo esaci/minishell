@@ -43,10 +43,7 @@ int	start_fonction(char *envp[])
 	ptr = readline("Minishell$ ");
 	if (!ptr || ptr[0] == EOF || !ft_memcmp(rl_line_buffer, "exit", 5))
 	{
-		double_free(lexer->pwd);
-		double_free(lexer->pathptr);
-		free(lexer);
-		free(ptr);
+		small_free(lexer, ptr, NULL, 1);
 		return (print_custom("\nMinishell$ exit", 1, 0, 1));
 	}
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
@@ -54,41 +51,27 @@ int	start_fonction(char *envp[])
 		add_history(rl_line_buffer);
 		if (!parser_input(lexer, envp))
 		{
-			double_free(lexer->pwd);
-			double_free(lexer->pathptr);
 			rl_clear_history();
-			free(lexer);
+			small_free(lexer, NULL, NULL, 1);
 			return (print_custom("malloc2", 2, 1, 1));
 		}
-/* 		print_tokens(lexer); */
 		tree_input(lexer);
 		if (exec_input(lexer))
 		{
 			rl_clear_history();
-			double_free(lexer->pwd);
-			double_free(lexer->pathptr);
-			free(lexer);
+			small_free(lexer, NULL, NULL, 1);
 			return (print_custom("malloc4", 2, 1, 1));
 		}
-/* 		print_tokens(lexer); */
-		/* print_node(lexer->node); */
-/* 		print_env(lexer); */
 		rl_line_buffer[1] = '\0';
-		free(ptr);
-		free_lexer_nodes(lexer, 1);
-		free_lexer_tokens(lexer, 1);
+		small_free(lexer, ptr, NULL, 0);
 		ptr = readline("Minishell$ ");
 		rl_on_new_line();
 		if (!ptr || ptr[0] == EOF)
 			break ;
 	}
 	rl_clear_history();
-	double_free(lexer->pwd);
-	double_free(lexer->pathptr);
-	free_lexer_nodes(lexer, 1);
-	free_lexer_tokens(lexer, 0);
-	free(lexer);
-	free(ptr);
+	/* small_free(lexer, ptr, NULL, 1); */
+	small_finish_free(lexer, ptr, NULL);
 	if (ft_memcmp(rl_line_buffer, "exit", 5))
 		return (print_custom("\nMinishell$ exit" , 1, 0, 1));
 	return (print_custom("" , 1, 0, 0));

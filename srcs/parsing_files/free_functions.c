@@ -31,10 +31,7 @@ int	free_lexer_tokens(t_lexer *lexer, int mode)
 	}
 	if (!lexer->buffer)
 		return (mode);
-	while (lexer->buffer[mode])
-		free(lexer->buffer[mode++]);
-	free(lexer->buffer);
-	/* double_free(lexer->buffer); */
+	double_free(lexer->buffer);
 	return (mode);
 }
 
@@ -46,28 +43,19 @@ int	free_lexer_nodes(t_lexer *l, int mode)
 	n = l->node;
 	while (n)
 	{
-		oldnode = n;
-		if (n->type == NODE_FILEOUT || !n->left)
-		{
-			free(n->str);
-			free(n);
-			break ;
-		}
-		if (n->left->type != NODE_FILEIN && n->left->type != NODE_DFILEIN)
+		if (n->left && n->left->type != NODE_FILEIN && n->left->type != NODE_DFILEIN)
 		{
 			free(n->left->left->str);
 			free(n->left->left);
 			free(n->left->right->str);
 			free(n->left->right);
 		}
-		free(n->left->str);
-		free(n->left);
-		if (n->right && (n->right->type == NODE_FILEOUT || n->right->type == NODE_DFILEOUT))
+		if (n->left)
 		{
-			free(n->right->str);
-			free(n->right);
-			break;
+			free(n->left->str);
+			free(n->left);
 		}
+		oldnode = n;
 		n = n->right;
 		free(oldnode->str);
 		free(oldnode);

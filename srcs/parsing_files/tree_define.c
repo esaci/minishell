@@ -12,33 +12,17 @@
 
 #include "../../lib/libmin.h"
 
-int	add_path(char **ptr, t_token *t, t_lexer *l)
+int	add_path(char **ptr, t_token *t, t_lexer *l, char *err)
 {
-	char	*tmp;
-
 	if (!t || !t->n_token)
-	{
-		tmp = malloc(sizeof(char) * 1);
-		if (!tmp)
-		{
-			*ptr = NULL;
-			return (1);
-		}
-		tmp[0] = '\0';
-		*ptr = tmp;
-	}
-	if (t->n_token->type == CHAR_INUT)
+		*ptr = NULL;
+	if (t->n_token && t->n_token->type == CHAR_INUT)
 		*ptr = l->buffer[get_buffer_count(l, t->n_token)];
 	else
 		{
-			tmp = malloc(sizeof(char) * 1);
-			if (!tmp)
-			{
-				*ptr = NULL;
-				return (1);
-			}
+			*ptr = NULL;
 			l->flagr = 1;
-			print_custom(l->buffer[get_buffer_count(l, t)], 2, 1, 0);
+			print_custom(err, 2, 1, 0);
 			return (print_custom(" syntax error", 2, 1, 1));
 		}
 	return (0);

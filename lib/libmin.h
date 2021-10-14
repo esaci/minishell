@@ -130,7 +130,7 @@ NODETYPE			is_any_command(t_lexer *l, t_token *t, t_token *oldt);
 int					is_redirection(t_node *n2);
 int					search_pipe(t_node *n, t_token *t, t_lexer *l);
 int					search_command(t_node *n, t_token *t, t_lexer *l);
-int					add_path(char **ptr, t_token *t, t_lexer *l);
+int					add_path(char **ptr, t_token *t, t_lexer *l, char *err);
 int					tree_define_left(t_node *n, t_token *t, t_lexer *l);
 int					tree_define_right(t_node *n, t_token *t, t_lexer *l);
 int					tree_define_command(t_node *n, t_token *t, t_lexer *l);
@@ -171,5 +171,6 @@ int					double_free(char **str);
 int					free_lexer_nodes(t_lexer *l, int mode);
 t_token				*unlink_free_return(t_token *t, int skip);
 int					small_free(t_lexer *l, void *ptr, void *ptr2, int mode);
+int					small_finish_free(t_lexer *l, void *ptr, void *ptr2);
 #endif
 
