@@ -60,10 +60,9 @@ char	*merge_twoarray(char *s, char *d)
 	int		count2;
 	char	*ptr;
 
-	if (!s && !d)
-		return (NULL);
 	count = ft_strlen(s) + ft_strlen(d);
-	ptr = malloc(sizeof(char) * (count + 1));
+	ptr = malloc(sizeof(char) * (count + 2));
+	ptr[count + 1] = 0;
 	count = 0;
 	count2 = 0;
 	while (s && s[count])
@@ -77,8 +76,12 @@ char	*merge_twoarray(char *s, char *d)
 		count2++;
 	}
 	ptr[count + count2] = 0;
-	free(s);
-	/* free(d); */
+	if (s)
+		free(s);
+	if (d)
+		free(d);
+/* 	s = NULL;
+	d = NULL; */
 	return (ptr);
 }
 

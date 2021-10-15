@@ -46,16 +46,16 @@ int	join_close_token(t_lexer *l, char **str, int count)
 				count2++;
 			}
 			str[count2] = NULL;
-			if (t->n_token && t->n_token->n_token)
+			if (t->n_token)
 				t->n_token = unlink_free_return(t->n_token, 1);
-			return (count);
+			return (--count);
 		}
 	}
 	if (count < (ft_strlen_double(str)))
 	{
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count + 1]);
-		ad = 2;//modif ici
+		ad = 0;//modif ici
 		if (correct_name(l, t))
 			ad = 2;
 		if ((t->line[ft_strlen(str[count]) + ad] == t2->line[0] && compatibility_arg(t2->type, 0)))
@@ -75,9 +75,10 @@ int	join_close_token(t_lexer *l, char **str, int count)
 			}
 			l->buffer[counter[1]] = NULL;
 			str[count2] = NULL;
-			if (t->n_token && t->n_token->n_token)
+			if (t->n_token)
 				t->n_token = unlink_free_return(t->n_token, 1);
 			return (count);
+			
 		}
 	}
 	return (++count);

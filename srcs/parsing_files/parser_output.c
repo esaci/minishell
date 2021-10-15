@@ -88,7 +88,6 @@ int	copy_buffer(char *buff, t_token *tok)
 		count++;
 	}
 	buff[count] = 0;
-	printf("buff %s\n", buff);
 	return (count);
 }
 
