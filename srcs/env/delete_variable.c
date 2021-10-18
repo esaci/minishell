@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:27:01 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/18 18:45:19 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 19:29:13 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	ft_del_variable(char *variable)
 					prev->next = env->next;
 				else
 					ft_envp(NULL, NULL, env->next);
-				//ft_free_ptr((void **)&env->content);
-				//ft_free_ptr((void **)&env);
 				return ;
 			}
 		}

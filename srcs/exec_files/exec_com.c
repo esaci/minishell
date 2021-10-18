@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 20:17:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/18 19:03:52 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 19:54:35 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,17 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		close_pipes(l, 1);
 		check_for_arg(n->str, l, n);
-		full_print(n->str);
+		//full_print(n->str);
 		t = get_token_buffer(l, n->str[0]);
+		if (menu(n->str[0], n->str, l->envp, l) == -1)
+		{
+			small_free(l, NULL, NULL, 0);
+			exit(print_custom("error comm", 2, 1, 1));
+		}
 		l->buffer[get_buffer_count(l, t)] = parse_is_command(l->buffer[get_buffer_count(l, t)], l, 0, 1);
 		n->str[0] = l->buffer[get_buffer_count(l, t)];
+		printf("Commande : %s\n", n->str[0]);
+		
 		tmp = access(n->str[0], X_OK);
 		if (tmp || !ft_strlen(n->str[0]))
 		{
@@ -157,11 +164,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			exit(0);
 		}
 		if (execve(n->str[0], n->str, l->envp) == -1)
-		{
-			small_free(l, NULL, NULL, 0);
-			exit(print_custom("error comm", 2, 1, 1));
-		}
-		if (menu(n->str[0], n->str, l->envp) == -1)
 		{
 			small_free(l, NULL, NULL, 0);
 			exit(print_custom("error comm", 2, 1, 1));

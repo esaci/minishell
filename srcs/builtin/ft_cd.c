@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 18:42:13 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/18 18:45:19 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 19:51:27 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void    ft_cd_noargs(void)
     char    *arg;
 
     arg = getenv("HOME");
-    printf("ARG : %s\n", arg);
     if (!arg)
         ft_putstr_fd("cd : HOME doesn't exist\n", 1);
     else if (chdir(arg) != 0)
@@ -39,7 +38,6 @@ void    ft_cd_noargs(void)
 void    ft_cd_minus(char **args)
 {
     char    *path;
-    printf("ARG : %s\n", *args);
     if (!ft_strncmp(*args, "-", 2))
     {
         path = getenv("OLDPWD");
@@ -96,7 +94,7 @@ void    ft_cd(char *command, char **args, char **envp)
 {
     (void)envp;
     (void)command;
-    printf("IN CD Function\n");
+    args++;
     if (!(*args))
         ft_cd_noargs();
     else

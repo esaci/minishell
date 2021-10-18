@@ -6,11 +6,12 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 12:36:15 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/18 18:45:19 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 19:37:26 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin_built.h"
+
 void	ft_init_env(char *envp[])
 {
 	ft_envp(envp, NULL, NULL);

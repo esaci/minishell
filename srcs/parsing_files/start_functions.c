@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 21:35:42 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/29 15:28:23 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/18 19:36:20 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	envp_init(char **envp, t_lexer *l)
 	l->buffer = NULL;
 	l->node = NULL;
 	count = 0;
+	ft_init_env(envp);
 	while (envp[count])
 	{
 		if (!ft_memcmp(envp[count], "PATH", 4))
@@ -56,7 +57,7 @@ int	start_fonction(char *envp[])
 			return (print_custom("malloc2", 2, 1, 1));
 		}
 		tree_input(lexer);
-		print_node(lexer->node);
+		//print_node(lexer->node);
 		if (exec_input(lexer))
 		{
 			rl_clear_history();

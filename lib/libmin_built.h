@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:25:17 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/18 18:56:34 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 19:57:55 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <term.h>
 # include "../fcts/libft/libft.h"
 # include "../fcts/GNL/get_next_line.h"
+# include "libmin.h"
 
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"
@@ -49,9 +50,11 @@ typedef struct  s_list
 	void	*next;
 }	            t_list;
 
+typedef struct 	s_lexer t_lexer;
+
 // Builtin
 
-int 	menu(char *command, char **args, char **envp);
+int 	menu(char *command, char **args, char **envp, t_lexer *l);
 void	ft_pwd(char *command);
 void    ft_env(char *command);
 void    ft_echo(char *command, char **args, char **envp);

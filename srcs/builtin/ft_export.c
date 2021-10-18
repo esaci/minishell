@@ -6,11 +6,12 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:19:14 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/18 19:04:29 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 19:31:31 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin_built.h"
+
 int check_identifier(char *id)
 {
     int i;
@@ -85,6 +86,7 @@ int export_variable(char **args)
         }
         args++;
     }
+    free(arg);
     return (ret);
 }
 
@@ -95,7 +97,6 @@ void    ft_export(char *command, char **args, char **envp)
     ret = 0;
     (void)command;
     (void)envp;
-    printf("Is in Export\n");
     if (*args)
     {
         if (*args[0] == '-')
@@ -109,4 +110,5 @@ void    ft_export(char *command, char **args, char **envp)
     else
         ret = ft_print_env();
     (void)ret;
+    exit(0);
 }

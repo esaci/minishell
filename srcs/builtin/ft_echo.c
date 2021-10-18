@@ -6,11 +6,12 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 16:55:24 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/18 18:45:19 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 19:49:57 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin_built.h"
+
 int ft_check_echo(char *flag)
 {
     int i;
@@ -18,7 +19,6 @@ int ft_check_echo(char *flag)
 
     i = 0;
     count = 0;
-    printf("CHECK\n");
     if (!flag)
         return (-1);
     while (flag[i++] == '-')
@@ -35,16 +35,14 @@ void    ft_echo(char *command, char **args, char **envp)
     int flag;
 
     flag = 0;
+    (void)command;
     (void)envp;
-    printf("Command : %s\n", command);
+    args++;
     if (ft_check_echo(args[0]) == 1 && args[1])
     {
-        printf(GREEN"Flag is ok\n"RESET);
         flag = 1;
         (args)++;
     }
-    else
-        printf(RED"Flag is not ok\n"RESET);
     while (*args)
     {
         if (ft_strncmp(*args, "\0", 1))

@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:15:38 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/18 19:03:25 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 20:04:51 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ char    *str_low(char *str)
     char    *res;
     int     i;
 
-    res = malloc(sizeof(char) * ft_strlen(str));
     i = 0;
+    if (!str)
+        return (NULL);
+    res = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2));
     while (str[i])
     {
         if (ft_isalpha(str[i]))
@@ -30,55 +32,52 @@ char    *str_low(char *str)
         }
         i++;
     }
+    res[i] = '\0';
     return (res);
 }
 
-int is_command(char *command, char **args, char **envp)
+int is_command(char *command, char **args, char **envp, t_lexer *l)
 {
-    if (!ft_strncmp(str_low(command), "echo", 5))
+    printf("command : %s\n", command);
+    char    *res;
+    res = str_low(command);
+    if (!ft_strncmp(res, "echo", 5))
     {
-        printf(GREEN"ECHO \n"RESET);
         ft_echo(command, args, envp);
-        return (1);
+        exit(0);
     }
-    if (!ft_strncmp(str_low(command), "env", 4))
+    if (!ft_strncmp(res, "env", 4))
     {
-        printf(GREEN"ENV \n"RESET);
         ft_env(command);
-        return (1);
+        exit(0);
     }
-    if (!ft_strncmp(str_low(command), "pwd", 4))
+    if (!ft_strncmp(res, "pwd", 4))
     {
-        printf(GREEN"PWD \n"RESET);
         ft_pwd(command);
-        return (1);
+        small_free(l, NULL, NULL, 0);
+        exit(0);
     }
-    if (!ft_strncmp(str_low(command), "unset", 6))
+    if (!ft_strncmp(res, "unset", 6))
     {
-        printf(GREEN"UNSET \n"RESET);
         ft_unset(command, args);
-        return (1);
+        exit(0);
     }
-    if (!ft_strncmp(str_low(command), "cd", 3))
+    if (!ft_strncmp(res, "cd", 3))
     {
-        printf(GREEN"CD \n"RESET);
         ft_cd(command, args, envp);
-        return (1);
+        exit(0);
     }
-    if (!ft_strncmp(str_low(command), "export", 7))
+    if (!ft_strncmp(res, "export", 7))
     {
-        printf(GREEN"EXPORT \n"RESET);
         ft_export(command, args, envp);
-        return (1);
+        exit(0);
     }
+    free(res);
     return (0);
 }
 
-int menu(char *command, char **args, char **envp)
+int menu(char *command, char **args, char **envp, t_lexer *l)
 {
-    (void)args;
-    (void)envp;
-    if (!is_command(command, args, envp))
-        printf("ERROR COMMAND \n");
+    is_command(command, args, envp, l);
     return (0);
 }

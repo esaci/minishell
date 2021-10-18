@@ -6,11 +6,12 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 11:55:01 by julespellet       #+#    #+#             */
-/*   Updated: 2021/10/18 18:45:19 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 20:08:06 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin_built.h"
+
 t_list	*ft_new_list_elem(char *content)
 {
 	t_list	*new;

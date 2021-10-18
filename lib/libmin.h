@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/18 18:45:32 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/18 20:20:15 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef	struct s_lexer
 	int			flagr;
 }	t_lexer;
 
+
 int					start_fonction(char *envp[]);
 void				*sig_handler();
 t_lexer				*parser_input(t_lexer *lexer, char **envp);
@@ -173,5 +174,6 @@ int					free_lexer_nodes(t_lexer *l, int mode);
 t_token				*unlink_free_return(t_token *t, int skip);
 int					small_free(t_lexer *l, void *ptr, void *ptr2, int mode);
 int					small_finish_free(t_lexer *l, void *ptr, void *ptr2);
+void				free_list(t_list *env);
 #endif
 
