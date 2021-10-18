@@ -20,13 +20,9 @@ int	join_close_token(t_lexer *l, char **str, int count)
 	int		ad;
 	int		counter[2];
 
-	printf("count : %d\n", count);
-	printf("str[count] vaut %s\n", str[count]);
-	printf("str[count+1] vaut %s\n", str[count+1]);
 	count2 = 0;
 	if (count)
 	{
-		print_custom("ca doit jamais apsser par la", 1, 1, 1);
 		t = get_token_buffer(l, str[count - 1]);
 		t2 = get_token_buffer(l, str[count]);
 		ad = 0;
@@ -36,8 +32,7 @@ int	join_close_token(t_lexer *l, char **str, int count)
 		{
 			counter[0] = get_buffer_count(l, t);
 			counter[1] = get_buffer_count(l, t2);
-			printf("mix entre |%s| et |%s|\n", l->buffer[counter[0]], l->buffer[counter[1]]);
-			l->buffer[counter[0]] = merge_twoarray(l->buffer[counter[0]], l->buffer[counter[1]]);
+			l->buffer[counter[0]] = merge_twoarray(l->buffer[counter[0]], l->buffer[counter[1]], 0);
 			str[count - 1] = l->buffer[counter[0]];
 			count2 = count;
 			while (str[count2])
@@ -51,19 +46,18 @@ int	join_close_token(t_lexer *l, char **str, int count)
 			return (--count);
 		}
 	}
-	if (count < (ft_strlen_double(str)))
+	if (count < (ft_strlen_double(str) - 1))
 	{
 		t = get_token_buffer(l, str[count]);
 		t2 = get_token_buffer(l, str[count + 1]);
-		ad = 0;//modif ici
+		ad = 2;
 		if (correct_name(l, t))
 			ad = 2;
 		if ((t->line[ft_strlen(str[count]) + ad] == t2->line[0] && compatibility_arg(t2->type, 0)))
 		{
 			counter[0] = get_buffer_count(l, t);
 			counter[1] = get_buffer_count(l, t2);
-			printf("2mix entre |%s| et |%s|\n", l->buffer[counter[0]], l->buffer[counter[1]]);
-			l->buffer[counter[0]] = merge_twoarray(l->buffer[counter[0]], l->buffer[counter[1]]);
+			l->buffer[counter[0]] = merge_twoarray(l->buffer[counter[0]], l->buffer[counter[1]], 1);
 			str[count] = l->buffer[counter[0]];
 			count2 = count + 1;
 			while (str[count2])
@@ -146,11 +140,12 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		close_pipes(l, 1);
 		check_for_arg(n->str, l, n);
+		full_print(n->str);
 		t = get_token_buffer(l, n->str[0]);
 		l->buffer[get_buffer_count(l, t)] = parse_is_command(l->buffer[get_buffer_count(l, t)], l, 0, 1);
 		n->str[0] = l->buffer[get_buffer_count(l, t)];
 		tmp = access(n->str[0], X_OK);
-		if (tmp || ft_strlen(n->str[0]) == 0)
+		if (tmp || !ft_strlen(n->str[0]))
 		{
 			if (n->str[0])
 			{

@@ -19,13 +19,15 @@ char	*remove_for_arg(char *str)
 	int	count;
 
 	count = 0;
-	str[count] = 0;
-	while (str[count + 1])
+	while (str[count])
 	{
 		str[count] = str[count + 1];
 		count++;
 	}
-	str[count - 1] = '\0';
+	if (count > 1)
+		str[count - 2] = '\0';
+	else
+		str[count] = 0;
 	return (str);
 }
 

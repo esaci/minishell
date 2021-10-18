@@ -63,8 +63,8 @@ char	*parse_is_command(char *arg_list, t_lexer *l, int count, int mode)
 	char	*ptr;
 	char	*ptr2;
 
-	if (!arg_list)
-		return (NULL);
+	if (!arg_list || !arg_list[0])
+		return (arg_list);
 	ptr2 = copieur(arg_list);
 	if (ptr2[0] != '/')
 	{

@@ -56,7 +56,7 @@ int	print_str_node(t_node *n, char *str, int count2)
 	if (str)
 		print_custom(str, 1, 1, 0);
 	count = 0;
-	while (n->str[count])
+	while (n->str && n->str[count])
 		count += print_custom(n->str[count], 1, 1, 1);
 	return (1);
 }
@@ -123,4 +123,23 @@ int	print_env(t_lexer *l)
 		printf("l'environnement de %s : %s\n", (l->buffer[count]) + 1, ptr);
 	}
 	return (0);
+}
+
+void full_print(char **str)
+{
+	int count;
+
+	count = 0;\
+	if (!str || !str[0])
+	{
+		print_custom("Input: VIDE", 1, 1, 1);
+		return ;
+	}
+	while (str && str[count])
+	{
+		print_custom("Input: ", 1, 1, 0);
+		print_custom(str[count], 1, 1, 1);
+		count++;
+	}
+	print_custom("FIN", 1, 1, 1);
 }
