@@ -54,7 +54,7 @@ t_token	*get_token_buffer(t_lexer *l, char *str)
 	return (tmp);
 }
 
-char	*merge_twoarray(char *s, char *d)
+char	*merge_twoarray(char *s, char *d, int mode)
 {
 	int		count;
 	int		count2;
@@ -78,10 +78,10 @@ char	*merge_twoarray(char *s, char *d)
 	ptr[count + count2] = 0;
 	if (s)
 		free(s);
+	if (!mode)
+		return (ptr);
 	if (d)
 		free(d);
-/* 	s = NULL;
-	d = NULL; */
 	return (ptr);
 }
 
