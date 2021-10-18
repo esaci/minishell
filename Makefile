@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/10/18 18:42:00 by julpelle          #+#    #+#              #
+#    Updated: 2021/10/18 19:03:00 by julpelle         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minishell
 
 MIN = libmini.a
@@ -20,6 +32,8 @@ SRCPARSING = parsing_files/
 
 SRCBUILTIN = builtin/
 
+SRCENV = env/
+
 SRCEXEC = exec_files/
 
 
@@ -36,13 +50,11 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCPARSING)parser_output.c				\
 		$(SRCD)$(SRCPARSING)lexer_start.c				\
 		$(SRCD)$(SRCPARSING)free_functions.c			\
-		$(SRCD)$(SRCBUILTIN)ft_menu.c					\
-		$(SRCD)$(SRCBUILTIN)ft_echo.c					\
 		$(SRCD)$(SRCPARSING)tree_input.c				\
 		$(SRCD)$(SRCPARSING)tree_define.c				\
 		$(SRCD)$(SRCPARSING)tree_output.c 				\
 		$(SRCD)$(SRCPARSING)free_functions.c			\
-		$(SRCD)$(SRCPARSING)small_free_functions.c			\
+		$(SRCD)$(SRCPARSING)small_free_functions.c		\
 		$(SRCD)$(SRCEXEC)full_functions.c				\
 		$(SRCD)$(SRCEXEC)exec_input.c					\
 		$(SRCD)$(SRCEXEC)exec_com.c						\
@@ -52,7 +64,19 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCEXEC)exec_waiter.c					\
 		$(SRCD)$(SRCEXEC)exec_redirections.c			\
 		$(SRCD)$(SRCEXEC)exec_heredoc.c					\
-		$(SRCD)$(SRCEXEC)exec_pipe.c
+		$(SRCD)$(SRCEXEC)exec_pipe.c					\
+		$(SRCD)$(SRCBUILTIN)ft_cd.c						\
+		$(SRCD)$(SRCBUILTIN)ft_pwd.c					\
+		$(SRCD)$(SRCBUILTIN)ft_echo.c					\
+		$(SRCD)$(SRCBUILTIN)ft_unset.c					\
+		$(SRCD)$(SRCBUILTIN)ft_export.c					\
+		$(SRCD)$(SRCBUILTIN)ft_env.c					\
+		$(SRCD)$(SRCBUILTIN)menu.c						\
+		$(SRCD)$(SRCENV)delete_variable.c				\
+		$(SRCD)$(SRCENV)environment.c					\
+		$(SRCD)$(SRCENV)init_env.c						\
+		$(SRCD)$(SRCENV)utils_env.c						\
+
 
 OBJ = $(SRC:.c=.o)
 

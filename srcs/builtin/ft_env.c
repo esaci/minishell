@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/18 19:02:05 by julpelle         ###   ########.fr       */
+/*   Created: 2021/10/13 16:51:11 by julpelle          #+#    #+#             */
+/*   Updated: 2021/10/18 18:45:19 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
-
-int	main(int ac, char *av[], char *envp[])
+#include "../../lib/libmin_built.h"
+void    ft_env(char *command)
 {
-	void	(*sigint_c)(int);
+    t_list  *env;
 
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	sigint_c = sig_handler();
-	start_fonction(envp);
-	return (0);
-	sigint_c(av[ac - 1][0]);
-	return (0);
+    (void)command;
+    env = ft_getallenv();
+    while (env)
+    {
+        if (ft_strchr(env->content, '='))
+        {
+            write(1, env->content, ft_strlen(env->content));
+            write(1, "\n", 1);
+        }
+        env = env->next;
+    }
 }

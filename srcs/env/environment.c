@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/18 19:02:05 by julpelle         ###   ########.fr       */
+/*   Created: 2021/09/29 18:24:28 by Jules             #+#    #+#             */
+/*   Updated: 2021/10/18 18:45:19 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libmin.h"
-
-int	main(int ac, char *av[], char *envp[])
+#include "../../lib/libmin_built.h"
+t_list	**ft_envp(char *envp[], char *content, t_list *env)
 {
-	void	(*sigint_c)(int);
+	static t_list	*environment = NULL;
 
-	if (envp[0] == NULL)
-		return (print_custom("Manque Envp\n", 2, 1, 1));
-	sigint_c = sig_handler();
-	start_fonction(envp);
-	return (0);
-	sigint_c(av[ac - 1][0]);
-	return (0);
+	if (envp != NULL)
+		environment = ft_tab_to_lst(envp);
+	else if (content != NULL)
+		ft_lst_pushback(&environment, content);
+	else if (env != NULL)
+		environment = env;
+	return (&environment);
 }

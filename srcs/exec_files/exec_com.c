@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_com.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 20:17:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/04 20:17:47 by esaci            ###   ########.fr       */
+/*   Updated: 2021/10/18 19:03:52 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,11 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			exit(0);
 		}
 		if (execve(n->str[0], n->str, l->envp) == -1)
+		{
+			small_free(l, NULL, NULL, 0);
+			exit(print_custom("error comm", 2, 1, 1));
+		}
+		if (menu(n->str[0], n->str, l->envp) == -1)
 		{
 			small_free(l, NULL, NULL, 0);
 			exit(print_custom("error comm", 2, 1, 1));

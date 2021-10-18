@@ -3,65 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/29 11:51:18 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/29 15:14:43 by Jules            ###   ########.fr       */
+/*   Created: 2021/10/13 16:55:24 by julpelle          #+#    #+#             */
+/*   Updated: 2021/10/18 18:45:19 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../lib/lib_jules.h"
-
-int	check_arg(char	*str)
+#include "../../lib/libmin_built.h"
+int ft_check_echo(char *flag)
 {
-	if (!str)
-		return (-1);
-	else if (!ft_strncmp(str, "|", 1) || !ft_strncmp(str, "&", 1) || !ft_strncmp(str, "\n", 1))
-		return (-1);
-	else
-		return (1);
+    int i;
+    int count;
+
+    i = 0;
+    count = 0;
+    printf("CHECK\n");
+    if (!flag)
+        return (-1);
+    while (flag[i++] == '-')
+        count++;
+    if (count != 1)
+        return (-1);
+    if (flag[count] == 'n')
+        return (1);
+    return (-1);    
 }
 
-int	ft_echo_check(t_command *cmd)
+void    ft_echo(char *command, char **args, char **envp)
 {
-	if (!ft_strncmp(*cmd->args, "\n", 2))
-		return (ERROR);
-	if (!ft_strncmp(*cmd->args, "-", 2))
-	{
-		cmd->flag = 1;
-		return (SUCCESS);
-	}
-	return (ERROR);
-}
+    int flag;
 
-void	ft_print_echo(t_command *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (check_arg(cmd->args[i]) == 1)
-	{
-		write(cmd->fd_out, cmd->args[i], ft_strlen(cmd->args[i]));
-		i++;
-	}
-}
-
-void	ft_echo(t_command *cmd)
-{
-	cmd->flag = 0;
-	if (ft_echo_check(cmd) == SUCCESS)
-	{
-		cmd->args = (cmd->args + 1);
-		if (!ft_strncmp(*cmd->args, "n", 1))
-			cmd->flag = 1;
-		else
-			cmd->flag = 0;
-	}
-	if (cmd->flag == 1 && (cmd->args_cpy + 2))
-		cmd->args = cmd->args_cpy + 2;
-	else
-		cmd->args = cmd->args_cpy;
-	ft_print_echo(cmd);
-	if (cmd->flag != 1)
-		write(cmd->fd_out, "\n", 1);
+    flag = 0;
+    (void)envp;
+    printf("Command : %s\n", command);
+    if (ft_check_echo(args[0]) == 1 && args[1])
+    {
+        printf(GREEN"Flag is ok\n"RESET);
+        flag = 1;
+        (args)++;
+    }
+    else
+        printf(RED"Flag is not ok\n"RESET);
+    while (*args)
+    {
+        if (ft_strncmp(*args, "\0", 1))
+            ft_putstr_fd(*args, 1);
+        (args)++;
+        if (*args)
+            ft_putstr_fd(" ", 1);
+    }
+    if (flag == 0)
+        ft_putstr_fd("\n", 1);
 }

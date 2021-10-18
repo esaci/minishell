@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/29 12:08:08 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/18 18:45:32 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # include <term.h>
 
 // Lib Jules
-# include "lib_jules.h"
+# include "libmin_built.h"
 
 typedef	enum	TOKENTYPE
 {
