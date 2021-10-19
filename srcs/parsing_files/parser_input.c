@@ -120,9 +120,9 @@ int	parser_lexer(t_lexer *lexer)
 	return (0);
 }
 
-t_lexer	*parser_input(t_lexer *lexer, char **envp)
+t_lexer	*parser_input(t_lexer *lexer)
 {
-	init_lexer(lexer, envp);
+	init_lexer(lexer);
 	if (!rl_line_buffer[0])
 		return (lexer);
 	if (lexer_start(lexer))

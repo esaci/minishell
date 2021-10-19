@@ -48,9 +48,8 @@ TOKENTYPE	lexer_check_type(t_token *tok, char *oldstr)
 	return (lexer_check_type2(tok, oldstr));
 }
 
-int	init_lexer(t_lexer *lexer, char **envp)
+int	init_lexer(t_lexer *lexer)
 {
-	lexer->envp = envp;
 	lexer->len = 0;
 	lexer->tok = NULL;
 	lexer->buffer = NULL;

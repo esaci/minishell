@@ -12,25 +12,16 @@
 
 #include "../../lib/libmin.h"
 
-void	envp_init(char **envp, t_lexer *l)
+void	envp_init(t_list *c_envp, t_lexer *l)
 {
-	int	count;
-
 	l->tok = NULL;
 	l->buffer = NULL;
 	l->node = NULL;
-	count = 0;
-	while (envp[count])
-	{
-		if (!ft_memcmp(envp[count], "PATH", 4))
-			l->pathptr = ft_split(envp[count] + 5, ':');
-		if (!ft_memcmp(envp[count], "PWD", 3))
-			l->pwd = ft_split(envp[count] + 4, 1);
-		count++;
-	}
+	l->envp = c_envp;
+	init_path_pwd(l, 0);
 }
 
-int	start_fonction(char *envp[])
+int	start_fonction(t_list *c_envp)
 {
 	t_lexer		*lexer;
 	char		*ptr;
@@ -38,7 +29,7 @@ int	start_fonction(char *envp[])
 	lexer = malloc(sizeof(t_lexer) * 2);
 	if (!lexer)
 		return (1);
-	envp_init(envp, lexer);
+	envp_init(c_envp, lexer);
 	ptr = NULL;
 	ptr = readline("Minishell$ ");
 	if (!ptr || ptr[0] == EOF || !ft_memcmp(rl_line_buffer, "exit", 5))
@@ -49,7 +40,7 @@ int	start_fonction(char *envp[])
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
 		add_history(rl_line_buffer);
-		if (!parser_input(lexer, envp))
+		if (!parser_input(lexer))
 		{
 			rl_clear_history();
 			small_free(lexer, NULL, NULL, 1);

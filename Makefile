@@ -22,6 +22,7 @@ SRCBUILTIN = builtin/
 
 SRCEXEC = exec_files/
 
+SRCENV = env/
 
 SRC =	$(GNLD)get_next_line.c							\
 		$(GNLD)get_next_line_utils.c					\
@@ -36,13 +37,11 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCPARSING)parser_output.c				\
 		$(SRCD)$(SRCPARSING)lexer_start.c				\
 		$(SRCD)$(SRCPARSING)free_functions.c			\
-		$(SRCD)$(SRCBUILTIN)ft_menu.c					\
-		$(SRCD)$(SRCBUILTIN)ft_echo.c					\
 		$(SRCD)$(SRCPARSING)tree_input.c				\
 		$(SRCD)$(SRCPARSING)tree_define.c				\
 		$(SRCD)$(SRCPARSING)tree_output.c 				\
 		$(SRCD)$(SRCPARSING)free_functions.c			\
-		$(SRCD)$(SRCPARSING)small_free_functions.c			\
+		$(SRCD)$(SRCPARSING)small_free_functions.c		\
 		$(SRCD)$(SRCEXEC)full_functions.c				\
 		$(SRCD)$(SRCEXEC)exec_input.c					\
 		$(SRCD)$(SRCEXEC)exec_com.c						\
@@ -52,7 +51,11 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCEXEC)exec_waiter.c					\
 		$(SRCD)$(SRCEXEC)exec_redirections.c			\
 		$(SRCD)$(SRCEXEC)exec_heredoc.c					\
-		$(SRCD)$(SRCEXEC)exec_pipe.c
+		$(SRCD)$(SRCEXEC)exec_pipe.c					\
+		$(SRCD)$(SRCENV)delete_variable.c				\
+		$(SRCD)$(SRCENV)environment.c					\
+		$(SRCD)$(SRCENV)init_env.c						\
+		$(SRCD)$(SRCENV)utils_env.c
 
 OBJ = $(SRC:.c=.o)
 

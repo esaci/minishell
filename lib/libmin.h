@@ -33,8 +33,7 @@
 # include <curses.h>
 # include <term.h>
 
-// Lib Jules
-# include "lib_jules.h"
+# include "libmin_built.h"
 
 typedef	enum	TOKENTYPE
 {
@@ -103,15 +102,16 @@ typedef	struct s_lexer
 	int			len;
 	char		**buffer;
 	t_pip		*pip;
-	char		**envp;
+	t_list		*envp;
 	char		**pathptr;
 	char		**pwd;
 	int			flagr;
 }	t_lexer;
 
-int					start_fonction(char *envp[]);
+void				init_path_pwd(t_lexer *l, int mode);
+int					start_fonction(t_list *c_envp);
 void				*sig_handler();
-t_lexer				*parser_input(t_lexer *lexer, char **envp);
+t_lexer				*parser_input(t_lexer *lexer);
 t_token				*parser_next_token(t_token *tok);
 t_token				*check_apo(t_token *t, int mode);
 int					parser_output(t_lexer *lexer);
@@ -122,7 +122,7 @@ int					print_node(t_node *node);
 void				full_print(char **str);
 int					print_str_node(t_node *n, char *str, int count2);
 int					free_lexer_tokens(t_lexer *lexer, int mode);
-int					init_lexer(t_lexer *lexer, char **envp);
+int					init_lexer(t_lexer *lexer);
 int					lexer_start(t_lexer *lexer);
 t_node				*tree_input(t_lexer *lexer);
 char				*parse_is_command(char *arg_list, t_lexer *l, int count, int mode);
