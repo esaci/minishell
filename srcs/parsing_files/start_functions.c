@@ -40,14 +40,18 @@ int	start_fonction(t_list *c_envp)
 	}
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
+		print_custom("Manque Envp1", 2, 1, 1);
 		if (!parser_input(lexer))
 		{
 			rl_clear_history();
 			small_free(lexer, NULL, NULL, 1);
 			return (print_custom("malloc2", 2, 1, 1));
 		}
+		print_custom("Manque Envp2", 2, 1, 1);
 		tree_input(lexer);
+		print_custom("Manque Envp3", 2, 1, 1);
 		print_node(lexer->node);
+		print_custom("Manque Envp4", 2, 1, 1);
 		if (exec_input(lexer))
 		{
 			rl_clear_history();

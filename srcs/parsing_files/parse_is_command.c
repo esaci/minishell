@@ -35,11 +35,14 @@ char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l, int mode)
 	char	*ptr;
 	int		tmp;
 
-	ptr = ft_strjoin(l->pwd[0], ptr2);
-	tmp = access(ptr, F_OK);
+	if (l->pwd && l->pwd[0])
+	{
+		ptr = ft_strjoin(l->pwd[0], ptr2);
+		tmp = access(ptr, F_OK);
+	}
 	if (tmp == 0)
 	{
-		if (ptr2[1] == '.')
+		if (ptr2[1] == '.' && l->pwd)
 		{
 			free(ptr);
 			ptr = ft_strjoin(l->pwd[0], ptr2 + 2);
@@ -72,7 +75,7 @@ char	*parse_is_command(char *arg_list, t_lexer *l, int count, int mode)
 		ptr2 = ft_strjoin("/", arg_list);
 	}
 	tmp = 1;
-	while (l->pathptr[count] && tmp != 0)
+	while (l->pathptr && l->pathptr[count] && tmp != 0)
 	{
 		ptr = ft_strjoin(l->pathptr[count], ptr2);
 		tmp = access(ptr, F_OK);
