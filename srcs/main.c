@@ -19,8 +19,10 @@ void	init_path_pwd(t_lexer *l, int mode)
 	c_envp = l->envp;
 	if (mode)
 	{
-		free(l->pathptr);
-		free(l->pwd);
+		if (l->pathptr)
+			free(l->pathptr);
+		if (l->pwd)
+			free(l->pwd);
 	}
 	while (c_envp)
 		{
@@ -39,7 +41,6 @@ int	main(int ac, char *av[], char *envp[])
 	if (envp[0] == NULL)
 		return (print_custom("Manque Envp\n", 2, 1, 1));
 	c_envp = ft_init_env(envp, NULL);
-	return (0);
 	sigint_c = sig_handler();
 	start_fonction(c_envp);
 	return (0);

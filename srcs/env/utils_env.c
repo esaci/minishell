@@ -43,12 +43,26 @@ void	ft_lst_pushback(t_list **lst, char *content)
 t_list	*ft_tab_to_lst(char *table[])
 {
 	t_list	*list;
-
+	char	*ptr;
 	list = NULL;
 	while (*table != NULL)
 	{
-		ft_lst_pushback(&list, *table);
+		ptr = copieur(*table);
+		ft_lst_pushback(&list, ptr);
 		table++;
 	}
 	return (list);
+}
+
+int	utils_strlen_env(t_list *l)
+{
+	int	count;
+
+	count = 0;
+	while (l)
+	{
+		l = l->next;
+		count++;
+	}
+	return (count);
 }

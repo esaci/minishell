@@ -71,5 +71,8 @@ t_list	*ft_init_env(char *envp[], t_list *env);
 t_list	*ft_add_env(char *to_add, t_list *env);
 t_list	*ft_tab_to_lst(char *table[]);
 t_list	*ft_del_variable(char *variable, t_list *env);
+t_list	*free_env(t_list *env);
+int		utils_strlen_env(t_list *l);
+char	**generate_custom_envp(t_list *v_env);
 
 #endif

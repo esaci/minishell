@@ -18,7 +18,8 @@ void	envp_init(t_list *c_envp, t_lexer *l)
 	l->buffer = NULL;
 	l->node = NULL;
 	l->envp = c_envp;
-	init_path_pwd(l, 0);
+	l->pathptr = NULL;
+	l->pwd = NULL;
 }
 
 int	start_fonction(t_list *c_envp)
@@ -39,7 +40,6 @@ int	start_fonction(t_list *c_envp)
 	}
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{
-		add_history(rl_line_buffer);
 		if (!parser_input(lexer))
 		{
 			rl_clear_history();
@@ -55,6 +55,7 @@ int	start_fonction(t_list *c_envp)
 			return (print_custom("malloc4", 2, 1, 1));
 		}
 		rl_line_buffer[1] = '\0';
+		add_history(ptr);
 		small_free(lexer, ptr, NULL, 0);
 		ptr = readline("Minishell$ ");
 		rl_on_new_line();

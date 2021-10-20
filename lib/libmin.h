@@ -69,6 +69,8 @@ typedef	enum	NODETYPE
 	NODE_ARG = 'A',
 }	NODETYPE;
 
+typedef struct 	s_list t_list;
+
 typedef struct s_pip
 {
 	int		tmp[2];
@@ -173,5 +175,6 @@ int					free_lexer_nodes(t_lexer *l, int mode);
 t_token				*unlink_free_return(t_token *t, int skip);
 int					small_free(t_lexer *l, void *ptr, void *ptr2, int mode);
 int					small_finish_free(t_lexer *l, void *ptr, void *ptr2);
+char				*copieur(char *s);
 #endif
 

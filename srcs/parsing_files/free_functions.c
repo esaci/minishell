@@ -61,7 +61,7 @@ int	free_lexer_nodes(t_lexer *l, int mode)
 		free(oldnode);
 	}
 	if (mode)
-		init_lexer(l, NULL);
+		init_lexer(l);
 	return (0);
 }
 

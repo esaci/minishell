@@ -45,3 +45,19 @@ t_list	*ft_del_variable(char *variable, t_list *env)
 	}
 	return (env);
 }
+
+t_list	*free_env(t_list *env)
+{
+	t_list	*tmp;
+
+	while(env)
+	{
+		tmp = env->next;
+		if (env->content)
+			free(env->content);
+		if (env)
+			free(env);
+		env = tmp;
+	}
+	return (NULL);
+}

@@ -156,8 +156,10 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			small_free(l, NULL, NULL, 0);
 			exit(0);
 		}
-		if (execve(n->str[0], n->str, l->envp) == -1)
+		ptr = generate_custom_envp(l->envp);
+		if (execve(n->str[0], n->str, ptr) == -1)
 		{
+			free(ptr);
 			small_free(l, NULL, NULL, 0);
 			exit(print_custom("error comm", 2, 1, 1));
 		}
