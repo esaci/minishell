@@ -20,9 +20,9 @@ void	init_path_pwd(t_lexer *l, int mode)
 	if (mode)
 	{
 		if (l->pathptr)
-			free(l->pathptr);
+			double_free(l->pathptr);
 		if (l->pwd)
-			free(l->pwd);
+			double_free(l->pwd);
 	}
 	while (c_envp)
 		{
