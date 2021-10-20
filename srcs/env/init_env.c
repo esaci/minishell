@@ -12,10 +12,25 @@
 
 #include "../../lib/libmin_built.h"
 
+t_list	*create_envp(t_list	*env)
+{
+	char	**ptr;
+
+	ptr = malloc(sizeof(char*) * 2);
+	ptr[0] = merge_twoarray("PWD=", getcwd(NULL, 100000), 2);
+	ptr[1] = 0;
+	env = ft_envp(ptr, NULL, env);
+	free(ptr[0]);
+	free(ptr);
+	return (env);
+}
+
 t_list	*ft_init_env(char *envp[], t_list *env)
 {
 	if (env)
 		print_custom("pointeur non nul envoye a init_env", 2, 1, 1);
+	if (envp[0] == NULL)
+		return (create_envp(env));
 	return (ft_envp(envp, NULL, env));
 }
 

@@ -40,6 +40,8 @@ int	free_lexer_nodes(t_lexer *l, int mode)
 	t_node	*n;
 	t_node	*oldnode;
 
+	if (!l)
+		return (0);
 	n = l->node;
 	while (n)
 	{

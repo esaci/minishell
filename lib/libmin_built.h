@@ -56,7 +56,7 @@ typedef struct 	s_lexer t_lexer;
 
 int 	menu(char *command, char **args, char **envp, t_lexer *l);
 void	ft_pwd(char *command);
-void    ft_env(char *command);
+void	ft_env(t_list *env);
 void    ft_echo(char *command, char **args, char **envp);
 int 	ft_check_echo(char *flag);
 void    ft_cd(char *command, char **args, char **envp);
@@ -74,5 +74,6 @@ t_list	*ft_del_variable(char *variable, t_list *env);
 t_list	*free_env(t_list *env);
 int		utils_strlen_env(t_list *l);
 char	**generate_custom_envp(t_list *v_env);
+t_list	*create_envp(t_list	*env);
 
 #endif

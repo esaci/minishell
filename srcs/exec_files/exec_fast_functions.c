@@ -76,6 +76,11 @@ char	*merge_twoarray(char *s, char *d, int mode)
 		count2++;
 	}
 	ptr[count + count2] = 0;
+	if (mode == 2)
+	{
+		free(d);
+		return (ptr);
+	}
 	if (s)
 		free(s);
 	if (!mode)
