@@ -49,7 +49,6 @@ int check_variable(char *str)
     return (1);
 }
 
-<<<<<<< HEAD
 int loop_identifier(char **args)
 {
     while (args && *args)
@@ -64,9 +63,6 @@ int loop_identifier(char **args)
 }
 
 char    *create_var(char *variable, int opt)
-=======
-void	export_variable(char **args)
->>>>>>> a509c65a1b4a2d44b68ed8e3d79af508571a826e
 {
     char    *res;
 
@@ -103,14 +99,14 @@ void	ft_export(char **args, t_list *e)
     {
         ft_putstr_fd("No args\n", 1);
         flag = 1;
-		//print_env(e);
+		print_env(e);
     }
-    if (!ft_strncmp(args[0], "-", 1))
+    else if (!ft_strncmp(args[0], "-", 1))
     {
         ft_putstr_fd("export : invalid option\n", 1);
         flag = 1;
     }
-    if (loop_identifier(args) != 1 && flag == 0)
+    else if (loop_identifier(args) != 1 && flag == 0)
     {
         ft_putstr_fd("export : not valid in this context\n", 1);
         flag = 1;
