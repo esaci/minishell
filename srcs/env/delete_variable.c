@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../lib/libmin_built.h"
-t_list	*ft_del_variable(char *variable, t_list *env)
+t_list	*ft_del_variable(char *ptr, t_list *env)
 {
 	t_list	*prev;
 	t_list	*tmp_e;
@@ -20,10 +20,9 @@ t_list	*ft_del_variable(char *variable, t_list *env)
 	tmp_e = env;
 	while (tmp_e)
 	{
-		if (ft_strlen(tmp_e->content) > ft_strlen(variable))
+		if (!ft_memcmp(tmp_e->content, ptr, ft_strlen(ptr)))
 		{
-			if (ft_strncmp(tmp_e->content, variable, ft_strlen(variable)) == 0
-				&& *(tmp_e->content + ft_strlen(variable)) == '=')
+			if (tmp_e->content[ft_strlen(ptr)] == '=')
 			{
 				if (prev)
 				{
@@ -34,8 +33,8 @@ t_list	*ft_del_variable(char *variable, t_list *env)
 				else
 				{
 					free(env->content);
-					free(env);
-					return(tmp_e->next);
+					env->content = NULL;
+					return(env);
 				}
 				return (env);
 			}
@@ -52,12 +51,12 @@ t_list	*free_env(t_list *env)
 
 	while(env)
 	{
-		tmp = env->next;
-		if (env->content)
-			free(env->content);
-		if (env)
-			free(env);
-		env = tmp;
+		tmp = env;
+		env = env->next;
+		if (tmp->content)
+			free(tmp->content);
+		if (tmp)
+			free(tmp);
 	}
 	return (NULL);
 }

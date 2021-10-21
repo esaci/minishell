@@ -35,7 +35,6 @@ void	ft_echo(char **args)
     int flag;
 
     flag = 0;
-    args++;
     if (ft_check_echo(args[0]) == 1 && args[1])
     {
         flag = 1;

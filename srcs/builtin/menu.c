@@ -36,45 +36,29 @@ char    *str_low(char *str)
     return (res);
 }
 
-int is_command(char *command, char **args, char **envp, t_lexer *l)
+int is_command(char *command, char **args, t_list *l)
 {
-    if (!ft_strncmp(command, "echo", 5))
-    {
-        ft_echo(command);
-        exit(0);
-    }
-    if (!ft_strncmp(command, "env", 4))
-    {
-        ft_env(l->envp);
-        exit(0);
-    }
-    if (!ft_strncmp(command, "pwd", 4))
-    {
-        ft_pwd(command);
-        small_free(l, NULL, NULL, 0);
-        exit(0);
-    }
-    if (!ft_strncmp(command, "unset", 6))
-    {
-        ft_unset(l->envp, **args);
-        exit(0);
-    }
-    if (!ft_strncmp(command, "cd", 3))
-    {
-        ft_cd(command, args, envp);
-        exit(0);
-    }
-    if (!ft_strncmp(command, "export", 7))
-    {
-        ft_export(command, args, envp);
-        exit(0);
-    }
-    free(command);
-    return (0);
+	if (!ft_strncmp(command, "echo", 5))
+		ft_echo(args);
+	else if (!ft_strncmp(command, "env", 4))
+		ft_env(l);
+	else if (!ft_strncmp(command, "pwd", 4))
+		ft_pwd(l);
+	else if (!ft_strncmp(command, "unset", 6))
+		ft_unset(l, args);
+	else if (!ft_strncmp(command, "cd", 3))
+		ft_cd(args, l);
+	else if (!ft_strncmp(command, "export", 7))
+		ft_env(l);
+	else
+		return (0);
+	return (1);
 }
 
-int menu(char *command, char **args, char **envp, t_lexer *l)
+int menu(char *command, char **args, t_lexer *l)
 {
-    is_command(command, args, envp, l);
-    return (0);
+    if (!is_command(command, args, l->envp))
+   		return (0);
+	small_free(l, NULL, NULL, 1);
+	exit(0);
 }

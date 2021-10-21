@@ -16,7 +16,7 @@ t_list	*ft_new_list_elem(char *content)
 {
 	t_list	*new;
 
-	new = (t_list *)malloc(sizeof(t_list));
+	new = (t_list *)malloc(sizeof(t_list) * 2);
 	if (new == NULL)
 		return (NULL);
 	new->next = NULL;
@@ -37,19 +37,17 @@ void	ft_lst_pushback(t_list **lst, char *content)
 	while (list->next)
 		list = list->next;
 	list->next = ft_new_list_elem(content);
-	list = list->next;
 }
 
-t_list	*ft_tab_to_lst(char *table[])
+t_list	*ft_tab_to_lst(char *envp[])
 {
 	t_list	*list;
-	char	*ptr;
+
 	list = NULL;
-	while (*table != NULL)
+	while (envp && *envp != NULL)
 	{
-		ptr = copieur(*table);
-		ft_lst_pushback(&list, ptr);
-		table++;
+		ft_lst_pushback(&list, *envp);
+		envp++;
 	}
 	return (list);
 }

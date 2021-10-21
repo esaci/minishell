@@ -54,14 +54,14 @@ typedef struct 	s_lexer t_lexer;
 
 // Builtin
 
-int 	menu(char *command, char **args, char **envp, t_lexer *l);
-void	ft_pwd(char *command);
+int		menu(char *command, char **args, t_lexer *l);
+void	ft_pwd(t_list *l);
 void	ft_env(t_list *env);
 void	ft_echo(char **args);
 int 	ft_check_echo(char *flag);
-void    ft_cd(char **args, t_list	*l);
+void    ft_cd(char **args, t_list *l);
 void    ft_unset(t_list *l, char **args);
-void    ft_export(char *command, char **args, char **envp);
+void	ft_export(char **args, t_list *e);
 
 //Environnement
 

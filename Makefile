@@ -55,7 +55,13 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCENV)delete_variable.c				\
 		$(SRCD)$(SRCENV)environment.c					\
 		$(SRCD)$(SRCENV)init_env.c						\
-		$(SRCD)$(SRCENV)utils_env.c
+		$(SRCD)$(SRCENV)utils_env.c						\
+		$(SRCD)$(SRCBUILTIN)ft_cd.c						\
+		$(SRCD)$(SRCBUILTIN)ft_pwd.c					\
+		$(SRCD)$(SRCBUILTIN)ft_echo.c					\
+		$(SRCD)$(SRCBUILTIN)ft_unset.c					\
+		$(SRCD)$(SRCBUILTIN)ft_env.c					\
+		$(SRCD)$(SRCBUILTIN)menu.c
 
 OBJ = $(SRC:.c=.o)
 

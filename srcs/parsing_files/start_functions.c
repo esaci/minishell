@@ -47,7 +47,7 @@ int	start_fonction(t_list *c_envp)
 			return (print_custom("malloc2", 2, 1, 1));
 		}
 		tree_input(lexer);
-		print_node(lexer->node);
+/* 		print_node(lexer->node); */
 		if (exec_input(lexer))
 		{
 			rl_clear_history();

@@ -140,7 +140,12 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		close_pipes(l, 1);
 		check_for_arg(n->str, l, n);
-		full_print(n->str);
+		/* full_print(n->str); */
+		if (menu(n->str[0], n->str + 1, l) == -1)
+		{
+			small_free(l, NULL, NULL, 0);
+			exit(print_custom("error comm", 2, 1, 1));
+		}
 		t = get_token_buffer(l, n->str[0]);
 		l->buffer[get_buffer_count(l, t)] = parse_is_command(l->buffer[get_buffer_count(l, t)], l, 0, 1);
 		n->str[0] = l->buffer[get_buffer_count(l, t)];
@@ -150,17 +155,17 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			if (n->str[0])
 			{
 				print_custom(n->str[0], 2, 1, 0);
-				small_free(l, NULL, NULL, 0);
+				small_free(l, NULL, NULL, 1);
 				exit(print_custom(" command not found", 2, 1, 1));
 			}
-			small_free(l, NULL, NULL, 0);
+			small_free(l, NULL, NULL, 1);
 			exit(0);
 		}
 		ptr = generate_custom_envp(l->envp);
 		if (execve(n->str[0], n->str, ptr) == -1)
 		{
 			free(ptr);
-			small_free(l, NULL, NULL, 0);
+			small_free(l, NULL, NULL, 1);
 			exit(print_custom("error comm", 2, 1, 1));
 		}
 	}
