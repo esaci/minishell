@@ -20,7 +20,7 @@ t_list	*ft_new_list_elem(char *content)
 	if (new == NULL)
 		return (NULL);
 	new->next = NULL;
-	new->content = content;
+	new->content = copieur(content);
 	return (new);
 }
 

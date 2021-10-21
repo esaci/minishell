@@ -21,6 +21,20 @@ t_list	*ft_envp(char *envp[], char *content, t_list *v_env)
 	return (v_env);
 }
 
+char	*custom_getenv(t_list *l, char *ptr)
+{
+	while (l)
+	{
+		if (ft_memcmp(l->content, ptr, ft_strlen(ptr)))
+		{
+			if (l->content[ft_strlen(ptr) + 1] == '=')
+				return (copieur(l->content + ft_strlen(ptr) + 2));
+		}
+		print_custom(l->content, 1, 1, 1);
+	}
+	return (NULL);
+}
+
 char	**generate_custom_envp(t_list *v_env)
 {
 	int		count;

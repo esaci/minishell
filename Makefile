@@ -52,7 +52,6 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCEXEC)exec_redirections.c			\
 		$(SRCD)$(SRCEXEC)exec_heredoc.c					\
 		$(SRCD)$(SRCEXEC)exec_pipe.c					\
-		$(SRCD)$(SRCBUILTIN)ft_env.c					\
 		$(SRCD)$(SRCENV)delete_variable.c				\
 		$(SRCD)$(SRCENV)environment.c					\
 		$(SRCD)$(SRCENV)init_env.c						\

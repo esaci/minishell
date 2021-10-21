@@ -41,6 +41,7 @@ int	main(int ac, char *av[], char *envp[])
 	/* if (envp[0] == NULL)
 		return (print_custom("Manque Envp", 2, 1, 1)); */
 	c_envp = ft_init_env(envp, NULL);
+	/* return (print_custom(custom_getenv(c_envp, "PATH"), 1, 1, 1)); */
 	sigint_c = sig_handler();
 	start_fonction(c_envp);
 	return (0);
