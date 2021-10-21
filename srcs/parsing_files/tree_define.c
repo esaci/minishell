@@ -75,6 +75,7 @@ int	tree_define_command(t_node *n, t_token *t, t_lexer *l)
 	t_node *right;
 	t_node *left;
 
+	check_for_arg(n->str, l, n);
 	if (n->type == NODE_PIPE)
 		return (0);
 	left = malloc(sizeof(t_node) * 2);
@@ -87,7 +88,9 @@ int	tree_define_command(t_node *n, t_token *t, t_lexer *l)
 	n->right = right;
 	if (search_infile(left, t, l))
 		return (1);
+	check_for_arg(left->str, l, n);
 	if (search_outfile(right, t, l))
 		return (1);
+	check_for_arg(right->str, l, n);
 	return (0);
 }

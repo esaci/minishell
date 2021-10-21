@@ -50,20 +50,6 @@ char    *ft_create_var(char **args)
     return (arg);
 }
 
-int ft_print_env()
-{
-    t_list  *env;
-
-    env = ft_getallenv();
-    while (env)
-    {
-        ft_putstr_fd(env->content, 1);
-        ft_putstr_fd("\n", 1);
-        env = env->next;
-    }
-    return (0);
-}
-
 void	export_variable(char **args)
 {
     int     ret;

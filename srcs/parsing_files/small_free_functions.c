@@ -2,7 +2,6 @@
 
 int	small_free(t_lexer *l, void *ptr, void *ptr2, int mode)
 {
-	rl_line_buffer[1] = '\0';
 	free_lexer_tokens(l, 0);
 	free_lexer_nodes(l, 0);
 	if (ptr)

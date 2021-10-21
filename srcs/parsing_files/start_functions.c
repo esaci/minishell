@@ -36,7 +36,9 @@ int	start_fonction(t_list *c_envp)
 	if (!ptr || ptr[0] == EOF || !ft_memcmp(rl_line_buffer, "exit", 5))
 	{
 		small_free(lexer, ptr, NULL, 1);
-		return (print_custom("\nMinishell$ exit", 1, 0, 1));
+		if (ft_memcmp(rl_line_buffer, "exit", 5))
+			return (print_custom("\nMinishell$ exit" , 1, 0, 1));
+		return (print_custom("", 1, 0, 0));
 	}
 	while (ft_memcmp(rl_line_buffer, "exit", 5))
 	{

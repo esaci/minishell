@@ -69,7 +69,7 @@ void	ft_cd_other(char **args, t_list *e)
 		ft_putstr_fd("cd : error\n", 1);
 	else
 	{
-		path = getcwd(NULL, 0);
+		path = custom_getenv(e, "PATH");
 		ft_swap_env_pwd(path, e);
 		free(path);
 	}

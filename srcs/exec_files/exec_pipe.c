@@ -18,9 +18,17 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 	int	in;
 	int	out;
 
+	in = 0;
+	in = new_menu(n->str[0], n->str + 1, l);
 	l->pip->pid[count] = fork();
 	if (!l->pip->pid[count])
 	{
+		if (in)
+		{
+			close_pipes(l, 1);
+			small_free(l, NULL, NULL, 1);
+			exit(0);
+		}
 		in = (count - 1) * 2;
 		out = in + 3;
 		if (count > 0)

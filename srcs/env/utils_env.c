@@ -64,3 +64,14 @@ int	utils_strlen_env(t_list *l)
 	}
 	return (count);
 }
+
+int print_env(t_list *env)
+{
+    while (env)
+    {
+        ft_putstr_fd(env->content, 1);
+        ft_putstr_fd("\n", 1);
+        env = env->next;
+    }
+    return (0);
+}
