@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/24 15:34:50 by esaci            ###   ########.fr       */
+/*   Updated: 2021/10/21 18:59:35 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	main(int ac, char *av[], char *envp[])
 	void	(*sigint_c)(int);
 	t_list	*c_envp;
 
-	/* if (envp[0] == NULL)
-		return (print_custom("Manque Envp", 2, 1, 1)); */
+	if (envp[0] == NULL)
+		return (print_custom("Manque Envp", 2, 1, 1));
 	c_envp = ft_init_env(envp, NULL);
 	sigint_c = sig_handler();
 	start_fonction(c_envp);

@@ -6,11 +6,12 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:27:01 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/18 19:29:13 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/21 19:01:13 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin_built.h"
+
 t_list	*ft_del_variable(char *ptr, t_list *env)
 {
 	t_list	*prev;

@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:19:14 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/18 19:31:31 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/21 20:53:35 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,82 +23,97 @@ int check_identifier(char *id)
         return (-1);
     while (id[i])
     {
-        if (!ft_isalnum(id[i]))
+        if (!ft_isalnum(id[i]) && id[i] != '=')
             return (-1);
         i++;
     }
     return (1);
 }
 
-char    *ft_create_var(char **args)
+
+int check_variable(char *str)
 {
-    char    *line;
-    char    **arg;
-    int     i;
+    int i;
 
     i = 0;
-    line = *args;
-    arg = (char **)malloc(sizeof(char *) * 4);
-    arg[3] = NULL;
-    while (line[i] && (line[i] != '=' || line[0] == '='))
+    if (!str)
+        return (0);
+    while (str[i])
+    {
+        if (str[i] == '=')
+            return (2);
         i++;
-    arg[0] = ft_substr(line, 0, i);
-    if (line[i] && line[i] == '=')
-        arg[1] = ft_strdup("=");
-    if (line[i])
-        arg[2] = ft_strdup(line + i);
-    return (arg);
-}
-
-int ft_print_env()
-{
-    t_list  *env;
-
-    env = ft_getallenv();
-    while (env)
-    {
-        ft_putstr_fd(env->content, 1);
-        ft_putstr_fd("\n", 1);
-        env = env->next;
     }
-    return (0);
+    if (i == 0)
+        return (-1);
+    return (1);
 }
 
-void	export_variable(char **args)
+int loop_identifier(char **args)
 {
-    int     ret;
-    char    **arg;
-
-    while(*args)
+    while (args && *args)
     {
-        arg = ft_create_var(args);
-        if (!check_identifier(arg[0]))
-        {
-            ft_putstr_fd("bash : not a valid identifier\n", 1);
-            ret = 1;
-        }
-        else
-        {
-            if (arg[1])
-                ft_del_variable(arg[0]);
-            ft_add_env(ft_strdup(*args));
-            ret = 0;
-        }
+        if (check_identifier(*args) == -1)
+            return (-1);
+        if (check_variable(*args) == -1)
+            return (-1);
         args++;
     }
-    free(arg);
-    return (ret);
+    return (1);
+}
+
+char    *create_var(char *variable, int opt)
+{
+    char    *res;
+
+    if (opt == -1)
+        res = ft_strjoin(variable, "=");
+    else
+        res = ft_strdup(variable);
+    return (res);
+}
+
+void    export_variable(char *variable, t_list *e)
+{
+    char    *res;
+
+    if (check_variable(variable) == 1)
+    {
+        res = create_var(variable, -1);
+        ft_add_env(res, e);
+    }
+    else if (check_variable(variable) == 2)
+    {
+        res = create_var(variable, 2);
+        ft_add_env(res, e);
+    }
+    free(res);
 }
 
 void	ft_export(char **args, t_list *e)
 {
-	if (args && *args)
+    int flag;
+
+    flag = 0;
+    if (!*args)
+    {
+        ft_putstr_fd("No args\n", 1);
+        flag = 1;
+		//print_env(e);
+    }
+    if (!ft_strncmp(args[0], "-", 1))
+    {
+        ft_putstr_fd("export : invalid option\n", 1);
+        flag = 1;
+    }
+    if (loop_identifier(args) != 1 && flag == 0)
+    {
+        ft_putstr_fd("export : not valid in this context\n", 1);
+        flag = 1;
+    }
+	while (args && *args && flag == 0)
 	{
-		if (*args[0] == '-')
-			ft_putstr_fd("export : invalid option\n", 2);
-		else
-			export_variable(args);
-	}
-	else
-		print_env(e);
+        export_variable(*args, e);
+        args++;
+    }
 }
