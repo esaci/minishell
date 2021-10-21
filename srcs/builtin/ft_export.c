@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:19:14 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/21 21:26:37 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/21 21:31:24 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	ft_export(char **args, t_list *e)
     flag = 0;
     if (!*args)
     {
-        ft_putstr_fd("No args\n", 1);
         flag = 1;
 		print_env(e);
     }
