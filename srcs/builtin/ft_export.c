@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:19:14 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/21 20:53:35 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/21 21:26:37 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int check_variable(char *str)
     return (1);
 }
 
-<<<<<<< HEAD
 int loop_identifier(char **args)
 {
     while (args && *args)
@@ -63,37 +62,6 @@ int loop_identifier(char **args)
     return (1);
 }
 
-char    *create_var(char *variable, int opt)
-=======
-void	export_variable(char **args)
->>>>>>> a509c65a1b4a2d44b68ed8e3d79af508571a826e
-{
-    char    *res;
-
-    if (opt == -1)
-        res = ft_strjoin(variable, "=");
-    else
-        res = ft_strdup(variable);
-    return (res);
-}
-
-void    export_variable(char *variable, t_list *e)
-{
-    char    *res;
-
-    if (check_variable(variable) == 1)
-    {
-        res = create_var(variable, -1);
-        ft_add_env(res, e);
-    }
-    else if (check_variable(variable) == 2)
-    {
-        res = create_var(variable, 2);
-        ft_add_env(res, e);
-    }
-    free(res);
-}
-
 void	ft_export(char **args, t_list *e)
 {
     int flag;
@@ -103,21 +71,21 @@ void	ft_export(char **args, t_list *e)
     {
         ft_putstr_fd("No args\n", 1);
         flag = 1;
-		//print_env(e);
+		print_env(e);
     }
-    if (!ft_strncmp(args[0], "-", 1))
+    else if (!ft_strncmp(args[0], "-", 1))
     {
         ft_putstr_fd("export : invalid option\n", 1);
         flag = 1;
     }
-    if (loop_identifier(args) != 1 && flag == 0)
+    else if (loop_identifier(args) != 1 && flag == 0)
     {
         ft_putstr_fd("export : not valid in this context\n", 1);
         flag = 1;
     }
 	while (args && *args && flag == 0)
 	{
-        export_variable(*args, e);
+        ft_add_env(*args, e);
         args++;
     }
 }

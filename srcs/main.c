@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/21 18:59:35 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/21 21:10:11 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ int	main(int ac, char *av[], char *envp[])
 	void	(*sigint_c)(int);
 	t_list	*c_envp;
 
-<<<<<<< HEAD
 	if (envp[0] == NULL)
 		return (print_custom("Manque Envp", 2, 1, 1));
-=======
->>>>>>> a509c65a1b4a2d44b68ed8e3d79af508571a826e
 	c_envp = ft_init_env(envp, NULL);
 	sigint_c = sig_handler();
 	start_fonction(c_envp);
