@@ -49,6 +49,7 @@ int check_variable(char *str)
     return (1);
 }
 
+<<<<<<< HEAD
 int loop_identifier(char **args)
 {
     while (args && *args)
@@ -63,6 +64,9 @@ int loop_identifier(char **args)
 }
 
 char    *create_var(char *variable, int opt)
+=======
+void	export_variable(char **args)
+>>>>>>> a509c65a1b4a2d44b68ed8e3d79af508571a826e
 {
     char    *res;
 

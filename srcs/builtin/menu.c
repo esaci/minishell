@@ -44,12 +44,15 @@ int is_command(char *command, char **args, t_list *l)
 		ft_env(l);
 	else if (!ft_strncmp(command, "pwd", 4))
 		ft_pwd(l);
+<<<<<<< HEAD
 	else if (!ft_strncmp(command, "unset", 6))
 		ft_unset(l, args);
 	else if (!ft_strncmp(command, "cd", 3))
 		ft_cd(args, l);
 	else if (!ft_strncmp(command, "export", 7))
 		ft_export(args, l);
+=======
+>>>>>>> a509c65a1b4a2d44b68ed8e3d79af508571a826e
 	else
 		return (0);
 	return (1);
@@ -61,4 +64,20 @@ int menu(char *command, char **args, t_lexer *l)
    		return (0);
 	small_free(l, NULL, NULL, 1);
 	exit(0);
+}
+
+int	new_menu(char *command, char **args, t_lexer *lex)
+{
+	t_list *l;
+
+	l = lex->envp;
+	if (!ft_strncmp(command, "unset", 6))
+		ft_unset(l, args);
+	else if (!ft_strncmp(command, "cd", 3))
+		ft_cd(args, l);
+	else if (!ft_strncmp(command, "export", 7))
+		print_env(l);
+	else
+		return (0);
+	return (1); 
 }

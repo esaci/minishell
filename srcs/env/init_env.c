@@ -38,6 +38,5 @@ t_list	*ft_add_env(char *to_add, t_list *env)
 {
 	if (!env)
 		print_custom("pointeur nul envoye a add_env", 2, 1, 1);
-	print_custom(to_add, 1, 1, 1);
 	return (ft_envp(NULL, to_add, env));
 }

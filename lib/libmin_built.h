@@ -55,6 +55,7 @@ typedef struct 	s_lexer t_lexer;
 // Builtin
 
 int		menu(char *command, char **args, t_lexer *l);
+int	new_menu(char *command, char **args, t_lexer *l);
 void	ft_pwd(t_list *l);
 void	ft_env(t_list *env);
 void	ft_echo(char **args);
@@ -76,5 +77,6 @@ int		utils_strlen_env(t_list *l);
 char	**generate_custom_envp(t_list *v_env);
 t_list	*create_envp(t_list	*env);
 char	*custom_getenv(t_list *l, char *ptr);
+int		print_env(t_list *env);
 
 #endif

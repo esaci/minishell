@@ -100,8 +100,18 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	t_token	*t;
 	char	**ptr;
 
+	tmp = 0;
 	if (last_pipe(l) == 0 || count == last_pipe(l))
+	{
+		tmp = new_menu(n->str[0], n->str + 1, l);
 		l->pip->pid[count] = fork();
+		if (tmp && !l->pip->pid[count])
+		{
+			close_pipes(l, 1);
+			small_free(l, NULL, NULL, 1);
+			exit(0);
+		}
+	}
 	else
 		l->pip->pid[count] = 0;
 	if (!l->pip->pid[count])
@@ -139,11 +149,10 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			close(fd[0]);
 		}
 		close_pipes(l, 1);
-		check_for_arg(n->str, l, n);
 		/* full_print(n->str); */
 		if (menu(n->str[0], n->str + 1, l) == -1)
 		{
-			small_free(l, NULL, NULL, 0);
+			small_free(l, NULL, NULL, 1);
 			exit(print_custom("error comm", 2, 1, 1));
 		}
 		t = get_token_buffer(l, n->str[0]);
