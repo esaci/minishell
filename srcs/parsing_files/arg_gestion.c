@@ -33,7 +33,7 @@ int		len_new_buff(t_token *t)
 
 	count3 = nbr_apo_guill(t->n_token);
 	count = 0;
-	while (t->line[count])
+	while (t && t->line && t->line[count])
 	{
 		c = t->line[count];
 		if (c == '<' || c == '>' || c == ' ' || c == '|')
@@ -43,10 +43,11 @@ int		len_new_buff(t_token *t)
 			t->n_token = unlink_free_return(t->n_token, 1);
 			count3--;
 			count++;
-			while (t->line[count] && t->line[count] != c)
+			while (t && t->line && t->line[count] && t->line[count] != c)
 				count++;
 		}
-		count++;
+		else
+			count++;
 	}
 	return (count);
 }
@@ -60,20 +61,25 @@ int		arg_gestion(char **ptr, t_token *t)
 	int		count3;
 
 	buff = *ptr;
-	if (t->n_token->type != CHAR_APO && t->n_token->type != CHAR_GUILL)
+	if (t->n_token && t->n_token->type != CHAR_APO && t->n_token->type != CHAR_GUILL)
 		return (0);
 	count2 = nbr_apo_guill(t->n_token);
 	if (t->type != CHAR_INUT)
 		count2 = count2 + 2;
 	count3 = 0;
-	while (t->line != t->n_token->line)
+	while (t->type == CHAR_INUT && (t->line + count3) != t->n_token->line)
 	{
-		buff[count3++] = t->line[0];
-		t->line++;
+		if ((t->line + count3)[0] == ' ')
+		{
+			buff[count3] = 0;
+			return (count3);
+		}
+		buff[count3] = (t->line + count3)[0];
+		count3++;
 	}
 	len = len_new_buff(t);
-	count = 0;
-	while(count < len)
+	count = count3;
+	while(count < len && t->line && t->line[count])
 	{
 		if (count2 < 1 || (t->line[count] != '\'' && t->line[count] != '\"'))
 			buff[count3++] = t->line[count];
@@ -82,5 +88,6 @@ int		arg_gestion(char **ptr, t_token *t)
 		count++;
 	}
 	buff[count3] = 0;
+	print_custom(buff, 1, 1, 1);
 	return (count);
 }

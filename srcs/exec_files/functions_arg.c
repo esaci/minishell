@@ -60,7 +60,6 @@ void	check_for_arg(char **str, t_lexer *l, t_node *n)
 		else
 			count++;
 	}
-
 }
 
 int		correct_name(t_lexer *l, t_token *t)
