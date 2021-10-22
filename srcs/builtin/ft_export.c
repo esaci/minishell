@@ -97,23 +97,22 @@ void	ft_export(char **args, t_list *e)
     flag = 0;
     if (!*args)
     {
-        ft_putstr_fd("No args\n", 1);
-        flag = 1;
+		flag = 1;
 		print_env(e);
     }
     else if (!ft_strncmp(args[0], "-", 1))
     {
-        ft_putstr_fd("export : invalid option\n", 1);
-        flag = 1;
+		ft_putstr_fd("export : invalid option\n", 1);
+		flag = 1;
     }
     else if (loop_identifier(args) != 1 && flag == 0)
     {
-        ft_putstr_fd("export : not valid in this context\n", 1);
-        flag = 1;
+		ft_putstr_fd("export : not valid in this context\n", 1);
+		flag = 1;
     }
 	while (args && *args && flag == 0)
 	{
-        export_variable(*args, e);
-        args++;
+		export_variable(*args, e);
+		args++;
     }
 }

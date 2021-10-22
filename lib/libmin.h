@@ -32,7 +32,8 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
-
+# include <errno.h>
+# include <sys/errno.h>
 # include "libmin_built.h"
 
 typedef	enum	TOKENTYPE

@@ -12,30 +12,6 @@
 
 #include "../../lib/libmin_built.h"
 
-char    *str_low(char *str)
-{
-    char    *res;
-    int     i;
-
-    i = 0;
-    if (!str)
-        return (NULL);
-    res = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2));
-    while (str[i])
-    {
-        if (ft_isalpha(str[i]))
-        {
-            if (str[i] >= 'A' && str[i] <= 'Z')
-                res[i] = str[i] + 32;
-            else
-                res[i] = str[i];
-        }
-        i++;
-    }
-    res[i] = '\0';
-    return (res);
-}
-
 int is_command(char *command, char **args, t_list *l)
 {
 	if (!ft_strncmp(command, "echo", 5))

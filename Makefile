@@ -57,6 +57,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCENV)init_env.c						\
 		$(SRCD)$(SRCENV)utils_env.c						\
 		$(SRCD)$(SRCBUILTIN)ft_cd.c						\
+		$(SRCD)$(SRCBUILTIN)cd_utils.c					\
 		$(SRCD)$(SRCBUILTIN)ft_pwd.c					\
 		$(SRCD)$(SRCBUILTIN)ft_echo.c					\
 		$(SRCD)$(SRCBUILTIN)ft_unset.c					\

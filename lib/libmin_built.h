@@ -61,6 +61,10 @@ void	ft_env(t_list *env);
 void	ft_echo(char **args);
 int 	ft_check_echo(char *flag);
 void    ft_cd(char **args, t_list *l);
+void	ft_swap_env_pwd(char *arg, t_list *e);
+void	ft_cd_minus(char **args, t_list *e);
+void	ft_cd_other(char **args, t_list *e);
+void	error_chdir(char *ptr);
 void    ft_unset(t_list *l, char **args);
 void	ft_export(char **args, t_list *e);
 
