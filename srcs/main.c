@@ -26,9 +26,9 @@ void	init_path_pwd(t_lexer *l, int mode)
 	}
 	while (c_envp)
 		{
-			if (!ft_memcmp(c_envp->content, "PATH", 4))
+			if (c_envp->content && !ft_memcmp(c_envp->content, "PATH", 4))
 				l->pathptr = ft_split(c_envp->content + 5, ':');
-			if (!ft_memcmp(c_envp->content, "PWD", 3))
+			if (c_envp->content && !ft_memcmp(c_envp->content, "PWD", 3))
 				l->pwd = ft_split(c_envp->content + 4, 1);
 			c_envp = c_envp->next;
 		}
@@ -38,6 +38,8 @@ int	main(int ac, char *av[], char *envp[])
 	void	(*sigint_c)(int);
 	t_list	*c_envp;
 
+	envp[1] = NULL;
+	envp[0] = 0;
 	c_envp = ft_init_env(envp, NULL);
 	sigint_c = sig_handler();
 	start_fonction(c_envp);

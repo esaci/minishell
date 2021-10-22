@@ -34,7 +34,7 @@ void	ft_cd_noargs(t_list *e)
 	char	*arg;
 
 	arg = custom_getenv(e, "HOME");
-	if (!arg)
+	if (!arg || !arg[0])
 		ft_putstr_fd("Minishell : cd : HOME doesn't exist\n", 2);
 	else if (chdir(arg) != 0)
 		error_chdir(NULL);

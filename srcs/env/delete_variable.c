@@ -21,7 +21,7 @@ t_list	*ft_del_variable(char *ptr, t_list *env)
 	tmp_e = env;
 	while (tmp_e)
 	{
-		if (!ft_memcmp(tmp_e->content, ptr, ft_strlen(ptr)))
+		if (tmp_e->content && !ft_memcmp(tmp_e->content, ptr, ft_strlen(ptr)))
 		{
 			if (tmp_e->content[ft_strlen(ptr)] == '=')
 			{

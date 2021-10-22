@@ -25,14 +25,14 @@ char	*custom_getenv(t_list *l, char *ptr)
 {
 	while (l)
 	{
-		if (!ft_memcmp(l->content, ptr, ft_strlen(ptr)))
+		if (l->content && !ft_memcmp(l->content, ptr, ft_strlen(ptr)))
 		{
 			if (l->content[ft_strlen(ptr)] == '=')
 				return (copieur(l->content + ft_strlen(ptr) + 1));
 		}
 		l = l->next;
 	}
-	return (NULL);
+	return (copieur(""));
 }
 
 char	**generate_custom_envp(t_list *v_env)
