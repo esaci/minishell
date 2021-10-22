@@ -175,6 +175,7 @@ int					free_lexer_nodes(t_lexer *l, int mode);
 t_token				*unlink_free_return(t_token *t, int skip);
 int					small_free(t_lexer *l, void *ptr, void *ptr2, int mode);
 int					small_finish_free(t_lexer *l, void *ptr, void *ptr2);
+int					arg_gestion(char **buff, t_token *t);
 char				*copieur(char *s);
 #endif
 

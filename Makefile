@@ -26,6 +26,7 @@ SRCENV = env/
 
 SRC =	$(GNLD)get_next_line.c							\
 		$(GNLD)get_next_line_utils.c					\
+		$(SRCD)$(SRCPARSING)arg_gestion.c				\
 		$(SRCD)$(SRCPARSING)print_functions.c			\
 		$(SRCD)$(SRCPARSING)sig_handler.c				\
 		$(SRCD)$(SRCPARSING)type_functions.c			\
@@ -39,7 +40,6 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCPARSING)free_functions.c			\
 		$(SRCD)$(SRCPARSING)tree_input.c				\
 		$(SRCD)$(SRCPARSING)tree_define.c				\
-		$(SRCD)$(SRCPARSING)tree_output.c 				\
 		$(SRCD)$(SRCPARSING)free_functions.c			\
 		$(SRCD)$(SRCPARSING)small_free_functions.c		\
 		$(SRCD)$(SRCEXEC)full_functions.c				\
