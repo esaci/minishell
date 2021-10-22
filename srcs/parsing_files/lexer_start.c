@@ -15,7 +15,7 @@
 TOKENTYPE	lexer_check_type2(t_token *tok, char *oldstr)
 {
 	if (tok->line[0] ==  '$')
-		return (CHAR_DOLL);
+		return (CHAR_INUT);
 	if (tok->line[0] ==  ' ')
 		return (CHAR_SPACE);
 	if (tok->line[0] ==  '-' && (oldstr[0] == CHAR_SPACE))

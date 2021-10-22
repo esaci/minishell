@@ -14,6 +14,7 @@
 
 void	envp_init(t_list *c_envp, t_lexer *l)
 {
+	l->last_exit = 0;
 	l->tok = NULL;
 	l->buffer = NULL;
 	l->node = NULL;
@@ -49,6 +50,7 @@ int	start_fonction(t_list *c_envp)
 			return (print_custom("malloc2", 2, 1, 1));
 		}
 		tree_input(lexer);
+		print_tokens(lexer);
 /* 		print_node(lexer->node); */
 		if (exec_input(lexer))
 		{

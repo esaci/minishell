@@ -68,7 +68,12 @@ char	*parse_is_command(char *arg_list, t_lexer *l, int count, int mode)
 	char	*ptr2;
 
 	if (!arg_list || !arg_list[0])
-		return (arg_list);
+	{
+		ptr = copieur(arg_list);
+		if (arg_list && mode)
+			free(arg_list);
+		return (ptr);
+	}
 	ptr2 = copieur(arg_list);
 	if (ptr2[0] != '/')
 	{

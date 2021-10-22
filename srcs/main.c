@@ -37,8 +37,6 @@ int	main(int ac, char *av[], char *envp[])
 	void	(*sigint_c)(int);
 	t_list	*c_envp;
 
-/* 	envp[1] = NULL;
-	envp[0] = 0; */
 	c_envp = ft_init_env(envp, NULL);
 	sigint_c = sig_handler();
 	start_fonction(c_envp);

@@ -58,7 +58,7 @@ int		menu(char *command, char **args, t_lexer *l);
 int		new_menu(char *command, char **args, t_lexer *l);
 void	ft_pwd(t_list *l);
 void	ft_env(t_list *env);
-void	ft_echo(char **args);
+void	ft_echo(char **args, int last_exit);
 int 	ft_check_echo(char *flag);
 void    ft_cd(char **args, t_list *l);
 void	ft_swap_env_pwd(char *arg, t_list *e);

@@ -109,6 +109,7 @@ typedef	struct s_lexer
 	char		**pathptr;
 	char		**pwd;
 	int			flagr;
+	int			last_exit;
 }	t_lexer;
 
 void				init_path_pwd(t_lexer *l, int mode);

@@ -23,22 +23,19 @@ t_list	*ft_del_variable(char *ptr, t_list *env)
 	{
 		if (tmp_e->content && !ft_memcmp(tmp_e->content, ptr, ft_strlen(ptr)))
 		{
-			if (tmp_e->content[ft_strlen(ptr)] == '=')
+			if (prev)
 			{
-				if (prev)
-				{
-					prev->next = tmp_e->next;
-					free(tmp_e->content);
-					free(tmp_e);
-				}
-				else
-				{
-					free(env->content);
-					env->content = NULL;
-					return(env);
-				}
-				return (env);
+				prev->next = tmp_e->next;
+				free(tmp_e->content);
+				free(tmp_e);
 			}
+			else
+			{
+				free(env->content);
+				env->content = NULL;
+				return(env);
+			}
+			return (env);
 		}
 		prev = tmp_e;
 		tmp_e = tmp_e->next;
