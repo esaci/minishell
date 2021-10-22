@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:27:01 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/21 19:01:13 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/23 01:34:53 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,19 @@ t_list	*ft_del_variable(char *ptr, t_list *env)
 	{
 		if (!ft_memcmp(tmp_e->content, ptr, ft_strlen(ptr)))
 		{
-			if (tmp_e->content[ft_strlen(ptr)] == '=')
+			if (prev)
 			{
-				if (prev)
-				{
-					prev->next = tmp_e->next;
-					free(tmp_e->content);
-					free(tmp_e);
-				}
-				else
-				{
-					free(env->content);
-					env->content = NULL;
-					return(env);
-				}
-				return (env);
+				prev->next = tmp_e->next;
+				free(tmp_e->content);
+				free(tmp_e);
 			}
+			else
+			{
+				free(env->content);
+				env->content = NULL;
+				return(env);
+			}
+			return (env);
 		}
 		prev = tmp_e;
 		tmp_e = tmp_e->next;
