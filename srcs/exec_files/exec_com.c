@@ -149,7 +149,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			close(fd[0]);
 		}
 		close_pipes(l, 1);
-		/* full_print(n->str); */
 		if (menu(n->str[0], n->str + 1, l) == -1)
 		{
 			small_free(l, NULL, NULL, 1);
@@ -163,9 +162,9 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		{
 			if (n->str[0])
 			{
-				print_custom(n->str[0], 2, 1, 0);
+				perror(n->str[0]);
 				small_free(l, NULL, NULL, 1);
-				exit(print_custom(" command not found", 2, 1, 1));
+				exit(print_custom("", 2, 1, 0));
 			}
 			small_free(l, NULL, NULL, 1);
 			exit(0);

@@ -8,7 +8,7 @@ int	small_free(t_lexer *l, void *ptr, void *ptr2, int mode)
 		free(ptr);
 	if (ptr2)
 		free(ptr2);
-	if (mode)
+	if (mode && l)
 	{
 		double_free(l->pwd);
 		double_free(l->pathptr);
@@ -20,10 +20,13 @@ int	small_free(t_lexer *l, void *ptr, void *ptr2, int mode)
 
 int	small_finish_free(t_lexer *l, void *ptr, void *ptr2)
 {
-	double_free(l->pwd);
-	double_free(l->pathptr);
-	l->envp = free_env(l->envp);
-	free(l);
+	if (l)
+	{
+		double_free(l->pwd);
+		double_free(l->pathptr);
+		l->envp = free_env(l->envp);
+		free(l);
+	}
 	if (ptr)
 		free(ptr);
 	if (ptr2)

@@ -72,6 +72,11 @@ int	copy_buffer(char *buff, t_token *tok)
 		buff[++count] = 0;
 		return (count);
 	}
+	else if (tok->type == CHAR_INUT)
+	{
+		c = tok->n_token->line[0];
+		print_custom("On a un CHAR_INUT", 1, 1, 1);
+	}
 	else
 		c = tok->n_token->line[0];
 	while(tok->line[count2] && tok->line[count2] != c)
