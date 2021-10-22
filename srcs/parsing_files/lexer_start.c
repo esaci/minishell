@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 18:38:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/27 18:39:01 by esaci            ###   ########.fr       */
+/*   Updated: 2021/10/23 00:10:42 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 TOKENTYPE	lexer_check_type2(t_token *tok, char *oldstr)
 {
 	if (tok->line[0] ==  '$')
-		return (CHAR_DOLL);
+		return (CHAR_INUT);
 	if (tok->line[0] ==  ' ')
 		return (CHAR_SPACE);
 	if (tok->line[0] ==  '-' && (oldstr[0] == CHAR_SPACE))

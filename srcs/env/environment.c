@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:24:28 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/18 18:45:19 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/23 00:44:25 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*custom_getenv(t_list *l, char *ptr)
 		}
 		l = l->next;
 	}
-	return (NULL);
+	return (copieur(""));
 }
 
 char	**generate_custom_envp(t_list *v_env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/29 12:08:08 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/22 23:48:40 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef	struct s_lexer
 	char		**pathptr;
 	char		**pwd;
 	int			flagr;
+	int			last_exit;
 }	t_lexer;
 
 void				init_path_pwd(t_lexer *l, int mode);

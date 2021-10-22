@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 16:55:24 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/18 19:49:57 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/23 00:08:53 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int ft_check_echo(char *flag)
     return (-1);    
 }
 
-void	ft_echo(char **args)
+void	ft_echo(char **args, int last_exit)
 {
     int flag;
 
@@ -42,7 +42,9 @@ void	ft_echo(char **args)
     }
     while (*args)
     {
-        if (ft_strncmp(*args, "\0", 1))
+        if (!ft_strncmp(*args, "$?", 2))
+            ft_putnbr_fd(last_exit, 1);
+        else if (ft_strncmp(*args, "\0", 1))
             ft_putstr_fd(*args, 1);
         (args)++;
         if (*args)

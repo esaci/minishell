@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 21:35:42 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/29 15:28:23 by Jules            ###   ########.fr       */
+/*   Updated: 2021/10/22 23:50:02 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	envp_init(t_list *c_envp, t_lexer *l)
 {
+	l->last_exit = 0;
 	l->tok = NULL;
 	l->buffer = NULL;
 	l->node = NULL;

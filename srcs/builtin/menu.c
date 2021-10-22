@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:15:38 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/21 21:28:14 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/22 23:51:17 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ char    *str_low(char *str)
     return (res);
 }
 
-int is_command(char *command, char **args, t_list *l)
+int is_command(char *command, char **args, t_list *l, int last_exit)
 {
 	if (!ft_strncmp(command, "echo", 5))
-		ft_echo(args);
+		ft_echo(args, last_exit);
 	else if (!ft_strncmp(command, "env", 4))
 		ft_env(l);
 	else if (!ft_strncmp(command, "pwd", 4))
@@ -51,7 +51,7 @@ int is_command(char *command, char **args, t_list *l)
 
 int menu(char *command, char **args, t_lexer *l)
 {
-    if (!is_command(command, args, l->envp))
+    if (!is_command(command, args, l->envp, l->last_exit))
    		return (0);
 	small_free(l, NULL, NULL, 1);
 	exit(0);
