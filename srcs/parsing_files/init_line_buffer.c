@@ -63,6 +63,8 @@ void	add_arg(t_lexer *l, int *count4, int *count2)
 	while (l->rl && l->rl[*count2] && l->rl[*count2] != ' ' && l->rl[*count2] != '\"' && l->rl[*count2] != '\'' && l->rl[*count2] != '>'
 		&& l->rl[*count2] != '<' && l->rl[*count2] != '|' && l->rl[*count2] != '$' && l->rl[*count2] != '-')
 		(*count2)++;
+	free(var);
+	free(ptr);
 }
 int	len_needed(t_lexer *l)
 {

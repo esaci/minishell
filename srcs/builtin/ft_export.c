@@ -141,7 +141,9 @@ void    export_cases(char *arg, t_list *e)
         free(ptr4);
     }
     else if (check_variable(arg) == 3)
-        ft_add_env(arg, e);
+		ft_add_env(arg, e);
+	free(ptr);
+	free(var);
 }
 
 void	ft_export(char **args, t_list *e)
