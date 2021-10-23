@@ -32,7 +32,7 @@ int ft_check_echo(char *flag)
 
 void	ft_echo(char **args, int last_exit)
 {
-    int flag;
+    int	flag;
 
     flag = 0;
     if (ft_check_echo(args[0]) == 1 && args[1])

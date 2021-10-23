@@ -50,6 +50,11 @@ int	start_fonction(t_list *c_envp)
 			return (print_custom("malloc2", 2, 1, 1));
 		}
 		tree_input(lexer);
+		if (!ft_memcmp(lexer->buffer[0], "exit", 5))
+		{
+			small_free(lexer, NULL, NULL, 0);
+			break;
+		}
 		print_tokens(lexer);
 /* 		print_node(lexer->node); */
 		if (exec_input(lexer))
