@@ -12,20 +12,115 @@
 
 #include "../../lib/libmin.h"
 
-int	len_needed(t_lexer *l)
+int	is_apo(char *ptr, char c)
 {
 	int	count;
-	int	count2;
 
-	count = ft_strlen(lexer->rl);
-	while (lexer->rl[count2])
+	count = 0;
+	while (ptr[count])
+	{
+		if (ptr[count] == c)
+			return (1);
+		count++;
+	}
+	return (0);
+}
+char    *get_name(char *arg)
+{
+	int		count;
+	char	*ptr;
+	int		count2;
+
+	count = 0;
+	while (arg && arg[count] && arg[count] != ' ' && arg[count] != '\"' && arg[count] != '\'' && arg[count] != '>'
+		&& arg[count] != '<' && arg[count] != '|' && arg[count] != '$' && arg[count] != '-')
+		count++;
+	ptr = malloc(sizeof(char) * (count + 10));
+	if (!ptr)
+		return (NULL);
+	ptr[count] = 0;
+	count2 = 0;
+	while (count2 < count)
+	{
+		ptr[count2] = arg[count2];
+		count2++;
+	} 
+    return (ptr);
+}
+
+void	add_arg(t_lexer *l, int *count4, int *count2)
+{
+	char	*ptr;
+	char	*var;
+	int		count;
+
+	var = get_name(l->rl + *count2 + 1);
+	ptr = custom_getenv(l->envp, var);
+	count = 0;
+	while (ptr && ptr[count])
+		l->line_buffer[(*count4)++] = ptr[count++];
+	(*count2)++;
+	while (l->rl && l->rl[*count2] && l->rl[*count2] != ' ' && l->rl[*count2] != '\"' && l->rl[*count2] != '\'' && l->rl[*count2] != '>'
+		&& l->rl[*count2] != '<' && l->rl[*count2] != '|' && l->rl[*count2] != '$' && l->rl[*count2] != '-')
+		(*count2)++;
+}
+int	len_needed(t_lexer *l)
+{
+	int		count;
+	int		count2;
+	char	*ptr;
+	char	*var;
+
+	count = ft_strlen(l->rl);
+	count2 = 0;
+	while (l->rl[count2])
+	{
+		if (l->rl[count2] == '$' && l->rl[count2 + 1] && l->rl[count2 + 1] != '?')
+		{
+			var = get_name(l->rl + count2 + 1);
+			ptr = custom_getenv(l->envp, var);
+			count += ft_strlen(ptr);
+			free(var);
+			free(ptr);
+		}
+		count2++;
+	}
+	return (count);
 }
 
 int	init_line_buffer(t_lexer *l)
 {
 	int	count;
+	int	count2;
+	int	count3;
+	int	count4;
 
 	if (l->line_buffer)
 		free(l->line_buffer);
 	count = len_needed(l);
+	l->line_buffer = malloc(sizeof(char) * (count + 10));
+	count2 = 0;
+	count3 = 0;
+	count4 = 0;
+	while (l->rl[count2])
+	{
+		if (l->rl[count2] == '\"' && is_apo(l->rl + count2 + 1, '\"'))
+		{
+			count3 = 1 - count3;
+			l->line_buffer[count4++] = l->rl[count2++];
+		}
+		else if (!count3 && l->rl[count2] == '\'' && is_apo(l->rl + count2 + 1, '\''))
+		{
+			l->line_buffer[count4++] = l->rl[count2++];;
+			while (l->rl[count2] && l->rl[count2] != '\'')
+				l->line_buffer[count4++] = l->rl[count2++];
+			l->line_buffer[count4++] = l->rl[count2++];;
+		}
+		else if (l->rl[count2] == '$' && l->rl[count2 + 1] && l->rl[count2 + 1] != '?')
+			add_arg(l, &count4, &count2);
+		else
+			l->line_buffer[count4++] = l->rl[count2++];
+	}
+	l->line_buffer[count4] = 0;
+	return (0);
 }

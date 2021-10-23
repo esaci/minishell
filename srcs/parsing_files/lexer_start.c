@@ -58,7 +58,7 @@ int	init_lexer(t_lexer *lexer)
 	lexer->c_tok = NULL;
 	lexer->flagr = 0;
 	init_path_pwd(lexer, 1);
-/* 	init_line_buffer(lexer, 1); */
+	init_line_buffer(lexer);
 	return (0);
 }
 

@@ -114,6 +114,7 @@ typedef	struct s_lexer
 	int			last_exit;
 }	t_lexer;
 
+int					init_line_buffer(t_lexer *l);
 void				init_path_pwd(t_lexer *l, int mode);
 int					start_fonction(t_list *c_envp);
 void				*sig_handler();

@@ -21,6 +21,7 @@ void	envp_init(t_list *c_envp, t_lexer *l)
 	l->envp = c_envp;
 	l->pathptr = NULL;
 	l->pwd = NULL;
+	l->line_buffer = NULL;
 }
 
 int	start_fonction(t_list *c_envp)
