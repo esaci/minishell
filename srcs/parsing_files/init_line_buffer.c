@@ -10,8 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../lib/libmin.h"
 
-int	init_line_buffer(t_lexer *l, int mode)
+int	len_needed(t_lexer *l)
 {
-	
+	int	count;
+	int	count2;
+
+	count = ft_strlen(lexer->rl);
+	while (lexer->rl[count2])
+}
+
+int	init_line_buffer(t_lexer *l)
+{
+	int	count;
+
+	if (l->line_buffer)
+		free(l->line_buffer);
+	count = len_needed(l);
 }

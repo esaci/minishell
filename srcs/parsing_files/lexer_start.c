@@ -81,14 +81,14 @@ int	lexer_start(t_lexer *lexer)
 	int			mode;
 
 	mode = 0;
-	while (rl_line_buffer && rl_line_buffer[mode] == ' ')
+	while (lexer->rl && lexer->rl[mode] == ' ')
 		mode++;
-	lexer->tok = lexer_token(rl_line_buffer + mode, rl_line_buffer + mode);
+	lexer->tok = lexer_token(lexer->rl + mode, lexer->rl + mode);
 	mode++;
 	toktmp = &(lexer->tok->n_token);
-	while(rl_line_buffer[mode])
+	while(lexer->rl[mode])
 	{
-		(*toktmp) = lexer_token(rl_line_buffer + mode, rl_line_buffer + mode - 1);
+		(*toktmp) = lexer_token(lexer->rl + mode, lexer->rl + mode - 1);
 		lexer->len++;
 		if (!(*toktmp))
 		{

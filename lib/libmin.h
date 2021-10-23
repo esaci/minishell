@@ -102,12 +102,14 @@ typedef	struct s_lexer
 	t_token		*tok;
 	t_token		*c_tok;
 	t_node		*node;
-	int			len;
-	char		**buffer;
 	t_pip		*pip;
 	t_list		*envp;
+	char		**buffer;
 	char		**pathptr;
 	char		**pwd;
+	char		*line_buffer;
+	char		*rl;
+	int			len;
 	int			flagr;
 	int			last_exit;
 }	t_lexer;

@@ -123,7 +123,7 @@ int	parser_lexer(t_lexer *lexer)
 t_lexer	*parser_input(t_lexer *lexer)
 {
 	init_lexer(lexer);
-	if (!rl_line_buffer[0])
+	if (!lexer->rl[0])
 		return (lexer);
 	if (lexer_start(lexer))
 		return (NULL);
