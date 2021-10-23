@@ -18,10 +18,12 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 	int	in;
 	int	out;
 
+	in = 0;
 	l->pip->pid[count] = fork();
 	if (!l->pip->pid[count])
 	{
-		in = new_menu(n->left->str[0], n->left->str + 1, l);
+		if (n->left && n->left->str && (n->left->str + 1))
+			in = new_menu(n->left->str[0], n->left->str + 1, l);
 		if (in)
 		{
 			close_pipes(l, 1);
