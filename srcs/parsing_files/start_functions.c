@@ -60,7 +60,7 @@ int	start_fonction(t_list *c_envp)
 			small_free(lexer, NULL, NULL, 0);
 			break;
 		}
-		print_tokens(lexer);
+/* 		print_tokens(lexer); */
 /* 		print_node(lexer->node); */
 		if (exec_input(lexer))
 		{
