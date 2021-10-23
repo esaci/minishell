@@ -17,20 +17,8 @@ int	poutput_strlen(t_token *tok)
 	int	count;
 	char	c;
 
+	c = '\0';
 	count = 0;
-	while(tok && tok->line[count] == ' ')
-		count++;
-	if ((tok->type == CHAR_APO || tok->type == CHAR_GUILL) && tok->line[count])
-	{
-		c = tok->line[count];
-		count++;
-	}
-	else if (!tok->n_token)
-		c = '\0';
-	else if (tok->n_token->type == CHAR_INUT || tok->n_token->type == CHAR_TIRET || tok->n_token->type  == CHAR_ARG || tok->n_token->type == CHAR_DOLL)
-		c = ' ';
-	else
-		c = tok->n_token->line[count];
 	while(tok->line[count] && tok->line[count] != c)
 		count++;
 	return (count + 10);
@@ -51,7 +39,7 @@ int	copy_buffer(char **buffu, t_token *tok)
 		count2++;
 	if (tok->type == CHAR_APO || tok->type == CHAR_GUILL)
 	{
-		count3 = arg_gestion(buffu, tok);
+		count3 = arg_gestion(*buffu, tok);
 		if (count3)
 			return (count3);
 		buff[count] = tok->line[count2];
@@ -80,7 +68,7 @@ int	copy_buffer(char **buffu, t_token *tok)
 	}
 	else if (tok->type == CHAR_INUT)
 	{
-		count3 = arg_gestion(buffu, tok);
+		count3 = arg_gestion(*buffu, tok);
 		if (count3)
 			return (count3);
 		c =  tok->n_token->line[0];

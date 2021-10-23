@@ -39,18 +39,16 @@ int		nbr_apo_guill(t_token *t)
 int		len_new_buff(t_token *t)
 {
 	int		count;
-	int		count3;
 	int		count4;
 	char	c;
 
-	count3 = nbr_apo_guill(t->n_token);
 	count = 0;
 	while (t && t->line && t->line[count])
 	{
 		c = t->line[count];
 		if (c == '<' || c == '>' || c == ' ' || c == '|')
 			break;
-		if (count3 && (c == '\'' || c == '\"'))
+		if (c == '\'' || c == '\"')
 		{
 			count4 = count + 1;
 			while (t && t->line && t->line[count4] && t->line[count4] != c)
@@ -60,30 +58,32 @@ int		len_new_buff(t_token *t)
 			count4++;
 			if (count)
 				t->n_token = unlink_free_return(t->n_token, 1);
-			count3--;
 			count = count4;
+			if (t->line[count] != '\'' && t->line[count] != '\"' && t->line[count] != '<' && t->line[count] != '>' && t->line[count] != ' ' && t->line[count] != '|')
+				t->n_token = unlink_free_return(t->n_token, 1);
+			else if (t->n_token && (t->line[count] == '\'' || t->line[count] == '\"') && t->n_token->type == CHAR_INUT)
+				t->n_token = unlink_free_return(t->n_token, 1);
 		}
 		else
+		{
 			count++;
+		}
 	}
 	return (count);
 }
 
-int		arg_gestion(char **ptr, t_token *t)
+int		arg_gestion(char *buff, t_token *t)
 {
 	int		count;
 	int		len;
-	int		count2;
-	char	*buff;
 	int		count3;
+	char	c;
 
-	buff = *ptr;
 	if (t->n_token && t->n_token->type != CHAR_APO && t->n_token->type != CHAR_GUILL)
 	{
 		if (t->type != CHAR_APO && t->type != CHAR_GUILL)
 			return (0);
 	}
-	count2 = nbr_apo_guill(t);
 	count3 = 0;
 	while (t->type == CHAR_INUT && (t->line + count3) != t->n_token->line)
 	{
@@ -98,12 +98,20 @@ int		arg_gestion(char **ptr, t_token *t)
 	len = len_new_buff(t);
 	t->type = CHAR_INUT;
 	count = count3;
+	c = 0;
 	while(count < len && t->line && t->line[count])
 	{
-		if (count2 < 1 || (t->line[count] != '\'' && t->line[count] != '\"'))
-			buff[count3++] = t->line[count];
+		if (t->line[count] == '\'' || t->line[count] == '\"')
+		{
+			if (!c)
+				c = t->line[count];
+			else if (c == t->line[count])
+				c = 0;
+			else
+				buff[count3++] = t->line[count];
+		}
 		else
-			count2--;
+			buff[count3++] = t->line[count];
 		count++;
 	}
 	buff[count3] = 0;
