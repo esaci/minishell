@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:25:17 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/22 23:53:26 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/24 23:08:41 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,13 @@ int 	ft_check_echo(char *flag);
 void    ft_cd(char **args, t_list *l);
 void    ft_unset(t_list *l, char **args);
 void	ft_export(char **args, t_list *e);
-
+int 	check_identifier(char *id);
+int 	check_variable(char *str);
+int 	loop_identifier(char **args);
+int 	check_existing(char *arg, t_list *e);
+int 	check_all_char(char *arg);
+char    *get_var(char *arg);
+char    *get_value(char *arg);
 //Environnement
 
 t_list	*ft_envp(char *envp[], char *content, t_list *v_env);

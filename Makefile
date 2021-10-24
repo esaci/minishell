@@ -62,6 +62,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCBUILTIN)ft_unset.c					\
 		$(SRCD)$(SRCBUILTIN)ft_env.c					\
 		$(SRCD)$(SRCBUILTIN)ft_export.c					\
+		$(SRCD)$(SRCBUILTIN)utils_export.c				\
 		$(SRCD)$(SRCBUILTIN)menu.c
 
 OBJ = $(SRC:.c=.o)
