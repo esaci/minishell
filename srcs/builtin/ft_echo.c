@@ -53,5 +53,4 @@ void	ft_echo(char **args, int last_exit)
 	if (flag == 0)
 		ft_putstr_fd("\n", 1);
 	return ;
-	printf("|%d|\n", last_exit);
 }

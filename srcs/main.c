@@ -38,9 +38,11 @@ int	main(int ac, char *av[], char *envp[])
 	t_list	*c_envp;
 
 	c_envp = ft_init_env(envp, NULL);
-	sigint_c = sig_handler();
+	/* get_signal(); */
 	start_fonction(c_envp);
 	return (0);
+	return (av[ac - 1][0]);
+	sigint_c = sig_handler();
 	sigint_c(av[ac - 1][0]);
 	return (0);
 }

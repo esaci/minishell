@@ -188,5 +188,9 @@ int					small_free(t_lexer *l, void *ptr, void *ptr2, int mode);
 int					small_finish_free(t_lexer *l, void *ptr, void *ptr2);
 int					arg_gestion(char *buff, t_token *t);
 char				*copieur(char *s);
+void				signal_handler(int sig);
+void				get_signal(void);
+void				signal_reset(void);
+void	 			signal_default(void);
 #endif
 

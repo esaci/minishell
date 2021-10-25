@@ -141,6 +141,8 @@ int	fill_buffer(t_lexer *lexer)
 
 int	parser_output(t_lexer *lexer)
 {
+	if (!(*lexer->rl))
+		return (0);
 	if (malloc_buffer(lexer))
 		return (1);
 	if (fill_buffer(lexer))

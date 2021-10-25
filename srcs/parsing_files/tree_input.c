@@ -87,6 +87,8 @@ t_node	*tree_input(t_lexer *lexer)
 	t_token	*t;
 	t_node	**node;
 
+	if (!lexer->rl[0])
+		return (NULL);
 	node = &(lexer->node);
 	t = lexer->tok;
 	while (t)
