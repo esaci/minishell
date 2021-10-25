@@ -80,10 +80,10 @@ int	start_fonction(t_list *c_envp)
 		tree_input(lexer);
 		if (lexer->buffer && !ft_memcmp(lexer->buffer[0], "exit", 5))
 		{
-			small_free(lexer, NULL, NULL, 0);
+			small_free(lexer, NULL, NULL, 1);
 			break;
 		}
-/* 		print_tokens(lexer); */
+		print_tokens(lexer);
 /* 		print_node(lexer->node); */
 		if (exec_input(lexer))
 		{

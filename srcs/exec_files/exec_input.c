@@ -35,6 +35,7 @@ int	exec_input(t_lexer *l)
 	count2 = 0;
 	while (count2 < count)
 		waiter_input(l, count2++);
+	/* printf("|%d|\n", l->last_exit); */
 	free(l->pip->pid);
 	free(l->pip->ppd);
 	free(l->pip);

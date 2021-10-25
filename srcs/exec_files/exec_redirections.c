@@ -25,7 +25,9 @@ int	check_order_redirection(t_lexer *l, char **ptr)
 			print_custom(ptr[0], 1, 1, 0);
 			print_custom(" file can't be read/write", 1, 1, 1);
 			free(ptr);
-			return (small_free(l, NULL, NULL, 0));
+			close_pipes(l, 1);
+			small_free(l, NULL, NULL, 1);
+			return (1);
 		}
 		if (ptr[1] && !ft_memcmp(ptr[1], l->buffer[count], ft_strlen(l->buffer[count])
 			&& (ft_strlen(l->buffer[count]) == ft_strlen(ptr[1]))))
@@ -33,7 +35,9 @@ int	check_order_redirection(t_lexer *l, char **ptr)
 			print_custom(ptr[1], 1, 1, 0);
 			print_custom(" file can't be read/write", 1, 1, 1);
 			free(ptr);
-			return (small_free(l, NULL, NULL, 0));
+			close_pipes(l, 1);
+			small_free(l, NULL, NULL, 1);
+			return (1);
 		}
 		count++;
 	}

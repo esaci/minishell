@@ -170,8 +170,13 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			if (n->str[0])
 			{
 				perror(n->str[0]);
+				if (access(n->str[0], F_OK))
+				{
+					small_free(l, NULL, NULL, 1);
+					exit(126);
+				}
 				small_free(l, NULL, NULL, 1);
-				exit(print_custom("", 2, 1, 0));
+				exit(127);
 			}
 			small_free(l, NULL, NULL, 1);
 			exit(0);
