@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:19:14 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/24 23:07:41 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/25 19:03:14 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,19 @@ void    export_cases(char *arg, t_list *e)
     char    *ptr2;
     char    *ptr3;
     char    *ptr4;
+    char    *old_value;
+    char    *test;
+    char    *test2;
     int     flag;
 
     flag = 0;
     var = get_var(arg);
     ptr = custom_getenv(e, arg);
-    ptr2 = get_value(arg);
+    test = custom_getenv(e, var);
+    old_value = get_value(arg);
     ft_del_variable(var, e);
-    if (check_all_char(ptr2) == 1 && ft_strncmp(ptr, "", 1))
+    if (check_all_char(old_value) == 1 && ft_strncmp(ptr, "", 1))
         flag = 1;
-    ptr2 = NULL;
     if (flag == 1)
     {
         ptr2 = ft_strjoin(var, "=");
@@ -108,10 +111,16 @@ void    export_cases(char *arg, t_list *e)
     ptr2 = NULL;
     if (check_variable(arg) == 1 && flag == 0)
     {
-        ptr2 = ft_strjoin(var, "=");
-        ptr3 = ft_strjoin(ptr2, ptr);
-        ptr4 = ft_strjoin(ptr3, get_value(arg));
-        ft_add_env(ptr4, e);
+        ptr2 = ft_strjoin(var, "=\"");
+        test2 = ft_substr(test, 1, ft_strlen(test) - 2);
+        ptr3 = ft_strjoin(ptr2, test2);
+        free(test2);
+        ptr4 = ft_strjoin(ptr3, ptr);
+        free(ptr2);
+        ptr2 = ft_strjoin(ptr4, get_value(arg));
+        free(ptr3);
+        ptr3 = ft_strjoin(ptr2, "\"");
+        ft_add_env(ptr3, e);
         free(ptr2);
         free(ptr3);
         free(ptr4);
@@ -132,6 +141,9 @@ void    export_cases(char *arg, t_list *e)
     {
         ft_add_env(arg, e);
     }
+    free(var);
+    free(ptr);
+    free(test);
 }
 
 void	ft_export(char **args, t_list *e)
