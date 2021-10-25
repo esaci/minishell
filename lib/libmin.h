@@ -32,7 +32,8 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
-
+# include <errno.h>
+# include <sys/errno.h>
 # include "libmin_built.h"
 
 typedef	enum	TOKENTYPE
@@ -101,16 +102,19 @@ typedef	struct s_lexer
 	t_token		*tok;
 	t_token		*c_tok;
 	t_node		*node;
-	int			len;
-	char		**buffer;
 	t_pip		*pip;
 	t_list		*envp;
+	char		**buffer;
 	char		**pathptr;
 	char		**pwd;
+	char		*line_buffer;
+	char		*rl;
+	int			len;
 	int			flagr;
 	int			last_exit;
 }	t_lexer;
 
+int					init_line_buffer(t_lexer *l);
 void				init_path_pwd(t_lexer *l, int mode);
 int					start_fonction(t_list *c_envp);
 void				*sig_handler();
@@ -175,6 +179,7 @@ int					free_lexer_nodes(t_lexer *l, int mode);
 t_token				*unlink_free_return(t_token *t, int skip);
 int					small_free(t_lexer *l, void *ptr, void *ptr2, int mode);
 int					small_finish_free(t_lexer *l, void *ptr, void *ptr2);
+int					arg_gestion(char *buff, t_token *t);
 char				*copieur(char *s);
 #endif
 

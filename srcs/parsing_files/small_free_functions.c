@@ -8,22 +8,32 @@ int	small_free(t_lexer *l, void *ptr, void *ptr2, int mode)
 		free(ptr);
 	if (ptr2)
 		free(ptr2);
-	if (mode)
+	if (mode && l)
 	{
 		double_free(l->pwd);
 		double_free(l->pathptr);
 		free_env(l->envp);
+		if (l->rl)
+			free(l->rl);
+		if (l->line_buffer)
+			free(l->line_buffer);
 		free(l);
+		return (0);
 	}
 	return (0);
 }
 
 int	small_finish_free(t_lexer *l, void *ptr, void *ptr2)
 {
-	double_free(l->pwd);
-	double_free(l->pathptr);
-	l->envp = free_env(l->envp);
-	free(l);
+	if (l)
+	{
+		double_free(l->pwd);
+		double_free(l->pathptr);
+		l->envp = free_env(l->envp);
+		if (l->line_buffer)
+			free(l->line_buffer);
+		free(l);
+	}
 	if (ptr)
 		free(ptr);
 	if (ptr2)

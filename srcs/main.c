@@ -15,6 +15,7 @@
 void	init_path_pwd(t_lexer *l, int mode)
 {
 	t_list	*c_envp;
+	char	*ptr;
 
 	c_envp = l->envp;
 	if (mode)
@@ -24,14 +25,12 @@ void	init_path_pwd(t_lexer *l, int mode)
 		if (l->pwd)
 			double_free(l->pwd);
 	}
-	while (c_envp)
-		{
-			if (!ft_memcmp(c_envp->content, "PATH", 4))
-				l->pathptr = ft_split(c_envp->content + 5, ':');
-			if (!ft_memcmp(c_envp->content, "PWD", 3))
-				l->pwd = ft_split(c_envp->content + 4, 1);
-			c_envp = c_envp->next;
-		}
+	ptr = custom_getenv(c_envp, "PATH");
+	l->pathptr = ft_split(ptr, ':');
+	free(ptr);
+	ptr = custom_getenv(c_envp, "PWD");
+	l->pwd = ft_split(ptr, 1);
+	free(ptr);
 }
 int	main(int ac, char *av[], char *envp[])
 {

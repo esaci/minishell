@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+char	*z_handle(char *dst)
+{
+	dst[0] = '0';
+	dst[1] = 0;
+	return (dst);
+}
+
 char	*ft_calcul(char *dst, long int val)
 {
 	long int	val2;
@@ -49,6 +56,8 @@ char	*ft_itoa(int n)
 	dst = malloc(sizeof(char) * 12);
 	if (!(dst))
 		return (NULL);
+	if (n == 0)
+		return (z_handle(dst));
 	dst = ft_calcul(dst, (long int)n);
 	count = ft_strlen(dst) - 1;
 	n = 0;

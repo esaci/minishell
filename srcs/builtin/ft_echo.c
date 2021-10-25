@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 16:55:24 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/25 19:50:10 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/25 19:54:12 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int ft_check_echo(char *flag)
 
 void	ft_echo(char **args, int last_exit)
 {
-    int flag;
+    int	flag;
 
     flag = 0;
     if (ft_check_echo(args[0]) == 1 && args[1])

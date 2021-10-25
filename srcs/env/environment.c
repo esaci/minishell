@@ -25,7 +25,7 @@ char	*custom_getenv(t_list *l, char *ptr)
 {
 	while (l)
 	{
-		if (!ft_memcmp(l->content, ptr, ft_strlen(ptr)))
+		if (l->content && !ft_memcmp(l->content, ptr, ft_strlen(ptr)))
 		{
 			if (l->content[ft_strlen(ptr)] == '=')
 				return (copieur(l->content + ft_strlen(ptr) + 1));

@@ -58,23 +58,11 @@ int	init_lexer(t_lexer *lexer)
 	lexer->c_tok = NULL;
 	lexer->flagr = 0;
 	init_path_pwd(lexer, 1);
+	init_line_buffer(lexer);
 	return (0);
 }
 
 t_token	*lexer_token(char *str, char *oldstr)
-{
-	t_token		*toktmp;
-
-	toktmp = malloc(sizeof(t_token) * 2);
-	if (!(toktmp))
-		return (NULL);
-	(toktmp)->line = str;
-	(toktmp)->type = lexer_check_type(toktmp, oldstr);
-	(toktmp)->n_token = NULL;
-	return (toktmp);
-}
-
-t_token	*lexer_token2(char *str, char *oldstr)
 {
 	t_token		*toktmp;
 
@@ -93,14 +81,14 @@ int	lexer_start(t_lexer *lexer)
 	int			mode;
 
 	mode = 0;
-	while (rl_line_buffer && rl_line_buffer[mode] == ' ')
+	while (lexer->line_buffer && lexer->line_buffer[mode] == ' ')
 		mode++;
-	lexer->tok = lexer_token2(rl_line_buffer + mode, rl_line_buffer + mode);
+	lexer->tok = lexer_token(lexer->line_buffer + mode, lexer->line_buffer + mode);
 	mode++;
 	toktmp = &(lexer->tok->n_token);
-	while(rl_line_buffer[mode])
+	while(lexer->line_buffer[mode])
 	{
-		(*toktmp) = lexer_token(rl_line_buffer + mode, rl_line_buffer + mode - 1);
+		(*toktmp) = lexer_token(lexer->line_buffer + mode, lexer->line_buffer + mode - 1);
 		lexer->len++;
 		if (!(*toktmp))
 		{

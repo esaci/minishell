@@ -18,7 +18,7 @@ int	waiter_input(t_lexer *l, int count)
 	waitpid(l->pip->pid[count], &(l->pip->tmp[1]), 0);
 	if (WIFEXITED(l->pip->tmp[1]))
 	{
-		l->pip->tmp[0] = WEXITSTATUS(l->pip->tmp[1]);
+		l->last_exit = WEXITSTATUS(l->pip->tmp[1]);
 	}
 	return (0);
 }
