@@ -3,10 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jules <Jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/28 12:26:12 by Jules             #+#    #+#             */
-/*   Updated: 2021/09/28 12:26:12 by Jules            ###   ########.fr       */
+/*   Created: 2021/10/13 16:42:20 by julpelle          #+#    #+#             */
+/*   Updated: 2021/10/25 20:27:44 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../lib/libmin_built.h"
+void	ft_pwd(t_list *l)
+{
+	char	*pwd;
+
+	pwd = custom_getenv(l, "PWD");
+	write(1, pwd, ft_strlen(pwd));
+	write(1, "\n", 2);
+	free(pwd);
+} 
