@@ -24,11 +24,14 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 	{
 		if (n->left && n->left->str && (n->left->str + 1))
 			in = new_menu(n->left->str[0], n->left->str + 1, l);
-		if (in)
+		if (in )
 		{
 			close_pipes(l, 1);
 			small_free(l, NULL, NULL, 1);
-			exit(0);
+			if (in)
+				exit(0);
+			printf("clairement ici\n");
+			exit(2);
 		}
 		in = (count - 1) * 2;
 		out = in + 3;
