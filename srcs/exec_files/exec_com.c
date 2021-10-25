@@ -120,7 +120,13 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		if (!n || (n->type != NODE_NOCOM && n->type != NODE_PATHCOM))
 		{
 			if (count == last_pipe(l))
+			{
+				close_pipes(l, 1);
+				small_free(l, NULL, NULL, 1);
 				exit(print_custom("Empty pipe", 2, 1, 1));
+			}
+			close_pipes(l, 1);
+			small_free(l, NULL, NULL, 1);
 			exit(1);
 		}
 		if (count != 0 && count == last_pipe(l))
@@ -130,7 +136,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		ptr = malloc(sizeof(char*) * 3);
 		if (!ptr)
-			exit(small_free(l, NULL, NULL, 0));
+			exit(small_free(l, NULL, NULL, 1));
 		ptr[2] = NULL;
 		ptr[0] = open_infiles(n->left, &(fd[0]));
 		ptr[1] = open_outfiles(n->right, &(fd[1]));
@@ -164,8 +170,13 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			if (n->str[0])
 			{
 				perror(n->str[0]);
+				if (access(n->str[0], F_OK))
+				{
+					small_free(l, NULL, NULL, 1);
+					exit(126);
+				}
 				small_free(l, NULL, NULL, 1);
-				exit(print_custom("", 2, 1, 0));
+				exit(127);
 			}
 			small_free(l, NULL, NULL, 1);
 			exit(0);

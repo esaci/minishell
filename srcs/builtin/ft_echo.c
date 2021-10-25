@@ -42,14 +42,18 @@ void	ft_echo(char **args, int last_exit)
     }
     while (*args)
     {
-        if (!ft_strncmp(*args, "$?", 2))
-            ft_putnbr_fd(last_exit, 1);
+		printf("|%s|\n", *args);
+		printf("|                 |\n");
+        if (!ft_memcmp(*args, "$?", 3))
+            printf("|                 |\n");
         else if (ft_strncmp(*args, "\0", 1))
             ft_putstr_fd(*args, 1);
         (args)++;
         if (*args)
             ft_putstr_fd(" ", 1);
     }
-    if (flag == 0)
-        ft_putstr_fd("\n", 1);
+	if (flag == 0)
+		ft_putstr_fd("\n", 1);
+	return ;
+	printf("|%d|\n", last_exit);
 }
