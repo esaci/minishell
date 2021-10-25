@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 16:55:24 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/25 20:06:24 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/25 20:18:30 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ void	ft_echo(char **args, int last_exit)
     }
     while (*args)
     {
-		printf("|%s|\n", *args);
-		printf("|                 |\n");
-        if (!ft_memcmp(*args, "$?", 3))
-            printf("|                 |\n");
+        if (!ft_strncmp(*args, "$?", 3))
+            ft_putnbr_fd(last_exit, 1);
         else if (ft_strncmp(*args, "\0", 1))
             ft_putstr_fd(*args, 1);
         (args)++;
