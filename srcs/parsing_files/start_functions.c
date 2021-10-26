@@ -28,6 +28,7 @@ int	start_fonction(t_list *c_envp)
 {
 	t_lexer		*lexer;
 	char		*ptr;
+	int			last_exit;
 
 	lexer = malloc(sizeof(t_lexer) * 2);
 	if (!lexer)
@@ -38,13 +39,15 @@ int	start_fonction(t_list *c_envp)
 	lexer->rl = ptr;
 	if (!ptr || ptr[0] == EOF)
 	{
+		last_exit = lexer->last_exit;
 		small_finish_free(lexer, ptr, NULL);
-		return (print_custom("" , 1, 0, 0));
+		return (print_custom("\nMinishell$ exit" , 1, last_exit, 1));
 	}
 	if (!ft_memcmp(lexer->rl, "exit", 5))
 	{
+		last_exit = lexer->last_exit;
 		small_finish_free(lexer, ptr, NULL);
-		return (print_custom("\nMinishell$ exit" , 1, 0, 0));
+		return (print_custom("" , 1, last_exit, 0));
 	}
 	while (ft_memcmp(lexer->rl, "exit", 5))
 	{
@@ -52,7 +55,8 @@ int	start_fonction(t_list *c_envp)
 		{
 			rl_clear_history();
 			small_free(lexer, NULL, NULL, 1);
-			return (print_custom("malloc2", 2, 1, 1));
+			print_custom("malloc2", 2, 1, 1);
+			return (1);
 		}
 		tree_input(lexer);
 		if (lexer->buffer && !ft_memcmp(lexer->buffer[0], "exit", 5))
@@ -79,9 +83,11 @@ int	start_fonction(t_list *c_envp)
 	rl_clear_history();
 	if (!ptr || ptr[0] == EOF)
 	{
+		last_exit = lexer->last_exit;
 		small_finish_free(lexer, ptr, NULL);
-		return (print_custom("" , 1, 0, 0));
+		return (print_custom("\nMinishell$ exit" , 1, last_exit, 1));
 	}
+	last_exit = lexer->last_exit;
 	small_finish_free(lexer, ptr, NULL);
-	return (print_custom("" , 1, 0, 0));
+	return (print_custom("" , 1, last_exit, 0));
 }

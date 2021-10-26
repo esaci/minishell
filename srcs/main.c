@@ -36,11 +36,12 @@ int	main(int ac, char *av[], char *envp[])
 {
 	void	(*sigint_c)(int);
 	t_list	*c_envp;
+	int		last_exit;
 
 	c_envp = ft_init_env(envp, NULL);
 	/* get_signal(); */
-	start_fonction(c_envp);
-	return (0);
+	last_exit = start_fonction(c_envp);
+	return (last_exit);
 	return (av[ac - 1][0]);
 	sigint_c = sig_handler();
 	sigint_c(av[ac - 1][0]);
