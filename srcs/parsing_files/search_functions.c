@@ -206,9 +206,7 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 			if (t->type == CHAR_DCHEVD)
 				n->type = NODE_DFILEOUT;
 			if (add_path(&n->str[count], t, l, n->str[count - 1]))
-			{
 				return (2);
-			}
 			count++;
 		}
 		t = t->n_token;

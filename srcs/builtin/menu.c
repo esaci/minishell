@@ -40,7 +40,7 @@ int	new_menu(char *command, char **args, t_lexer *lex)
 	t_list *l;
 
 	if (!(command))
-		return (0);
+		return (-1);
 	l = lex->envp;
 	if (!ft_memcmp(command, "unset", 6))
 		lex->last_exit = ft_unset(l, args);
