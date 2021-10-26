@@ -31,8 +31,7 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 			small_free(l, NULL, NULL, 1);
 			if (in)
 				exit(0);
-			printf("clairement ici\n");
-			exit(2);
+			exit(1);
 		}
 		in = (count - 1) * 2;
 		out = in + 3;
