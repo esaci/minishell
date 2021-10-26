@@ -80,3 +80,15 @@ t_token	*check_apo(t_token *t, int mode)
 	}
 	return (NULL);
 }
+
+void	init_both_nodes(t_node *left, t_node *right)
+{
+	right->type = NODE_ERROR;
+	left->type = NODE_ERROR;
+	right->str = NULL;
+	left->str = NULL;
+	left->left = NULL;
+	left->right = NULL;
+	right->right = NULL;
+	right->left = NULL;
+}

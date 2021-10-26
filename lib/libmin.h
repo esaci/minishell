@@ -193,5 +193,6 @@ void				signal_handler(int sig);
 void				get_signal(void);
 void				signal_reset(void);
 void	 			signal_default(void);
+void				init_both_nodes(t_node *left, t_node *right);
 #endif
 
