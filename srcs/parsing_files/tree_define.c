@@ -38,6 +38,7 @@ int	tree_define_left(t_node *n, t_token *t, t_lexer *l)
 	if (!left)
 		return (1);
 	n->left = left;
+	left->fd = NULL;
 	left->str = NULL;
 	if (search_command(left, t, l))
 		return (1);
@@ -75,6 +76,7 @@ int	tree_define_command(t_node *n, t_token *t, t_lexer *l)
 	t_node *right;
 	t_node *left;
 
+	n->fd = NULL;
 	if (n->type == NODE_PIPE)
 		return (0);
 	left = malloc(sizeof(t_node) * 2);

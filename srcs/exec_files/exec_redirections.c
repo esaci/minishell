@@ -91,11 +91,10 @@ char	*open_infiles(t_node *n, int *fd)
 		{
 			handle_old_fd(oldfd, *fd);
 			oldfd = 2;
-			exec_in_heredoc(n->str[count + 1]);
-			*fd = open("./srcs/here_doc_file", O_RDWR);
+			*fd = *(n->fd++);
+			/* exec_in_heredoc(n->str[count + 1], fd); */
 			if (*fd < 0)
 				return (n->str[count + 1]);
-			unlink("./srcs/here_doc_file");
 		}
 		else
 			break;

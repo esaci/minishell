@@ -102,6 +102,7 @@ typedef	struct s_node
 	char			**str;
 	struct s_node	*right;
 	struct s_node	*left;
+	int				*fd;
 }	t_node;
 
 typedef	struct s_lexer
@@ -175,7 +176,7 @@ int					count_file_redirection(t_node *left, t_node *right);
 char				*open_infiles(t_node *n, int *fd);
 char				*open_outfiles(t_node *n, int *fd);
 int					check_order_redirection(t_lexer *l, char **ptr);
-int					exec_in_heredoc(char *limiter);
+int					exec_in_heredoc(char *limiter, int *fd);
 int					last_pipe(t_lexer *l);
 char				*remove_for_arg(char *str);
 void				check_for_arg(char **str, t_lexer *l, t_node *n);
