@@ -146,11 +146,13 @@ void    export_cases(char *arg, t_list *e)
     free(test);
 }
 
-void	ft_export(char **args, t_list *e)
+int ft_export(char **args, t_list *e)
 {
     int flag;
+    int	flag2;
 
     flag = 0;
+	flag2 = 0;
     if (!*args)
     {
         flag = 1;
@@ -159,16 +161,17 @@ void	ft_export(char **args, t_list *e)
     else if (!ft_strncmp(args[0], "-", 1))
     {
         ft_putstr_fd("export : invalid option\n", 1);
-        flag = 1;
+		flag2 = 1;
     }
     else if (loop_identifier(args) != 1 && flag == 0)
     {
         ft_putstr_fd("export : not valid in this context\n", 1);
-        flag = 1;
+		flag2 = 1;
     }
     while (args && *args && flag == 0)
     {
         export_cases(*args, e);
         args++;
     }
+    return (flag2);
 }

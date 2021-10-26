@@ -12,11 +12,12 @@
 
 #include "../../lib/libmin_built.h"
 
-void    ft_unset(t_list *l, char **args)
+int	ft_unset(t_list *l, char **args)
 {
 	while(*args)
 	{
 		ft_del_variable(*args, l);
 		args++;
 	}
+	return (0);
 }

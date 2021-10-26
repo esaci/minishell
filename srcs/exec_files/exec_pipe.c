@@ -25,13 +25,12 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 		signal_reset();
 		if (n->left && n->left->str && (n->left->str + 1))
 			in = new_menu(n->left->str[0], n->left->str + 1, l);
-		if (in )
+		if (in != -1)
 		{
+			in = l->last_exit;
 			close_pipes(l, 1);
 			small_free(l, NULL, NULL, 1);
-			if (in)
-				exit(0);
-			exit(1);
+			exit(in);
 		}
 		in = (count - 1) * 2;
 		out = in + 3;

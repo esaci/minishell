@@ -12,7 +12,7 @@
 
 #include "../../lib/libmin_built.h"
 
-int is_command(char *command, char **args, t_list *l , int last_exit)
+int is_command(char *command, char **args, t_list *l , int *last_exit)
 {
 	if (!(command))
 		return (0);
@@ -29,7 +29,7 @@ int is_command(char *command, char **args, t_list *l , int last_exit)
 
 int menu(char *command, char **args, t_lexer *l)
 {
-    if (!is_command(command, args, l->envp, l->last_exit))
+    if (!is_command(command, args, l->envp, &l->last_exit))
    		return (0);
 	small_free(l, NULL, NULL, 1);
 	exit(0);
@@ -43,12 +43,14 @@ int	new_menu(char *command, char **args, t_lexer *lex)
 		return (0);
 	l = lex->envp;
 	if (!ft_memcmp(command, "unset", 6))
-		ft_unset(l, args);
+		lex->last_exit = ft_unset(l, args);
 	else if (!ft_memcmp(command, "cd", 3))
-		ft_cd(args, l);
+		lex->last_exit = ft_cd(args, l);
 	else if (!ft_memcmp(command, "export", 7))
-		ft_export(args, l);
+		lex->last_exit = ft_export(args, l);
+	else if (!ft_memcmp(command, "exit", 5))
+		lex->last_exit = ft_exit(lex, args);
 	else
-		return (0);
-	return (1); 
+		return (-1);
+	return (lex->last_exit); 
 }

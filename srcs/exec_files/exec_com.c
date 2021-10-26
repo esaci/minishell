@@ -106,11 +106,12 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		if (n && n->str && (n->str + 1))
 			tmp = new_menu(n->str[0], n->str + 1, l);
 		l->pip->pid[count] = fork();
-		if (tmp && !l->pip->pid[count])
+		if (tmp != -1 && !l->pip->pid[count])
 		{
 			close_pipes(l, 1);
+			tmp = l->last_exit;
 			small_free(l, NULL, NULL, 1);
-			exit(0);
+			exit(tmp);
 		}
 	}
 	else

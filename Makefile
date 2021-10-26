@@ -65,6 +65,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCBUILTIN)ft_env.c					\
 		$(SRCD)$(SRCBUILTIN)ft_export.c					\
 		$(SRCD)$(SRCBUILTIN)utils_export.c				\
+		$(SRCD)$(SRCBUILTIN)ft_exit.c					\
 		$(SRCD)signal_handler.c							\
 		$(SRCD)$(SRCBUILTIN)menu.c
 

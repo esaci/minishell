@@ -30,12 +30,14 @@ int ft_check_echo(char *flag)
     return (-1);    
 }
 
-void	ft_echo(char **args, int last_exit)
+void	ft_echo(char **args, int *lt)
 {
     int	flag;
+	int	last_exit;
 
+	last_exit = *lt;
     flag = 0;
-    if (ft_check_echo(args[0]) == 1)
+    while (ft_check_echo(args[0]) == 1)
     {
         flag = 1;
         (args)++;
