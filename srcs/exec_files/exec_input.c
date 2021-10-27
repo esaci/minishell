@@ -39,7 +39,6 @@ int	exec_input(t_lexer *l)
 		while (count2 < count)
 			waiter_input(l, count2++);
 		g_exit_code = 0;
-		signal_wait_input();
 		free(l->pip->pid);
 		free(l->pip->ppd);
 		free(l->pip);

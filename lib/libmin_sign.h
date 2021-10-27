@@ -13,10 +13,6 @@
 #ifndef LIBMIN_SIGN_H
 # define LIBMIN_SIGN_H
 
-void	handler_son(int num);
-void	signal_wait_input(void);
-void	get_signal_child(void);
-void	signal_ignore(void);
-void	signal_default(void);
+
 
 #endif

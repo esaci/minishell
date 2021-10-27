@@ -104,8 +104,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	tmp = 0;
 	if (last_pipe(l) == 0 || count == last_pipe(l))
 	{
-		
-		signal_ignore(); // pour le parent
 		if (n && n->str && (n->str + 1))
 			tmp = new_menu(n->str[0], n->str + 1, l);
 		l->pip->pid[count] = fork();
@@ -116,8 +114,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			small_free(l, NULL, NULL, 1);
 			exit(tmp);
 		}
-		if (!l->pip->pid[count])
-			signal_default(); //pour lenfant
 	}
 	else
 		l->pip->pid[count] = 0;
