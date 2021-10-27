@@ -47,8 +47,8 @@ int	free_lexer_nodes(t_lexer *l, int mode)
 	{
 		if (n->left && n->left->type != NODE_FILEIN && n->left->type != NODE_DFILEIN)
 		{
-			if(n->left->left->fd)
-				free(n->left->left->fd);
+			if(n->left->left->archive_fd)
+				free(n->left->left->archive_fd);
 			free(n->left->left->str);
 			free(n->left->left);
 			free(n->left->right->str);
@@ -56,8 +56,8 @@ int	free_lexer_nodes(t_lexer *l, int mode)
 		}
 		if (n->left)
 		{
-			if (n->left->fd)
-				free(n->left->fd);
+			if (n->left->archive_fd)
+				free(n->left->archive_fd);
 			free(n->left->str);
 			free(n->left);
 		}

@@ -74,6 +74,7 @@ char	*open_infiles(t_node *n, int *fd)
 	*fd = 0;
 	count = 0;
 	oldfd = 0;
+	n->archive_fd = n->fd;
 	while (n->str[count] && (!ft_memcmp(n->str[count], "<", ft_strlen(n->str[count])) ||
 			!ft_memcmp(n->str[count], "<<", ft_strlen(n->str[count]))))
 	{
@@ -111,6 +112,7 @@ char	*open_outfiles(t_node *n, int *fd)
 	*fd = 1;
 	count = 0;
 	oldfd = 0;
+	n->archive_fd = n->fd;
 	while (n->str[count] && (!ft_memcmp(n->str[count], ">", ft_strlen(n->str[count])) ||
 			!ft_memcmp(n->str[count], ">>", ft_strlen(n->str[count]))))
 	{

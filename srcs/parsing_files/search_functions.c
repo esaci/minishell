@@ -169,6 +169,13 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 	n->str[count] = NULL;
 	if (!n->str[0])
 	{
+		if (n->fd)
+		{
+			count = 0;
+			while (n->fd[count] != -1)
+				close(n->fd[count]);
+			free(n->fd);
+		}
 		n->type = NODE_FILEIN;
 		n->str[0] = "/dev/stdin";
 		n->str[1] = 0;

@@ -30,7 +30,7 @@ int	start_fonction(t_list *c_envp)
 	char		*ptr;
 	int			last_exit;
 
-	get_signal_father(); // pour le parent
+/* 	get_signal_father(); // pour le parent */
 	g_exit_code = 0;
 	lexer = malloc(sizeof(t_lexer) * 2);
 	if (!lexer)

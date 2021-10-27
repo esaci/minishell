@@ -195,7 +195,5 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			exit(print_custom("error comm", 2, 1, 1));
 		}
 	}
-	else
-		get_signal_father();
 	return (0);
 }

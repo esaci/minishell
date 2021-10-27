@@ -99,6 +99,7 @@ typedef struct s_node
 	struct s_node	*right;
 	struct s_node	*left;
 	int				*fd;
+	int				*archive_fd;
 }	t_node;
 
 typedef struct s_lexer

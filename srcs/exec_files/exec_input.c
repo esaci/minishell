@@ -44,8 +44,6 @@ int	exec_input(t_lexer *l)
 		free(l->pip->ppd);
 		free(l->pip);
 	}
-	printf("\ng_exit_code = %d\n", g_exit_code);
-	print_custom("Je passe par ici", 2, 1,1);
 	l->pip = NULL;
 	return (0);
 }
