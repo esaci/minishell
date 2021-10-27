@@ -42,44 +42,6 @@ char    *get_value(char *arg)
     return (&arg[i + 1]);
 }
 
-/*
-char    *extra_export(char *arg, char *ptr, int case, char *var)
-{
-    char    *ptr2;
-    char    *ptr3;
-    char    *ptr4;
-
-    if (case == 0)
-    {
-        ptr2 = ft_strjoin(var, "=");
-        ptr3 = ft_strjoin(ptr2, ptr);
-        free(ptr2);
-        return (ptr3);
-    }
-    if (case == 1)
-    {
-        ptr2 = ft_strjoin(var, "=");
-        ptr3 = ft_strjoin(ptr2, ptr);
-        ptr4 = ft_strjoin(ptr3, get_value(arg));
-        free(ptr2);
-        free(ptr3);
-        return (ptr4);
-    }
-    if (case == 2)
-    {
-        ptr2 = ft_strjoin(var, "=");
-        ptr3 = ft_strjoin(ptr2, "\"");
-        ptr4 = ft_strjoin(ptr3, get_value(arg));
-        free(ptr2);
-        free(ptr3);
-        ptr2 = ft_strjoin(ptr4, "\"");
-        free(ptr4);
-        return (ptr2);
-    }
-    return (res);
-}
-*/
-
 void    export_cases(char *arg, t_list *e)
 {
     char    *var;
@@ -161,6 +123,7 @@ int ft_export(char **args, t_list *e)
     else if (!ft_strncmp(args[0], "-", 1))
     {
         ft_putstr_fd("export : invalid option\n", 1);
+		args++;
 		flag2 = 1;
     }
     else if (loop_identifier(args) != 1 && flag == 0)
