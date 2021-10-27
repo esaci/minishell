@@ -57,6 +57,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCENV)environment.c					\
 		$(SRCD)$(SRCENV)init_env.c						\
 		$(SRCD)$(SRCENV)utils_env.c						\
+		$(SRCD)$(SRCENV)signal_functions.c				\
 		$(SRCD)$(SRCBUILTIN)ft_cd.c						\
 		$(SRCD)$(SRCBUILTIN)cd_utils.c					\
 		$(SRCD)$(SRCBUILTIN)ft_pwd.c					\
@@ -66,7 +67,6 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCBUILTIN)ft_export.c					\
 		$(SRCD)$(SRCBUILTIN)utils_export.c				\
 		$(SRCD)$(SRCBUILTIN)ft_exit.c					\
-		$(SRCD)signal_handler.c							\
 		$(SRCD)$(SRCBUILTIN)menu.c
 
 OBJ = $(SRC:.c=.o)

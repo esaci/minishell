@@ -38,6 +38,7 @@ int	main(int ac, char *av[], char *envp[])
 	t_list	*c_envp;
 	int		last_exit;
 
+	signal_wait_input();
 	c_envp = ft_init_env(envp, NULL);
 	/* get_signal(); */
 	last_exit = start_fonction(c_envp);

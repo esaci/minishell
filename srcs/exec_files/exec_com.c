@@ -114,6 +114,8 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			small_free(l, NULL, NULL, 1);
 			exit(tmp);
 		}
+		if (l->pip->pid[count])
+			signal_wait_command();
 	}
 	else
 		l->pip->pid[count] = 0;
@@ -163,11 +165,15 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			small_free(l, NULL, NULL, 1);
 			exit(print_custom("error comm", 2, 1, 1));
 		}
-		t = get_token_buffer(l, n->str[0]);
-		l->buffer[get_buffer_count(l, t)] = parse_is_command(l->buffer[get_buffer_count(l, t)], l, 0, 1);
-		n->str[0] = l->buffer[get_buffer_count(l, t)];
-		tmp = access(n->str[0], X_OK);
-		if (tmp || !ft_strlen(n->str[0]))
+		tmp = 1;
+		if (n->str[0])
+		{
+			t = get_token_buffer(l, n->str[0]);
+			l->buffer[get_buffer_count(l, t)] = parse_is_command(l->buffer[get_buffer_count(l, t)], l, 0, 1);
+			n->str[0] = l->buffer[get_buffer_count(l, t)];
+			tmp = access(n->str[0], X_OK);
+		}
+		if (tmp || !n->str[0])
 		{
 			if (n->str[0])
 			{

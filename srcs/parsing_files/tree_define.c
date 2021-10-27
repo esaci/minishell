@@ -91,8 +91,12 @@ int	tree_define_command(t_node *n, t_token *t, t_lexer *l)
 	n->right = right;
 	init_both_nodes(left, right);
 	if (search_infile(left, t, l))
+	{
+		left->archive_fd = left->fd;
 		return (1);
+	}
 	if (search_outfile(right, t, l))
 		return (1);
+	left->archive_fd = left->fd;
 	return (0);
 }

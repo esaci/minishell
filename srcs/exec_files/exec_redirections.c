@@ -93,7 +93,6 @@ char	*open_infiles(t_node *n, int *fd)
 			handle_old_fd(oldfd, *fd);
 			oldfd = 2;
 			*fd = *(n->fd++);
-			/* exec_in_heredoc(n->str[count + 1], fd); */
 			if (*fd < 0)
 				return (n->str[count + 1]);
 		}

@@ -39,6 +39,7 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 		exit_code = exec_com(l, n->left, count);
 		exit(exit_code);
 	}
+	signal_wait_command();
 	n = n->right;
 	return (n);
 }

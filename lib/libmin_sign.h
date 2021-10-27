@@ -13,6 +13,7 @@
 #ifndef LIBMIN_SIGN_H
 # define LIBMIN_SIGN_H
 
-
+void	signal_wait_input(void);
+void	signal_wait_command(void);
 
 #endif
