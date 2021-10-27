@@ -39,6 +39,7 @@ int	tree_define_left(t_node *n, t_token *t, t_lexer *l)
 		return (1);
 	n->left = left;
 	left->fd = NULL;
+	left->archive_fd = NULL;
 	left->str = NULL;
 	if (search_command(left, t, l))
 		return (1);
@@ -60,6 +61,7 @@ int	tree_define_right(t_node *n, t_token *t, t_lexer *l)
 	right->right = NULL;
 	n->right = right;
 	right->str = NULL;
+	right->archive_fd = NULL;
 	if (search_pipe(right, t, l))
 		return (1);
 	if (right->type != NODE_PIPE)

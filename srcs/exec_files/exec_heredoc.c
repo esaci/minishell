@@ -24,13 +24,9 @@ int	exec_in_heredoc(char *limiter, int *fdu)
 	print_custom(">", 2, 1, 0);
 	while (get_next_line(0, &ptr) > 0)
 	{
-		if ((!ft_memcmp(ptr, limiter, ft_strlen(ptr))
-			&& ft_strlen(limiter) == ft_strlen(ptr) ) || g_exit_code)
-		{
-			write(fd, limiter, ft_strlen(limiter));
-			write(fd, "\n", 1);
+		if (!ft_memcmp(ptr, limiter, ft_strlen(ptr))
+			&& ft_strlen(limiter) == ft_strlen(ptr))
 			break ;
-		}
 		print_custom(">", 2, 1, 0);
 		write(fd, ptr, ft_strlen(ptr));
 		write(fd, "\n", 1);

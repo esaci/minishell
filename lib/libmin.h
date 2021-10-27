@@ -71,7 +71,7 @@ typedef enum NODETYPE
 	NODE_ARG = 'A',
 }	NODETYPE;
 
-int						g_exit_code;
+/* int						g_exit_code; */
 
 typedef struct s_list	t_list;
 
