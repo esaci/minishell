@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/29 11:25:17 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/24 23:08:41 by julpelle         ###   ########.fr       */
+/*   Created: 2021/10/27 16:05:01 by julpelle          #+#    #+#             */
+/*   Updated: 2021/10/27 16:05:03 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,23 @@
 # include "../fcts/GNL/get_next_line.h"
 # include "libmin.h"
 
-#define RESET   "\033[0m"
-#define BLACK   "\033[30m"
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define YELLOW  "\033[33m"
-#define BLUE    "\033[34m"
-#define MAGENTA "\033[35m"
-#define CYAN    "\033[36m"
-#define WHITE   "\033[37m"
+# define RESET   "\033[0m"
+# define BLACK   "\033[30m"
+# define RED     "\033[31m"
+# define GREEN   "\033[32m"
+# define YELLOW  "\033[33m"
+# define BLUE    "\033[34m"
+# define MAGENTA "\033[35m"
+# define CYAN    "\033[36m"
+# define WHITE   "\033[37m"
 
-typedef struct  s_list
+typedef struct s_list
 {
 	char	*content;
 	void	*next;
-}	            t_list;
+}t_list;
 
-typedef struct 	s_lexer t_lexer;
+typedef struct s_lexer	t_lexer;
 
 // Builtin
 
@@ -60,7 +60,7 @@ void	ft_pwd(t_list *l);
 int		ft_exit(t_lexer *l, char **args);
 void	ft_env(t_list *env);
 void	ft_echo(char **args, int *last_exit);
-int 	ft_check_echo(char *flag);
+int		ft_check_echo(char *flag);
 int		ft_cd(char **args, t_list *l);
 void	ft_swap_env_pwd(char *arg, t_list *e);
 int		ft_cd_minus(char **args, t_list *e, int *last_exit);
@@ -68,13 +68,13 @@ int		ft_cd_other(char **args, t_list *e, int *last_exit);
 void	error_chdir(char *ptr, int *last_exit);
 int		ft_unset(t_list *l, char **args);
 int		ft_export(char **args, t_list *e);
-int 	check_identifier(char *id);
-int 	check_variable(char *str);
-int 	loop_identifier(char **args);
-int 	check_existing(char *arg, t_list *e);
-int 	check_all_char(char *arg);
-char    *get_var(char *arg);
-char    *get_value(char *arg);
+int		check_identifier(char *id);
+int		check_variable(char *str);
+int		loop_identifier(char **args);
+int		check_existing(char *arg, t_list *e);
+int		check_all_char(char *arg);
+char	get_var(char *arg);
+char	*get_value(char *arg);
 //Environnement
 
 t_list	*ft_envp(char *envp[], char *content, t_list *v_env);

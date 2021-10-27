@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/27 12:54:13 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:09:28 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # include <sys/errno.h>
 # include "libmin_built.h"
 
-typedef	enum	TOKENTYPE
+typedef enum TOKENTYPE
 {
 	CHAR_TMP = -1,
 	CHAR_INUT = 'I',
@@ -55,9 +55,9 @@ typedef	enum	TOKENTYPE
 	CHAR_NL = '\n',
 	CHAR_ERROR = '!',
 	CHAR_ARG = 'E',
-}	TOKENTYPE;
+}	t_TOKENTYPE;
 
-typedef	enum	NODETYPE
+typedef enum NODETYPE
 {
 	NODE_ERROR = 0,
 	NODE_PIPE = '|',
@@ -68,11 +68,10 @@ typedef	enum	NODETYPE
 	NODE_PATHCOM = 'C',
 	NODE_NOCOM = 'N',
 	NODE_ARG = 'A',
-}	NODETYPE;
+}	t_NODETYPE;
 
-extern int		g_exit_code;
-typedef struct 	s_list t_list;
-
+int						g_exit_code;
+typedef struct s_list	t_list;
 
 // Structures Communes
 
@@ -86,14 +85,14 @@ typedef struct s_pip
 	int		*ppd;
 }	t_pip;
 
-typedef	struct s_token
+typedef struct s_token
 {
-	TOKENTYPE	type;
+	TOKENTYPE			type;
 	char				*line;
 	struct s_token		*n_token;
 }	t_token;
 
-typedef	struct s_node
+typedef struct s_node
 {
 	NODETYPE		type;
 	char			**str;
@@ -102,7 +101,7 @@ typedef	struct s_node
 	int				*fd;
 }	t_node;
 
-typedef	struct s_lexer
+typedef struct s_lexer
 {
 	t_token		*tok;
 	t_token		*c_tok;
@@ -122,13 +121,14 @@ typedef	struct s_lexer
 int					init_line_buffer(t_lexer *l);
 void				init_path_pwd(t_lexer *l, int mode);
 int					start_fonction(t_list *c_envp);
-void				*sig_handler();
+void				*sig_handler(void);
 t_lexer				*parser_input(t_lexer *lexer);
 t_token				*parser_next_token(t_token *tok);
 t_token				*check_apo(t_token *t, int mode);
 int					parser_output(t_lexer *lexer);
 int					fill_buffer(t_lexer *lexer);
-int					print_custom(char *str, int fd, int exit_code, int saut_ligne);
+int					print_custom(char *str, int fd, int exit_code,
+						int saut_ligne);
 int					print_tokens(t_lexer *l);
 int					print_node(t_node *node);
 void				full_print(char **str);
@@ -137,7 +137,8 @@ int					free_lexer_tokens(t_lexer *lexer, int mode);
 int					init_lexer(t_lexer *lexer);
 int					lexer_start(t_lexer *lexer);
 t_node				*tree_input(t_lexer *lexer);
-char				*parse_is_command(char *arg_list, t_lexer *l, int count, int mode);
+char				*parse_is_command(char *arg_list, t_lexer *l,
+						int count, int mode);
 NODETYPE			is_any_chevron(t_token *t);
 NODETYPE			is_any_command(t_lexer *l, t_token *t, t_token *oldt);
 int					is_redirection(t_node *n2);
@@ -189,7 +190,9 @@ char				*copieur(char *s);
 void				signal_handler(int sig);
 void				get_signal(void);
 void				signal_reset(void);
-void	 			signal_default(void);
+void				signal_default(void);
+char				*signal_heredoc(int sig, char *ptr);
 void				init_both_nodes(t_node *left, t_node *right);
-#endif
+void				get_signal2(void);
 
+#endif
