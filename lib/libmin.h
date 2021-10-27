@@ -35,6 +35,7 @@
 # include <errno.h>
 # include <sys/errno.h>
 # include "libmin_built.h"
+# include "libmin_sign.h"
 
 typedef enum TOKENTYPE
 {
@@ -71,9 +72,8 @@ typedef enum NODETYPE
 }	NODETYPE;
 
 int						g_exit_code;
-typedef struct s_list	t_list;
 
-// Structures Communes
+typedef struct s_list	t_list;
 
 typedef struct s_pip
 {
@@ -187,12 +187,6 @@ int					small_free(t_lexer *l, void *ptr, void *ptr2, int mode);
 int					small_finish_free(t_lexer *l, void *ptr, void *ptr2);
 int					arg_gestion(char *buff, t_token *t);
 char				*copieur(char *s);
-void				signal_handler(int sig);
-void				get_signal(void);
-void				signal_reset(void);
-void				signal_default(void);
-char				*signal_heredoc(int sig, char *ptr);
 void				init_both_nodes(t_node *left, t_node *right);
-void				get_signal2(void);
 
 #endif

@@ -99,8 +99,8 @@ int	*join_int(int *fd, char *str)
 
 	if (!fd)
 	{
-		ptr = malloc(sizeof(int) * 2);
-		ptr[1] = -1;
+		ptr = malloc(sizeof(int) * 1);
+		ptr[0] = -1;
 		exec_in_heredoc(str, ptr);
 		return (ptr);
 	}

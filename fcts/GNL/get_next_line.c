@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "../../lib/libmin.h"
 
 int	ft_test(int fd, char **line, char *countb, char *countu)
 {
@@ -105,7 +106,7 @@ int	get_next_line(int fd, char **line)
 	ct = 0;
 	if (ft_test(fd, line, countb, countu[fd]) == - 'E')
 		return (-1);
-	while ((ft_testli(*line) == - 'E'))
+	while ((ft_testli(*line) == - 'E') && !g_exit_code)
 	{
 		ct = read(fd, countb, BUFFER_SIZE);
 		if (ct <= 0)

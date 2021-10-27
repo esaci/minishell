@@ -12,37 +12,56 @@
 
 #include "../lib/libmin.h"
 
-void	signal_handler(int sig)
+void        handler_son(int num)
 {
-    if (sig == SIGINT)
-    {
-        rl_on_new_line();
+/* 	int	fd; */
+
+	if (num == SIGINT)
+	{
+		if (!g_exit_code)
+		{
+			g_exit_code = 130;
+/* 			fd = open("./srcs/here_doc_file", O_RDWR);
+			print_custom("", fd, 1, 0); */
+/* 			rl_replace_line("", 0);
+			rl_redisplay(); */
+		}
+		g_exit_code = 130;
+	}
+	else if (num == SIGQUIT)
+	{
 		print_custom("", 1, 1, 1);
-        rl_replace_line("", 0);
-        rl_redisplay();
-        g_exit_code = 130;
-    }
-    if (sig == SIGQUIT)
-    {
-        print_custom("Quit : 3", 1, 1, 1);
-        g_exit_code = 131;
-    }
+		print_custom("Quit (core dumped)", 1, 1, 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_exit_code = 131;
+	}
 }
 
-void	get_signal(void)
+void	signal_wait_input(void)
 {
-    signal(SIGINT, signal_handler);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+/* 	signal(SIGINT, signal_handler); */
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
 }
 
-void    signal_reset(void)
+void	get_signal_child(void)
 {
-    signal(SIGINT, SIG_IGN);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+	/* signal(SIGINT, signal_handler); */
+	signal(SIGQUIT, handler_son);
+}
+
+void	signal_ignore(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	signal_default(void)
 {
-    signal(SIGINT, SIG_DFL);
-    signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }

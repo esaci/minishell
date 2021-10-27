@@ -89,6 +89,8 @@ void	init_both_nodes(t_node *left, t_node *right)
 	left->str = NULL;
 	left->left = NULL;
 	left->right = NULL;
+	left->fd = NULL;
 	right->right = NULL;
 	right->left = NULL;
+	right->fd = NULL;
 }

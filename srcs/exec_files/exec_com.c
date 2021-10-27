@@ -100,12 +100,14 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	t_token	*t;
 	char	**ptr;
 
+
 	tmp = 0;
 	if (last_pipe(l) == 0 || count == last_pipe(l))
 	{
+		
+		signal_ignore(); // pour le parent
 		if (n && n->str && (n->str + 1))
 			tmp = new_menu(n->str[0], n->str + 1, l);
-		signal_reset();
 		l->pip->pid[count] = fork();
 		if (tmp != -1 && !l->pip->pid[count])
 		{
@@ -114,12 +116,13 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			small_free(l, NULL, NULL, 1);
 			exit(tmp);
 		}
+		if (!l->pip->pid[count])
+			signal_default(); //pour lenfant
 	}
 	else
 		l->pip->pid[count] = 0;
 	if (!l->pip->pid[count])
 	{
-		signal_default();
 		if (!n || (n->type != NODE_NOCOM && n->type != NODE_PATHCOM))
 		{
 			if (count == last_pipe(l))
@@ -192,5 +195,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			exit(print_custom("error comm", 2, 1, 1));
 		}
 	}
+	else
+		get_signal_father();
 	return (0);
 }

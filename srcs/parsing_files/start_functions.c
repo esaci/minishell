@@ -30,12 +30,13 @@ int	start_fonction(t_list *c_envp)
 	char		*ptr;
 	int			last_exit;
 
+	get_signal_father(); // pour le parent
+	g_exit_code = 0;
 	lexer = malloc(sizeof(t_lexer) * 2);
 	if (!lexer)
 		return (1);
 	envp_init(c_envp, lexer);
 	ptr = NULL;
-	get_signal();
 	ptr = readline("Minishell$ ");
 	lexer->rl = ptr;
 	if (!ptr || ptr[0] == EOF)
@@ -68,12 +69,20 @@ int	start_fonction(t_list *c_envp)
 			small_free(lexer, ptr, NULL, 1);
 			return (print_custom("malloc4", 2, 1, 1));
 		}
-		get_signal();
 		add_history(ptr);
 		small_free(lexer, ptr, NULL, 0);
-		ptr = readline("Minishell$ ");
+		if (!g_exit_code)
+		{
+			ptr = readline("Minishell$ ");
+			rl_on_new_line();
+		}
+		else
+		{
+			ptr = readline(NULL);
+			rl_on_new_line();
+			g_exit_code = 0;
+		}
 		lexer->rl = ptr;
-		rl_on_new_line();
 		if (!ptr || ptr[0] == EOF)
 			break ;
 	}

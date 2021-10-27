@@ -56,7 +56,7 @@ int	free_lexer_nodes(t_lexer *l, int mode)
 		}
 		if (n->left)
 		{
-			if(n->left->fd)
+			if (n->left->fd)
 				free(n->left->fd);
 			free(n->left->str);
 			free(n->left);
