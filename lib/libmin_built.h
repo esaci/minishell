@@ -73,7 +73,7 @@ int		check_variable(char *str);
 int		loop_identifier(char **args);
 int		check_existing(char *arg, t_list *e);
 int		check_all_char(char *arg);
-char	get_var(char *arg);
+char	*get_var(char *arg);
 char	*get_value(char *arg);
 //Environnement
 

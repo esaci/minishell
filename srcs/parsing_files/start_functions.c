@@ -35,6 +35,7 @@ int	start_fonction(t_list *c_envp)
 		return (1);
 	envp_init(c_envp, lexer);
 	ptr = NULL;
+	get_signal();
 	ptr = readline("Minishell$ ");
 	lexer->rl = ptr;
 	if (!ptr || ptr[0] == EOF)

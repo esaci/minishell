@@ -55,7 +55,7 @@ typedef enum TOKENTYPE
 	CHAR_NL = '\n',
 	CHAR_ERROR = '!',
 	CHAR_ARG = 'E',
-}	t_TOKENTYPE;
+}	TOKENTYPE;
 
 typedef enum NODETYPE
 {
@@ -68,7 +68,7 @@ typedef enum NODETYPE
 	NODE_PATHCOM = 'C',
 	NODE_NOCOM = 'N',
 	NODE_ARG = 'A',
-}	t_NODETYPE;
+}	NODETYPE;
 
 int						g_exit_code;
 typedef struct s_list	t_list;
