@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 19:50:15 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/04 19:50:41 by esaci            ###   ########.fr       */
+/*   Updated: 2021/10/27 12:57:43 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	exec_input(t_lexer *l)
 	while (count2 < count)
 		waiter_input(l, count2++);
 	/* printf("|%d|\n", l->last_exit); */
+	get_signal();
 	free(l->pip->pid);
 	free(l->pip->ppd);
 	free(l->pip);

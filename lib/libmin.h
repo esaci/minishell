@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/25 20:28:16 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/27 12:54:13 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,8 @@ typedef	enum	NODETYPE
 	NODE_ARG = 'A',
 }	NODETYPE;
 
+extern int		g_exit_code;
 typedef struct 	s_list t_list;
-
-# define SUCCESS 0
-# define ERROR 1
-# define ERROR_INPUT 2
 
 
 // Structures Communes

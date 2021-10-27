@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 23:13:29 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/24 23:19:52 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/27 12:56:54 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	signal_handler(int sig)
 		print_custom("", 1, 1, 1);
         rl_replace_line("", 0);
         rl_redisplay();
+        g_exit_code = 130;
+    }
+    if (sig == SIGQUIT)
+    {
+        print_custom("Quit : 3", 1, 1, 1);
+        g_exit_code = 131;
     }
 }
 

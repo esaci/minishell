@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_com.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 20:17:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/04 20:17:47 by esaci            ###   ########.fr       */
+/*   Updated: 2021/10/27 13:00:19 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	{
 		if (n && n->str && (n->str + 1))
 			tmp = new_menu(n->str[0], n->str + 1, l);
+		signal_reset();
 		l->pip->pid[count] = fork();
 		if (tmp != -1 && !l->pip->pid[count])
 		{
@@ -118,6 +119,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		l->pip->pid[count] = 0;
 	if (!l->pip->pid[count])
 	{
+		signal_default();
 		if (!n || (n->type != NODE_NOCOM && n->type != NODE_PATHCOM))
 		{
 			if (count == last_pipe(l))

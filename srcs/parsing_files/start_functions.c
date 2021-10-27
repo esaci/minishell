@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 21:35:42 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/22 23:50:02 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/27 12:57:04 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	start_fonction(t_list *c_envp)
 			small_free(lexer, ptr, NULL, 1);
 			return (print_custom("malloc4", 2, 1, 1));
 		}
+		get_signal();
 		add_history(ptr);
 		small_free(lexer, ptr, NULL, 0);
 		ptr = readline("Minishell$ ");
