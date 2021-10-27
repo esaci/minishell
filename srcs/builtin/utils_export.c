@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 22:46:34 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/24 23:02:59 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:16:43 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int check_identifier(char *id)
         return (-1);
     while (id[i])
     {
-        if (!ft_isalnum(id[i]) && (id[i] != '=' && id[i] != '+'))
+        if (!ft_isalnum(id[i]) && (id[i] != '=' && id[i] != '+' && id[i] != '-'))
             return (-1);
         i++;
     }
