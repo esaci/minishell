@@ -6,7 +6,7 @@
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 10:51:13 by esaci             #+#    #+#             */
-/*   Updated: 2019/11/25 21:24:54 by esaci            ###   ########.fr       */
+/*   Updated: 2021/10/27 15:59:17 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	remp_n(char **ptr, int len)
 	}
 }
 
-
 char	**ft_split(char const *s, char c)
 {
 	int		count;
@@ -89,7 +88,7 @@ char	**ft_split(char const *s, char c)
 		while (s[count3] == c)
 			count3++;
 		if (s[count3] == '\0')
-			return (ft_vide(ptr, (char*)s));
+			return (ft_vide(ptr, (char *)s));
 		ptr[count] = ft_substr(s, count3, ft_len(s, c, count3));
 		count3 = count3 + ft_len(s, c, count3);
 		count++;
