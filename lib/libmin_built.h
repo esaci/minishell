@@ -75,6 +75,7 @@ int		check_existing(char *arg, t_list *e);
 int		check_all_char(char *arg);
 char	*get_var(char *arg);
 char	*get_value(char *arg);
+void	ft_cd_back(char **args, t_list *e, int *last_exit);
 //Environnement
 
 t_list	*ft_envp(char *envp[], char *content, t_list *v_env);

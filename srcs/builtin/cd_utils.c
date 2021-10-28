@@ -40,7 +40,6 @@ int	ft_cd_minus(char **args, t_list *e, int *last_exit)
 
 int	ft_cd_other(char **args, t_list *e, int *last_exit)
 {
-	char	*path;
 	char	*ptr;
 	char	*ptr2;
 
@@ -48,15 +47,9 @@ int	ft_cd_other(char **args, t_list *e, int *last_exit)
 		error_chdir(*args, last_exit);
 	ptr = custom_getenv(e, "PWD");
 	ptr2 = ft_strjoin(ptr, *args);
-	printf("PTR2 : %s\n", ptr2);
 	if (chdir(ptr2) == 0)
 		ft_swap_env_pwd(ptr2, e);
-	else
-	{
-		path = custom_getenv(e, "PATH");
-		ft_swap_env_pwd(path, e);
-		free(path);
-	}
+	free(ptr2);
 	return (0);
 }
 
@@ -74,7 +67,7 @@ void	ft_cd_back(char **args, t_list *e, int *last_exit)
 		i--;
 	ptr2 = ft_substr(ptr, 0, i);
 	free(ptr);
-	printf("ptr2 : %s\n", ptr2);
+	chdir(ptr2);
 	ft_swap_env_pwd(ptr2, e);
 	free(ptr2);
 }
