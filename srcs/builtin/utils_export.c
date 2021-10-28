@@ -12,6 +12,8 @@
 
 #include "../../lib/libmin_built.h"
 
+#include "../../lib/libmin_built.h"
+
 int check_identifier(char *id)
 {
     int i;

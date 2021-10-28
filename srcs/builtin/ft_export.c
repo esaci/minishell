@@ -126,14 +126,19 @@ int ft_export(char **args, t_list *e)
 		args++;
 		flag2 = 1;
     }
+	/*
     else if (loop_identifier(args) != 1 && flag == 0)
     {
         ft_putstr_fd("export : not valid in this context\n", 1);
 		flag2 = 1;
     }
+	*/
     while (args && *args && flag == 0)
     {
-        export_cases(*args, e);
+		if (loop_identifier(args) != 1 && flag == 0)
+			flag = 1;
+		else
+        	export_cases(*args, e);
         args++;
     }
     return (flag2);
