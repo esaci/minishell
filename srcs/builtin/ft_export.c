@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:19:14 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/27 16:11:46 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/28 17:09:12 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,19 +126,17 @@ int ft_export(char **args, t_list *e)
 		args++;
 		flag2 = 1;
     }
-	/*
-    else if (loop_identifier(args) != 1 && flag == 0)
-    {
-        ft_putstr_fd("export : not valid in this context\n", 1);
-		flag2 = 1;
-    }
-	*/
+
     while (args && *args && flag == 0)
     {
-		if (loop_identifier(args) != 1 && flag == 0)
-			flag = 1;
-		else
-        	export_cases(*args, e);
+        flag2 = 0;
+        if (loop_identifier(args) != 1)
+        {
+            ft_putstr_fd("export : not valid in this context\n", 1);
+            flag2 = 1;
+        }
+        if (flag2 != 1)
+            export_cases(*args, e);
         args++;
     }
     return (flag2);
