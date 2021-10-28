@@ -62,7 +62,7 @@ int	start_fonction(t_list *c_envp)
 			print_custom("malloc2", 2, 1, 1);
 			return (1);
 		}
-		/* tree_input(lexer); */
+		tree_input(lexer);
 /* 		print_custom(lexer->line_buffer, 1, 1, 1); */
 		/* print_tokens(lexer); */
 		/* print_node(lexer->node); */
