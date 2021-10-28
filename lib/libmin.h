@@ -192,5 +192,5 @@ void				init_both_nodes(t_node *left, t_node *right);
 void				close_archive(int *ptr);
 int					len_needed(t_lexer *l);
 char				*get_name(char *arg);
-
+void				ultime_close_archive(t_lexer *l);
 #endif

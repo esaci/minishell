@@ -108,7 +108,10 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			tmp = new_menu(n->str[0], n->str + 1, l);
 		l->pip->pid[count] = fork();
 		if (l->pip->pid[count])
-			close_archive(n->left->archive_fd);
+		{
+			if (n && n->left && n->left->left && n->left->left->archive_fd)
+				close_archive(n->left->archive_fd);
+		}
 		if (tmp != -1 && !l->pip->pid[count])
 		{
 			close_pipes(l, 1);
@@ -163,6 +166,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 		}
+		ultime_close_archive(l);
 		close_pipes(l, 1);
 		if (menu(n->str[0], n->str + 1, l) == -1)
 		{

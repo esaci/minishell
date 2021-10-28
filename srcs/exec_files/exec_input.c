@@ -55,6 +55,7 @@ int	exec_input(t_lexer *l)
 	if (*g_exit_code == 130 || *g_exit_code == 131)
 		l->last_exit = *g_exit_code;
 	signal_wait_input();
+	ultime_close_archive(l);
 	free(l->pip->pid);
 	free(l->pip->ppd);
 	free(l->pip);

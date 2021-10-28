@@ -66,11 +66,14 @@ void	add_arg(t_lexer *l, int *count4, int *count2)
 		*count4 = *count4 - 1;
 	}
 	(*count2)++;
+	if (!ft_isalnum(l->rl[*count2]))
+		l->line_buffer[(*count4)++] = '$';
 	while (l->rl && l->rl[*count2] && ft_isalnum(l->rl[*count2]))
 		(*count2)++;
 	free(var);
 	free(ptr);
 }
+
 int	len_needed(t_lexer *l)
 {
 	int		count;
@@ -118,10 +121,10 @@ int	init_line_buffer(t_lexer *l)
 		}
 		else if (!count3 && l->rl[count2] == '\'' && is_apo(l->rl + count2 + 1, '\''))
 		{
-			l->line_buffer[count4++] = l->rl[count2++];;
+			l->line_buffer[count4++] = l->rl[count2++];
 			while (l->rl[count2] && l->rl[count2] != '\'')
 				l->line_buffer[count4++] = l->rl[count2++];
-			l->line_buffer[count4++] = l->rl[count2++];;
+			l->line_buffer[count4++] = l->rl[count2++];
 		}
 		else if (l->rl[count2] == '$' && l->rl[count2 + 1] && l->rl[count2 + 1] != '?')
 			add_arg(l, &count4, &count2);
