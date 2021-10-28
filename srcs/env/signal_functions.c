@@ -56,11 +56,13 @@ void	signal_wait_input(void)
 {
 	signal(SIGINT, handler_parent);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);
 	signal(SIGTERM, SIG_IGN);
 }
 
 void	signal_wait_command(void)
 {
+	signal(SIGPIPE, SIG_IGN);
 	signal(SIGINT, handler_parent_muted);
 	signal(SIGQUIT, handler_parent_muted);
 	signal(SIGTERM, SIG_IGN);
@@ -68,6 +70,7 @@ void	signal_wait_command(void)
 
 void	signal_wait_heredoc(void)
 {
+	signal(SIGPIPE, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTERM, SIG_IGN);
 	signal(SIGINT, handler_parent_heredoc);
@@ -75,6 +78,7 @@ void	signal_wait_heredoc(void)
 
 void	signal_default(void)
 {
+	signal(SIGPIPE, SIG_IGN);
     signal(SIGINT, SIG_DFL);
     signal(SIGQUIT, SIG_DFL);
 }

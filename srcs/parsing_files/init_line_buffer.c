@@ -114,7 +114,7 @@ int	init_line_buffer(t_lexer *l)
 	count4 = 0;
 	while (l->rl[count2])
 	{
-		if (l->rl[count2] == '\"' && is_apo(l->rl + count2 + 1, '\"'))
+		if (l->rl[count2] == '\"' && (is_apo(l->rl + count2 + 1, '\"') || count3))
 		{
 			count3 = 1 - count3;
 			l->line_buffer[count4++] = l->rl[count2++];

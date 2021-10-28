@@ -19,11 +19,15 @@ void	ultime_close_archive(t_lexer *l)
 	n = l->node;
 	while (n && n->type == NODE_PIPE)
 	{
-		close_archive(n->left->left->fd);
+		if (n && n->left && n->left->left && n->left->left->archive_fd)
+			close_archive(n->left->left->archive_fd);
 		n = n->right;
 	}
 	if (n)
-		close_archive(n->left->fd);
+	{
+		if (n && n->left && n->left->archive_fd)
+			close_archive(n->left->archive_fd);
+	}
 }
 
 int	exec_input(t_lexer *l)
@@ -34,7 +38,8 @@ int	exec_input(t_lexer *l)
 
 	if (!l || !l->node || !l->tok || l->flagr[0] || !l->rl[0])
 	{
-		ultime_close_archive(l);
+		if (l)
+			ultime_close_archive(l);
 		return (0);
 	}
 	if (init_pip(l))
