@@ -25,15 +25,14 @@ int	is_apo(char *ptr, char c)
 	}
 	return (0);
 }
-char    *get_name(char *arg)
+char	*get_name(char *arg)
 {
 	int		count;
 	char	*ptr;
 	int		count2;
 
 	count = 0;
-	while (arg && arg[count] && arg[count] != ' ' && arg[count] != '\"' && arg[count] != '\'' && arg[count] != '>'
-		&& arg[count] != '<' && arg[count] != '|' && arg[count] != '$' && arg[count] != '-')
+	while (arg && arg[count] && ft_isalnum(arg[count]))
 		count++;
 	ptr = malloc(sizeof(char) * (count + 10));
 	if (!ptr)
@@ -60,8 +59,7 @@ void	add_arg(t_lexer *l, int *count4, int *count2)
 	while (ptr && ptr[count])
 		l->line_buffer[(*count4)++] = ptr[count++];
 	(*count2)++;
-	while (l->rl && l->rl[*count2] && l->rl[*count2] != ' ' && l->rl[*count2] != '\"' && l->rl[*count2] != '\'' && l->rl[*count2] != '>'
-		&& l->rl[*count2] != '<' && l->rl[*count2] != '|' && l->rl[*count2] != '$' && l->rl[*count2] != '-')
+	while (l->rl && l->rl[*count2] && ft_isalnum(l->rl[*count2]))
 		(*count2)++;
 	free(var);
 	free(ptr);

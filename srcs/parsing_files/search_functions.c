@@ -92,7 +92,7 @@ int	search_pipe(t_node *n, t_token *t, t_lexer *l)
 	return (0);
 }
 
-int	*join_int(int *fd, char *str)
+int	*join_int(int *fd, char *str, t_lexer *l)
 {
 	int	*ptr;
 	int	count;
@@ -102,7 +102,7 @@ int	*join_int(int *fd, char *str)
 		ptr = malloc(sizeof(int) * 2);
 		ptr[0] = -1;
 		ptr[1] = -1;
-		exec_in_heredoc(str, ptr);
+		exec_in_heredoc(str, ptr, l);
 		return (ptr);
 	}
 	count = 0;
@@ -115,7 +115,7 @@ int	*join_int(int *fd, char *str)
 		ptr[count] = fd[count];
 		count++;
 	}
-	exec_in_heredoc(str, ptr + count);
+	exec_in_heredoc(str, ptr + count, l);
 	ptr[count + 1] = -1;
 	free(fd);
 	return (ptr);
@@ -154,7 +154,7 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 			if (t->type == CHAR_DCHEVG)
 			{
 				if (t->n_token && t->n_token->type == CHAR_INUT)
-					n->fd = join_int(n->fd, l->buffer[get_buffer_count(l, t->n_token)]);
+					n->fd = join_int(n->fd, l->buffer[get_buffer_count(l, t->n_token)], l);
 				else
 				{
 					free(n->fd);

@@ -175,7 +175,7 @@ int					count_file_redirection(t_node *left, t_node *right);
 char				*open_infiles(t_node *n, int *fd);
 char				*open_outfiles(t_node *n, int *fd);
 int					check_order_redirection(t_lexer *l, char **ptr);
-int					exec_in_heredoc(char *limiter, int *fd);
+int					exec_in_heredoc(char *limiter, int *fd, t_lexer *l);
 int					last_pipe(t_lexer *l);
 char				*remove_for_arg(char *str);
 void				check_for_arg(char **str, t_lexer *l, t_node *n);
@@ -190,5 +190,7 @@ int					arg_gestion(char *buff, t_token *t);
 char				*copieur(char *s);
 void				init_both_nodes(t_node *left, t_node *right);
 void				close_archive(int *ptr);
+int					len_needed(t_lexer *l);
+char				*get_name(char *arg);
 
 #endif
