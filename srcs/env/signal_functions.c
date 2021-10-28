@@ -20,6 +20,7 @@ void	handler_parent(int num)
 		print_custom("", 1, 1, 1);
 		rl_replace_line("", 0);
 		rl_redisplay();
+		*g_exit_code = 130;
 	}
 }
 
@@ -41,7 +42,10 @@ void	handler_parent_heredoc(int num)
 void	handler_parent_muted(int num)
 {
 	if (num == SIGINT)
+	{
 		print_custom("", 1, 1, 1);
+		*g_exit_code = 130;
+	}
 }
 
 void	signal_wait_input(void)

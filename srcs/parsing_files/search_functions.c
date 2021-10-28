@@ -145,7 +145,7 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 	count = 0;
 	while (t && t->type != CHAR_PIPE)
 	{
-		if (t->type == CHAR_CHEVG || t->type == CHAR_DCHEVG)
+		if ((t->type == CHAR_CHEVG || t->type == CHAR_DCHEVG) && !g_exit_code[0])
 		{
 			count2 = get_buffer_count(l, t);
 			n->str[count] = l->buffer[count2];
@@ -184,10 +184,12 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 	}
 	if (*g_exit_code)
 	{
+		signal_wait_input();
 		dup2(*g_exit_code, STDIN_FILENO);
 		close(*g_exit_code);
 		*g_exit_code = 130;
 	}
+
 	return (0);
 }
 

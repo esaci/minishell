@@ -104,7 +104,6 @@ int	exec_in_heredoc(char *limiter, int *fdu, t_lexer *l)
 	fd = open("./srcs/here_doc_file", O_RDWR);
 	if (fd < 0)
 		exit(print_custom("here_doc file can't be read/write", 2, 1, 1));
-	printf("|%d|\n", *g_exit_code);
 	print_custom(">", 2, 1, 0);
 	while (get_next_line(0, &ptr) > 0)
 	{
@@ -118,7 +117,6 @@ int	exec_in_heredoc(char *limiter, int *fdu, t_lexer *l)
 		write(fd, "\n", 1);
 		free(ptr);
 	}
-
 	if (ptr)
 		free(ptr);
 	close(fd);

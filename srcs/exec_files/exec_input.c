@@ -52,6 +52,8 @@ int	exec_input(t_lexer *l)
 	count2 = 0;
 	while (count2 < count)
 		waiter_input(l, count2++);
+	if (*g_exit_code == 130 || *g_exit_code == 131)
+		l->last_exit = *g_exit_code;
 	signal_wait_input();
 	free(l->pip->pid);
 	free(l->pip->ppd);
