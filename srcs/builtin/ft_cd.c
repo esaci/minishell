@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 18:42:13 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/18 19:51:27 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/28 17:14:43 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ int	ft_cd(char **args, t_list *l)
 		print_custom("cd: too many arguments", 2, 1, 1);
 		last_exit = 1;
 	}
-	else if (!args | !(*args))
+	else if (!args || !(*args) || (*args && *args[0] == '~'))
 		ft_cd_noargs(l, &last_exit);
 	else if (args[0][0] == '-')
 		ft_cd_minus(args, l, &last_exit);
+	else if (args[0][0] == '.' && !args[0][1])
+		;
+	else if (args[0][0] == '.' && args[0][1] == '.' && !args[0][2])
+		ft_cd_back(args, l, &last_exit);
 	else
 		ft_cd_arg(args, l, &last_exit);
 	return (last_exit);
