@@ -56,8 +56,15 @@ void	add_arg(t_lexer *l, int *count4, int *count2)
 	var = get_name(l->rl + *count2 + 1);
 	ptr = custom_getenv(l->envp, var);
 	count = 0;
+	if (ptr && ptr[count] && ptr[count] == '\"')
+		count++;
 	while (ptr && ptr[count])
 		l->line_buffer[(*count4)++] = ptr[count++];
+	if (l->line_buffer[(*count4) - 1] == '\"')
+	{
+		l->line_buffer[(*count4) - 1] = 0;
+		*count4 = *count4 - 1;
+	}
 	(*count2)++;
 	while (l->rl && l->rl[*count2] && ft_isalnum(l->rl[*count2]))
 		(*count2)++;
