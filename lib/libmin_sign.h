@@ -15,5 +15,6 @@
 
 void	signal_wait_input(void);
 void	signal_wait_command(void);
+void	signal_wait_heredoc(void);
 
 #endif

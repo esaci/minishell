@@ -93,6 +93,7 @@ char	*open_infiles(t_node *n, int *fd)
 			handle_old_fd(oldfd, *fd);
 			oldfd = 2;
 			*fd = *(n->fd++);
+			n->archive_fd[0] = -1;
 			if (*fd < 0)
 				return (n->str[count + 1]);
 		}

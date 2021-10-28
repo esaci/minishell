@@ -71,7 +71,7 @@ typedef enum NODETYPE
 	NODE_ARG = 'A',
 }	NODETYPE;
 
-/* int						g_exit_code; */
+int						*g_exit_code;
 
 typedef struct s_list	t_list;
 
@@ -115,7 +115,7 @@ typedef struct s_lexer
 	char		*line_buffer;
 	char		*rl;
 	int			len;
-	int			flagr;
+	int			flagr[1];
 	int			last_exit;
 }	t_lexer;
 
@@ -189,5 +189,6 @@ int					small_finish_free(t_lexer *l, void *ptr, void *ptr2);
 int					arg_gestion(char *buff, t_token *t);
 char				*copieur(char *s);
 void				init_both_nodes(t_node *left, t_node *right);
+void				close_archive(int *ptr);
 
 #endif

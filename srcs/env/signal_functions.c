@@ -23,6 +23,26 @@ void	handler_parent(int num)
 	}
 }
 
+void	handler_parent_heredoc(int num)
+{
+	int	fd;
+
+	if (num == SIGINT)
+	{
+		fd = open("./srcs/here_doc_file", O_RDWR);
+		print_custom("", fd, 1, 1);
+		close(fd);
+		print_custom("", 1, 1, 1);
+/* 		*g_exit_code = 130; */
+	}
+}
+
+void	handler_parent_muted(int num)
+{
+	if (num == SIGINT)
+		print_custom("", 1, 1, 1);
+}
+
 void	signal_wait_input(void)
 {
 	signal(SIGINT, handler_parent);
@@ -32,7 +52,14 @@ void	signal_wait_input(void)
 
 void	signal_wait_command(void)
 {
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, handler_parent_muted);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTERM, SIG_IGN);
+}
+
+void	signal_wait_heredoc(void)
+{
+	signal(SIGINT, handler_parent_heredoc);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTERM, SIG_IGN);
 }

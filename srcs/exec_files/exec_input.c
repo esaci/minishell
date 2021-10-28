@@ -18,7 +18,7 @@ int	exec_input(t_lexer *l)
 	int		count;
 	int		count2;
 
-	if (!l || !l->node || !l->tok || l->flagr || !l->rl[0])
+	if (!l || !l->node || !l->tok || l->flagr[0] || !l->rl[0])
 		return (0);
 	if (init_pip(l))
 	{

@@ -93,7 +93,9 @@ void	close_pipes(t_lexer *l, int mode)
 	while (n)
 	{
 		if (n->type == NODE_PIPE)
+		{
 			count++;
+		}
 		n = n->right;
 	}
 	count2 = 0;

@@ -56,7 +56,8 @@ int	init_lexer(t_lexer *lexer)
 	lexer->node = NULL;
 	lexer->pip = NULL;
 	lexer->c_tok = NULL;
-	lexer->flagr = 0;
+	lexer->flagr[0] = 0;
+	g_exit_code = lexer->flagr;
 	if (!(*lexer->rl))
 		return (0);
 	init_path_pwd(lexer, 1);

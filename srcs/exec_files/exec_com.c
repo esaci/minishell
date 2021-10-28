@@ -197,5 +197,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			exit(print_custom("error comm", 2, 1, 1));
 		}
 	}
+	else
+		close_archive(n->left->archive_fd);
 	return (0);
 }

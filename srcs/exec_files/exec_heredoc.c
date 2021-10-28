@@ -21,8 +21,9 @@ int	exec_in_heredoc(char *limiter, int *fdu)
 	fd = open("./srcs/here_doc_file", O_RDWR);
 	if (fd < 0)
 		exit(print_custom("here_doc file can't be read/write", 2, 1, 1));
+	printf("|%d|\n", *g_exit_code);
 	print_custom(">", 2, 1, 0);
-	while (get_next_line(0, &ptr) > 0)
+	while ((get_next_line(0, &ptr) > 0))
 	{
 		if (!ft_memcmp(ptr, limiter, ft_strlen(ptr))
 			&& ft_strlen(limiter) == ft_strlen(ptr))
@@ -38,4 +39,13 @@ int	exec_in_heredoc(char *limiter, int *fdu)
 	close(fd);
 	unlink("./srcs/here_doc_file");
 	return (0);
+}
+
+void	close_archive(int *ptr)
+{
+	int	count;
+
+	count = 0;
+	while (ptr && ptr[count] != -1)
+		close(ptr[count++]);
 }

@@ -21,7 +21,7 @@ int	add_path(char **ptr, t_token *t, t_lexer *l, char *err)
 	else
 		{
 			*ptr = NULL;
-			l->flagr = 1;
+			l->flagr[0] = 1;
 			print_custom(err, 2, 1, 0);
 			return (print_custom(" syntax error", 2, 1, 1));
 		}
@@ -96,7 +96,10 @@ int	tree_define_command(t_node *n, t_token *t, t_lexer *l)
 		return (1);
 	}
 	if (search_outfile(right, t, l))
+	{
+		left->archive_fd = left->fd;
 		return (1);
+	}
 	left->archive_fd = left->fd;
 	return (0);
 }

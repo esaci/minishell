@@ -99,8 +99,9 @@ int	*join_int(int *fd, char *str)
 
 	if (!fd)
 	{
-		ptr = malloc(sizeof(int) * 1);
+		ptr = malloc(sizeof(int) * 2);
 		ptr[0] = -1;
+		ptr[1] = -1;
 		exec_in_heredoc(str, ptr);
 		return (ptr);
 	}
@@ -140,6 +141,7 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 	n->str = malloc(sizeof(char*) * ((count*2) + 2));
 	if (!n->str)
 		return (1);
+	signal_wait_heredoc();
 	count = 0;
 	while (t && t->type != CHAR_PIPE)
 	{
