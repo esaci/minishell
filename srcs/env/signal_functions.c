@@ -25,16 +25,17 @@ void	handler_parent(int num)
 
 void	handler_parent_heredoc(int num)
 {
-	int	fd;
+	int		fd;
 
-	if (num == SIGINT)
-	{
-		fd = open("./srcs/here_doc_file", O_RDWR);
-		print_custom("", fd, 1, 1);
-		close(fd);
-		print_custom("", 1, 1, 1);
-/* 		*g_exit_code = 130; */
-	}
+	print_custom("", 1, 1, 1);
+	*g_exit_code = 130;
+	fd = dup(STDIN_FILENO);
+	close(STDIN_FILENO);
+	*g_exit_code = fd;
+	return ;
+	if (num)
+		fd = dup(STDIN_FILENO);
+	close(STDIN_FILENO);
 }
 
 void	handler_parent_muted(int num)

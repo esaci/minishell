@@ -25,6 +25,7 @@ int	exec_in_heredoc(char *limiter, int *fdu)
 	print_custom(">", 2, 1, 0);
 	while ((get_next_line(0, &ptr) > 0))
 	{
+		printf("|%d|\n", *g_exit_code);
 		if (!ft_memcmp(ptr, limiter, ft_strlen(ptr))
 			&& ft_strlen(limiter) == ft_strlen(ptr))
 			break ;

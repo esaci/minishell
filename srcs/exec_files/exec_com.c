@@ -107,6 +107,8 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		if (n && n->str && (n->str + 1))
 			tmp = new_menu(n->str[0], n->str + 1, l);
 		l->pip->pid[count] = fork();
+		if (l->pip->pid[count])
+			close_archive(n->left->archive_fd);
 		if (tmp != -1 && !l->pip->pid[count])
 		{
 			close_pipes(l, 1);
@@ -197,7 +199,5 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			exit(print_custom("error comm", 2, 1, 1));
 		}
 	}
-	else
-		close_archive(n->left->archive_fd);
 	return (0);
 }

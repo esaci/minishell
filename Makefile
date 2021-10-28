@@ -28,7 +28,6 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(GNLD)get_next_line_utils.c					\
 		$(SRCD)$(SRCPARSING)arg_gestion.c				\
 		$(SRCD)$(SRCPARSING)print_functions.c			\
-		$(SRCD)$(SRCPARSING)sig_handler.c				\
 		$(SRCD)$(SRCPARSING)type_functions.c			\
 		$(SRCD)$(SRCPARSING)search_functions.c			\
 		$(SRCD)$(SRCPARSING)fast_functions.c			\

@@ -182,6 +182,12 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 		n->str[0] = "/dev/stdin";
 		n->str[1] = 0;
 	}
+	if (*g_exit_code)
+	{
+		dup2(*g_exit_code, STDIN_FILENO);
+		close(*g_exit_code);
+		*g_exit_code = 130;
+	}
 	return (0);
 }
 

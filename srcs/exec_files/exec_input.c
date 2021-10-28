@@ -12,6 +12,20 @@
 
 #include "../../lib/libmin.h"
 
+void	ultime_close_archive(t_lexer *l)
+{
+	t_node *n;
+
+	n = l->node;
+	while (n && n->type == NODE_PIPE)
+	{
+		close_archive(n->left->left->fd);
+		n = n->right;
+	}
+	if (n)
+		close_archive(n->left->fd);
+}
+
 int	exec_input(t_lexer *l)
 {
 	t_node	*n;
@@ -19,7 +33,10 @@ int	exec_input(t_lexer *l)
 	int		count2;
 
 	if (!l || !l->node || !l->tok || l->flagr[0] || !l->rl[0])
+	{
+		ultime_close_archive(l);
 		return (0);
+	}
 	if (init_pip(l))
 	{
 		print_custom("init_pipe error", 1, 1, 1);

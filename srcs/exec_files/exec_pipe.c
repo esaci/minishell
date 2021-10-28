@@ -20,6 +20,8 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 
 	in = 0;
 	l->pip->pid[count] = fork();
+	if (l->pip->pid[count])
+			close_archive(n->left->left->archive_fd);
 	if (!l->pip->pid[count])
 	{
 		if (n->left && n->left->str && (n->left->str + 1))
