@@ -28,15 +28,14 @@ void	handler_parent_heredoc(int num)
 {
 	int		fd;
 
-	print_custom("", 1, 1, 1);
-	*g_exit_code = 130;
-	fd = dup(STDIN_FILENO);
-	close(STDIN_FILENO);
-	*g_exit_code = fd;
-	return ;
-	if (num)
+	if (num == SIGINT)
+	{
+		print_custom("", 1, 1, 1);
+		*g_exit_code = 130;
 		fd = dup(STDIN_FILENO);
-	close(STDIN_FILENO);
+		close(STDIN_FILENO);
+		*g_exit_code = fd;
+	}
 }
 
 void	handler_parent_muted(int num)
@@ -45,6 +44,11 @@ void	handler_parent_muted(int num)
 	{
 		print_custom("", 1, 1, 1);
 		*g_exit_code = 130;
+	}
+	if (num == SIGQUIT)
+	{
+		print_custom("Quit (core dumped)", 1, 1, 1);
+		*g_exit_code = 131;
 	}
 }
 
@@ -58,13 +62,19 @@ void	signal_wait_input(void)
 void	signal_wait_command(void)
 {
 	signal(SIGINT, handler_parent_muted);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, handler_parent_muted);
 	signal(SIGTERM, SIG_IGN);
 }
 
 void	signal_wait_heredoc(void)
 {
-	signal(SIGINT, handler_parent_heredoc);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTERM, SIG_IGN);
+	signal(SIGINT, handler_parent_heredoc);
+}
+
+void	signal_default(void)
+{
+    signal(SIGINT, SIG_DFL);
+    signal(SIGQUIT, SIG_DFL);
 }

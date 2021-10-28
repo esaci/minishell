@@ -118,6 +118,8 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		if (l->pip->pid[count])
 			signal_wait_command();
+		else
+			signal_default();
 	}
 	else
 		l->pip->pid[count] = 0;
