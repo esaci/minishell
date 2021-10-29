@@ -78,7 +78,7 @@ void	signal_wait_heredoc(void)
 
 void	signal_default(void)
 {
-	signal(SIGPIPE, SIG_IGN);
+	signal(SIGPIPE, SIG_DFL);
     signal(SIGINT, SIG_DFL);
     signal(SIGQUIT, SIG_DFL);
 }

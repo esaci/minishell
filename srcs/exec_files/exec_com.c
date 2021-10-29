@@ -133,7 +133,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			exit(0);
 		}
 		ptr = generate_custom_envp(l->envp);
-		print_custom(n->str[0], 1, 1, 1);
 		if (execve(n->str[0], n->str, ptr) == -1)
 		{
 			free(ptr);
