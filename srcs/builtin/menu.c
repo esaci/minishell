@@ -44,7 +44,7 @@ int	check_com(char *command, char **args, t_lexer *l)
 	else if (!ft_memcmp(command, "export", 7))
 		return (0);
 	else if (ft_memcmp(command, "exit", 5))
-		return (1);
+		return (-1);
 	if (!args || !args[0])
 		return (0);
 	l->last_exit = 2;
