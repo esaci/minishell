@@ -65,7 +65,7 @@ int	start_fonction(t_list *c_envp)
 		tree_input(lexer);
 /* 		print_custom(lexer->line_buffer, 1, 1, 1); */
 		/* print_tokens(lexer); */
-		/* print_node(lexer->node); */
+		print_node(lexer->node);
 		if (exec_input(lexer))
 		{
 			rl_clear_history();

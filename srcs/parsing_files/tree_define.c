@@ -22,6 +22,7 @@ int	add_path(char **ptr, t_token *t, t_lexer *l, char *err)
 		{
 			*ptr = NULL;
 			l->flagr[0] = 1;
+			print_custom("Minishell: ", 2, 1, 0);
 			print_custom(err, 2, 1, 0);
 			l->last_exit = 2;
 			return (print_custom(" syntax error", 2, 1, 1));
