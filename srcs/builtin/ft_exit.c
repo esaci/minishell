@@ -21,7 +21,7 @@ int	c_int(char *nbr)
 	temp = ft_itoa(ft_atoi(nbr));
 	if (ft_strncmp(temp, nbr, ft_strlen(nbr)))
 	{
-		if (nbr[fix] == '0')
+		if (nbr[fix] == '0' || nbr[fix] == '+')
 		{
 			free(temp);
 			return (c_int(nbr + fix + 1));
@@ -47,10 +47,10 @@ int	ft_exit(t_lexer *l, char **args)
 	if (args[0] && args[1])
 	{
 		if (!c_int(*args))
-			return (print_custom("Minishell$: exit: too many arguments" , 1, 1, 1));
+			return (print_custom("Minishell$: exit: too many arguments" , 2, 1, 1));
 		close_pipes(l, 1);
 		small_free(l, NULL, NULL, 1);
-		exit(print_custom("Minishell$: exit: numeric argument required" , 1, 2, 1));
+		exit(print_custom("Minishell$: exit: numeric argument required" , 2, 2, 1));
 	}
 	if (c_int(*args))
 	{
@@ -59,5 +59,8 @@ int	ft_exit(t_lexer *l, char **args)
 		small_free(l, NULL, NULL, 1);
 		exit(print_custom("" , 1, exit_code, 0));
 	}
+	close_pipes(l, 1);
+	small_free(l, NULL, NULL, 1);
+	exit(print_custom("Minishell$: exit: numeric argument required" , 2, 2, 1));
 	return (0);
 }

@@ -34,7 +34,9 @@ char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l, int mode)
 {
 	char	*ptr;
 	int		tmp;
+/* 	int		index;
 
+	index = 0; */
 	if (l->pwd && l->pwd[0])
 	{
 		ptr = ft_strjoin(l->pwd[0], ptr2);
