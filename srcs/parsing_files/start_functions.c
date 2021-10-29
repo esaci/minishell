@@ -38,7 +38,7 @@ int	start_fonction(t_list *c_envp)
 	envp_init(c_envp, lexer);
 	ptr = NULL;
 	ptr = readline("Minishell$ ");
-	if (*g_exit_code == 130 || *g_exit_code == 131)
+	if (*g_exit_code == 130 || *g_exit_code == 131 || *g_exit_code == 2)
 		lexer->last_exit = *g_exit_code;
 	lexer->rl = ptr;
 	if (!ptr || ptr[0] == EOF)
@@ -75,7 +75,7 @@ int	start_fonction(t_list *c_envp)
 		add_history(ptr);
 		small_free(lexer, ptr, NULL, 0);
 		ptr = readline("Minishell$ ");
-		if (*g_exit_code == 130 || *g_exit_code == 131)
+		if (*g_exit_code == 130 || *g_exit_code == 131 || *g_exit_code == 2)
 			lexer->last_exit = *g_exit_code;
 		rl_on_new_line();
 		lexer->rl = ptr;

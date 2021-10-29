@@ -71,13 +71,20 @@ t_token *parser_until_space(t_token *tok)
 	{
 		while (tmp && tmp->type == CHAR_SPACE)
 			tmp = unlink_free_return(tmp, 1);
+		if (!tmp || tmp->type == CHAR_PIPE)
+		{
+			if (!g_exit_code[0])
+				print_custom("Minishell: syntax error near unexpected token `|'", 2, 1, 1);
+			*g_exit_code = 2;
+		}
 		return (tmp);
 	}
 	while (tmp && tmp->type != CHAR_SPACE)
 		tmp = unlink_free_return(tmp, 1);
 	if (!tmp)
 		return (tmp);
-	return (unlink_free_return(tmp, 1));
+	tmp = unlink_free_return(tmp, 1);
+	return (tmp);
 }
 
 t_token	*parser_next_token(t_token *tok)
@@ -111,6 +118,12 @@ int	parser_lexer(t_lexer *lexer)
 
 	count = 0;
 	toktmp = lexer->tok;
+	if (toktmp->type == CHAR_PIPE)
+	{
+		if (!g_exit_code[0])
+			print_custom("Minishell: syntax error near unexpected token `|'", 2, 1, 1);
+		*g_exit_code = 2;
+	}
 	while (toktmp)
 	{
 		toktmp->n_token = parser_next_token(toktmp);

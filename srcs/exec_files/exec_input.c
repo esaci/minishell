@@ -57,7 +57,7 @@ int	exec_input(t_lexer *l)
 	count2 = 0;
 	while (count2 < count)
 		waiter_input(l, count2++);
-	if (*g_exit_code == 130 || *g_exit_code == 131)
+	if (*g_exit_code == 130 || *g_exit_code == 131 || *g_exit_code == 2)
 		l->last_exit = *g_exit_code;
 	signal_wait_input();
 	ultime_close_archive(l);
