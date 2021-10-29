@@ -46,7 +46,7 @@ int	ft_exit(t_lexer *l, char **args)
 	}
 	if (args[0] && args[1])
 	{
-		if (!c_int(*args))
+		if (c_int(*args))
 			return (print_custom("Minishell$: exit: too many arguments" , 2, 1, 1));
 		close_pipes(l, 1);
 		small_free(l, NULL, NULL, 1);

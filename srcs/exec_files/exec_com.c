@@ -40,7 +40,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	{
 
 		if (n && n->str && (n->str + 1))
-			tmp = new_menu(n->str[0], n->str + 1, l, count);
+			tmp = new_menu(n->str[0], n->str + 1, l);
 		l->pip->pid[count] = fork();
 		if (l->pip->pid[count])
 		{

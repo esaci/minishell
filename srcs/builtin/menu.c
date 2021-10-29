@@ -35,30 +35,43 @@ int menu(char *command, char **args, t_lexer *l)
 	exit(0);
 }
 
-int	check_com(char *command)
+int	check_com(char *command, char **args, t_lexer *l)
 {
-	int	tmp;
-
-	tmp = -1;
 	if (!ft_memcmp(command, "unset", 6))
-		tmp = 0;
+		return (0);
 	else if (!ft_memcmp(command, "cd", 3))
-		tmp = 0;
+		return (0);
 	else if (!ft_memcmp(command, "export", 7))
-		tmp = 0;
-	else if (!ft_memcmp(command, "exit", 5))
-		tmp = 0;
-	return (tmp);
+		return (0);
+	else if (ft_memcmp(command, "exit", 5))
+		return (1);
+	if (!args || !args[0])
+		return (0);
+	l->last_exit = 2;
+	if (args[0] && args[1])
+	{
+		l->last_exit = 1;
+		if (c_int(*args))
+			return (print_custom("Minishell$: exit: too many arguments" , 2, 0, 1));
+		l->last_exit = 2;
+		return (print_custom("Minishell$: exit: numeric argument required" , 2, 0, 1));
+	}
+	if (c_int(*args))
+	{
+		l->last_exit = ft_atoi(args[0]);
+		return (print_custom("" , 1, 0, 0));
+	}
+	return (print_custom("Minishell$: exit: numeric argument required" , 2, 0, 1));
 }
 
-int	new_menu(char *command, char **args, t_lexer *lex, int count)
+int	new_menu(char *command, char **args, t_lexer *lex)
 {
 	t_list *l;
 
 	if (!(command))
 		return (-1);
-	if (count)
-		return (check_com(command));
+	if (last_pipe(lex))
+		return (check_com(command, args, lex));
 	l = lex->envp;
 	if (!ft_memcmp(command, "unset", 6))
 		lex->last_exit = ft_unset(l, args);
