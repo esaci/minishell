@@ -71,7 +71,7 @@ int	check_existing(char *arg, t_list *e)
 	char    *ptr;
 
 	var = get_var(arg);
-	ptr = custom_getenv(e, var);
+	ptr = custom_getenv(e, var, 1);
 	if (ptr[0])
 		return (1);
 	ft_del_variable(ptr, e);

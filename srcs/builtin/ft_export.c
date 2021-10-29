@@ -56,8 +56,8 @@ void    export_cases(char *arg, t_list *e)
 
     flag = 0;
     var = get_var(arg);
-    ptr = custom_getenv(e, arg);
-    test = custom_getenv(e, var);
+    ptr = custom_getenv(e, arg, 1);
+    test = custom_getenv(e, var, 1);
     old_value = get_value(arg);
     ft_del_variable(var, e);
     if (check_all_char(old_value) == 1 && ft_strncmp(ptr, "", 1))

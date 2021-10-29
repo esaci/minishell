@@ -15,7 +15,7 @@ void	ft_pwd(t_list *l)
 {
 	char	*pwd;
 
-	pwd = custom_getenv(l, "PWD");
+	pwd = custom_getenv(l, "PWD", 0);
 	write(1, pwd, ft_strlen(pwd));
 	write(1, "\n", 2);
 	free(pwd);

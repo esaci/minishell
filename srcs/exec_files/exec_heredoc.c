@@ -40,7 +40,7 @@ int		len_var(t_lexer *l, char *ptr)
 		if (ptr[count] == '$')
 		{
 			var = get_name(ptr + count + 1);
-			str = custom_getenv(l->envp, var);
+			str = custom_getenv(l->envp, var, 0);
 			count2 += ft_strlen(str);
 			free(var);
 			free(str);
@@ -81,7 +81,7 @@ char	*apply_doll(char *ptr, t_lexer *l)
 		if (ptr[count] == '$')
 		{
 			var = get_name(ptr + count + 1);
-			copy_arg(str, custom_getenv(l->envp, var), &count2);
+			copy_arg(str, custom_getenv(l->envp, var, 0), &count2);
 			free(var);
 			count++;
 			while (ptr && ptr[count] && ft_isalnum(ptr[count]))

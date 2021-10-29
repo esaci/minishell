@@ -54,7 +54,7 @@ void	add_arg(t_lexer *l, int *count4, int *count2)
 	int		count;
 
 	var = get_name(l->rl + *count2 + 1);
-	ptr = custom_getenv(l->envp, var);
+	ptr = custom_getenv(l->envp, var, 0);
 	count = 0;
 	if (ptr && ptr[count] && ptr[count] == '\"')
 		count++;
@@ -88,7 +88,7 @@ int	len_needed(t_lexer *l)
 		if (l->rl[count2] == '$' && l->rl[count2 + 1] && l->rl[count2 + 1] != '?')
 		{
 			var = get_name(l->rl + count2 + 1);
-			ptr = custom_getenv(l->envp, var);
+			ptr = custom_getenv(l->envp, var, 0);
 			count += ft_strlen(ptr);
 			free(var);
 			free(ptr);
@@ -112,8 +112,16 @@ int	init_line_buffer(t_lexer *l)
 	count2 = 0;
 	count3 = 0;
 	count4 = 0;
+	count = 0;
 	while (l->rl[count2])
 	{
+		if (l->rl[count2])
+		if (l->rl[count2] == '<' && l->rl[count2 + 1] && l->rl[count2 + 1] == '<')
+			count = 2;
+		if ((count == 1) && l->rl[count2] == ' ')
+			count--;
+		if ((count == 2) && l->rl[count2] != '<')
+			count--;
 		if (l->rl[count2] == '\"' && (is_apo(l->rl + count2 + 1, '\"') || count3))
 		{
 			count3 = 1 - count3;
@@ -126,7 +134,7 @@ int	init_line_buffer(t_lexer *l)
 				l->line_buffer[count4++] = l->rl[count2++];
 			l->line_buffer[count4++] = l->rl[count2++];
 		}
-		else if (l->rl[count2] == '$' && l->rl[count2 + 1] && l->rl[count2 + 1] != '?')
+		else if (l->rl[count2] == '$' && l->rl[count2 + 1] && l->rl[count2 + 1] != '?' && !count)
 			add_arg(l, &count4, &count2);
 		else
 			l->line_buffer[count4++] = l->rl[count2++];

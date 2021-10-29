@@ -31,37 +31,6 @@ char	*remove_for_arg(char *str)
 	return (str);
 }
 
-void	check_for_arg(char **str, t_lexer *l, t_node *n)
-{
-	int	count;
-
-	count = 0;
-	while (str && str[count])
-	{
-		if (str[count][0] == '\'' || str[count][0] == '\"')
-		{
-			if (ft_strlen(str[count]) >= 2)
-			{
-				if (str[count][0] == str[count][ft_strlen(str[count]) - 1])
-				{
-					if (get_token_buffer(l, str[count]))
-						get_token_buffer(l, str[count])->type = CHAR_INUT;
-					n->str[count] = remove_for_arg(str[count]);
-					count = join_close_token(l, str, count);
-					if (count < 0)
-						return ;
-				}
-				else
-					count++;
-			}
-			else
-				count++;
-		}
-		else
-			count++;
-	}
-}
-
 int		correct_name(t_lexer *l, t_token *t)
 {
 	char	*str;

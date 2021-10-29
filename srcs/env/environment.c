@@ -21,18 +21,41 @@ t_list	*ft_envp(char *envp[], char *content, t_list *v_env)
 	return (v_env);
 }
 
-char	*custom_getenv(t_list *l, char *ptr)
+char	*custom_getenv(t_list *l, char *ptr, int mode)
 {
 	while (l)
 	{
 		if (l->content && !ft_memcmp(l->content, ptr, ft_strlen(ptr)))
 		{
+			if (l->content[ft_strlen(ptr)] == '=' && !mode)
+				return (copieur(correct_path(l->content + ft_strlen(ptr) + 1)));
 			if (l->content[ft_strlen(ptr)] == '=')
 				return (copieur(l->content + ft_strlen(ptr) + 1));
 		}
 		l = l->next;
 	}
 	return (copieur(""));
+}
+
+char	*clear_apo(char *ptr)
+{
+	int	count;
+	int	count2;
+
+	count = 0;
+	count2 = 0;
+	while (ptr[count])
+	{
+		ptr[count] = ptr[count + count2];
+		if (ptr[count] == '=')
+			count2 = 1;
+		count++;
+	}
+	if (count2)
+		ptr[count - 2] = 0;
+	else
+		ptr[count] = 0;
+	return (ptr);
 }
 
 char	**generate_custom_envp(t_list *v_env)
@@ -48,7 +71,7 @@ char	**generate_custom_envp(t_list *v_env)
 	count = 0;
 	while (tmp)
 	{
-		ptr[count++] = tmp->content;
+		ptr[count++] = clear_apo(tmp->content);
 		tmp = tmp->next;
 	}
 	return (ptr);

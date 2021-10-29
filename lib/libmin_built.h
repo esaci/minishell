@@ -88,8 +88,9 @@ t_list	*free_env(t_list *env);
 int		utils_strlen_env(t_list *l);
 char	**generate_custom_envp(t_list *v_env);
 t_list	*create_envp(t_list	*env);
-char	*custom_getenv(t_list *l, char *ptr);
+char	*custom_getenv(t_list *l, char *ptr, int mode);
 int		print_env(t_list *env);
 char	*add_apo_envp(char *env);
+char	*correct_path(char *ptr);
 
 #endif

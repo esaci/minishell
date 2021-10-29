@@ -17,15 +17,19 @@ void	ft_swap_env_pwd(char *arg, t_list *e)
 	char	*ptr;
 	char	*ptr2;
 
-	ptr = custom_getenv(e, "PWD");
+	ptr = custom_getenv(e, "PWD", 1);
 	ft_del_variable("OLDPWD", e);
 	ptr2 = ft_strjoin("OLDPWD=", ptr);
 	ft_add_env(ptr2, e);
 	free(ptr2);
 	free(ptr);
 	ft_del_variable("PWD", e);
-	ptr2 = ft_strjoin("PWD=", arg);
-	ft_add_env(ptr2, e);
+	ptr = ft_strjoin("PWD=", "\"");
+	ptr2 = ft_strjoin(ptr, arg);
+	free(ptr);
+	ptr = ft_strjoin(ptr2, "\"");
+	ft_add_env(ptr, e);
+	free(ptr);
 	free(ptr2);
 }
 
@@ -33,7 +37,7 @@ void	ft_cd_noargs(t_list *e, int *last_exit)
 {
 	char	*arg;
 
-	arg = custom_getenv(e, "HOME");
+	arg = custom_getenv(e, "HOME", 0);
 	if (!arg || !arg[0])
 	{
 		ft_putstr_fd("Minishell : cd : HOME doesn't exist\n", 2);

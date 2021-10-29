@@ -20,13 +20,17 @@ int	ft_cd_minus(char **args, t_list *e, int *last_exit)
 	
 	if (!ft_strncmp(*args, "-", 2))
 	{
-		path = custom_getenv(e, "OLDPWD");
+		path = custom_getenv(e, "OLDPWD", 0);
 		if (!path)
 			ft_putstr_fd("cd : OLDPWD is not set\n", 2);
 		if (chdir(path) != 0)
 			error_chdir(*args, last_exit);
 		else
+		{
+			free(path);
+			path = custom_getenv(e, "OLDPWD", 1);
 			ft_swap_env_pwd(path, e);
+		}
 		if (path)
 			free(path);
 	}
@@ -47,7 +51,7 @@ int	ft_cd_other(char **args, t_list *e, int *last_exit)
 	x = chdir(*args);
 	if (x)
 		error_chdir(*args, last_exit);
-	ptr = custom_getenv(e, "PWD");
+	ptr = custom_getenv(e, "PWD", 0);
 	ptr2 = ft_strjoin(ptr, "/");
 	free(ptr);
 	ptr = ft_strjoin(ptr2, *args);
@@ -66,7 +70,7 @@ void	ft_cd_back(char **args, t_list *e, int *last_exit)
 
 	(void)args;
 	(void)last_exit;
-	ptr = custom_getenv(e, "PWD");
+	ptr = custom_getenv(e, "PWD", 0);
 	i = ft_strlen(ptr) - 1;
 	while (ptr[i] && ptr[i] != '/')
 		i--;
