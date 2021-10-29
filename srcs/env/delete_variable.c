@@ -58,3 +58,28 @@ t_list	*free_env(t_list *env)
 	}
 	return (NULL);
 }
+
+char	*add_apo_envp(char *env)
+{
+	char	*ptr;
+	int		count;
+	int		count2;
+
+	ptr = malloc(sizeof(char) * (ft_strlen(env) + 3));
+	count = 0;
+	count2 = 0;
+	while (env && env[count] && env[count] != '=')
+		ptr[count2++] = env[count++];
+	if (!env[count])
+	{
+		ptr[count] = 0;
+		return (ptr);
+	}
+	ptr[count2++] = env[count++];
+	ptr[count2++] = '\"';
+	while (env && env[count])
+		ptr[count2++] = env[count++];
+	ptr[count2++] = '\"';
+	ptr[count2] = 0;
+	return (ptr);
+}

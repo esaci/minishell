@@ -42,11 +42,14 @@ void	ft_lst_pushback(t_list **lst, char *content)
 t_list	*ft_tab_to_lst(char *envp[])
 {
 	t_list	*list;
+	char	*ptr;
 
 	list = NULL;
 	while (envp && *envp != NULL)
 	{
-		ft_lst_pushback(&list, *envp);
+		ptr = add_apo_envp(*envp);
+		ft_lst_pushback(&list, ptr);
+		free(ptr);
 		envp++;
 	}
 	return (list);

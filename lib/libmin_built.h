@@ -90,5 +90,6 @@ char	**generate_custom_envp(t_list *v_env);
 t_list	*create_envp(t_list	*env);
 char	*custom_getenv(t_list *l, char *ptr);
 int		print_env(t_list *env);
+char	*add_apo_envp(char *env);
 
 #endif

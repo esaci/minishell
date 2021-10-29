@@ -12,6 +12,23 @@
 
 #include "../lib/libmin.h"
 
+void	correct_path(char *ptr)
+{
+	int	count;
+
+	count = 0;
+	if (!ptr || !ptr[0] || ptr[0] != '"')
+		return ;
+	count++;
+	while (ptr[count])
+	{
+		ptr[count - 1] = ptr[count];
+		count++;
+	}
+	ptr[count - 1] = 0;
+	ptr[count] = 0;
+}
+
 void	init_path_pwd(t_lexer *l, int mode)
 {
 	t_list	*c_envp;
@@ -26,9 +43,11 @@ void	init_path_pwd(t_lexer *l, int mode)
 			double_free(l->pwd);
 	}
 	ptr = custom_getenv(c_envp, "PATH");
+	correct_path(ptr);
 	l->pathptr = ft_split(ptr, ':');
 	free(ptr);
 	ptr = custom_getenv(c_envp, "PWD");
+	correct_path(ptr);
 	l->pwd = ft_split(ptr, 1);
 	free(ptr);
 }
