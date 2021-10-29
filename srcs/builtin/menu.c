@@ -35,12 +35,30 @@ int menu(char *command, char **args, t_lexer *l)
 	exit(0);
 }
 
-int	new_menu(char *command, char **args, t_lexer *lex)
+int	check_com(char *command)
+{
+	int	tmp;
+
+	tmp = -1;
+	if (!ft_memcmp(command, "unset", 6))
+		tmp = 0;
+	else if (!ft_memcmp(command, "cd", 3))
+		tmp = 0;
+	else if (!ft_memcmp(command, "export", 7))
+		tmp = 0;
+	else if (!ft_memcmp(command, "exit", 5))
+		tmp = 0;
+	return (tmp);
+}
+
+int	new_menu(char *command, char **args, t_lexer *lex, int count)
 {
 	t_list *l;
 
 	if (!(command))
 		return (-1);
+	if (count)
+		return (check_com(command));
 	l = lex->envp;
 	if (!ft_memcmp(command, "unset", 6))
 		lex->last_exit = ft_unset(l, args);

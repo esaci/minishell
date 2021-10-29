@@ -42,7 +42,7 @@ int	ft_exit(t_lexer *l, char **args)
 		exit_code = l->last_exit;
 		close_pipes(l, 1);
 		small_free(l, NULL, NULL, 1);
-		exit(print_custom("" , 1, exit_code, 1));
+		exit(print_custom("" , 1, exit_code, 0));
 	}
 	if (args[0] && args[1])
 	{
@@ -57,7 +57,7 @@ int	ft_exit(t_lexer *l, char **args)
 		exit_code = ft_atoi(args[0]);
 		close_pipes(l, 1);
 		small_free(l, NULL, NULL, 1);
-		exit(print_custom("" , 1, exit_code, 1));
+		exit(print_custom("" , 1, exit_code, 0));
 	}
 	return (0);
 }

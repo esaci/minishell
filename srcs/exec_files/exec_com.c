@@ -101,11 +101,12 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	char	**ptr;
 
 
-	tmp = 0;
+	tmp = -1;
 	if (last_pipe(l) == 0 || count == last_pipe(l))
 	{
+
 		if (n && n->str && (n->str + 1))
-			tmp = new_menu(n->str[0], n->str + 1, l);
+			tmp = new_menu(n->str[0], n->str + 1, l, count);
 		l->pip->pid[count] = fork();
 		if (l->pip->pid[count])
 		{

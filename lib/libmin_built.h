@@ -55,7 +55,7 @@ typedef struct s_lexer	t_lexer;
 // Builtin
 
 int		menu(char *command, char **args, t_lexer *l);
-int		new_menu(char *command, char **args, t_lexer *l);
+int		new_menu(char *command, char **args, t_lexer *l, int count);
 void	ft_pwd(t_list *l);
 int		ft_exit(t_lexer *l, char **args);
 void	ft_env(t_list *env);
