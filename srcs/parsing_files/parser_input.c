@@ -96,6 +96,12 @@ t_token	*parser_next_token(t_token *tok)
 		toktmp = unlink_free_return(toktmp, 1);
 	if (!toktmp)
 		return (NULL);
+	if (toktmp->type ==  CHAR_PIPE && !toktmp->n_token)
+	{
+		if (!g_exit_code[0])
+			print_custom("Minishell: syntax error near unexpected token `|'", 2, 1, 1);
+		*g_exit_code = 2;
+	}
 	if (!toktmp->n_token)
 		return (NULL);
 	if (toktmp->type == CHAR_CHEVG || toktmp->type == CHAR_CHEVD)
