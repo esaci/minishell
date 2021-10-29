@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:19:14 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/28 17:09:12 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/29 23:06:19 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void    export_cases(char *arg, t_list *e)
     if (check_variable(arg) == 1 && flag == 0)
     {
         ptr2 = ft_strjoin(var, "=\"");
-        test2 = ft_substr(test, 1, ft_strlen(test) - 2);
+        test2 = copieur(test);
         ptr3 = ft_strjoin(ptr2, test2);
         free(test2);
         ptr4 = ft_strjoin(ptr3, ptr);

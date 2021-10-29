@@ -6,11 +6,9 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:17:27 by elias             #+#    #+#             */
-/*   Updated: 2021/10/28 17:15:07 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/29 22:50:54 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../lib/libmin_built.h"
 
 #include "../../lib/libmin_built.h"
 
@@ -66,7 +64,6 @@ void	ft_cd_back(char **args, t_list *e, int *last_exit)
 {
 	char	*ptr;
 	int		i;
-	char	*ptr2;
 
 	(void)args;
 	(void)last_exit;
@@ -74,11 +71,10 @@ void	ft_cd_back(char **args, t_list *e, int *last_exit)
 	i = ft_strlen(ptr) - 1;
 	while (ptr[i] && ptr[i] != '/')
 		i--;
-	ptr2 = ft_substr(ptr, 0, i);
+	ptr[i] = 0;
+	chdir(ptr);
+	ft_swap_env_pwd(ptr, e);
 	free(ptr);
-	chdir(ptr2);
-	ft_swap_env_pwd(ptr2, e);
-	free(ptr2);
 }
 
 void	error_chdir(char *ptr, int	*last_exit)

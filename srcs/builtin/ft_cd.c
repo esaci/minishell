@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 18:42:13 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/28 17:14:43 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/29 22:50:11 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ void	ft_cd_noargs(t_list *e, int *last_exit)
 
 void	ft_cd_arg(char **args, t_list *e, int *last_exit)
 {
+	if (args)
+	{
+		if (args[0][ft_strlen(args[0]) - 1] == '/')
+			args[0][ft_strlen(args[0]) - 1] = 0;
+	}
 	if (args && *args[0] == '/')
 	{
 		if (chdir(*args) != 0)

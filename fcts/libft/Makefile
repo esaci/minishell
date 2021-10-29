@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: esaci <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/27 13:20:44 by esaci             #+#    #+#              #
-#    Updated: 2019/12/02 22:39:59 by esaci            ###   ########.fr        #
+#    Updated: 2021/10/29 22:24:06 by julpelle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libft.a
 
-CC=gcc
+CC = gcc -Wall -Werror -Wextra
 
 CFLAGS = -Wall -Wextra -Werror
 
