@@ -42,14 +42,19 @@ int	ft_cd_other(char **args, t_list *e, int *last_exit)
 {
 	char	*ptr;
 	char	*ptr2;
+	int		x;
 
-	if (chdir(*args) != 0)
+	x = chdir(*args);
+	if (x)
 		error_chdir(*args, last_exit);
 	ptr = custom_getenv(e, "PWD");
-	ptr2 = ft_strjoin(ptr, *args);
-	if (chdir(ptr2) == 0)
-		ft_swap_env_pwd(ptr2, e);
+	ptr2 = ft_strjoin(ptr, "/");
+	free(ptr);
+	ptr = ft_strjoin(ptr2, *args);
+	if (!x)
+		ft_swap_env_pwd(ptr, e);
 	free(ptr2);
+	free(ptr);
 	return (0);
 }
 

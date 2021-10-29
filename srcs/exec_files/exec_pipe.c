@@ -29,7 +29,7 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 	{
 		signal_default();
 		if (n->left && n->left->str && (n->left->str + 1))
-			in = new_menu(n->left->str[0], n->left->str + 1, l);
+			in = new_menu(n->left->str[0], n->left->str + 1, l, count + 1);
 		if (in != -1)
 		{
 			in = l->last_exit;
