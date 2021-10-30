@@ -61,6 +61,6 @@ int	main(int ac, char *av[], char *envp[])
 	(void)av;
 	signal_wait_input();
 	c_envp = ft_init_env(envp, NULL);
-	last_exit = start_fonction(c_envp);
+	last_exit = start_fonction(c_envp, 0, NULL);
 	return (last_exit);
 }

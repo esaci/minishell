@@ -121,7 +121,7 @@ typedef struct s_lexer
 
 int					init_line_buffer(t_lexer *l);
 void				init_path_pwd(t_lexer *l, int mode);
-int					start_fonction(t_list *c_envp);
+int					start_fonction(t_list *c_envp, int last_exit, char *ptr);
 void				*sig_handler(void);
 t_lexer				*parser_input(t_lexer *lexer);
 t_token				*parser_next_token(t_token *tok);
