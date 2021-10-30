@@ -28,7 +28,7 @@ char	*custom_getenv(t_list *l, char *ptr, int mode)
 		if (l->content && !ft_memcmp(l->content, ptr, ft_strlen(ptr)))
 		{
 			if (l->content[ft_strlen(ptr)] == '=' && !mode)
-				return (copieur(correct_path(l->content + ft_strlen(ptr) + 1)));
+				return (correct_path(copieur(l->content + ft_strlen(ptr) + 1)));
 			if (l->content[ft_strlen(ptr)] == '=')
 				return (copieur(l->content + ft_strlen(ptr) + 1));
 		}
@@ -63,6 +63,7 @@ char	**generate_custom_envp(t_list *v_env)
 	int		count;
 	t_list	*tmp;
 	char	**ptr;
+	char 	*str;
 
 	count = utils_strlen_env(v_env);
 	ptr = malloc(sizeof(char *) * (count + 3));
@@ -71,7 +72,9 @@ char	**generate_custom_envp(t_list *v_env)
 	count = 0;
 	while (tmp)
 	{
-		ptr[count++] = clear_apo(tmp->content);
+		str = copieur(tmp->content);
+		ptr[count++] = clear_apo(str);
+		free(str);
 		tmp = tmp->next;
 	}
 	return (ptr);

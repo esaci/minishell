@@ -165,4 +165,7 @@ echo "1234"
 echo "1a234"
 echo -nn -nnnnnnn -n -nnnn -nnnh
 export
+ls
+pwd
+
 

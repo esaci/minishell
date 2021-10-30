@@ -15,7 +15,7 @@
 t_list	*ft_new_list_elem(char *content)
 {
 	t_list	*new;
-
+	
 	new = (t_list *)malloc(sizeof(t_list) * 2);
 	if (new == NULL)
 		return (NULL);
@@ -72,8 +72,13 @@ int	print_env(t_list *env)
 {
 	while (env)
 	{
-		ft_putstr_fd(env->content, 1);
-		ft_putstr_fd("\n", 1);
+		if (env->content && !env->content[0])
+		{
+			free(env->content);
+			env->content = NULL;
+		}
+		if (env->content)
+			print_custom(env->content, 1, 1, 1);
 		env = env->next;
 	}
 	return (0);

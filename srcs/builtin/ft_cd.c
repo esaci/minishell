@@ -17,18 +17,18 @@ void	ft_swap_env_pwd(char *arg, t_list *e)
 	char	*ptr;
 	char	*ptr2;
 
-	ptr = custom_getenv(e, "PWD", 1);
+	ptr = custom_getenv(e, "PWD", 0);
 	ft_del_variable("OLDPWD", e);
-	ptr2 = ft_strjoin("OLDPWD=", ptr);
-	ft_add_env(ptr2, e);
+	ptr2 = add_apo_envp(ptr);
+	free(ptr);
+	ptr = ft_strjoin("OLDPWD=", ptr2);
+	ft_add_env(ptr, e);
 	free(ptr2);
 	free(ptr);
 	ft_del_variable("PWD", e);
-	ptr = ft_strjoin("PWD=", "\"");
-	ptr2 = ft_strjoin(ptr, arg);
-	free(ptr);
-	ptr = ft_strjoin(ptr2, "\"");
-	ft_add_env(ptr, e);
+	ptr = add_apo_envp(arg);
+	ptr2 = ft_strjoin("PWD=", ptr);
+	ft_add_env(ptr2, e);
 	free(ptr);
 	free(ptr2);
 }

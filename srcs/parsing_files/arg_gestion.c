@@ -124,5 +124,7 @@ int	ft_isal(int c)
 		return (1);
 	if (c <= 'Z' && c >= 'A')
 		return (1);
+	if (c == '_')
+		return (1);
 	return (0);
 }

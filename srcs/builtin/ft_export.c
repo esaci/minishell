@@ -54,7 +54,7 @@ int	loop_identifier_mini(char **args)
 
 int	ft_export(char **args, t_list *e, int flag)
 {
-	int	flag2;
+	int		flag2;
 
 	flag2 = 0;
 	if (!*args)
