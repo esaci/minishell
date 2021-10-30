@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 11:55:01 by julespellet       #+#    #+#             */
-/*   Updated: 2021/10/18 20:08:06 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/30 12:08:00 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ int	utils_strlen_env(t_list *l)
 	return (count);
 }
 
-int print_env(t_list *env)
+int	print_env(t_list *env)
 {
-    while (env)
-    {
-        ft_putstr_fd(env->content, 1);
-        ft_putstr_fd("\n", 1);
-        env = env->next;
-    }
-    return (0);
+	while (env)
+	{
+		ft_putstr_fd(env->content, 1);
+		ft_putstr_fd("\n", 1);
+		env = env->next;
+	}
+	return (0);
 }

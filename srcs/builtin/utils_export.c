@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 22:46:34 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/28 17:08:48 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/30 11:59:39 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,16 @@
 
 int	check_identifier(char *id)
 {
-	//int	i;
-
-	//i = 0;
 	if (!id)
 		return (-1);
 	if (ft_isdigit(id[0]))
 		return (-1);
-	/*
-	while (id[i])
-	{
-		if (!ft_isalnum(id[i]) && (id[i] != '=' && id[i] != '+'
-				&& id[i] != '-'))
-			return (-1);
-		i++;
-	}
-	*/
 	return (1);
 }
 
 int	check_variable(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -67,8 +55,8 @@ int	loop_identifier(char **args)
 
 int	check_existing(char *arg, t_list *e)
 {
-	char    *var;
-	char    *ptr;
+	char	*var;
+	char	*ptr;
 
 	var = get_var(arg);
 	ptr = custom_getenv(e, var, 1);
@@ -78,9 +66,9 @@ int	check_existing(char *arg, t_list *e)
 	return (0);
 }
 
-int check_all_char(char *arg)
+int	check_all_char(char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!arg)

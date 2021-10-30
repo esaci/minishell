@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:27:01 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/25 19:54:14 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/30 12:07:24 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_list	*ft_del_variable(char *ptr, t_list *env)
 			{
 				free(env->content);
 				env->content = NULL;
-				return(env);
+				return (env);
 			}
 			return (env);
 		}
@@ -47,7 +47,7 @@ t_list	*free_env(t_list *env)
 {
 	t_list	*tmp;
 
-	while(env)
+	while (env)
 	{
 		tmp = env;
 		env = env->next;
@@ -62,8 +62,8 @@ t_list	*free_env(t_list *env)
 char	*add_apo_envp(char *env)
 {
 	char	*ptr;
-	int		count;
-	int		count2;
+	int	count;
+	int	count2;
 
 	ptr = malloc(sizeof(char) * (ft_strlen(env) + 3));
 	count = 0;

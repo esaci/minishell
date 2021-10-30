@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:17:27 by elias             #+#    #+#             */
-/*   Updated: 2021/10/29 22:50:54 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/30 11:53:17 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_cd_minus(char **args, t_list *e, int *last_exit)
 {
 	char	*path;
-	
+
 	if (!ft_strncmp(*args, "-", 2))
 	{
 		path = custom_getenv(e, "OLDPWD", 0);
@@ -36,7 +36,7 @@ int	ft_cd_minus(char **args, t_list *e, int *last_exit)
 	{
 		ft_putstr_fd("Invalid option\n", 2);
 		*last_exit = 1;
-	} 
+	}
 	return (0);
 }
 
