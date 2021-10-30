@@ -6,11 +6,33 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:27:01 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/30 12:07:24 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/30 12:30:15 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin_built.h"
+
+t_list	*ft_del_variable_suite(char *ptr, t_list *env, \
+	t_list *prev, t_list *tmp_e)
+{
+	if (tmp_e->content && !ft_memcmp(tmp_e->content, ptr, ft_strlen(ptr)))
+	{
+		if (prev)
+		{
+			prev->next = tmp_e->next;
+			free(tmp_e->content);
+			free(tmp_e);
+		}
+		else
+		{
+			free(env->content);
+			env->content = NULL;
+			return (env);
+		}
+		return (env);
+	}
+	return (env);
+}
 
 t_list	*ft_del_variable(char *ptr, t_list *env)
 {
@@ -21,22 +43,7 @@ t_list	*ft_del_variable(char *ptr, t_list *env)
 	tmp_e = env;
 	while (tmp_e)
 	{
-		if (tmp_e->content && !ft_memcmp(tmp_e->content, ptr, ft_strlen(ptr)))
-		{
-			if (prev)
-			{
-				prev->next = tmp_e->next;
-				free(tmp_e->content);
-				free(tmp_e);
-			}
-			else
-			{
-				free(env->content);
-				env->content = NULL;
-				return (env);
-			}
-			return (env);
-		}
+		ft_del_variable_suite(ptr, env, prev, tmp_e);
 		prev = tmp_e;
 		tmp_e = tmp_e->next;
 	}
@@ -62,8 +69,8 @@ t_list	*free_env(t_list *env)
 char	*add_apo_envp(char *env)
 {
 	char	*ptr;
-	int	count;
-	int	count2;
+	int		count;
+	int		count2;
 
 	ptr = malloc(sizeof(char) * (ft_strlen(env) + 3));
 	count = 0;

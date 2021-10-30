@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:24:05 by elias             #+#    #+#             */
-/*   Updated: 2021/10/30 11:55:33 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/30 12:34:39 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	c_int(char *nbr)
 	return (1);
 }
 
-int	ft_exit(t_lexer *l, char **args)
+int	ft_exit_suite(t_lexer *l, char **args)
 {
 	int	exit_code;
 
@@ -61,6 +61,12 @@ int	ft_exit(t_lexer *l, char **args)
 		small_free(l, NULL, NULL, 1);
 		exit(print_custom("", 1, exit_code, 0));
 	}
+	return (0);
+}
+
+int	ft_exit(t_lexer *l, char **args)
+{
+	ft_exit_suite(l, args);
 	close_pipes(l, 1);
 	small_free(l, NULL, NULL, 1);
 	exit(print_custom("Minishell$: exit: \
