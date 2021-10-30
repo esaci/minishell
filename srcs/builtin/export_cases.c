@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 12:00:06 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/30 12:00:49 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/30 12:16:39 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	export_cases(char *arg, t_list *e)
 
 	flag = 0;
 	var = get_var(arg);
-	ptr = custom_getenv(e, arg);
-	test = custom_getenv(e, var);
+	ptr = custom_getenv(e, arg, 0);
+	test = custom_getenv(e, var, 0);
 	ft_del_variable(var, e);
 	if (check_all_char(get_value(arg)) == 1 && ft_strncmp(ptr, "", 1))
 		flag = 1;

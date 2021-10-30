@@ -57,6 +57,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCENV)init_env.c						\
 		$(SRCD)$(SRCENV)utils_env.c						\
 		$(SRCD)$(SRCENV)signal_functions.c				\
+		$(SRCD)$(SRCENV)signal_handler.c				\
 		$(SRCD)$(SRCBUILTIN)ft_cd.c						\
 		$(SRCD)$(SRCBUILTIN)cd_utils.c					\
 		$(SRCD)$(SRCBUILTIN)ft_pwd.c					\
@@ -64,6 +65,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCBUILTIN)ft_unset.c					\
 		$(SRCD)$(SRCBUILTIN)ft_env.c					\
 		$(SRCD)$(SRCBUILTIN)ft_export.c					\
+		$(SRCD)$(SRCBUILTIN)export_cases.c				\
 		$(SRCD)$(SRCBUILTIN)utils_export.c				\
 		$(SRCD)$(SRCBUILTIN)ft_exit.c					\
 		$(SRCD)$(SRCBUILTIN)menu.c

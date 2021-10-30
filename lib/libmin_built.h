@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 16:05:01 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/27 16:05:03 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/10/30 12:15:05 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,20 @@ int		check_all_char(char *arg);
 char	*get_var(char *arg);
 char	*get_value(char *arg);
 void	ft_cd_back(char **args, t_list *e, int *last_exit);
+void	export_cases_1(t_list *e, char *var, char *ptr);
+void	export_cases_2(char *arg, t_list *e, char *var, char *ptr);
+void	export_cases_3(char *arg, t_list *e, char *var);
+void	export_cases(char *arg, t_list *e);
+
+// Handler
+void	handler_parent(int num);
+void	handler_parent_heredoc(int num);
+void	handler_parent_muted(int num);
+void	signal_wait_input(void);
+void	signal_wait_command(void);
+void	signal_wait_heredoc(void);
+void	signal_default(void);
+
 //Environnement
 
 t_list	*ft_envp(char *envp[], char *content, t_list *v_env);
