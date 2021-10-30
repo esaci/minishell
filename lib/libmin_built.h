@@ -60,7 +60,7 @@ void	ft_pwd(t_list *l);
 int		ft_exit(t_lexer *l, char **args);
 int		c_int(char *nbr);
 void	ft_env(t_list *env);
-void	ft_echo(char **args, int *last_exit);
+void	ft_echo(char **args, int *last_exit, t_lexer *l);
 int		ft_check_echo(char *flag);
 int		ft_cd(char **args, t_list *l);
 void	ft_swap_env_pwd(char *arg, t_list *e);

@@ -30,7 +30,17 @@ int	ft_check_echo(char *flag)
 	return (-1);
 }
 
-void	ft_echo(char **args, int *lt)
+int	custom_check(char *ptr, t_lexer *l)
+{
+	t_token	*t;
+
+	t = get_token_buffer(l, ptr);
+	if (t && t->line && t->line[0] == '\'')
+		return (1);
+	return (0);
+}
+
+void	ft_echo(char **args, int *lt, t_lexer *l)
 {
 	int	flag;
 	int	last_exit;
@@ -44,7 +54,7 @@ void	ft_echo(char **args, int *lt)
 	}
 	while (*args)
 	{
-		if (!ft_strncmp(*args, "$?", 3))
+		if (!ft_strncmp(*args, "$?", 3) && !custom_check(*args, l))
 			ft_putnbr_fd(last_exit, 1);
 		else if (ft_strncmp(*args, "\0", 1))
 			ft_putstr_fd(*args, 1);

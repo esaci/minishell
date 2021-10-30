@@ -1,0 +1,220 @@
+123elias
+/mnt/nfs/homes/esaci/Desktop/minishell/oritest
+hoi
+234
+hallo
+hallo$
+poep
+$
+
+$
+123456
+0
+0
+0
+test
+
+
+how are you
+$PWD
+hoi maran
+
+hallo daar
+hallo daar
+hallo daar
+hoi maran
+elias
+elias
+
+$
+123elias----
+123elias----$
+abc
+abc
+abc
+elias elias $USER
+
+
+hallo
+hallo
+/mnt/nfs/homes/esaci/Desktop/minishell/oritest
+
+
+hoi
+hallo maran siemons
+hallo maran siemons
+hallo maran siemons
+ma Hij ziet de niet als escape, print gewoon
+hallo$USER
+hallo$USER
+$?
+$USER
+$USER
+"$USER"
+hallomaran
+poep
+poep
+poep
+poep
+poep
+hallopoep
+hallo
+hoi
+elias
+tim
+TEST
+'elias'
+elias
+123456
+poep
+123'456
+hallo$
+0
+$USERelias
+$USEReliaseliaselias
+hallo1234maranelias$USEReliaspoeppoep2maranellendeEND
+elias$USER
+poeppoep2maranellendeEND
+poep2maranellende
+123hallo$456
+hallo
+hoi
+hoi
+hoi
+
+
+poep
+123elias
+22
+halloelias***elias$
+
+
+
+hallo
+hallo
+halloUSER
+halloPOEP
+halloUSER
+###
+
+$
+elias
+elias
+123elias----
+123elias----$
+abc
+abc
+abc
+%%$
+elias
+lkgj
+USERhallo
+
+22
+halloeliaselias$
+
+
+###
+
+$
+hallo$abc
+halloabc
+halloeliasabc
+elias
+elias
+elias
+abc
+abc
+abc
+%%$
+lkgj
+hallo
+
+poep
+hallopoep
+etet
+3535
+hallo
+hallo
+hallohoi
+elias
+123456
+12356
+123456
+123456
+123echo %%
+1234
+1234
+1234
+1234
+1a234
+-nnnhdeclare -x COLORTERM="truecolor"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/35996/bus"
+declare -x DEFAULTS_PATH="/usr/share/gconf/ubuntu.default.path"
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x DISPLAY=":0"
+declare -x DOCKER_HOST="unix:///run/user/35996/docker.sock"
+declare -x GDMSESSION="ubuntu"
+declare -x GJS_DEBUG_OUTPUT="stderr"
+declare -x GJS_DEBUG_TOPICS="JS ERROR;JS LOG"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/e951996f_eaf7_4bd5_b9e5_57410049f92c"
+declare -x GNOME_TERMINAL_SERVICE=":1.79"
+declare -x GPG_AGENT_INFO="/run/user/35996/gnupg/S.gpg-agent:0:1"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x HOME="/mnt/nfs/homes/esaci"
+declare -x IM_CONFIG_PHASE="1"
+declare -x INVOCATION_ID="8d2464f39c57422795755b8d1cede532"
+declare -x JOURNAL_STREAM="9:4986309"
+declare -x KRB5CCNAME="FILE:/tmp/krb5cc_35996_6aqgPs"
+declare -x LANG="en_US.UTF-8"
+declare -x LESS="-R"
+declare -x LOGNAME="esaci"
+declare -x LSCOLORS="exfxcxdxbxbxbxbxbxbxbx"
+declare -x LS_COLORS="di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=31;40:cd=31;40:su=31;40:sg=31;40:tw=31;40:ow=31;40:"
+declare -x MANAGERPID="1202773"
+declare -x MANDATORY_PATH="/usr/share/gconf/ubuntu.mandatory.path"
+declare -x OLDPWD="/mnt/nfs/homes/esaci/Desktop/minishell"
+declare -x PAGER="less"
+declare -x PATH="/mnt/nfs/homes/esaci/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+declare -x PWD="/mnt/nfs/homes/esaci/Desktop/minishell/oritest"
+declare -x QT_ACCESSIBILITY="1"
+declare -x QT_IM_MODULE="ibus"
+declare -x SESSION_MANAGER="local/e3r9p17.clusters.42paris.fr:@/tmp/.ICE-unix/1203000,unix/e3r9p17.clusters.42paris.fr:/tmp/.ICE-unix/1203000"
+declare -x SHELL="/bin/zsh"
+declare -x SHLVL="2"
+declare -x SSH_AGENT_PID="1202956"
+declare -x SSH_AUTH_SOCK="/run/user/35996/keyring/ssh"
+declare -x TERM="xterm-256color"
+declare -x USER="elias"
+declare -x VTE_VERSION="6003"
+declare -x XAUTHORITY="/mnt/nfs/homes/esaci/.Xauthority"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x XDG_DATA_DIRS="/usr/share/gnome:/usr/share/ubuntu:/mnt/nfs/homes/esaci/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+declare -x XDG_GREETER_DATA_DIR="/var/lib/lightdm-data/esaci"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x XDG_RUNTIME_DIR="/run/user/35996"
+declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
+declare -x XDG_SESSION_CLASS="user"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session22"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
+declare -x ZSH="/mnt/nfs/homes/esaci/.oh-my-zsh"
+file1
+file2
+file3
+hardesttest.txt
+log.txt
+test1
+test2
+test3
+test4
+working.txt
+x1
+x2
+x3
+y1
+y2
+/mnt/nfs/homes/esaci/Desktop/minishell/oritest

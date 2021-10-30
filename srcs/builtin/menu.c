@@ -12,16 +12,16 @@
 
 #include "../../lib/libmin_built.h"
 
-int	is_command(char *command, char **args, t_list *l, int *last_exit)
+int	is_command(char *command, char **args, t_lexer *l, int *last_exit)
 {
 	if (!(command))
 		return (0);
 	if (!ft_memcmp(command, "echo", 5))
-		ft_echo(args, last_exit);
+		ft_echo(args, last_exit, l);
 	else if (!ft_memcmp(command, "env", 4))
-		ft_env(l);
+		ft_env(l->envp);
 	else if (!ft_memcmp(command, "pwd", 4))
-		ft_pwd(l);
+		ft_pwd(l->envp);
 	else
 		return (0);
 	return (1);
@@ -29,7 +29,7 @@ int	is_command(char *command, char **args, t_list *l, int *last_exit)
 
 int	menu(char *command, char **args, t_lexer *l)
 {
-	if (!is_command(command, args, l->envp, &l->last_exit))
+	if (!is_command(command, args, l, &l->last_exit))
 		return (0);
 	small_free(l, NULL, NULL, 1);
 	exit(0);

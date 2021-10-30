@@ -194,4 +194,5 @@ int					len_needed(t_lexer *l);
 char				*get_name(char *arg);
 void				ultime_close_archive(t_lexer *l);
 int					ft_isal(int c);
+int					is_apo(char *ptr, char c);
 #endif
