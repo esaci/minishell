@@ -134,7 +134,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		ptr = generate_custom_envp(l->envp);
 		if (execve(n->str[0], n->str, ptr) == -1)
 		{
-			free(ptr);
+			double_free(ptr);
 			small_free(l, NULL, NULL, 1);
 			exit(print_custom("error comm", 2, 1, 1));
 		}

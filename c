@@ -1,0 +1,14 @@
+a
+b
+c
+d
+fcts
+files_test
+ignoreliberror
+lib
+Makefile
+MakefileMAC
+minishell
+mytest
+oritest
+srcs
