@@ -15,7 +15,7 @@
 t_list	*ft_new_list_elem(char *content)
 {
 	t_list	*new;
-	
+
 	new = (t_list *)malloc(sizeof(t_list) * 2);
 	if (new == NULL)
 		return (NULL);

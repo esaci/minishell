@@ -48,19 +48,18 @@ void	export_exist_equal(t_list *e, char *var, char *ptr)
 	free(ptr3);
 }
 
-void	export_with_plus(char *complete_arg, t_list *e, char *var, char *old_value)
+void	export_with_plus(char *c_arg, t_list *e, char *var, char *o_v)
 {
 	char	*ptr2;
 	char	*ptr3;
 
-	print_custom("case2", 1, 1, 1);
-	print_custom(old_value, 1, 1, 1);
+	print_custom(o_v, 1, 1, 1);
 	ptr3 = ft_strjoin(var, "=");
 	ptr2 = ft_strjoin(ptr3, "\"");
 	free(ptr3);
-	ptr3 = ft_strjoin(ptr2, old_value);
+	ptr3 = ft_strjoin(ptr2, o_v);
 	free(ptr2);
-	ptr2 = ft_strjoin(ptr3, get_value(complete_arg));
+	ptr2 = ft_strjoin(ptr3, get_value(c_arg));
 	free(ptr3);
 	ptr3 = ft_strjoin(ptr2, "\"");
 	free(ptr2);
@@ -75,7 +74,6 @@ void	export_exist_empty(char *arg, t_list *e, char *var)
 	char	*ptr2;
 	char	*ptr3;
 
-	print_custom("case3", 1, 1, 1);
 	ptr = ft_strjoin(var, "=");
 	ptr2 = ft_strjoin(ptr, "\"");
 	ptr3 = ft_strjoin(ptr2, get_value(arg));

@@ -63,7 +63,7 @@ char	**generate_custom_envp(t_list *v_env)
 	int		count;
 	t_list	*tmp;
 	char	**ptr;
-	char 	*str;
+	char	*str;
 
 	count = utils_strlen_env(v_env);
 	ptr = malloc(sizeof(char *) * (count + 3));
