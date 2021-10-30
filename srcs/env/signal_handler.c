@@ -51,3 +51,9 @@ void	handler_parent_muted(int num)
 		*g_exit_code = 131;
 	}
 }
+
+void	handler_child_sigquit(int num)
+{
+	if (num == SIGQUIT)
+		kill(0, SIGQUIT);
+}

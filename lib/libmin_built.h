@@ -83,15 +83,6 @@ void	export_cases_3(char *arg, t_list *e, char *var);
 void	export_cases(char *arg, t_list *e);
 int		check_equal(char *ptr);
 
-// Handler
-void	handler_parent(int num);
-void	handler_parent_heredoc(int num);
-void	handler_parent_muted(int num);
-void	signal_wait_input(void);
-void	signal_wait_command(void);
-void	signal_wait_heredoc(void);
-void	signal_default(void);
-
 //Environnement
 
 t_list	*ft_envp(char *envp[], char *content, t_list *v_env);

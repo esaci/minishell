@@ -56,8 +56,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		if (l->pip->pid[count])
 			signal_wait_command();
-		else
-			signal_default();
 	}
 	else
 		l->pip->pid[count] = 0;
@@ -108,6 +106,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			small_free(l, NULL, NULL, 1);
 			exit(print_custom("error comm", 2, 1, 1));
 		}
+		signal_default();
 		tmp = 1;
 		if (n->str[0])
 		{

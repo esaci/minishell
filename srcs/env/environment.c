@@ -74,7 +74,6 @@ char	**generate_custom_envp(t_list *v_env)
 	{
 		str = copieur(tmp->content);
 		ptr[count++] = clear_apo(str);
-		free(str);
 		tmp = tmp->next;
 	}
 	return (ptr);

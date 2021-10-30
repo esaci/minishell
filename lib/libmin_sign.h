@@ -17,5 +17,9 @@ void	signal_wait_input(void);
 void	signal_wait_command(void);
 void	signal_wait_heredoc(void);
 void	signal_default(void);
+void	handler_child_sigquit(int num);
+void	handler_parent(int num);
+void	handler_parent_heredoc(int num);
+void	handler_parent_muted(int num);
 
 #endif

@@ -27,7 +27,6 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 	}
 	if (!l->pip->pid[count])
 	{
-		signal_default();
 		if (n->left && n->left->str && (n->left->str + 1))
 			in = new_menu(n->left->str[0], n->left->str + 1, l);
 		if (in != -1)

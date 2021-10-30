@@ -40,5 +40,5 @@ void	signal_default(void)
 {
 	signal(SIGPIPE, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	signal(SIGQUIT, handler_child_sigquit);
 }
