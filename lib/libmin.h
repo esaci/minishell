@@ -132,7 +132,7 @@ t_token				*parser_next_token(t_token *tok);
 t_token				*check_apo(t_token *t, int mode);
 int					parser_output(t_lexer *lexer);
 int					fill_buffer(t_lexer *lexer);
-int					copy_buffer(char **buffu, t_token *tok);
+int					copy_buffer(char **buffu, t_token *tok, int fd[2]);
 int					print_custom(char *str, int fd, int exit_code,
 						int saut_ligne);
 int					print_tokens(t_lexer *l);
