@@ -26,6 +26,31 @@ void	envp_init(t_list *c_envp, t_lexer *l)
 	g_exit_code = l->flagr;
 }
 
+int	wave_readline(char **oldptr, t_lexer *lexer)
+{
+	char	*ptr;
+	int		last_exit;
+
+	ptr = *oldptr;
+	ptr = readline("Minishell$ ");
+	if (*g_exit_code == 130 || *g_exit_code == 131 || *g_exit_code == 2)
+		lexer->last_exit = *g_exit_code;
+	lexer->rl = ptr;
+	if (!ptr || ptr[0] == EOF)
+	{
+		last_exit = lexer->last_exit;
+		small_finish_free(lexer, ptr, NULL);
+		return (print_custom("\nMinishell$ exit", 1, last_exit, 1));
+	}
+	if (!ft_memcmp(lexer->rl, "exit", 5))
+	{
+		last_exit = lexer->last_exit;
+		small_finish_free(lexer, ptr, NULL);
+		return (print_custom("", 1, last_exit, 0));
+	}
+	return (-1);
+}
+
 int	start_fonction(t_list *c_envp)
 {
 	t_lexer		*lexer;
@@ -37,22 +62,9 @@ int	start_fonction(t_list *c_envp)
 		return (1);
 	envp_init(c_envp, lexer);
 	ptr = NULL;
-	ptr = readline("Minishell$ ");
-	if (*g_exit_code == 130 || *g_exit_code == 131 || *g_exit_code == 2)
-		lexer->last_exit = *g_exit_code;
-	lexer->rl = ptr;
-	if (!ptr || ptr[0] == EOF)
-	{
-		last_exit = lexer->last_exit;
-		small_finish_free(lexer, ptr, NULL);
-		return (print_custom("\nMinishell$ exit" , 1, last_exit, 1));
-	}
-	if (!ft_memcmp(lexer->rl, "exit", 5))
-	{
-		last_exit = lexer->last_exit;
-		small_finish_free(lexer, ptr, NULL);
-		return (print_custom("" , 1, last_exit, 0));
-	}
+	last_exit = wave_readline(&ptr, lexer);
+	if (last_exit != -1)
+		return (last_exit);
 	while (ft_memcmp(lexer->rl, "exit", 5))
 	{
 		if (!parser_input(lexer))
@@ -63,9 +75,6 @@ int	start_fonction(t_list *c_envp)
 			return (1);
 		}
 		tree_input(lexer);
-		/* print_custom(lexer->line_buffer, 1, 1, 1); */
-		/* print_tokens(lexer); */
-		/* print_node(lexer->node); */
 		if (exec_input(lexer))
 		{
 			rl_clear_history();
@@ -87,9 +96,9 @@ int	start_fonction(t_list *c_envp)
 	{
 		last_exit = lexer->last_exit;
 		small_finish_free(lexer, ptr, NULL);
-		return (print_custom("\nMinishell$ exit" , 1, last_exit, 1));
+		return (print_custom("\nMinishell$ exit", 1, last_exit, 1));
 	}
 	last_exit = lexer->last_exit;
 	small_finish_free(lexer, ptr, NULL);
-	return (print_custom("" , 1, last_exit, 0));
+	return (print_custom("", 1, last_exit, 0));
 }
