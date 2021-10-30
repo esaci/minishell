@@ -31,19 +31,22 @@ t_list	*ft_del_variable_suite(char *ptr, t_list *env, \
 		}
 		return (env);
 	}
-	return (env);
+	return (NULL);
 }
 
 t_list	*ft_del_variable(char *ptr, t_list *env)
 {
 	t_list	*prev;
 	t_list	*tmp_e;
-
+	t_list	*tmp;
+	
 	prev = NULL;
 	tmp_e = env;
 	while (tmp_e)
 	{
-		ft_del_variable_suite(ptr, env, prev, tmp_e);
+		tmp = ft_del_variable_suite(ptr, env, prev, tmp_e);
+		if (tmp)
+			return (tmp);
 		prev = tmp_e;
 		tmp_e = tmp_e->next;
 	}

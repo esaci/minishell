@@ -81,7 +81,7 @@ int	new_menu(char *command, char **args, t_lexer *lex)
 	else if (!ft_memcmp(command, "cd", 3))
 		lex->last_exit = ft_cd(args, l);
 	else if (!ft_memcmp(command, "export", 7))
-		lex->last_exit = ft_export(args, l);
+		lex->last_exit = ft_export(args, l, 0);
 	else if (!ft_memcmp(command, "exit", 5))
 		lex->last_exit = ft_exit(lex, args);
 	else

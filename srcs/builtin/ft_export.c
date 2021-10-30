@@ -22,7 +22,7 @@ char	*get_var(char *arg)
 		return (copieur(""));
 	while (arg[i] && arg[i] != '=')
 		i++;
-	if (arg[i - 1] == '+')
+	if (i && arg[i - 1] && arg[i - 1] == '+')
 		i--;
 	res = ft_substr(arg, 0, i);
 	return (res);
@@ -42,12 +42,20 @@ char	*get_value(char *arg)
 	return (&arg[i + 1]);
 }
 
-int	ft_export(char **args, t_list *e)
+int	loop_identifier_mini(char **args)
 {
-	int	flag;
+	if (loop_identifier(args) != 1)
+	{
+		ft_putstr_fd("export : not valid in this context\n", 1);
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_export(char **args, t_list *e, int flag)
+{
 	int	flag2;
 
-	flag = 0;
 	flag2 = 0;
 	if (!*args)
 	{
@@ -62,12 +70,7 @@ int	ft_export(char **args, t_list *e)
 	}
 	while (args && *args && flag == 0)
 	{
-		flag2 = 0;
-		if (loop_identifier(args) != 1)
-		{
-			ft_putstr_fd("export : not valid in this context\n", 1);
-			flag2 = 1;
-		}
+		flag2 = loop_identifier_mini(args);
 		if (flag2 != 1)
 			export_cases(*args, e);
 		args++;

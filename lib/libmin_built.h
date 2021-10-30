@@ -68,7 +68,7 @@ int		ft_cd_minus(char **args, t_list *e, int *last_exit);
 int		ft_cd_other(char **args, t_list *e, int *last_exit);
 void	error_chdir(char *ptr, int *last_exit);
 int		ft_unset(t_list *l, char **args);
-int		ft_export(char **args, t_list *e);
+int		ft_export(char **args, t_list *e, int flag);
 int		check_identifier(char *id);
 int		check_variable(char *str);
 int		loop_identifier(char **args);
