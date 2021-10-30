@@ -14,7 +14,7 @@
 
 char	*get_var(char *arg)
 {
-	int	i;
+	int		i;
 	char	*res;
 
 	i = 0;
