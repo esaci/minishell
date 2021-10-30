@@ -77,9 +77,6 @@ int		check_all_char(char *arg);
 char	*get_var(char *arg);
 char	*get_value(char *arg);
 void	ft_cd_back(char **args, t_list *e, int *last_exit);
-void	export_cases_1(t_list *e, char *var, char *ptr);
-void	export_cases_2(char *arg, t_list *e, char *var, char *ptr);
-void	export_cases_3(char *arg, t_list *e, char *var);
 void	export_cases(char *arg, t_list *e);
 int		check_equal(char *ptr);
 
