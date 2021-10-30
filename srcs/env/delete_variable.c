@@ -39,7 +39,7 @@ t_list	*ft_del_variable(char *ptr, t_list *env)
 	t_list	*prev;
 	t_list	*tmp_e;
 	t_list	*tmp;
-	
+
 	prev = NULL;
 	tmp_e = env;
 	while (tmp_e)

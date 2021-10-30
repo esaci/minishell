@@ -81,6 +81,7 @@ void	export_cases_1(t_list *e, char *var, char *ptr);
 void	export_cases_2(char *arg, t_list *e, char *var, char *ptr);
 void	export_cases_3(char *arg, t_list *e, char *var);
 void	export_cases(char *arg, t_list *e);
+int		check_equal(char *ptr);
 
 // Handler
 void	handler_parent(int num);

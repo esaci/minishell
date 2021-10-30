@@ -24,6 +24,18 @@
 
 #include "../../lib/libmin_built.h"
 
+int	check_equal(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg && arg[i] && arg[i] != '=')
+		i++;
+	if (!i)
+		return (1);
+	return (0);
+}
+
 void	export_cases_1(t_list *e, char *var, char *ptr)
 {
 	char	*ptr2;

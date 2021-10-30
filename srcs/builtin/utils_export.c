@@ -18,6 +18,8 @@ int	check_identifier(char *id)
 		return (-1);
 	if (ft_isdigit(id[0]))
 		return (-1);
+	if (check_equal(id))
+		return (-1);
 	return (1);
 }
 
