@@ -32,7 +32,7 @@ char	*get_name(char *arg)
 	int		count2;
 
 	count = 0;
-	while (arg && arg[count] && ft_isal(arg[count]))
+	while (arg && arg[count] && (ft_isal(arg[count]) || (count && ft_isalnum(arg[count]))))
 		count++;
 	ptr = malloc(sizeof(char) * (count + 10));
 	if (!ptr)
@@ -59,13 +59,15 @@ void	add_arg(t_lexer *l, int *count4, int *count2, int count3)
 	while (ptr && ptr[count])
 		l->line_buffer[(*count4)++] = ptr[count++];
 	(*count2)++;
-	if (!ft_isalnum(l->rl[*count2]) && ((l->rl[*count2] != '\'' && l->rl[*count2] != '\"') || count3))
+	if (!ft_isalnum(l->rl[*count2]) && l->rl[*count2] != '_' && ((l->rl[*count2] != '\'' && l->rl[*count2] != '\"') || count3))
 		l->line_buffer[(*count4)++] = '$';
+	count = 0;
 	while (l->rl && l->rl[*count2] && (ft_isalnum(l->rl[*count2]) || l->rl[*count2] == '_'))
 	{
 		(*count2)++;
-		if (!ft_isal(l->rl[*count2]))
+		if (!ft_isal(l->rl[*count2 - 1]) && !count)
 			break ;
+		count++;
 	}
 	free(var);
 	free(ptr);
