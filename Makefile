@@ -34,6 +34,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCPARSING)parse_is_command.c			\
 		$(SRCD)$(SRCPARSING)start_functions.c			\
 		$(SRCD)$(SRCPARSING)parser_input.c				\
+		$(SRCD)$(SRCPARSING)utils_parser_input.c		\
 		$(SRCD)$(SRCPARSING)parser_output.c				\
 		$(SRCD)$(SRCPARSING)lexer_start.c				\
 		$(SRCD)$(SRCPARSING)free_functions.c			\

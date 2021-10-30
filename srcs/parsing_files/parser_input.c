@@ -12,79 +12,20 @@
 
 #include "../../lib/libmin.h"
 
-t_token	*parser_chevron(t_token *t, TOKENTYPE type)
+t_token	*checker_next_token(t_token *toktmp)
 {
-	t_token	*tmp;
-
-	if (t->n_token->type == type)
-	{
-		t->type = t->type - 1;
-		while (t->n_token->n_token && t->n_token->n_token->type == CHAR_SPACE)
-			t->n_token->n_token = unlink_free_return(t->n_token->n_token, 1);
-		return(unlink_free_return(t->n_token, 1));
-	}
+	if (toktmp->type == CHAR_CHEVG || toktmp->type == CHAR_CHEVD)
+		toktmp = parser_chevron(toktmp, toktmp->type);
+	else if (toktmp->type == CHAR_GUILL || toktmp->type == CHAR_APO)
+		toktmp = parser_in_between(toktmp, toktmp->type);
+	else if (toktmp->type == CHAR_INUT)
+		toktmp = parser_until_not(toktmp, toktmp->type, CHAR_SPACE);
+	else if (toktmp->type == CHAR_TIRET
+		||toktmp->type == CHAR_PIPE || toktmp->type == CHAR_DOLL)
+		toktmp = parser_until_space(toktmp);
 	else
-	{
-		tmp = t->n_token;
-		while (tmp && tmp->type == CHAR_SPACE)
-			tmp = unlink_free_return(tmp, 1);
-	}
-	return (tmp);
-}
-
-t_token	*parser_in_between(t_token *t, TOKENTYPE type)
-{
-	t_token	*tmp;
-
-	tmp = check_apo(t, 1);
-	if (tmp)
-		return (tmp);
-	tmp = t->n_token;
-	while (tmp && tmp->line[0] != type)
-		tmp = unlink_free_return(tmp, 1);
-	if (!tmp)
-		return (tmp);
-	tmp = unlink_free_return(tmp, 1);
-	while (tmp && tmp->type == CHAR_SPACE)
-		tmp = unlink_free_return(tmp, 1);
-	return (tmp);
-}
-
-t_token	*parser_until_not(t_token *t, TOKENTYPE type, TOKENTYPE type2)
-{
-	t_token	*tmp;
-
-	tmp = t->n_token;
-	while (tmp && tmp->type == type)
-		tmp = unlink_free_return(tmp, 1);
-	while (tmp && tmp->type == type2)
-		tmp = unlink_free_return(tmp, 1);
-	return (tmp);
-}
-
-t_token *parser_until_space(t_token *tok)
-{
-	t_token *tmp;
-
-	tmp = tok->n_token;
-	if (tok->type == CHAR_PIPE)
-	{
-		while (tmp && tmp->type == CHAR_SPACE)
-			tmp = unlink_free_return(tmp, 1);
-		if (!tmp || tmp->type == CHAR_PIPE)
-		{
-			if (!g_exit_code[0])
-				print_custom("Minishell: syntax error near unexpected token `|'", 2, 1, 1);
-			*g_exit_code = 2;
-		}
-		return (tmp);
-	}
-	while (tmp && tmp->type != CHAR_SPACE)
-		tmp = unlink_free_return(tmp, 1);
-	if (!tmp)
-		return (tmp);
-	tmp = unlink_free_return(tmp, 1);
-	return (tmp);
+		toktmp = toktmp->n_token;
+	return (toktmp);
 }
 
 t_token	*parser_next_token(t_token *tok)
@@ -96,24 +37,17 @@ t_token	*parser_next_token(t_token *tok)
 		toktmp = unlink_free_return(toktmp, 1);
 	if (!toktmp)
 		return (NULL);
-	if (toktmp->type ==  CHAR_PIPE && !toktmp->n_token)
+	if (toktmp->type == CHAR_PIPE && !toktmp->n_token)
 	{
 		if (!g_exit_code[0])
-			print_custom("Minishell: syntax error near unexpected token `|'", 2, 1, 1);
+			print_custom(
+				"Minishell: syntax error near unexpected token `|'",
+				2, 1, 1);
 		*g_exit_code = 2;
 	}
 	if (!toktmp->n_token)
 		return (NULL);
-	if (toktmp->type == CHAR_CHEVG || toktmp->type == CHAR_CHEVD)
-		toktmp = parser_chevron(toktmp, toktmp->type);
-	else if (toktmp->type == CHAR_GUILL || toktmp->type == CHAR_APO)
-		toktmp = parser_in_between(toktmp, toktmp->type);
-	else if (toktmp->type == CHAR_INUT)
-		toktmp = parser_until_not(toktmp, toktmp->type, CHAR_SPACE);
-	else if (toktmp->type == CHAR_TIRET || toktmp->type ==  CHAR_PIPE || toktmp->type == CHAR_DOLL)
-		toktmp = parser_until_space(toktmp);
-	else
-		toktmp = toktmp->n_token;
+	toktmp = checker_next_token(toktmp);
 	return (toktmp);
 }
 
@@ -127,7 +61,9 @@ int	parser_lexer(t_lexer *lexer)
 	if (toktmp->type == CHAR_PIPE)
 	{
 		if (!g_exit_code[0])
-			print_custom("Minishell: syntax error near unexpected token `|'", 2, 1, 1);
+			print_custom(
+				"Minishell: syntax error near unexpected token `|'",
+				2, 1, 1);
 		*g_exit_code = 2;
 	}
 	while (toktmp)
