@@ -33,7 +33,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	int		fd[2];
 	t_token	*t;
 	char	**ptr;
-
+	DIR		*dir_ptr;
 
 	tmp = -1;
 	if (last_pipe(l) == 0 || count == last_pipe(l))
@@ -134,9 +134,20 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		ptr = generate_custom_envp(l->envp);
 		if (execve(n->str[0], n->str, ptr) == -1)
 		{
+			dir_ptr = opendir(n->str[0]);
+			if (dir_ptr)
+			{
+				closedir(dir_ptr);
+				print_custom(n->str[0], 2, 1, 0);
+				tmp = 1;
+			}
+			else
+				tmp = 0;
 			double_free(ptr);
 			small_free(l, NULL, NULL, 1);
-			exit(print_custom("error comm", 2, 1, 1));
+			if (!tmp)
+				exit(print_custom("error comm", 2, 1, 1));
+			exit(print_custom(": Is a Directory", 2, 126, 1));
 		}
 	}
 	return (0);
