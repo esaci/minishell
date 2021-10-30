@@ -81,7 +81,7 @@ void	export_cases(char *arg, t_list *e)
 	char	*var;
 	char	*ptr;
 	char	*test;
-	int	flag;
+	int		flag;
 
 	flag = 0;
 	var = get_var(arg);
