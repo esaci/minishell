@@ -117,3 +117,12 @@ int		arg_gestion(char *buff, t_token *t)
 	buff[count3] = 0;
 	return (1);
 }
+
+int	ft_isal(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	if (c <= 'Z' && c >= 'A')
+		return (1);
+	return (0);
+}

@@ -84,7 +84,7 @@ char	*apply_doll(char *ptr, t_lexer *l)
 			copy_arg(str, custom_getenv(l->envp, var, 0), &count2);
 			free(var);
 			count++;
-			while (ptr && ptr[count] && ft_isalnum(ptr[count]))
+			while (ptr && ptr[count] && ft_isal(ptr[count]))
 				count++;
 		}
 		else
