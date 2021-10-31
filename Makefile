@@ -43,6 +43,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCPARSING)free_functions.c			\
 		$(SRCD)$(SRCPARSING)small_free_functions.c		\
 		$(SRCD)$(SRCPARSING)init_line_buffer.c 			\
+		$(SRCD)$(SRCPARSING)utils_line_buffer.c 		\
 		$(SRCD)$(SRCPARSING)copy_buffer.c 				\
 		$(SRCD)$(SRCEXEC)full_functions.c				\
 		$(SRCD)$(SRCEXEC)exec_input.c					\

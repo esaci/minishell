@@ -114,12 +114,7 @@ int	init_line_buffer(t_lexer *l)
 	count = 0;
 	while (l->rl[count2])
 	{
-		if (l->rl[count2] == '<' && l->rl[count2 + 1] && l->rl[count2 + 1] == '<')
-			count = 2;
-		if ((count == 1) && l->rl[count2] == ' ')
-			count--;
-		if ((count == 2) && l->rl[count2] != '<')
-			count--;
+		count = flag_arg(count, count2, l);
 		if (l->rl[count2] == '\"' && (is_apo(l->rl + count2 + 1, '\"') || count3))
 		{
 			count3 = 1 - count3;

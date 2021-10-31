@@ -120,6 +120,7 @@ typedef struct s_lexer
 }	t_lexer;
 
 int					init_line_buffer(t_lexer *l);
+int					flag_arg(int count, int count2, t_lexer *l);
 void				init_path_pwd(t_lexer *l, int mode);
 int					start_fonction(t_list *c_envp, int last_exit, char *ptr);
 void				*sig_handler(void);
