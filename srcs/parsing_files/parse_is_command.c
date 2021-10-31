@@ -30,18 +30,24 @@ char	*copieur(char *s)
 	return (str);
 }
 
+char	*return_free(char *r, char *f, char *arg, int mode)
+{
+	if (mode)
+		free(arg);
+	if (f)
+		free(f);
+	return (r);
+}
+
 char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l, int mode)
 {
 	char	*ptr;
 	int		tmp;
-/* 	int		index;
 
-	index = 0; */
 	if (l->pwd && l->pwd[0])
 	{
 		ptr = ft_strjoin(l->pwd[0], ptr2);
 		tmp = access(ptr, F_OK);
-	
 		if (tmp == 0)
 		{
 			if (ptr2[1] == '.' && l->pwd)
@@ -49,18 +55,12 @@ char	*parse_path2(char *arg_list, char *ptr2, t_lexer *l, int mode)
 				free(ptr);
 				ptr = ft_strjoin(l->pwd[0], ptr2 + 2);
 			}
-			free(ptr2);
-			if (mode)
-				free(arg_list);
-			return (ptr);
+			return (return_free(ptr, ptr2, arg_list, mode));
 		}
-	free(ptr);
+		free(ptr);
 	}
-	free(ptr2);
 	ptr = copieur(arg_list);
-	if (mode)
-		free(arg_list);
-	return (ptr);
+	return (return_free(ptr, ptr2, arg_list, mode));
 }
 
 char	*parse_is_command(char *arg_list, t_lexer *l, int count, int mode)
@@ -70,12 +70,7 @@ char	*parse_is_command(char *arg_list, t_lexer *l, int count, int mode)
 	char	*ptr2;
 
 	if (!arg_list || !arg_list[0] || arg_list[0] == '.')
-	{
-		ptr = copieur(arg_list);
-		if (arg_list && mode)
-			free(arg_list);
-		return (ptr);
-	}
+		return (return_free(copieur(arg_list), NULL, arg_list, mode));
 	ptr2 = copieur(arg_list);
 	if (ptr2[0] != '/')
 	{
@@ -92,11 +87,6 @@ char	*parse_is_command(char *arg_list, t_lexer *l, int count, int mode)
 		count++;
 	}
 	if (tmp == 0)
-	{
-		free(ptr2);
-		if (mode)
-			free(arg_list);
-		return (ptr);
-	}
+		return (return_free(ptr, ptr2, arg_list, mode));
 	return (parse_path2(arg_list, ptr2, l, mode));
 }
