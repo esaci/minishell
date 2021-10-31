@@ -23,3 +23,21 @@ int	flag_arg(int count, int count2, t_lexer *l)
 		count--;
 	return (count);
 }
+
+int	malloc_free_buff(t_lexer *l)
+{
+	if (l->line_buffer)
+		free(l->line_buffer);
+	l->line_buffer = malloc(sizeof(char) * (len_needed(l) + 10));
+	if (!l->line_buffer)
+		return (1);
+	return (0);
+}
+
+void	ignore_all_buff(t_lexer *l, int	*c2, int *c4)
+{
+	l->line_buffer[(*c4)++] = l->rl[(*c2)++];
+	while (l->rl[(*c2)] && l->rl[(*c2)] != '\'')
+		l->line_buffer[(*c4)++] = l->rl[(*c2)++];
+	l->line_buffer[(*c4)++] = l->rl[(*c2)++];
+}

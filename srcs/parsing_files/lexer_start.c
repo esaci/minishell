@@ -61,7 +61,7 @@ int	init_lexer(t_lexer *lexer)
 	if (!(*lexer->rl))
 		return (0);
 	init_path_pwd(lexer, 1);
-	init_line_buffer(lexer);
+	init_line_buffer(lexer, 0, 0, 0);
 	return (0);
 }
 

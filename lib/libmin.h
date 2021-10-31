@@ -119,7 +119,10 @@ typedef struct s_lexer
 	int			last_exit;
 }	t_lexer;
 
-int					init_line_buffer(t_lexer *l);
+void				init_line_buffer(t_lexer *l, int count2, int count3, int count4);
+int					len_needed(t_lexer *l);
+int					malloc_free_buff(t_lexer *l);
+void				ignore_all_buff(t_lexer *l, int	*c2, int *c4);
 int					flag_arg(int count, int count2, t_lexer *l);
 void				init_path_pwd(t_lexer *l, int mode);
 int					start_fonction(t_list *c_envp, int last_exit, char *ptr);

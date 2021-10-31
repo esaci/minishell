@@ -102,44 +102,28 @@ int	len_needed(t_lexer *l)
 	return (count);
 }
 
-int	init_line_buffer(t_lexer *l)
+void	init_line_buffer(t_lexer *l, int c2, int c3, int c4)
 {
-	int	count;
-	int	count2;
-	int	count3;
-	int	count4;
+	int	c1;
 
-	if (l->line_buffer)
-		free(l->line_buffer);
-	count = len_needed(l);
-	l->line_buffer = malloc(sizeof(char) * (count + 10));
-	count2 = 0;
-	count3 = 0;
-	count4 = 0;
-	count = 0;
-	while (l->rl[count2])
+	if (malloc_free_buff(l))
+		return ;
+	c1 = 0;
+	while (l->rl[c2])
 	{
-		count = flag_arg(count, count2, l);
-		if (l->rl[count2] == '\"'
-			&& (is_apo(l->rl + count2 + 1, '\"') || count3))
+		c1 = flag_arg(c1, c2, l);
+		if (l->rl[c2] == '\"' && (is_apo(l->rl + c2 + 1, '\"') || c3))
 		{
-			count3 = 1 - count3;
-			l->line_buffer[count4++] = l->rl[count2++];
+			c3 = 1 - c3;
+			l->line_buffer[c4++] = l->rl[c2++];
 		}
-		else if (!count3 && l->rl[count2] == '\''
-			&& is_apo(l->rl + count2 + 1, '\''))
-		{
-			l->line_buffer[count4++] = l->rl[count2++];
-			while (l->rl[count2] && l->rl[count2] != '\'')
-				l->line_buffer[count4++] = l->rl[count2++];
-			l->line_buffer[count4++] = l->rl[count2++];
-		}
-		else if (l->rl[count2] == '$'
-			&& l->rl[count2 + 1] && l->rl[count2 + 1] != '?' && !count)
-			add_arg(l, &count4, &count2, count3);
+		else if (!c3 && l->rl[c2] == '\'' && is_apo(l->rl + c2 + 1, '\''))
+			ignore_all_buff(l, &c2, &c4);
+		else if (l->rl[c2] == '$'
+			&& l->rl[c2 + 1] && l->rl[c2 + 1] != '?' && !c1)
+			add_arg(l, &c4, &c2, c3);
 		else
-			l->line_buffer[count4++] = l->rl[count2++];
+			l->line_buffer[c4++] = l->rl[c2++];
 	}
-	l->line_buffer[count4] = 0;
-	return (0);
+	l->line_buffer[c4] = 0;
 }
