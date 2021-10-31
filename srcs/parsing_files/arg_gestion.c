@@ -12,17 +12,19 @@
 
 #include "../../lib/libmin.h"
 
-int		nbr_apo_guill(t_token *t)
+int	nbr_apo_guill(t_token *t)
 {
 	int	count;
 	int	count2;
 
 	count = 0;
-	while (t && (t->type == CHAR_APO || t->type == CHAR_GUILL || t->type == CHAR_INUT))
+	while (t && (t->type == CHAR_APO
+			|| t->type == CHAR_GUILL || t->type == CHAR_INUT))
 	{
 		if (t->type == CHAR_APO || t->type == CHAR_GUILL)
 			count++;
-		else{
+		else
+		{
 			count2 = 0;
 			while (t->n_token && ((t->line) + count2) != t->n_token->line)
 			{
@@ -36,18 +38,13 @@ int		nbr_apo_guill(t_token *t)
 	return (count * 2);
 }
 
-int		len_new_buff(t_token *t)
+int	len_new_buff(t_token *t, int count, int count4, char c)
 {
-	int		count;
-	int		count4;
-	char	c;
-
-	count = 0;
 	while (t && t->line && t->line[count])
 	{
 		c = t->line[count];
 		if (c == '<' || c == '>' || c == ' ' || c == '|')
-			break;
+			break ;
 		if (c == '\'' || c == '\"')
 		{
 			count4 = count + 1;
@@ -59,20 +56,21 @@ int		len_new_buff(t_token *t)
 			if (count)
 				t->n_token = unlink_free_return(t->n_token, 1);
 			count = count4;
-			if (t->line[count] != '\'' && t->line[count] != '\"' && t->line[count] != '<' && t->line[count] != '>' && t->line[count] != ' ' && t->line[count] != '|')
+			if (t->line[count] != '\'' && t->line[count] != '\"'
+				&& t->line[count] != '<' && t->line[count] != '>'
+				&& t->line[count] != ' ' && t->line[count] != '|')
 				t->n_token = unlink_free_return(t->n_token, 1);
-			else if (t->n_token && (t->line[count] == '\'' || t->line[count] == '\"') && t->n_token->type == CHAR_INUT)
+			else if (t->n_token && (t->line[count] == '\''
+					|| t->line[count] == '\"') && t->n_token->type == CHAR_INUT)
 				t->n_token = unlink_free_return(t->n_token, 1);
 		}
 		else
-		{
 			count++;
-		}
 	}
 	return (count);
 }
 
-int		arg_gestion(char *buff, t_token *t)
+int	arg_gestion(char *buff, t_token *t)
 {
 	int		count;
 	int		len;
@@ -95,7 +93,7 @@ int		arg_gestion(char *buff, t_token *t)
 		buff[count3] = (t->line + count3)[0];
 		count3++;
 	}
-	len = len_new_buff(t);
+	len = len_new_buff(t, 0, 0, 0);
 	t->type = CHAR_INUT;
 	count = count3;
 	c = 0;
