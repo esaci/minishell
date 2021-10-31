@@ -12,33 +12,9 @@
 
 #include "../../lib/libmin.h"
 
-int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
-{
-	int		count;
-	t_token *tmp;
-
-	if (n->type != NODE_NOCOM && n->type != NODE_PATHCOM)
-		return (0);
-	count = 1;
-	tmp = t;
-	while (t && t->type != CHAR_PIPE)
-	{
-		if ((t->type == CHAR_INUT && !is_any_chevron(tmp)) || (is_arg(t) == 1))
-		{
-			n->str[count] = l->buffer[get_buffer_count(l, t)];
-			count++;
-		}
-		tmp = t;
-		t = t->n_token;
-	}
-	n->str[count] = NULL;
-	return (0);
-	return(l->buffer[0][0]);
-}
-
 int	search_command(t_node *n, t_token *t, t_lexer *l)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	t_token	*tmp2;
 	int		count;
 
@@ -61,9 +37,9 @@ int	search_command(t_node *n, t_token *t, t_lexer *l)
 	else
 		n->type = NODE_NOCOM;
 	count = nbr_com(l, tmp2);
-	n->str = malloc(sizeof(char*) * (count + 3));
+	n->str = malloc(sizeof(char *) * (count + 3));
 	if (!n->str)
-		return	(1);
+		return (1);
 	n->str[count] = NULL;
 	n->str[0] = l->buffer[get_buffer_count(l, t)];
 	if (search_node_str_com(n, t->n_token, l))
@@ -90,35 +66,6 @@ int	search_pipe(t_node *n, t_token *t, t_lexer *l)
 			return (1);
 	}
 	return (0);
-}
-
-int	*join_int(int *fd, char *str, t_lexer *l)
-{
-	int	*ptr;
-	int	count;
-
-	if (!fd)
-	{
-		ptr = malloc(sizeof(int) * 2);
-		ptr[0] = -1;
-		ptr[1] = -1;
-		exec_in_heredoc(str, ptr, l);
-		return (ptr);
-	}
-	count = 0;
-	while (fd && fd[count] != -1)
-		count++;
-	ptr = malloc(sizeof(int) * (count + 2));
-	count = 0;
-	while (fd && fd[count] != -1)
-	{
-		ptr[count] = fd[count];
-		count++;
-	}
-	exec_in_heredoc(str, ptr + count, l);
-	ptr[count + 1] = -1;
-	free(fd);
-	return (ptr);
 }
 
 int	search_infile(t_node *n, t_token *t, t_lexer *l)

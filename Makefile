@@ -30,6 +30,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCPARSING)print_functions.c			\
 		$(SRCD)$(SRCPARSING)type_functions.c			\
 		$(SRCD)$(SRCPARSING)search_functions.c			\
+		$(SRCD)$(SRCPARSING)utils_search.c				\
 		$(SRCD)$(SRCPARSING)fast_functions.c			\
 		$(SRCD)$(SRCPARSING)parse_is_command.c			\
 		$(SRCD)$(SRCPARSING)start_functions.c			\
