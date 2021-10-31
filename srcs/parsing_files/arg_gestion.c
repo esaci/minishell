@@ -70,31 +70,12 @@ int	len_new_buff(t_token *t, int count, int count4, char c)
 	return (count);
 }
 
-int	arg_gestion(char *buff, t_token *t)
+int	arg_gestion2(t_token *t, char *buff, int count3, int count)
 {
-	int		count;
 	int		len;
-	int		count3;
 	char	c;
-
-	if (t->n_token && t->n_token->type != CHAR_APO && t->n_token->type != CHAR_GUILL)
-	{
-		if (t->type != CHAR_APO && t->type != CHAR_GUILL)
-			return (0);
-	}
-	count3 = 0;
-	while (t->type == CHAR_INUT && (t->line + count3) != t->n_token->line)
-	{
-		if ((t->line + count3)[0] == ' ')
-		{
-			buff[count3] = 0;
-			return (1);
-		}
-		buff[count3] = (t->line + count3)[0];
-		count3++;
-	}
+	
 	len = len_new_buff(t, 0, 0, 0);
-	t->type = CHAR_INUT;
 	count = count3;
 	c = 0;
 	while(count < len && t->line && t->line[count])
@@ -116,13 +97,26 @@ int	arg_gestion(char *buff, t_token *t)
 	return (1);
 }
 
-int	ft_isal(int c)
+int	arg_gestion(char *buff, t_token *t)
 {
-	if (c >= 'a' && c <= 'z')
-		return (1);
-	if (c <= 'Z' && c >= 'A')
-		return (1);
-	if (c == '_')
-		return (1);
-	return (0);
+	int		count3;
+
+	if (t->n_token && t->n_token->type != CHAR_APO && t->n_token->type != CHAR_GUILL)
+	{
+		if (t->type != CHAR_APO && t->type != CHAR_GUILL)
+			return (0);
+	}
+	count3 = 0;
+	while (t->type == CHAR_INUT && (t->line + count3) != t->n_token->line)
+	{
+		if ((t->line + count3)[0] == ' ')
+		{
+			buff[count3] = 0;
+			return (1);
+		}
+		buff[count3] = (t->line + count3)[0];
+		count3++;
+	}
+	t->type = CHAR_INUT;
+	return (arg_gestion2(t, buff, count3, 0));
 }

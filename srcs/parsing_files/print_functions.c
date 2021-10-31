@@ -45,3 +45,14 @@ char	*first_false_command(t_token *t, t_lexer *l)
 	}
 	return (first_false_command(t->n_token, l));
 }
+
+int	ft_isal(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	if (c <= 'Z' && c >= 'A')
+		return (1);
+	if (c == '_')
+		return (1);
+	return (0);
+}
