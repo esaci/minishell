@@ -56,7 +56,7 @@ int	search_command(t_node *n, t_token *t, t_lexer *l)
 
 int	search_pipe(t_node *n, t_token *t, t_lexer *l)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = t;
 	while (t && t->type != CHAR_PIPE)
@@ -65,7 +65,6 @@ int	search_pipe(t_node *n, t_token *t, t_lexer *l)
 	{
 		n->type = NODE_PIPE;
 		n->str = NULL;
-
 	}
 	else
 	{
@@ -77,29 +76,17 @@ int	search_pipe(t_node *n, t_token *t, t_lexer *l)
 
 int	search_infile(t_node *n, t_token *t, t_lexer *l)
 {
-	int	count;
-	int	count2;
-	t_token	*tmp;
+	int		count;
+	int		count2;
 
-	n->left = NULL;
-	n->right = NULL;
-	n->fd = NULL;
-	tmp = t;
-	count = 0;
-	while (tmp && tmp->type != CHAR_PIPE)
-	{
-		if (tmp->type == CHAR_CHEVG || tmp->type == CHAR_DCHEVG)
-			count++;
-		tmp = tmp->n_token;
-	}
-	n->str = malloc(sizeof(char*) * ((count*2) + 2));
-	if (!n->str)
+	if (malloc_node_redir(n, t, CHAR_DCHEVG, CHAR_CHEVG))
 		return (1);
 	signal_wait_heredoc();
 	count = 0;
 	while (t && t->type != CHAR_PIPE)
 	{
-		if ((t->type == CHAR_CHEVG || t->type == CHAR_DCHEVG) && !g_exit_code[0])
+		if ((t->type == CHAR_CHEVG
+				|| t->type == CHAR_DCHEVG) && !g_exit_code[0])
 		{
 			count2 = get_buffer_count(l, t);
 			n->str[count] = l->buffer[count2];
@@ -108,7 +95,8 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 			if (t->type == CHAR_DCHEVG)
 			{
 				if (t->n_token && t->n_token->type == CHAR_INUT)
-					n->fd = join_int(n->fd, l->buffer[get_buffer_count(l, t->n_token)], l);
+					n->fd = join_int(n->fd,
+						l->buffer[get_buffer_count(l, t->n_token)], l);
 				else
 				{
 					free(n->fd);
@@ -143,28 +131,14 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 		close(*g_exit_code);
 		*g_exit_code = 130;
 	}
-
 	return (0);
 }
 
 int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 {
 	int	count;
-	t_token	*tmp;
 
-	n->left = NULL;
-	n->right = NULL;
-	n->fd = NULL;
-	tmp = t;
-	count = 0;
-	while (tmp && tmp->type != CHAR_PIPE)
-	{
-		if (tmp->type == CHAR_CHEVD || tmp->type == CHAR_DCHEVD)
-			count++;
-		tmp = tmp->n_token;
-	}
-	n->str = malloc(sizeof(char*) * ((count*2) + 2));
-	if (!n->str)
+	if (malloc_node_redir(n, t, CHAR_CHEVD, CHAR_DCHEVD))
 		return (1);
 	count = 0;
 	while (t && t->type != CHAR_PIPE)
@@ -188,7 +162,6 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 		n->type = NODE_FILEOUT;
 		n->str[0] = "/dev/stdout";
 		n->str[1] = 0;
-
 	}
 	return (0);
 }

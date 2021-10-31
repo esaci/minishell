@@ -170,7 +170,6 @@ int					is_arg(t_token *t);
 int					exec_input(t_lexer *l);
 t_node				*exec_pipe(t_lexer *l, t_node *n, int count);
 int					exec_com(t_lexer *l, t_node *n, int count);
-int					join_close_token(t_lexer *l, char **str, int count);
 int					init_pip(t_lexer *l);
 void				close_pipes(t_lexer *l, int mode);
 int					free_pip(t_lexer *l, int exit);
@@ -206,4 +205,5 @@ char				*get_name(char *arg);
 void				ultime_close_archive(t_lexer *l);
 int					ft_isal(int c);
 int					is_apo(char *ptr, char c);
+int					malloc_node_redir(t_node *n, t_token *t, TOKENTYPE r1, TOKENTYPE r2);
 #endif

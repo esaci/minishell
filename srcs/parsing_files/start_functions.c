@@ -26,12 +26,8 @@ void	envp_init(t_list *c_envp, t_lexer *l)
 	g_exit_code = l->flagr;
 }
 
-int	wave_readline(char **oldptr, t_lexer *lexer, int *last_exit)
+int	wave_readline(char *ptr, t_lexer *lexer, int *last_exit)
 {
-	char	*ptr;
-
-	ptr = *oldptr;
-	ptr = readline("Minishell$ ");
 	if (*g_exit_code == 130 || *g_exit_code == 131 || *g_exit_code == 2)
 		lexer->last_exit = *g_exit_code;
 	lexer->rl = ptr;
@@ -99,7 +95,8 @@ int	start_fonction(t_list *c_envp, int last_exit, char *ptr)
 	if (!lexer)
 		return (1);
 	envp_init(c_envp, lexer);
-	if (wave_readline(&ptr, lexer, &last_exit) != -1)
+	ptr = readline("Minishell$ ");
+	if (wave_readline(ptr, lexer, &last_exit) != -1)
 		return (last_exit);
 	while (ft_memcmp(lexer->rl, "exit", 5))
 	{

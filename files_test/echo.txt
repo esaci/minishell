@@ -168,4 +168,8 @@ export
 ls
 pwd
 
+ls > t1 | < t1 cat
+echo PATH+="$PWD"
+cat | cat | ls
+ls | << limiter cat | cat
 

@@ -63,3 +63,25 @@ int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 	n->str[count] = NULL;
 	return (0);
 }
+
+int	malloc_node_redir(t_node *n, t_token *t, TOKENTYPE r1, TOKENTYPE r2)
+{
+	t_token	*tmp;
+	int		count;
+
+	n->left = NULL;
+	n->right = NULL;
+	n->fd = NULL;
+	tmp = t;
+	count = 0;
+	while (tmp && tmp->type != CHAR_PIPE)
+	{
+		if (tmp->type == r1 || tmp->type == r2)
+			count++;
+		tmp = tmp->n_token;
+	}
+	n->str = malloc(sizeof(char *) * ((count * 2) + 2));
+	if (!n->str)
+		return (1);
+	return (0);
+}
