@@ -42,7 +42,11 @@ void	export_exist_equal(t_list *e, char *var, char *ptr)
 	char	*ptr3;
 
 	ptr2 = ft_strjoin(var, "=");
-	ptr3 = ft_strjoin(ptr2, ptr);
+	ptr3 = ft_strjoin(var, "\"");
+	free(ptr2);
+	ptr2 = ft_strjoin(ptr3, ptr);
+	free(ptr3);
+	ptr3 = ft_strjoin(ptr2, "\"");
 	ft_add_env(ptr3, e);
 	free(ptr2);
 	free(ptr3);
@@ -53,7 +57,6 @@ void	export_with_plus(char *c_arg, t_list *e, char *var, char *o_v)
 	char	*ptr2;
 	char	*ptr3;
 
-	print_custom(o_v, 1, 1, 1);
 	ptr3 = ft_strjoin(var, "=");
 	ptr2 = ft_strjoin(ptr3, "\"");
 	free(ptr3);
@@ -73,7 +76,7 @@ void	export_exist_empty(char *arg, t_list *e, char *var)
 	char	*ptr;
 	char	*ptr2;
 	char	*ptr3;
-
+	
 	ptr = ft_strjoin(var, "=");
 	ptr2 = ft_strjoin(ptr, "\"");
 	ptr3 = ft_strjoin(ptr2, get_value(arg));
@@ -95,7 +98,7 @@ void	export_cases(char *arg, t_list *e)
 	var = get_var(arg);
 	ptr = custom_getenv(e, var, 0);
 	ft_del_variable(var, e);
-	if (check_all_char(get_value(arg)) == 1 && ft_strncmp(ptr, "", 1))
+	if (check_all_char(get_value(arg)) == 1 && !ft_memcmp(ptr, "", 1))
 		flag = 1;
 	if (flag == 1)
 		export_exist_equal(e, var, ptr);
