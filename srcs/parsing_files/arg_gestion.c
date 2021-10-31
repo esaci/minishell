@@ -38,6 +38,21 @@ int	nbr_apo_guill(t_token *t)
 	return (count * 2);
 }
 
+int	unlinker_arg(t_token *t, int count, int count4)
+{
+	if (count)
+		t->n_token = unlink_free_return(t->n_token, 1);
+	count = count4;
+	if (t->line[count] != '\'' && t->line[count] != '\"'
+		&& t->line[count] != '<' && t->line[count] != '>'
+		&& t->line[count] != ' ' && t->line[count] != '|')
+		t->n_token = unlink_free_return(t->n_token, 1);
+	else if (t->n_token && (t->line[count] == '\''
+			|| t->line[count] == '\"') && t->n_token->type == CHAR_INUT)
+		t->n_token = unlink_free_return(t->n_token, 1);
+	return (count);
+}
+
 int	len_new_buff(t_token *t, int count, int count4, char c)
 {
 	while (t && t->line && t->line[count])
@@ -53,16 +68,7 @@ int	len_new_buff(t_token *t, int count, int count4, char c)
 			if (!t || !t->line || !t->line[count4])
 				return (count4);
 			count4++;
-			if (count)
-				t->n_token = unlink_free_return(t->n_token, 1);
-			count = count4;
-			if (t->line[count] != '\'' && t->line[count] != '\"'
-				&& t->line[count] != '<' && t->line[count] != '>'
-				&& t->line[count] != ' ' && t->line[count] != '|')
-				t->n_token = unlink_free_return(t->n_token, 1);
-			else if (t->n_token && (t->line[count] == '\''
-					|| t->line[count] == '\"') && t->n_token->type == CHAR_INUT)
-				t->n_token = unlink_free_return(t->n_token, 1);
+			count = unlinker_arg(t, count, count4);
 		}
 		else
 			count++;
@@ -74,11 +80,11 @@ int	arg_gestion2(t_token *t, char *buff, int count3, int count)
 {
 	int		len;
 	char	c;
-	
+
 	len = len_new_buff(t, 0, 0, 0);
 	count = count3;
 	c = 0;
-	while(count < len && t->line && t->line[count])
+	while (count < len && t->line && t->line[count])
 	{
 		if (t->line[count] == '\'' || t->line[count] == '\"')
 		{
@@ -101,7 +107,8 @@ int	arg_gestion(char *buff, t_token *t)
 {
 	int		count3;
 
-	if (t->n_token && t->n_token->type != CHAR_APO && t->n_token->type != CHAR_GUILL)
+	if (t->n_token && t->n_token->type
+		!= CHAR_APO && t->n_token->type != CHAR_GUILL)
 	{
 		if (t->type != CHAR_APO && t->type != CHAR_GUILL)
 			return (0);
