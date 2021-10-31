@@ -26,28 +26,11 @@ int	nbr_com(t_lexer *l, t_token *t)
 	return (l->tok->line[0]);
 }
 
-void	no_com_fill(t_node *n, t_lexer *l, t_token *t)
+void	no_com_fill2(t_node *n, t_lexer *l, t_token *tmp2)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	int		count;
-	t_token *tmp2;
 
-	if (n->type == NODE_PIPE)
-		return ;
-	tmp2 = t;
-	n->type = NODE_NOCOM;
-	tmp = t;
-	count = 0;
-	while(t)
-	{
-		if (t->type == CHAR_INUT && !is_any_chevron(tmp))
-			count++;
-		tmp = t;
-		t = t->n_token;
-	}
-	n->str = malloc(sizeof(char*) * (count + 3));
-	if (!n->str)
-		return;
 	tmp = tmp2;
 	count = 0;
 	while (tmp2)
@@ -58,6 +41,31 @@ void	no_com_fill(t_node *n, t_lexer *l, t_token *t)
 		tmp2 = tmp2->n_token;
 	}
 	n->str[count] = NULL;
+}
+
+void	no_com_fill(t_node *n, t_lexer *l, t_token *t)
+{
+	t_token	*tmp;
+	int		count;
+	t_token	*tmp2;
+
+	if (n->type == NODE_PIPE)
+		return ;
+	tmp2 = t;
+	n->type = NODE_NOCOM;
+	tmp = t;
+	count = 0;
+	while (t)
+	{
+		if (t->type == CHAR_INUT && !is_any_chevron(tmp))
+			count++;
+		tmp = t;
+		t = t->n_token;
+	}
+	n->str = malloc(sizeof(char *) * (count + 3));
+	if (!n->str)
+		return ;
+	no_com_fill2(n, l, tmp2);
 }
 
 t_token	*check_apo(t_token *t, int mode)
