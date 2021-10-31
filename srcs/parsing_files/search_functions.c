@@ -12,6 +12,21 @@
 
 #include "../../lib/libmin.h"
 
+int	search_command2(t_lexer *l, t_node *n, t_token *t, t_token *tmp2)
+{
+	int	count;
+
+	count = nbr_com(l, tmp2);
+	n->str = malloc(sizeof(char *) * (count + 3));
+	if (!n->str)
+		return (1);
+	n->str[count] = NULL;
+	n->str[0] = l->buffer[get_buffer_count(l, t)];
+	if (search_node_str_com(n, t->n_token, l))
+		return (1);
+	return (0);
+}
+
 int	search_command(t_node *n, t_token *t, t_lexer *l)
 {
 	t_token	*tmp;
@@ -36,15 +51,7 @@ int	search_command(t_node *n, t_token *t, t_lexer *l)
 		n->type = NODE_PATHCOM;
 	else
 		n->type = NODE_NOCOM;
-	count = nbr_com(l, tmp2);
-	n->str = malloc(sizeof(char *) * (count + 3));
-	if (!n->str)
-		return (1);
-	n->str[count] = NULL;
-	n->str[0] = l->buffer[get_buffer_count(l, t)];
-	if (search_node_str_com(n, t->n_token, l))
-		return (1);
-	return (0);
+	return (search_command2(l, n, t, tmp2));
 }
 
 int	search_pipe(t_node *n, t_token *t, t_lexer *l)
