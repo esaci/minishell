@@ -35,6 +35,20 @@ int	free_lexer_tokens(t_lexer *lexer, int mode)
 	return (mode);
 }
 
+void	free_redirections_command(t_node *n)
+{
+	if (n->left && n->left->type != NODE_FILEIN
+		&& n->left->type != NODE_DFILEIN)
+	{
+		if (n->left->left->archive_fd)
+			free(n->left->left->archive_fd);
+		free(n->left->left->str);
+		free(n->left->left);
+		free(n->left->right->str);
+		free(n->left->right);
+	}
+}
+
 int	free_lexer_nodes(t_lexer *l, int mode)
 {
 	t_node	*n;
@@ -45,15 +59,7 @@ int	free_lexer_nodes(t_lexer *l, int mode)
 	n = l->node;
 	while (n)
 	{
-		if (n->left && n->left->type != NODE_FILEIN && n->left->type != NODE_DFILEIN)
-		{
-			if(n->left->left->archive_fd)
-				free(n->left->left->archive_fd);
-			free(n->left->left->str);
-			free(n->left->left);
-			free(n->left->right->str);
-			free(n->left->right);
-		}
+		free_redirections_command(n);
 		if (n->left)
 		{
 			if (n->left->archive_fd)
@@ -86,7 +92,7 @@ int	double_free(char **str)
 
 t_token	*unlink_free_return(t_token *t, int skip)
 {
-	t_token *oldt;
+	t_token	*oldt;
 	int		count;
 
 	if (!t)
