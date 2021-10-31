@@ -30,37 +30,42 @@ NODETYPE	tree_check_type(t_lexer *l, t_token *t)
 	return (NODE_ARG);
 }
 
+t_node	*gestion_error(t_node **n)
+{
+	(*n) = malloc(sizeof(t_node) * 2);
+	if (!*n)
+		return (NULL);
+	(*n)->left = NULL;
+	(*n)->right = NULL;
+	(*n)->str = NULL;
+	(*n)->type = NODE_ERROR;
+	return ((*n));
+}
+
 t_node	*tree_parser_node(t_node **n)
 {
 	t_node	*tmp;
 
 	if (!(*n))
-	{
-		(*n) = malloc(sizeof(t_node) * 2);
-		if (!*n)
-			return (NULL);
-		(*n)->left = NULL;
-		(*n)->right = NULL;
-		(*n)->str = NULL;
-		(*n)->type = NODE_ERROR;
-		return ((*n));
-	}
+		return (gestion_error(n));
 	tmp = (*n)->right;
-	while (tmp->left && (tmp->left->type == NODE_PATHCOM || tmp->left->type == NODE_NOCOM))
+	while (tmp->left && (tmp->left->type == NODE_PATHCOM
+			|| tmp->left->type == NODE_NOCOM))
 	{
 		if (!tmp->right)
 		{
-			print_custom("Erreur Parsing node, tmp->right n'a pas ete defini alors qu'il aurait du l'etre", 1, 0, 1);
+			print_custom("Erreur Parsing node", 1, 0, 1);
 			return (NULL);
 		}
 		tmp = tmp->right;
-		if (tmp->right && (tmp->right->type == NODE_FILEOUT || tmp->right->type == NODE_DFILEOUT))
+		if (tmp->right && (tmp->right->type == NODE_FILEOUT
+				|| tmp->right->type == NODE_DFILEOUT))
 			return (NULL);
 	}
 	return (tmp);
 }
 
-t_token *tree_init_node(t_lexer *l, t_token *t, t_node **node)
+t_token	*tree_init_node(t_lexer *l, t_token *t, t_node **node)
 {
 	t_node		*n;
 

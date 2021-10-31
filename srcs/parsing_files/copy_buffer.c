@@ -84,9 +84,7 @@ int	copy_buffer(char **buffu, t_token *tok, int fd[2])
 		if ((tok->type != CHAR_APO && tok->type
 				!= CHAR_GUILL) && tok->line[fd[1]] == ' ')
 			break ;
-		(*buffu)[fd[0]] = tok->line[fd[1]];
-		fd[0]++;
-		fd[1]++;
+		(*buffu)[fd[0]++] = tok->line[fd[1]++];
 	}
 	if ((tok->type == CHAR_APO || tok->type == CHAR_GUILL) && tok->line[fd[1]])
 	{
