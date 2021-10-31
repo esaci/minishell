@@ -12,7 +12,6 @@
 
 #include "../../lib/libmin.h"
 
-
 NODETYPE	is_any_chevron(t_token *t)
 {
 	if (t->type == CHAR_CHEVD)
@@ -43,7 +42,7 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t, t_token *oldt)
 
 	if (t->type != CHAR_INUT)
 		return (NODE_ERROR);
-	tmp = parse_is_command(l->buffer[get_buffer_count(l, t)] , l, 0, 0);
+	tmp = parse_is_command(l->buffer[get_buffer_count(l, t)], l, 0, 0);
 	if (!access(tmp, F_OK) && !is_any_chevron(oldt))
 	{
 		free(tmp);
@@ -52,7 +51,6 @@ NODETYPE	is_any_command(t_lexer *l, t_token *t, t_token *oldt)
 	free(tmp);
 	return (NODE_ERROR);
 }
-
 
 int	is_redirection(t_node *n2)
 {
@@ -69,7 +67,7 @@ int	is_redirection(t_node *n2)
 
 int	get_buffer_count(t_lexer *l, t_token *t)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	int		count;
 
 	count = 0;
@@ -80,30 +78,4 @@ int	get_buffer_count(t_lexer *l, t_token *t)
 		count++;
 	}
 	return (count);
-}
-
-char	*first_false_command(t_token *t, t_lexer *l)
-{
-	t_token	*tmp;
-
-	tmp = t;
-	while (t && t->type != CHAR_INUT)
-	{
-		tmp = t;
-		t = t->n_token;
-	}
-	if (!t)
-		return ("");
-	if (!is_any_chevron(tmp) && !is_arg(t))
-	{
-		t = t->n_token;
-		while (t)
-		{
-			if (!is_arg(t) && !is_any_chevron(tmp))
-				t->n_token->type = CHAR_ARG;
-			t = t->n_token;
-		}
-		return (l->buffer[get_buffer_count(l, t)]);
-	}
-	return (first_false_command(t->n_token, l));
 }

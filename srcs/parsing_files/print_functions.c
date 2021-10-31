@@ -19,3 +19,29 @@ int	print_custom(char *str, int fd, int exit_code, int saut_ligne)
 		write(fd, "\n", 1);
 	return (exit_code);
 }
+
+char	*first_false_command(t_token *t, t_lexer *l)
+{
+	t_token	*tmp;
+
+	tmp = t;
+	while (t && t->type != CHAR_INUT)
+	{
+		tmp = t;
+		t = t->n_token;
+	}
+	if (!t)
+		return ("");
+	if (!is_any_chevron(tmp) && !is_arg(t))
+	{
+		t = t->n_token;
+		while (t)
+		{
+			if (!is_arg(t) && !is_any_chevron(tmp))
+				t->n_token->type = CHAR_ARG;
+			t = t->n_token;
+		}
+		return (l->buffer[get_buffer_count(l, t)]);
+	}
+	return (first_false_command(t->n_token, l));
+}
