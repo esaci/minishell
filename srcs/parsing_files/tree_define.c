@@ -19,14 +19,14 @@ int	add_path(char **ptr, t_token *t, t_lexer *l, char *err)
 	if (t->n_token && t->n_token->type == CHAR_INUT)
 		*ptr = l->buffer[get_buffer_count(l, t->n_token)];
 	else
-		{
-			*ptr = NULL;
-			l->flagr[0] = 1;
-			print_custom("Minishell: ", 2, 1, 0);
-			print_custom(err, 2, 1, 0);
-			l->last_exit = 2;
-			return (print_custom(" syntax error", 2, 1, 1));
-		}
+	{
+		*ptr = NULL;
+		l->flagr[0] = 1;
+		print_custom("Minishell: ", 2, 1, 0);
+		print_custom(err, 2, 1, 0);
+		l->last_exit = 2;
+		return (print_custom(" syntax error", 2, 1, 1));
+	}
 	return (0);
 }
 
@@ -52,7 +52,7 @@ int	tree_define_left(t_node *n, t_token *t, t_lexer *l)
 
 int	tree_define_right(t_node *n, t_token *t, t_lexer *l)
 {
-	t_node *right;
+	t_node	*right;
 
 	if (n->type != NODE_PIPE)
 		return (0);
@@ -74,11 +74,26 @@ int	tree_define_right(t_node *n, t_token *t, t_lexer *l)
 	return (0);
 }
 
+int	small_definer(t_node *left, t_node *right, t_token *t, t_lexer *l)
+{
+	if (search_infile(left, t, l))
+	{
+		left->archive_fd = left->fd;
+		return (1);
+	}
+	if (search_outfile(right, t, l))
+	{
+		left->archive_fd = left->fd;
+		return (1);
+	}
+	left->archive_fd = left->fd;
+	return (0);
+}
 
 int	tree_define_command(t_node *n, t_token *t, t_lexer *l)
 {
-	t_node *right;
-	t_node *left;
+	t_node	*right;
+	t_node	*left;
 
 	n->fd = NULL;
 	if (n->type == NODE_PIPE)
@@ -92,16 +107,5 @@ int	tree_define_command(t_node *n, t_token *t, t_lexer *l)
 	n->left = left;
 	n->right = right;
 	init_both_nodes(left, right);
-	if (search_infile(left, t, l))
-	{
-		left->archive_fd = left->fd;
-		return (1);
-	}
-	if (search_outfile(right, t, l))
-	{
-		left->archive_fd = left->fd;
-		return (1);
-	}
-	left->archive_fd = left->fd;
-	return (0);
+	return (small_definer(left, right, t, l));
 }
