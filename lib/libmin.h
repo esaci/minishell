@@ -141,7 +141,7 @@ void				full_print(char **str);
 int					print_str_node(t_node *n, char *str, int count2);
 int					free_lexer_tokens(t_lexer *lexer, int mode);
 int					init_lexer(t_lexer *lexer);
-int					lexer_start(t_lexer *lexer);
+int					lexer_start(t_lexer *lexer, int mode);
 t_node				*tree_input(t_lexer *lexer);
 char				*parse_is_command(char *arg_list, t_lexer *l,
 						int count, int mode);
