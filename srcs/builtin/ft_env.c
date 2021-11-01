@@ -16,11 +16,8 @@ void	ft_env(t_list *env)
 {
 	while (env)
 	{
-		if (ft_strchr(env->content, '='))
-		{
-			write(1, env->content, ft_strlen(env->content));
-			write(1, "\n", 1);
-		}
+		if (env->content && env->content[0])
+			print_custom(env->content, 1, 1, 1);
 		env = env->next;
 	}
 }

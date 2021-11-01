@@ -12,21 +12,38 @@
 
 #include "../../lib/libmin_built.h"
 
+char	*add_apo_arg(char *ptr)
+{
+	char	*str;
+	int		count;
+	int		count2;
+
+	str = malloc(ft_strlen(ptr) + 3);
+	if (!str)
+		return (NULL);
+	count = 0;
+	count2 = 0;
+	str[count++] = '\"';
+	while (ptr[count2])
+		str[count++] = ptr[count2++];
+	str[count++] = '\"';
+	str[count] = 0;
+	return (str); 
+}
+
 void	ft_swap_env_pwd(char *arg, t_list *e)
 {
 	char	*ptr;
 	char	*ptr2;
 
-	ptr = custom_getenv(e, "PWD", 0);
+	ptr = custom_getenv(e, "PWD", 1);
 	ft_del_variable("OLDPWD", e);
-	ptr2 = add_apo_envp(ptr);
+	ptr2 = ft_strjoin("OLDPWD=", ptr);
 	free(ptr);
-	ptr = ft_strjoin("OLDPWD=", ptr2);
-	ft_add_env(ptr, e);
+	ft_add_env(ptr2, e);
 	free(ptr2);
-	free(ptr);
 	ft_del_variable("PWD", e);
-	ptr = add_apo_envp(arg);
+	ptr = add_apo_arg(arg);
 	ptr2 = ft_strjoin("PWD=", ptr);
 	ft_add_env(ptr2, e);
 	free(ptr);

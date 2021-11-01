@@ -41,15 +41,20 @@ void	export_exist_equal(t_list *e, char *var, char *ptr)
 	char	*ptr2;
 	char	*ptr3;
 
-	ptr2 = ft_strjoin(var, "=");
-	ptr3 = ft_strjoin(var, "\"");
-	free(ptr2);
-	ptr2 = ft_strjoin(ptr3, ptr);
-	free(ptr3);
-	ptr3 = ft_strjoin(ptr2, "\"");
-	ft_add_env(ptr3, e);
-	free(ptr2);
-	free(ptr3);
+	if (ptr && ptr[0])
+	{
+		ptr2 = ft_strjoin(var, "=");
+		ptr3 = ft_strjoin(var, "\"");
+		free(ptr2);
+		ptr2 = ft_strjoin(ptr3, ptr);
+		free(ptr3);
+		ptr3 = ft_strjoin(ptr2, "\"");
+		ft_add_env(ptr3, e);
+		free(ptr2);
+		free(ptr3);
+	}
+	else
+		ft_add_env(var, e);
 }
 
 void	export_with_plus(char *c_arg, t_list *e, char *var, char *o_v)
@@ -58,17 +63,25 @@ void	export_with_plus(char *c_arg, t_list *e, char *var, char *o_v)
 	char	*ptr3;
 
 	ptr3 = ft_strjoin(var, "=");
-	ptr2 = ft_strjoin(ptr3, "\"");
-	free(ptr3);
-	ptr3 = ft_strjoin(ptr2, o_v);
-	free(ptr2);
-	ptr2 = ft_strjoin(ptr3, get_value(c_arg));
-	free(ptr3);
-	ptr3 = ft_strjoin(ptr2, "\"");
-	free(ptr2);
-	print_custom(ptr3, 1, 1, 1);
-	ft_add_env(ptr3, e);
-	free(ptr3);
+	if (c_arg && c_arg[0])
+	{
+		ptr2 = ft_strjoin(ptr3, "\"");
+		free(ptr3);
+		ptr3 = ft_strjoin(ptr2, o_v);
+		free(ptr2);
+		ptr2 = ft_strjoin(ptr3, get_value(c_arg));
+		free(ptr3);
+		ptr3 = ft_strjoin(ptr2, "\"");
+		free(ptr2);
+		print_custom(ptr3, 1, 1, 1);
+		ft_add_env(ptr3, e);
+		free(ptr3);
+	}
+	else
+	{
+		ft_add_env(ptr3, e);
+		free(ptr3);
+	}
 }
 
 void	export_exist_empty(char *arg, t_list *e, char *var)
@@ -78,14 +91,22 @@ void	export_exist_empty(char *arg, t_list *e, char *var)
 	char	*ptr3;
 	
 	ptr = ft_strjoin(var, "=");
-	ptr2 = ft_strjoin(ptr, "\"");
-	ptr3 = ft_strjoin(ptr2, get_value(arg));
-	free(ptr);
-	free(ptr2);
-	ptr = ft_strjoin(ptr3, "\"");
-	ft_add_env(ptr, e);
-	free(ptr);
-	free(ptr3);
+	if (ptr && ptr[0])
+	{
+		ptr2 = ft_strjoin(ptr, "\"");
+		ptr3 = ft_strjoin(ptr2, get_value(arg));
+		free(ptr);
+		free(ptr2);
+		ptr = ft_strjoin(ptr3, "\"");
+		ft_add_env(ptr, e);
+		free(ptr);
+		free(ptr3);
+	}
+	else
+	{
+		ft_add_env(ptr, e);
+		free(ptr);
+	}
 }
 
 void	export_cases(char *arg, t_list *e)

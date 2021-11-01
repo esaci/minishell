@@ -57,6 +57,7 @@ int	main(int ac, char *av[], char *envp[])
 	t_list	*c_envp;
 	int		last_exit;
 
+	envp[0] = NULL;
 	(void)ac;
 	(void)av;
 	signal_wait_input();

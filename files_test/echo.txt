@@ -173,3 +173,5 @@ echo PATH+="$PWD"
 cat | cat | ls
 ls | << limiter cat | cat
 
+ls | cat > t1 | ls | cat > t2 | ls | cat > t3 
+cat t1 t2 t3
