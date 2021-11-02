@@ -20,8 +20,7 @@ int	waiter_input(t_lexer *l, int count)
 	{
 		l->pip->tmp[0] = WEXITSTATUS(l->pip->tmp[1]);
 		l->last_exit = l->pip->tmp[0];
-		if (g_exit_code && l->last_exit)
-			*g_exit_code = l->last_exit;
+		*g_exit_code = l->last_exit;
 	}
 	else
 		l->last_exit = 0;

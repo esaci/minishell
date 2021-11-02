@@ -66,7 +66,11 @@ int	ft_exit_suite(t_lexer *l, char **args)
 
 int	ft_exit(t_lexer *l, char **args)
 {
-	ft_exit_suite(l, args);
+	int tmp;
+
+	tmp = ft_exit_suite(l, args);
+	if (tmp)
+		return (tmp);
 	close_pipes(l, 1);
 	small_free(l, NULL, NULL, 1);
 	exit(print_custom("Minishell$: exit: \
