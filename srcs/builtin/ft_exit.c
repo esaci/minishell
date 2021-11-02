@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:24:05 by elias             #+#    #+#             */
-/*   Updated: 2021/10/30 12:34:39 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 00:37:35 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_exit_suite(t_lexer *l, char **args)
 
 int	ft_exit(t_lexer *l, char **args)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = ft_exit_suite(l, args);
 	if (tmp)
