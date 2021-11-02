@@ -6,25 +6,19 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 01:03:51 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/02 01:03:56 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 01:40:28 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
+void	exec_pipe_split(t_lexer *l, t_node *n, int count)
 {
-	int	exit_code;
 	int	in;
 	int	out;
+	int	exit_code;
 
 	in = 0;
-	l->pip->pid[count] = fork();
-	if (l->pip->pid[count])
-	{
-		if (n && n->left && n->left->left && n->left->left->archive_fd)
-			close_archive(n->left->left->archive_fd);
-	}
 	if (!l->pip->pid[count])
 	{
 		if (n->left && n->left->str && (n->left->str + 1))
@@ -44,6 +38,17 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
 		exit_code = exec_com(l, n->left, count);
 		exit(exit_code);
 	}
+}
+
+t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
+{
+	l->pip->pid[count] = fork();
+	if (l->pip->pid[count])
+	{
+		if (n && n->left && n->left->left && n->left->left->archive_fd)
+			close_archive(n->left->left->archive_fd);
+	}
+	exec_pipe_split(l, n, count);
 	signal_wait_command();
 	n = n->right;
 	return (n);
