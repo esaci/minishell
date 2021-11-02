@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 18:42:13 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/30 11:53:39 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 04:09:06 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*add_apo_arg(char *ptr)
 		str[count++] = ptr[count2++];
 	str[count++] = '\"';
 	str[count] = 0;
-	return (str); 
+	return (str);
 }
 
 void	ft_swap_env_pwd(char *arg, t_list *e)

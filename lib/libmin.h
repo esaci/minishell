@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 04:02:30 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 04:08:33 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ typedef struct s_lexer
 	int			last_exit;
 }	t_lexer;
 
-void				init_line_buffer(t_lexer *l, int count2, int count3, int count4);
+void				init_line_buffer(t_lexer *l, int count2, int count3, \
+					int count4);
 int					len_needed(t_lexer *l);
 int					malloc_free_buff(t_lexer *l);
 void				ignore_all_buff(t_lexer *l, int	*c2, int *c4);
@@ -130,7 +131,8 @@ void				*sig_handler(void);
 t_lexer				*parser_input(t_lexer *lexer);
 t_token				*parser_chevron(t_token *t, TOKENTYPE type);
 t_token				*parser_in_between(t_token *t, TOKENTYPE type);
-t_token				*parser_until_not(t_token *t, TOKENTYPE type, TOKENTYPE type2);
+t_token				*parser_until_not(t_token *t, TOKENTYPE type, \
+					TOKENTYPE type2);
 t_token				*parser_until_space(t_token *tok);
 t_token				*parser_next_token(t_token *tok);
 t_token				*check_apo(t_token *t, int mode);
@@ -205,7 +207,8 @@ char				*get_name(char *arg);
 void				ultime_close_archive(t_lexer *l);
 int					ft_isal(int c);
 int					is_apo(char *ptr, char c);
-int					malloc_node_redir(t_node *n, t_token *t, TOKENTYPE r1, TOKENTYPE r2);
+int					malloc_node_redir(t_node *n, t_token *t, \
+					TOKENTYPE r1, TOKENTYPE r2);
 int					free_pip_2(t_lexer *l);
 char				*merge_suite(int mode, char *ptr, char *s, char *d);
 void				copy_arg(char *str, char *ptr, int *count2);

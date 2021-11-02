@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 12:00:06 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/02 01:55:58 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 04:09:25 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	export_exist_equal(t_list *e, char *var, char *ptr)
 {
 	char	*ptr2;
 	char	*ptr3;
-
 
 	ptr2 = ft_strjoin(var, "=");
 	ptr3 = ft_strjoin(ptr2, "\"");
@@ -85,7 +84,7 @@ void	export_exist_empty(char *arg, t_list *e, char *var)
 	char	*ptr;
 	char	*ptr2;
 	char	*ptr3;
-	
+
 	ptr = ft_strjoin(var, "=");
 	if (ptr && ptr[0])
 	{
