@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 16:55:24 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/30 11:54:33 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 19:43:11 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	ft_check_echo(char *flag)
 		count++;
 	if (count != 1)
 		return (-1);
-	if (flag[count] == 'n')
+	while(flag[count] == 'n')
+		count++;
+	if (!flag[count])
 		return (1);
 	return (-1);
 }

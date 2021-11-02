@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 12:00:06 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/02 04:09:25 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 19:38:06 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,6 @@ void	export_cases(char *arg, t_list *e)
 		export_exist_empty(arg, e, var);
 	else if (check_variable(arg) == 3 && flag == 0)
 		ft_add_env(arg, e);
-	printf("arg : %s\n", arg);
-	printf("flag : %d\n", flag);
 	free(var);
 	free(ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 20:39:47 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 16:50:25 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:52:47 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 			search_chevd(n, t, l, &count);
 		t = t->n_token;
 	}
+	n->str[count] = NULL;
 	free_loop_fd_out(n);
 	return (0);
 }
