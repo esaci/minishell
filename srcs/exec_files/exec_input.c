@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 19:50:15 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 00:56:07 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 01:32:44 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,37 @@ void	ultime_close_archive(t_lexer *l)
 	}
 }
 
+int	exec_input_split(t_lexer *l, t_node *n)
+{
+	int	count;
+	int	count2;
+
+	count = 0;
+	while (n && n->type == NODE_PIPE)
+		n = exec_pipe(l, n, count++);
+	if (exec_com(l, n, count++))
+		return (1);
+	close_pipes(l, 0);
+	count2 = 0;
+	while (count2 < count)
+		waiter_input(l, count2++);
+	if (*g_exit_code == 130 || *g_exit_code == 131 || *g_exit_code == 2)
+		l->last_exit = *g_exit_code;
+	return (0);
+}
+
+void	free_exec_input(t_lexer *l)
+{
+	ultime_close_archive(l);
+	free(l->pip->pid);
+	free(l->pip->ppd);
+	free(l->pip);
+	l->pip = NULL;
+}
+
 int	exec_input(t_lexer *l)
 {
 	t_node	*n;
-	int		count;
-	int		count2;
 
 	if (!l || !l->node || !l->tok || l->flagr[0] || !l->rl[0])
 	{
@@ -48,22 +74,9 @@ int	exec_input(t_lexer *l)
 		return (1);
 	}
 	n = l->node;
-	count = 0;
-	while (n && n->type == NODE_PIPE)
-		n = exec_pipe(l, n, count++);
-	if (exec_com(l, n, count++))
+	if (exec_input_split(l, n) == 1)
 		return (1);
-	close_pipes(l, 0);
-	count2 = 0;
-	while (count2 < count)
-		waiter_input(l, count2++);
-	if (*g_exit_code == 130 || *g_exit_code == 131 || *g_exit_code == 2)
-		l->last_exit = *g_exit_code;
 	signal_wait_input();
-	ultime_close_archive(l);
-	free(l->pip->pid);
-	free(l->pip->ppd);
-	free(l->pip);
-	l->pip = NULL;
+	free_exec_input(l);
 	return (0);
 }
