@@ -6,13 +6,13 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 22:17:08 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 04:06:24 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 04:22:24 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-void	check_redirection_suite(t_lexer *l, char *ptr, char c)
+void	check_redirection_suite(t_lexer *l, char **ptr, char *c)
 {
 	print_custom(c, 1, 1, 0);
 	print_custom(" file can't be read/write", 1, 1, 1);
@@ -32,14 +32,14 @@ int	check_order_redirection(t_lexer *l, char **ptr)
 			ft_strlen(l->buffer[count]) && \
 			(ft_strlen(l->buffer[count]) == ft_strlen(ptr[0]))))
 		{
-			check_order_redirection(l, ptr, ptr[0]);
+			check_redirection_suite(l, ptr, ptr[0]);
 			return (1);
 		}
 		if (ptr[1] && !ft_memcmp(ptr[1], l->buffer[count], \
 			ft_strlen(l->buffer[count]) && \
 			(ft_strlen(l->buffer[count]) == ft_strlen(ptr[1]))))
 		{
-			check_order_redirection(l, ptr, ptr[1]);
+			check_redirection_suite(l, ptr, ptr[1]);
 			return (1);
 		}
 		count++;
@@ -69,6 +69,28 @@ int	count_file_redirection(t_node *left, t_node *right)
 	return (count + count2);
 }
 
+char	*open_infiles_suite(t_node *n, int *fd, int *count, int *oldfd)
+{
+	if (!ft_memcmp(n->str[*count], "<", ft_strlen(n->str[*count])))
+	{
+		handle_old_fd(*oldfd, *fd);
+		*oldfd = 1;
+		*fd = open(n->str[*count + 1], O_RDONLY);
+		if (*fd < 0)
+			return (n->str[*count + 1]);
+	}
+	else if (!ft_memcmp(n->str[*count], "<<", ft_strlen(n->str[*count])))
+	{
+		handle_old_fd(*oldfd, *fd);
+		*oldfd = 2;
+		*fd = *(n->fd++);
+		n->archive_fd[0] = -1;
+		if (*fd < 0)
+			return (n->str[*count + 1]);
+	}
+	return (NULL);
+}
+
 char	*open_infiles(t_node *n, int *fd)
 {
 	int	count;
@@ -78,31 +100,11 @@ char	*open_infiles(t_node *n, int *fd)
 	count = 0;
 	oldfd = 0;
 	n->archive_fd = n->fd;
-	while (n->str[count] && (!ft_memcmp(n->str[count], "<", \
+	while (open_infiles_suite(n, fd, &count, &oldfd) != NULL &&  n->str[count] && (!ft_memcmp(n->str[count], "<", \
 		ft_strlen(n->str[count])) || !ft_memcmp(n->str[count], \
 		"<<", ft_strlen(n->str[count]))))
 	{
-		if (!n->str[count + 1])
-			break ;
-		if (!ft_memcmp(n->str[count], "<", ft_strlen(n->str[count])))
-		{
-			handle_old_fd(oldfd, *fd);
-			oldfd = 1;
-			*fd = open(n->str[count + 1], O_RDONLY);
-			if (*fd < 0)
-				return (n->str[count + 1]);
-		}
-		else if (!ft_memcmp(n->str[count], "<<", ft_strlen(n->str[count])))
-		{
-			handle_old_fd(oldfd, *fd);
-			oldfd = 2;
-			*fd = *(n->fd++);
-			n->archive_fd[0] = -1;
-			if (*fd < 0)
-				return (n->str[count + 1]);
-		}
-		else
-			break ;
+		open_infiles_suite(n, fd, &count, &oldfd);
 		count += 2;
 	}
 	return (NULL);
