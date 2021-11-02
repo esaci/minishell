@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 23:17:53 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 01:02:26 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 02:14:44 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,12 @@ void	copy_arg(char *str, char *ptr, int *count2)
 	free(ptr);
 }
 
-char	*apply_doll(char *ptr, t_lexer *l)
+char	*apply_doll_suite(char *ptr, t_lexer *l, int count2, char *str)
 {
-	int		count;
-	int		count2;
-	char	*str;
 	char	*var;
+	int		count;
 
-	count = ft_strlen(ptr);
-	count += len_var(l, ptr);
-	str = malloc(sizeof(char) * (count + 2));
-	if (!str)
-		return (NULL);
-	str[count] = 0;
-	str[count + 1] = 0;
 	count = 0;
-	count2 = 0;
 	while (ptr && ptr[count])
 	{
 		if (ptr[count] == '$')
@@ -90,6 +80,25 @@ char	*apply_doll(char *ptr, t_lexer *l)
 		else
 			str[count2++] = ptr[count++];
 	}
+	return (str);
+}
+
+char	*apply_doll(char *ptr, t_lexer *l)
+{
+	int		count;
+	int		count2;
+	char	*str;
+
+	count = ft_strlen(ptr);
+	count += len_var(l, ptr);
+	str = malloc(sizeof(char) * (count + 2));
+	if (!str)
+		return (NULL);
+	str[count] = 0;
+	str[count + 1] = 0;
+	count = 0;
+	count2 = 0;
+	str = apply_doll_suite(ptr, l, count2, str);
 	str[count2] = 0;
 	free(ptr);
 	return (str);
