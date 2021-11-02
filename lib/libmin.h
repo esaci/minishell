@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 04:08:33 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:40:34 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,4 +218,8 @@ int					last_pipe(t_lexer *l);
 void				exec_com_pipes(t_lexer *l, t_node *n, int count);
 void				free_last_pipe(t_lexer *l, int count);
 void				exec_com_end(t_lexer *l, t_node *n, char **ptr, int tmp);
+void				check_redirection_suite(t_lexer *l, char **ptr, char *c);
+int					check_order_redirection(t_lexer *l, char **ptr);
+void				handle_old_fd(int oldfd, int fd);
+
 #endif

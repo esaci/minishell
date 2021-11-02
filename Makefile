@@ -58,6 +58,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCEXEC)exec_pipe.c					\
 		$(SRCD)$(SRCEXEC)exec_utils1.c					\
 		$(SRCD)$(SRCEXEC)exec_utils2.c					\
+		$(SRCD)$(SRCEXEC)exec_utils3.c					\
 		$(SRCD)$(SRCENV)delete_variable.c				\
 		$(SRCD)$(SRCENV)environment.c					\
 		$(SRCD)$(SRCENV)init_env.c						\
