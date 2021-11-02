@@ -113,7 +113,6 @@ void	export_cases(char *arg, t_list *e)
 	var = get_var(arg);
 	ptr = custom_getenv(e, var, 0);
 	ft_del_variable(var, e);
-	print_custom(ptr, 1, 1, 1);
 	if (check_all_char(get_value(arg)) == 1 && !ft_memcmp(ptr, "", 1))
 		flag = 1;
 	if (flag == 1)

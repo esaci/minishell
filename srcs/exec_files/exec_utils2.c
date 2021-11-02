@@ -27,7 +27,7 @@ int	last_pipe(t_lexer *l)
 	return (count);
 }
 
-int	utils2_com_nopipe(t_lexer *l, t_node *n, int count)
+void	utils2_com_nopipe(t_lexer *l, t_node *n, int count)
 {
 	int	tmp;
 
@@ -54,7 +54,6 @@ int	utils2_com_nopipe(t_lexer *l, t_node *n, int count)
 	}
 	else
 		l->pip->pid[count] = 0;
-	return (tmp);
 }
 
 void	error_pipe(t_lexer *l, int count)
@@ -73,7 +72,7 @@ void	error_pipe(t_lexer *l, int count)
 void	execve_check_error(t_lexer *l, t_node *n, char **ptr, int tmp)
 {
 	DIR		*dir_ptr;
-	
+
 	if (execve(n->str[0], n->str, ptr) == -1)
 	{
 		dir_ptr = opendir(n->str[0]);

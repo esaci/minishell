@@ -25,7 +25,7 @@ int	ft_check_echo(char *flag)
 		count++;
 	if (count != 1)
 		return (-1);
-	while(flag[count] == 'n')
+	while (flag[count] == 'n')
 		count++;
 	if (!flag[count])
 		return (1);

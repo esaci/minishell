@@ -36,6 +36,7 @@ void	ft_swap_env_pwd(char *arg, t_list *e)
 	char	*ptr;
 	char	*ptr2;
 
+	(void)arg;
 	ptr = custom_getenv(e, "PWD", 1);
 	ft_del_variable("OLDPWD", e);
 	ptr2 = ft_strjoin("OLDPWD=", ptr);
@@ -43,9 +44,14 @@ void	ft_swap_env_pwd(char *arg, t_list *e)
 	ft_add_env(ptr2, e);
 	free(ptr2);
 	ft_del_variable("PWD", e);
-	ptr = add_apo_arg(arg);
-	ptr2 = ft_strjoin("PWD=", ptr);
-	ft_add_env(ptr2, e);
+	ptr = malloc(sizeof(char) * 1000);
+	if (!ptr)
+		return ;
+	ptr = getcwd(ptr, 1000);
+	ptr2 = add_apo_arg(ptr);
+	free(ptr);
+	ptr = ft_strjoin("PWD=", ptr2);
+	ft_add_env(ptr, e);
 	free(ptr);
 	free(ptr2);
 }
@@ -67,47 +73,9 @@ void	ft_cd_noargs(t_list *e, int *last_exit)
 	free(arg);
 }
 
-void	ft_cd_arg(char **args, t_list *e, int *last_exit)
-{
-	if (args)
-	{
-		if (args[0][ft_strlen(args[0]) - 1] == '/')
-			args[0][ft_strlen(args[0]) - 1] = 0;
-	}
-	if (args && *args[0] == '/')
-	{
-		if (chdir(*args) != 0)
-			error_chdir(*args, last_exit);
-		else
-			ft_swap_env_pwd(*args, e);
-	}
-	else
-		ft_cd_other(args, e, last_exit);
-}
-
-int	check_path(t_list *l)
-{
-	char	*path;
-	int		count;
-	int		res;
-
-	path = custom_getenv(l, "PWD", 0);
-	count = 0;
-	res = 0;
-	while (path[count])
-	{
-		if (path[count] == '/')
-			res++;
-		count++;
-	}
-	free(path);
-	return (res);
-}
-
 int	ft_cd(char **args, t_list *l)
 {
 	int		last_exit;
-	char	**str;
 	int		test;
 
 	last_exit = 0;
@@ -118,26 +86,13 @@ int	ft_cd(char **args, t_list *l)
 	}
 	else if (!args || !(*args) || (*args && *args[0] == '~'))
 		ft_cd_noargs(l, &last_exit);
-	else if (args[0][0] == '-')
-		ft_cd_minus(args, l, &last_exit);
-	else if (*args && args[0][0] == '.' && !args[0][1])
-		;
-	else if (args[0][0] == '.' && args[0][1] == '.')
-	{
-		str = malloc(sizeof(char *) * 2);
-		ft_cd_back(args, l, &last_exit);
-		test = check_path(l);
-		if (args[0][2] && args[0][2] == '/' && args[0][3] && test > 0)
-		{
-			str[0] = &args[0][3];
-			str[1] = 0;
-			ft_cd(str, l);
-		}
-		if (test == 0)
-			ft_swap_env_pwd("/", l);
-		free(str);
-	}
 	else
-		ft_cd_arg(args, l, &last_exit);
+	{
+		test = chdir(*args);
+		if (test != -1)
+			ft_swap_env_pwd(*args, l);
+		else
+			error_chdir(*args, &last_exit);
+	}
 	return (last_exit);
 }

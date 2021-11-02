@@ -81,19 +81,13 @@ void	redirection_trymenu(t_lexer *l, t_node *n, int count)
 	signal_default();
 }
 
-void	close_sterr(t_lexer *l)
-{
-		exit(small_free(l, NULL, NULL, 1));
-		exit(small_free(l, NULL, NULL, 1));
-}
-
 int	exec_com(t_lexer *l, t_node *n, int count)
 {
 	t_token	*t;
 	char	**ptr;
 	int		tmp;
 
-	tmp = utils2_com_nopipe(l, n, count);
+	utils2_com_nopipe(l, n, count);
 	if (!l->pip->pid[count])
 	{
 		redirection_trymenu(l, n, count);

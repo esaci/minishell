@@ -33,7 +33,7 @@ char	*open_infiles_suite(t_node *n, int *fd, int *count, int *oldfd)
 		handle_old_fd(*oldfd, *fd);
 		*oldfd = 1;
 		if (n->str[*count] && n->str[*count + 1])
-		*fd = open(n->str[*count + 1], O_RDONLY);
+			*fd = open(n->str[*count + 1], O_RDONLY);
 		if (*fd < 0)
 			return (n->str[*count + 1]);
 	}
