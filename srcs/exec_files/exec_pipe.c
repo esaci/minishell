@@ -12,13 +12,11 @@
 
 #include "../../lib/libmin.h"
 
-void	exec_pipe_split(t_lexer *l, t_node *n, int count)
+void	exec_pipe_split(t_lexer *l, t_node *n, int count, int fdin)
 {
 	int	in;
-	int	out;
 	int	exit_code;
 
-	in = 0;
 	if (!l->pip->pid[count])
 	{
 		if (n->left && n->left->str && (n->left->str + 1))
@@ -30,26 +28,31 @@ void	exec_pipe_split(t_lexer *l, t_node *n, int count)
 			small_free(l, NULL, NULL, 1);
 			exit(in);
 		}
-		in = (count - 1) * 2;
-		out = in + 3;
 		if (count > 0)
-			dup2(l->pip->ppd[in], STDIN_FILENO);
-		dup2(l->pip->ppd[out], STDOUT_FILENO);
+			dup2(fdin, STDIN_FILENO);
+		dup2(l->pip->ppd[1], STDOUT_FILENO);
+		close(fdin);
+		close(l->pip->ppd[1]);
 		exit_code = exec_com(l, n->left, count);
 		exit(exit_code);
 	}
 }
 
-t_node	*exec_pipe(t_lexer *l, t_node *n, int count)
+t_node	*exec_pipe(t_lexer *l, t_node *n, int count, int *fdin)
 {
+	*fdin = dup(l->pip->ppd[0]);
+	close(l->pip->ppd[0]);
+	close(l->pip->ppd[1]);
+	pipe(l->pip->ppd);
 	l->pip->pid[count] = fork();
 	if (l->pip->pid[count])
 	{
 		if (n && n->left && n->left->left && n->left->left->archive_fd)
 			close_archive(n->left->left->archive_fd);
 	}
-	exec_pipe_split(l, n, count);
+	exec_pipe_split(l, n, count, *fdin);
 	signal_wait_command();
+	close(*fdin);
 	n = n->right;
 	return (n);
 }

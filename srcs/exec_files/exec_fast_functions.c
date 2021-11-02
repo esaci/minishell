@@ -46,7 +46,7 @@ t_token	*get_token_buffer(t_lexer *l, char *str)
 	count = 0;
 	while (str && l && l->buffer && l->buffer[count])
 	{
-		if (!ft_memcmp(l->buffer[count], str, ft_strlen(str)))
+		if (!ft_memcmp(l->buffer[count], str, ft_strlen(str) + 1))
 			break ;
 		tmp = tmp->n_token;
 		count++;

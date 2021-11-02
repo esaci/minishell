@@ -34,10 +34,12 @@ int	exec_input_split(t_lexer *l, t_node *n)
 {
 	int	count;
 	int	count2;
+	int	fdin;
 
 	count = 0;
+	fdin = 0;
 	while (n && n->type == NODE_PIPE)
-		n = exec_pipe(l, n, count++);
+		n = exec_pipe(l, n, count++, &fdin);
 	if (exec_com(l, n, count++))
 		return (1);
 	close_pipes(l, 0);

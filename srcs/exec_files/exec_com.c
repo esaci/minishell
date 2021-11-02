@@ -67,8 +67,8 @@ void	redirection_trymenu(t_lexer *l, t_node *n, int count)
 		error_pipe(l, count);
 	if (count != 0 && count == last_pipe(l))
 	{
-		close(l->pip->ppd[((count - 1) * 2) + 1]);
-		dup2(l->pip->ppd[(count - 1) * 2], STDIN_FILENO);
+		close(l->pip->ppd[1]);
+		dup2(l->pip->ppd[0], STDIN_FILENO);
 	}
 	init_ptr(l, n, fd);
 	ultime_close_archive(l);
@@ -79,6 +79,12 @@ void	redirection_trymenu(t_lexer *l, t_node *n, int count)
 		exit(print_custom("error comm", 2, 1, 1));
 	}
 	signal_default();
+}
+
+void	close_sterr(t_lexer *l)
+{
+		exit(small_free(l, NULL, NULL, 1));
+		exit(small_free(l, NULL, NULL, 1));
 }
 
 int	exec_com(t_lexer *l, t_node *n, int count)

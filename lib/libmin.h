@@ -170,7 +170,7 @@ int					nbr_com(t_lexer *l, t_token *t);
 void				no_com_fill(t_node *n, t_lexer *l, t_token *t);
 int					is_arg(t_token *t);
 int					exec_input(t_lexer *l);
-t_node				*exec_pipe(t_lexer *l, t_node *n, int count);
+t_node				*exec_pipe(t_lexer *l, t_node *n, int count, int *fdin);
 int					exec_com(t_lexer *l, t_node *n, int count);
 int					init_pip(t_lexer *l);
 void				close_pipes(t_lexer *l, int mode);

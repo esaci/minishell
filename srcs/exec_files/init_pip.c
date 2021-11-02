@@ -38,7 +38,6 @@ int	init_pip2(t_lexer *l)
 {
 	t_node	*n;
 	int		count;
-	int		count2;
 
 	n = l->node;
 	count = 0;
@@ -48,16 +47,11 @@ int	init_pip2(t_lexer *l)
 			count++;
 		n = n->right;
 	}
-	l->pip->ppd = malloc(sizeof(int) * ((count + 6) * 2));
+	l->pip->ppd = malloc(sizeof(int) * (3));
 	if (free_pip_2(l) == 1)
 		return (1);
-	count2 = 0;
-	while (count2 < (count + 3))
-	{
-		if (pipe(l->pip->ppd + (count2 * 2)) == -1)
+	if (pipe(l->pip->ppd) == -1)
 			return (free_pip(l, 1));
-		count2++;
-	}
 	return (0);
 }
 
@@ -81,23 +75,11 @@ int	init_pip(t_lexer *l)
 
 void	close_pipes(t_lexer *l, int mode)
 {
-	int		count;
 	int		count2;
-	t_node	*n;
 
-	n = l->node;
-	count = 0;
-	while (n)
-	{
-		if (n->type == NODE_PIPE)
-		{
-			count++;
-		}
-		n = n->right;
-	}
 	count2 = 0;
-	while (count2 < ((count + 3) * 2))
-		close(l->pip->ppd[count2++]);
+	close(l->pip->ppd[count2++]);
+	close(l->pip->ppd[count2++]);
 	if (!mode)
 		return ;
 	free(l->pip->pid);
