@@ -27,7 +27,7 @@ int	last_pipe(t_lexer *l)
 	return (count);
 }
 
-void	utils2_com_nopipe(t_lexer *l, t_node *n, int count)
+int	utils2_com_nopipe(t_lexer *l, t_node *n, int count)
 {
 	int	tmp;
 
@@ -54,6 +54,7 @@ void	utils2_com_nopipe(t_lexer *l, t_node *n, int count)
 	}
 	else
 		l->pip->pid[count] = 0;
+	return (tmp);
 }
 
 void	error_pipe(t_lexer *l, int count)

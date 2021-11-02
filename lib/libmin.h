@@ -215,7 +215,7 @@ void				copy_arg(char *str, char *ptr, int *count2);
 int					len_var(t_lexer *l, char *ptr);
 int					countain_doll(char *ptr);
 int					last_pipe(t_lexer *l);
-void				utils2_com_nopipe(t_lexer *l, t_node *n, int count);
+int					utils2_com_nopipe(t_lexer *l, t_node *n, int count);
 void				error_pipe(t_lexer *l, int count);
 void				execve_check_error(t_lexer *l, t_node *n, char **p, int t);
 void				check_redirection_suite(t_lexer *l, char **ptr, char *c);

@@ -124,8 +124,6 @@ void	export_cases(char *arg, t_list *e)
 		export_exist_empty(arg, e, var);
 	else if (check_variable(arg) == 3 && flag == 0)
 		ft_add_env(arg, e);
-	printf("arg : %s\n", arg);
-	printf("flag : %d\n", flag);
 	free(var);
 	free(ptr);
 }

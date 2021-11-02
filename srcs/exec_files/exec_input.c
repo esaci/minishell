@@ -12,7 +12,7 @@
 
 #include "../../lib/libmin.h"
 
-void	ultime_close_archive(t_lexer *l)
+void		ultime_close_archive(t_lexer *l)
 {
 	t_node	*n;
 

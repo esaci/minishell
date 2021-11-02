@@ -87,7 +87,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	char	**ptr;
 	int		tmp;
 
-	utils2_com_nopipe(l, n, count);
+	tmp = utils2_com_nopipe(l, n, count);
 	if (!l->pip->pid[count])
 	{
 		redirection_trymenu(l, n, count);

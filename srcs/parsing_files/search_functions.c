@@ -108,6 +108,7 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 			search_chevd(n, t, l, &count);
 		t = t->n_token;
 	}
+	n->str[count] = NULL;
 	free_loop_fd_out(n);
 	return (0);
 }
