@@ -6,13 +6,13 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 00:59:44 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/02 01:00:13 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:36:39 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-int	compatibility_arg(TOKENTYPE type, int mode)
+int	compatibility_arg(enum TOKENTYPE type, int mode)
 {
 	if (type == CHAR_INUT || type == CHAR_TIRET)
 		return (1);

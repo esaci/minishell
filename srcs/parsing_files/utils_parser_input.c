@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parser_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 00:22:42 by elias             #+#    #+#             */
-/*   Updated: 2021/10/31 00:22:45 by elias            ###   ########.fr       */
+/*   Updated: 2021/11/02 17:35:50 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-t_token	*parser_chevron(t_token *t, TOKENTYPE type)
+t_token	*parser_chevron(t_token *t, enum TOKENTYPE type)
 {
 	t_token	*tmp;
 
@@ -32,7 +32,7 @@ t_token	*parser_chevron(t_token *t, TOKENTYPE type)
 	return (tmp);
 }
 
-t_token	*parser_in_between(t_token *t, TOKENTYPE type)
+t_token	*parser_in_between(t_token *t, enum TOKENTYPE type)
 {
 	t_token	*tmp;
 
@@ -50,7 +50,7 @@ t_token	*parser_in_between(t_token *t, TOKENTYPE type)
 	return (tmp);
 }
 
-t_token	*parser_until_not(t_token *t, TOKENTYPE type, TOKENTYPE type2)
+t_token	*parser_until_not(t_token *t, enum TOKENTYPE type, enum TOKENTYPE type2)
 {
 	t_token	*tmp;
 

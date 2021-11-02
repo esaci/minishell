@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   type_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 14:39:30 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/01 14:39:31 by esaci            ###   ########.fr       */
+/*   Updated: 2021/11/02 17:35:12 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-NODETYPE	is_any_chevron(t_token *t)
+enum NODETYPE	is_any_chevron(t_token *t)
 {
 	if (t->type == CHAR_CHEVD)
 		return (NODE_FILEOUT);
@@ -36,7 +36,7 @@ int	is_arg(t_token *t)
 	return (0);
 }
 
-NODETYPE	is_any_command(t_lexer *l, t_token *t, t_token *oldt)
+enum NODETYPE	is_any_command(t_lexer *l, t_token *t, t_token *oldt)
 {
 	char	*tmp;
 

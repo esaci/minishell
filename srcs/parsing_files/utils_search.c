@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_search.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 04:31:23 by elias             #+#    #+#             */
-/*   Updated: 2021/10/31 04:31:26 by elias            ###   ########.fr       */
+/*   Updated: 2021/11/02 17:35:28 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 	return (0);
 }
 
-int	malloc_node_redir(t_node *n, t_token *t, TOKENTYPE r1, TOKENTYPE r2)
+int	malloc_node_redir(t_node *n, t_token *t, enum TOKENTYPE r1, enum TOKENTYPE r2)
 {
 	t_token	*tmp;
 	int		count;

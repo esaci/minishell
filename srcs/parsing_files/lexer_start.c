@@ -6,13 +6,13 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 18:38:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/23 00:10:42 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:36:05 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-TOKENTYPE	lexer_check_type2(t_token *tok, char *oldstr)
+enum TOKENTYPE	lexer_check_type2(t_token *tok, char *oldstr)
 {
 	if (tok->line[0] == '$')
 		return (CHAR_INUT);
@@ -25,7 +25,7 @@ TOKENTYPE	lexer_check_type2(t_token *tok, char *oldstr)
 	return (CHAR_INUT);
 }
 
-TOKENTYPE	lexer_check_type(t_token *tok, char *oldstr)
+enum TOKENTYPE	lexer_check_type(t_token *tok, char *oldstr)
 {
 	if (tok->line[0] == '|')
 		return (CHAR_PIPE);

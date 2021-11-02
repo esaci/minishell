@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tree_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 12:13:00 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/29 12:13:01 by esaci            ###   ########.fr       */
+/*   Updated: 2021/11/02 17:36:25 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-NODETYPE	tree_check_type(t_lexer *l, t_token *t)
+enum NODETYPE	tree_check_type(t_lexer *l, t_token *t)
 {
 	if (t->type == CHAR_PIPE)
 		return (NODE_PIPE);

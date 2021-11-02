@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 16:53:50 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:33:30 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef enum TOKENTYPE
 	CHAR_NL = '\n',
 	CHAR_ERROR = '!',
 	CHAR_ARG = 'E',
-}	TOKENTYPE;
+}	t_TOKENTYPE;
 
 typedef enum NODETYPE
 {
@@ -69,7 +69,7 @@ typedef enum NODETYPE
 	NODE_PATHCOM = 'C',
 	NODE_NOCOM = 'N',
 	NODE_ARG = 'A',
-}	NODETYPE;
+}	t_NODETYPE;
 
 int						*g_exit_code;
 
@@ -87,14 +87,14 @@ typedef struct s_pip
 
 typedef struct s_token
 {
-	TOKENTYPE			type;
+	t_TOKENTYPE			type;
 	char				*line;
 	struct s_token		*n_token;
 }	t_token;
 
 typedef struct s_node
 {
-	NODETYPE		type;
+	t_NODETYPE		type;
 	char			**str;
 	struct s_node	*right;
 	struct s_node	*left;
@@ -129,10 +129,10 @@ void				init_path_pwd(t_lexer *l, int mode);
 int					start_fonction(t_list *c_envp, int last_exit, char *ptr);
 void				*sig_handler(void);
 t_lexer				*parser_input(t_lexer *lexer);
-t_token				*parser_chevron(t_token *t, TOKENTYPE type);
-t_token				*parser_in_between(t_token *t, TOKENTYPE type);
-t_token				*parser_until_not(t_token *t, TOKENTYPE type, \
-					TOKENTYPE type2);
+t_token				*parser_chevron(t_token *t, enum TOKENTYPE type);
+t_token				*parser_in_between(t_token *t, enum TOKENTYPE type);
+t_token				*parser_until_not(t_token *t, enum TOKENTYPE type, \
+					enum TOKENTYPE type2);
 t_token				*parser_until_space(t_token *tok);
 t_token				*parser_next_token(t_token *tok);
 t_token				*check_apo(t_token *t, int mode);
@@ -151,8 +151,8 @@ int					lexer_start(t_lexer *lexer, int mode);
 t_node				*tree_input(t_lexer *lexer);
 char				*parse_is_command(char *arg_list, t_lexer *l,
 						int count, int mode);
-NODETYPE			is_any_chevron(t_token *t);
-NODETYPE			is_any_command(t_lexer *l, t_token *t, t_token *oldt);
+t_NODETYPE			is_any_chevron(t_token *t);
+t_NODETYPE			is_any_command(t_lexer *l, t_token *t, t_token *oldt);
 int					is_redirection(t_node *n2);
 int					search_pipe(t_node *n, t_token *t, t_lexer *l);
 int					search_command(t_node *n, t_token *t, t_lexer *l);
@@ -191,7 +191,7 @@ int					exec_in_heredoc(char *limiter, int *fd, t_lexer *l);
 int					last_pipe(t_lexer *l);
 char				*remove_for_arg(char *str);
 void				check_for_arg(char **str, t_lexer *l, t_node *n);
-int					compatibility_arg(TOKENTYPE type, int mode);
+int					compatibility_arg(enum TOKENTYPE type, int mode);
 int					correct_name(t_lexer *l, t_token *t);
 int					double_free(char **str);
 int					free_lexer_nodes(t_lexer *l, int mode);
@@ -208,7 +208,7 @@ void				ultime_close_archive(t_lexer *l);
 int					ft_isal(int c);
 int					is_apo(char *ptr, char c);
 int					malloc_node_redir(t_node *n, t_token *t, \
-					TOKENTYPE r1, TOKENTYPE r2);
+					enum TOKENTYPE r1, enum TOKENTYPE r2);
 int					free_pip_2(t_lexer *l);
 char				*merge_suite(int mode, char *ptr, char *s, char *d);
 void				copy_arg(char *str, char *ptr, int *count2);
