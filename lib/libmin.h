@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 01:06:56 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 02:38:41 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,8 @@ int					ft_isal(int c);
 int					is_apo(char *ptr, char c);
 int					malloc_node_redir(t_node *n, t_token *t, TOKENTYPE r1, TOKENTYPE r2);
 int					free_pip_2(t_lexer *l);
-
-
-
+char				*merge_suite(int mode, char *ptr, char *s, char *d);
+void				copy_arg(char *str, char *ptr, int *count2);
+int					len_var(t_lexer *l, char *ptr);
+int					countain_doll(char *ptr);
 #endif

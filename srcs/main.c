@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:34:34 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/22 23:49:47 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 03:32:26 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	main(int ac, char *av[], char *envp[])
 	t_list	*c_envp;
 	int		last_exit;
 
-	envp[0] = NULL;
 	(void)ac;
 	(void)av;
 	signal_wait_input();
