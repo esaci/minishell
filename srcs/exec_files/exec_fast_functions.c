@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_fast_functions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:26:50 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 01:03:13 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 02:01:12 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,7 @@ char	*merge_twoarray(char *s, char *d, int mode)
 		count2++;
 	}
 	ptr[count + count2] = 0;
-	if (mode == 3)
-		return (ptr);
-	if (mode == 2)
-	{
-		free(d);
-		return (ptr);
-	}
-	if (s)
-		free(s);
-	if (!mode)
-		return (ptr);
-	if (d)
-		free(d);
-	return (ptr);
+	return (merge_suite(mode, ptr, s, d));
 }
 
 void	fast_replacement(char **str, int count)
