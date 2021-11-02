@@ -64,7 +64,8 @@ int	search_node_str_com(t_node *n, t_token *t, t_lexer *l)
 	return (0);
 }
 
-int	malloc_node_redir(t_node *n, t_token *t, enum TOKENTYPE r1, enum TOKENTYPE r2)
+int	malloc_node_redir(t_node *n, t_token *t,
+	enum TOKENTYPE r1, enum TOKENTYPE r2)
 {
 	t_token	*tmp;
 	int		count;

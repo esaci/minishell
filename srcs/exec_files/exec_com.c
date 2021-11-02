@@ -59,12 +59,12 @@ void	init_ptr(t_lexer *l, t_node *n, int fd[2])
 	}
 }
 
-void	exec_com_main_body(t_lexer *l, t_node *n, int count)
+void	redirection_trymenu(t_lexer *l, t_node *n, int count)
 {
 	int		fd[2];
 
 	if (!n || (n->type != NODE_NOCOM && n->type != NODE_PATHCOM))
-		free_last_pipe(l, count);
+		error_pipe(l, count);
 	if (count != 0 && count == last_pipe(l))
 	{
 		close(l->pip->ppd[((count - 1) * 2) + 1]);
@@ -87,10 +87,10 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	char	**ptr;
 	int		tmp;
 
-	exec_com_pipes(l, n, count);
+	tmp = utils2_com_nopipe(l, n, count);
 	if (!l->pip->pid[count])
 	{
-		exec_com_main_body(l, n, count);
+		redirection_trymenu(l, n, count);
 		tmp = 1;
 		if (n->str[0])
 		{
@@ -102,7 +102,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		}
 		free_lexer_tmp(l, n, tmp);
 		ptr = generate_custom_envp(l->envp);
-		exec_com_end(l, n, ptr, tmp);
+		execve_check_error(l, n, ptr, tmp);
 	}
 	return (0);
 }
