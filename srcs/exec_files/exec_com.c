@@ -6,13 +6,13 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 20:17:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/27 13:00:19 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 01:01:08 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-int		last_pipe(t_lexer *l)
+int	last_pipe(t_lexer *l)
 {
 	int		count;
 	t_node	*n;
@@ -38,7 +38,6 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	tmp = -1;
 	if (last_pipe(l) == 0 || count == last_pipe(l))
 	{
-
 		if (n && n->str && (n->str + 1))
 			tmp = new_menu(n->str[0], n->str + 1, l);
 		l->pip->pid[count] = fork();
@@ -78,7 +77,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 			close(l->pip->ppd[((count - 1) * 2) + 1]);
 			dup2(l->pip->ppd[(count - 1) * 2], STDIN_FILENO);
 		}
-		ptr = malloc(sizeof(char*) * 3);
+		ptr = malloc(sizeof(char *) * 3);
 		if (!ptr)
 			exit(small_free(l, NULL, NULL, 1));
 		ptr[2] = NULL;
@@ -111,7 +110,8 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 		if (n->str[0])
 		{
 			t = get_token_buffer(l, n->str[0]);
-			l->buffer[get_buffer_count(l, t)] = parse_is_command(l->buffer[get_buffer_count(l, t)], l, 0, 1);
+			l->buffer[get_buffer_count(l, t)] = \
+			parse_is_command(l->buffer[get_buffer_count(l, t)], l, 0, 1);
 			n->str[0] = l->buffer[get_buffer_count(l, t)];
 			tmp = access(n->str[0], X_OK);
 		}

@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/27 16:09:28 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 01:06:56 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,4 +206,8 @@ void				ultime_close_archive(t_lexer *l);
 int					ft_isal(int c);
 int					is_apo(char *ptr, char c);
 int					malloc_node_redir(t_node *n, t_token *t, TOKENTYPE r1, TOKENTYPE r2);
+int					free_pip_2(t_lexer *l);
+
+
+
 #endif

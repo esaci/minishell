@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   functions_arg.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/02 00:59:44 by julpelle          #+#    #+#             */
+/*   Updated: 2021/11/02 01:00:13 by julpelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../lib/libmin.h"
 
 int	compatibility_arg(TOKENTYPE type, int mode)
@@ -31,7 +43,7 @@ char	*remove_for_arg(char *str)
 	return (str);
 }
 
-int		correct_name(t_lexer *l, t_token *t)
+int	correct_name(t_lexer *l, t_token *t)
 {
 	char	*str;
 	char	*str2;
@@ -41,9 +53,9 @@ int		correct_name(t_lexer *l, t_token *t)
 	if (!ft_strlen(str2))
 		return (0);
 	if (str[0] == '\'' || str[0] == '\"')
-		{
-			if (str[0] == str[ft_strlen(str2) - 1])
-				return (1);
-		}
+	{
+		if (str[0] == str[ft_strlen(str2) - 1])
+			return (1);
+	}
 	return (0);
 }

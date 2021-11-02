@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 19:50:15 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/27 12:57:43 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 00:56:07 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ultime_close_archive(t_lexer *l)
 {
-	t_node *n;
+	t_node	*n;
 
 	n = l->node;
 	while (n && n->type == NODE_PIPE)
@@ -51,7 +51,7 @@ int	exec_input(t_lexer *l)
 	count = 0;
 	while (n && n->type == NODE_PIPE)
 		n = exec_pipe(l, n, count++);
-	if (exec_com(l, n,  count++))
+	if (exec_com(l, n, count++))
 		return (1);
 	close_pipes(l, 0);
 	count2 = 0;

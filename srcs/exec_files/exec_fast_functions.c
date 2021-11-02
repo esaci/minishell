@@ -6,7 +6,7 @@
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:26:50 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/05 17:26:52 by esaci            ###   ########.fr       */
+/*   Updated: 2021/11/02 01:03:13 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_token	*get_token_buffer(t_lexer *l, char *str)
 	while (str && l && l->buffer && l->buffer[count])
 	{
 		if (!ft_memcmp(l->buffer[count], str, ft_strlen(str)))
-			break;
+			break ;
 		tmp = tmp->n_token;
 		count++;
 	}

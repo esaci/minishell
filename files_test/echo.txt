@@ -50,8 +50,8 @@ echo hallo $POEP
 echo $POEP hallo
 echojhdfjhjdkh
 echo | poep
- echo | cd .. | pwd
- echo
+echo | cd .. | pwd
+echo
 echo
 echo hoi
 echo hallo 'maran' siemons

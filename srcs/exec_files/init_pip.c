@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pip.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 15:28:39 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/05 15:28:40 by esaci            ###   ########.fr       */
+/*   Updated: 2021/11/02 01:08:30 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	count_right_nodes(t_lexer *l)
 {
 	t_node	*n;
 	int		count;
-	
+
 	n = l->node;
 	count = 0;
 	while (n)
@@ -49,16 +49,13 @@ int	init_pip2(t_lexer *l)
 		n = n->right;
 	}
 	l->pip->ppd = malloc(sizeof(int) * ((count + 6) * 2));
-	if (!l->pip->ppd)
-	{
-		free(l->pip->pid);
+	if (free_pip_2(l) == 1)
 		return (1);
-	}
 	count2 = 0;
-	while(count2 < (count + 3))
+	while (count2 < (count + 3))
 	{
 		if (pipe(l->pip->ppd + (count2 * 2)) == -1)
-			return(free_pip(l, 1));
+			return (free_pip(l, 1));
 		count2++;
 	}
 	return (0);
@@ -99,7 +96,7 @@ void	close_pipes(t_lexer *l, int mode)
 		n = n->right;
 	}
 	count2 = 0;
-	while(count2 <	((count + 3)* 2))
+	while (count2 < ((count + 3) * 2))
 		close(l->pip->ppd[count2++]);
 	if (!mode)
 		return ;

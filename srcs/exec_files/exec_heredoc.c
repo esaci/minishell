@@ -6,7 +6,7 @@
 /*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 23:17:53 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/06 23:18:35 by esaci            ###   ########.fr       */
+/*   Updated: 2021/11/02 01:02:26 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	countain_doll(char *ptr)
 	return (0);
 }
 
-int		len_var(t_lexer *l, char *ptr)
+int	len_var(t_lexer *l, char *ptr)
 {
 	int		count;
 	int		count2;
