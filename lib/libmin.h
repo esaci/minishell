@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 02:38:41 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 04:02:30 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,4 +211,8 @@ char				*merge_suite(int mode, char *ptr, char *s, char *d);
 void				copy_arg(char *str, char *ptr, int *count2);
 int					len_var(t_lexer *l, char *ptr);
 int					countain_doll(char *ptr);
+int					last_pipe(t_lexer *l);
+void				exec_com_pipes(t_lexer *l, t_node *n, int count);
+void				free_last_pipe(t_lexer *l, int count);
+void				exec_com_end(t_lexer *l, t_node *n, char **ptr, int tmp);
 #endif

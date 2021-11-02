@@ -6,91 +6,11 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 20:17:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 03:16:10 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 04:01:36 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
-
-int	last_pipe(t_lexer *l)
-{
-	int		count;
-	t_node	*n;
-
-	n = l->node;
-	count = 0;
-	while (n && n->type == NODE_PIPE)
-	{
-		n = n->right;
-		count++;
-	}
-	return (count);
-}
-
-void	exec_com_pipes(t_lexer *l, t_node *n, int count)
-{
-	int	tmp;
-
-	tmp = -1;
-	if (last_pipe(l) == 0 || count == last_pipe(l))
-	{
-		if (n && n->str && (n->str + 1))
-			tmp = new_menu(n->str[0], n->str + 1, l);
-		l->pip->pid[count] = fork();
-		if (l->pip->pid[count])
-		{
-			if (n && n->left && n->left->left && n->left->left->archive_fd)
-				close_archive(n->left->archive_fd);
-		}
-		if (tmp != -1 && !l->pip->pid[count])
-		{
-			close_pipes(l, 1);
-			tmp = l->last_exit;
-			small_free(l, NULL, NULL, 1);
-			exit(tmp);
-		}
-		if (l->pip->pid[count])
-			signal_wait_command();
-	}
-	else
-		l->pip->pid[count] = 0;
-}
-
-void	free_last_pipe(t_lexer *l, int count)
-{
-	if (count == last_pipe(l))
-	{
-		close_pipes(l, 1);
-		small_free(l, NULL, NULL, 1);
-		exit(print_custom("Empty pipe", 2, 1, 1));
-	}
-	close_pipes(l, 1);
-	small_free(l, NULL, NULL, 1);
-	exit(1);
-}
-
-void	exec_com_end(t_lexer *l, t_node *n, char **ptr, int tmp)
-{
-	DIR		*dir_ptr;
-	
-	if (execve(n->str[0], n->str, ptr) == -1)
-	{
-		dir_ptr = opendir(n->str[0]);
-		if (dir_ptr)
-		{
-			closedir(dir_ptr);
-			print_custom(n->str[0], 2, 1, 0);
-			tmp = 1;
-		}
-		else
-			tmp = 0;
-		double_free(ptr);
-		small_free(l, NULL, NULL, 1);
-		if (!tmp)
-			exit(print_custom("error comm", 2, 1, 1));
-		exit(print_custom(": Is a Directory", 2, 126, 1));
-	}
-}
 
 void	free_lexer_tmp(t_lexer *l, t_node *n, int tmp)
 {
@@ -139,9 +59,30 @@ void	init_ptr(t_lexer *l, t_node *n, int fd[2])
 	}
 }
 
-int	exec_com(t_lexer *l, t_node *n, int count)
+void	exec_com_main_body(t_lexer *l, t_node *n, int count)
 {
 	int		fd[2];
+
+	if (!n || (n->type != NODE_NOCOM && n->type != NODE_PATHCOM))
+		free_last_pipe(l, count);
+	if (count != 0 && count == last_pipe(l))
+	{
+		close(l->pip->ppd[((count - 1) * 2) + 1]);
+		dup2(l->pip->ppd[(count - 1) * 2], STDIN_FILENO);
+	}
+	init_ptr(l, n, fd);
+	ultime_close_archive(l);
+	close_pipes(l, 1);
+	if (menu(n->str[0], n->str + 1, l) == -1)
+	{
+		small_free(l, NULL, NULL, 1);
+		exit(print_custom("error comm", 2, 1, 1));
+	}
+	signal_default();
+}
+
+int	exec_com(t_lexer *l, t_node *n, int count)
+{
 	t_token	*t;
 	char	**ptr;
 	int		tmp;
@@ -149,22 +90,7 @@ int	exec_com(t_lexer *l, t_node *n, int count)
 	exec_com_pipes(l, n, count);
 	if (!l->pip->pid[count])
 	{
-		if (!n || (n->type != NODE_NOCOM && n->type != NODE_PATHCOM))
-			free_last_pipe(l, count);
-		if (count != 0 && count == last_pipe(l))
-		{
-			close(l->pip->ppd[((count - 1) * 2) + 1]);
-			dup2(l->pip->ppd[(count - 1) * 2], STDIN_FILENO);
-		}
-		init_ptr(l, n, fd);
-		ultime_close_archive(l);
-		close_pipes(l, 1);
-		if (menu(n->str[0], n->str + 1, l) == -1)
-		{
-			small_free(l, NULL, NULL, 1);
-			exit(print_custom("error comm", 2, 1, 1));
-		}
-		signal_default();
+		exec_com_main_body(l, n, count);
 		tmp = 1;
 		if (n->str[0])
 		{

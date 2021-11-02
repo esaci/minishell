@@ -6,13 +6,13 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 23:17:53 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 02:28:04 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 03:51:42 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-char	*apply_doll_suite(char *ptr, t_lexer *l, int count2, char *str)
+char	*apply_doll_suite(char *ptr, t_lexer *l, int *count2, char *str)
 {
 	char	*var;
 	int		count;
@@ -23,14 +23,14 @@ char	*apply_doll_suite(char *ptr, t_lexer *l, int count2, char *str)
 		if (ptr[count] == '$')
 		{
 			var = get_name(ptr + count + 1);
-			copy_arg(str, custom_getenv(l->envp, var, 0), &count2);
+			copy_arg(str, custom_getenv(l->envp, var, 0), count2);
 			free(var);
 			count++;
 			while (ptr && ptr[count] && ft_isal(ptr[count]))
 				count++;
 		}
 		else
-			str[count2++] = ptr[count++];
+			str[*count2++] = ptr[count++];
 	}
 	return (str);
 }
@@ -50,7 +50,7 @@ char	*apply_doll(char *ptr, t_lexer *l)
 	str[count + 1] = 0;
 	count = 0;
 	count2 = 0;
-	str = apply_doll_suite(ptr, l, count2, str);
+	str = apply_doll_suite(ptr, l, &count2, str);
 	str[count2] = 0;
 	free(ptr);
 	return (str);
