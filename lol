@@ -1,0 +1,10 @@
+fcts
+files_test
+ignoreliberror
+lib
+lol
+Makefile
+MakefileMAC
+minishell
+my_tests
+srcs
