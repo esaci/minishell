@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 20:39:47 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/02 20:39:48 by esaci            ###   ########.fr       */
+/*   Updated: 2021/11/02 16:50:25 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,44 @@ int	search_pipe(t_node *n, t_token *t, t_lexer *l)
 	return (0);
 }
 
+int	search_infile(t_node *n, t_token *t, t_lexer *l)
+{
+	int	count;
+
+	if (malloc_node_redir(n, t, CHAR_DCHEVG, CHAR_CHEVG))
+		return (1);
+	signal_wait_heredoc();
+	count = 0;
+	while (t && t->type != CHAR_PIPE)
+	{
+		if ((t->type == CHAR_CHEVG
+				|| t->type == CHAR_DCHEVG) && !g_exit_code[0])
+			search_chevg(n, t, l, &count);
+		t = t->n_token;
+	}
+	n->str[count] = NULL;
+	free_loop_fd_in(n);
+	infile_exit_code();
+	return (0);
+}
+
+int	search_outfile(t_node *n, t_token *t, t_lexer *l)
+{
+	int	count;
+
+	if (malloc_node_redir(n, t, CHAR_CHEVD, CHAR_DCHEVD))
+		return (1);
+	count = 0;
+	while (t && t->type != CHAR_PIPE)
+	{
+		if (t->type == CHAR_CHEVD || t->type == CHAR_DCHEVD)
+			search_chevd(n, t, l, &count);
+		t = t->n_token;
+	}
+	free_loop_fd_out(n);
+	return (0);
+}
+/*
 int	search_infile(t_node *n, t_token *t, t_lexer *l)
 {
 	int		count;
@@ -165,3 +203,4 @@ int	search_outfile(t_node *n, t_token *t, t_lexer *l)
 	}
 	return (0);
 }
+*/

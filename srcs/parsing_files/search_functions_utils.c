@@ -6,19 +6,19 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 23:34:28 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/02 00:43:04 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:53:59 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-int	search_chevg(t_node *n, t_token *t, t_lexer *l, int i)
+int	search_chevg(t_node *n, t_token *t, t_lexer *l, int *count)
 {
 	int	j;
 
 	j = get_buffer_count(l, t);
-	n->str[i] = l->buffer[j];
-	i++;
+	n->str[*count] = l->buffer[j];
+	(*count)++;
 	n->type = NODE_FILEIN;
 	if (t->type == CHAR_DCHEVG)
 	{
@@ -32,22 +32,22 @@ int	search_chevg(t_node *n, t_token *t, t_lexer *l, int i)
 		}
 		n->type = NODE_DFILEIN;
 	}
-	if (add_path(&n->str[i], t, l, n->str[i - 1]))
+	if (add_path(&n->str[*count], t, l, n->str[*count - 1]))
 		return (-1);
-	i++;
+	(*count)++;
 	return (0);
 }
 
-int	search_chevd(t_node *n, t_token *t, t_lexer *l, int i)
+int	search_chevd(t_node *n, t_token *t, t_lexer *l, int *count)
 {
-	n->str[i] = l->buffer[get_buffer_count(l, t)];
-	i++;
+	n->str[*count] = l->buffer[get_buffer_count(l, t)];
+	(*count)++;
 	n->type = NODE_FILEOUT;
 	if (t->type == CHAR_DCHEVD)
 		n->type = NODE_DFILEOUT;
-	if (add_path(&n->str[i], t, l, n->str[i - 1]))
+	if (add_path(&n->str[*count], t, l, n->str[*count - 1]))
 		return (-1);
-	i++;
+	(*count)++;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 16:40:34 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:53:50 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,5 +221,9 @@ void				exec_com_end(t_lexer *l, t_node *n, char **ptr, int tmp);
 void				check_redirection_suite(t_lexer *l, char **ptr, char *c);
 int					check_order_redirection(t_lexer *l, char **ptr);
 void				handle_old_fd(int oldfd, int fd);
-
+int					search_chevg(t_node *n, t_token *t, t_lexer *l, int *count);
+int					search_chevd(t_node *n, t_token *t, t_lexer *l, int *count);
+void				free_loop_fd_in(t_node *n);
+void				free_loop_fd_out(t_node *n);
+void				infile_exit_code(void);
 #endif
