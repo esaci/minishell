@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:39:29 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/02 16:43:43 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 17:16:14 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void	handle_old_fd(int oldfd, int fd)
 {
 	if (!oldfd)
 		return ;
-	close(fd);
+	if (fd > -1)
+		close(fd);
 }

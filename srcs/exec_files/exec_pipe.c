@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 01:03:51 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/02 01:40:28 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 17:25:26 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ void	exec_pipe_split(t_lexer *l, t_node *n, int count, int fdin)
 			exit(in);
 		}
 		if (count > 0)
+		{
 			dup2(fdin, STDIN_FILENO);
+			if (fdin > -1)
+				close(fdin);
+		}
 		dup2(l->pip->ppd[1], STDOUT_FILENO);
-		close(fdin);
-		close(l->pip->ppd[1]);
+		if (l->pip->ppd[1] > -1)
+			close(l->pip->ppd[1]);
 		exit_code = exec_com(l, n->left, count);
 		exit(exit_code);
 	}
@@ -41,8 +45,10 @@ void	exec_pipe_split(t_lexer *l, t_node *n, int count, int fdin)
 t_node	*exec_pipe(t_lexer *l, t_node *n, int count, int *fdin)
 {
 	*fdin = dup(l->pip->ppd[0]);
-	close(l->pip->ppd[0]);
-	close(l->pip->ppd[1]);
+	if (l->pip->ppd[0] > -1)
+		close(l->pip->ppd[0]);
+	if (l->pip->ppd[1] > -1)
+		close(l->pip->ppd[1]);
 	pipe(l->pip->ppd);
 	l->pip->pid[count] = fork();
 	if (l->pip->pid[count])
@@ -52,7 +58,8 @@ t_node	*exec_pipe(t_lexer *l, t_node *n, int count, int *fdin)
 	}
 	exec_pipe_split(l, n, count, *fdin);
 	signal_wait_command();
-	close(*fdin);
+	if (*fdin > -1)
+		close(*fdin);
 	n = n->right;
 	return (n);
 }

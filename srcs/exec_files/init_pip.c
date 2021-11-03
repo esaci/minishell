@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 15:28:39 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/03 03:00:04 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 17:29:42 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,10 @@ int	init_pip(t_lexer *l)
 
 void	close_pipes(t_lexer *l, int mode)
 {
-	int		count2;
-
-	count2 = 0;
-	close(l->pip->ppd[count2++]);
-	close(l->pip->ppd[count2++]);
+	if (l->pip->ppd[0] > -1)
+		close(l->pip->ppd[0]);
+	if (l->pip->ppd[1] > -1)
+		close(l->pip->ppd[1]);
 	if (!mode)
 		return ;
 	free(l->pip->pid);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   full_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 22:32:27 by esaci             #+#    #+#             */
-/*   Updated: 2021/10/05 22:32:30 by esaci            ###   ########.fr       */
+/*   Updated: 2021/11/03 17:16:39 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	full_close(t_lexer *l)
 	count2 = 0;
 	while (count2 < count)
 	{
-		close(l->pip->ppd[count2]);
+		if (l->pip->ppd[count2] > -1)
+			close(l->pip->ppd[count2]);
 		count2++;
 	}
 	return (0);

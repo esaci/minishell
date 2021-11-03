@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 20:17:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 04:01:36 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 17:24:25 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,14 @@ void	init_ptr(t_lexer *l, t_node *n, int fd[2])
 	if (fd[1] != 1)
 	{
 		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
+		if (fd[1] > -1)
+			close(fd[1]);
 	}
 	if (fd[0] != 0)
 	{
 		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
+		if (fd[0] > -1)
+			close(fd[0]);
 	}
 }
 
@@ -67,8 +69,11 @@ void	redirection_trymenu(t_lexer *l, t_node *n, int count)
 		error_pipe(l, count);
 	if (count != 0 && count == last_pipe(l))
 	{
-		close(l->pip->ppd[1]);
+		if (l->pip->ppd[1] > -1)
+			close(l->pip->ppd[1]);
 		dup2(l->pip->ppd[0], STDIN_FILENO);
+		if (l->pip->ppd[0] > -1)
+			close(l->pip->ppd[0]);
 	}
 	init_ptr(l, n, fd);
 	ultime_close_archive(l);

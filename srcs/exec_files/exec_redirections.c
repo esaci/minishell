@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 22:17:08 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 16:41:37 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 17:20:35 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*open_infiles_suite(t_node *n, int *fd, int *count, int *oldfd)
 		*oldfd = 1;
 		if (n->str[*count] && n->str[*count + 1])
 			*fd = open(n->str[*count + 1], O_RDONLY);
+		if (!n->str[*count] && *fd < 0)
+			return (n->str[*count]);
 		if (*fd < 0)
 			return (n->str[*count + 1]);
 	}
@@ -43,6 +45,8 @@ char	*open_infiles_suite(t_node *n, int *fd, int *count, int *oldfd)
 		*oldfd = 2;
 		*fd = *(n->fd++);
 		n->archive_fd[0] = -1;
+		if (!n->str[*count] && *fd < 0)
+			return (n->str[*count]);
 		if (*fd < 0)
 			return (n->str[*count + 1]);
 	}

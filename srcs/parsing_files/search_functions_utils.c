@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 23:34:28 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/02 16:53:59 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 17:17:13 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	infile_exit_code(void)
 	{
 		signal_wait_input();
 		dup2(*g_exit_code, STDIN_FILENO);
-		close(*g_exit_code);
+		if (*g_exit_code > -1)
+			close(*g_exit_code);
 		*g_exit_code = 130;
 	}
 }

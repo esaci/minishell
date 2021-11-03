@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 23:17:53 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 03:51:42 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 17:15:20 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	exec_in_heredoc(char *limiter, int *fdu, t_lexer *l)
 	}
 	if (ptr)
 		free(ptr);
-	close(fd);
+	if (fd > -1)
+		close(fd);
 	unlink("./srcs/here_doc_file");
 	return (0);
 }
@@ -90,6 +91,6 @@ void	close_archive(int *ptr)
 	int	count;
 
 	count = 0;
-	while (ptr && ptr[count] != -1)
+	while (ptr && ptr[count] > -1)
 		close(ptr[count++]);
 }
