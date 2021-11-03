@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 12:36:15 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/30 12:09:09 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 02:46:27 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_list	*create_envp(t_list	*env)
 	char	**ptr;
 
 	ptr = malloc(sizeof(char *) * 2);
+	if (!ptr)
+		return (NULL);
 	ptr[0] = merge_twoarray("PWD=", getcwd(NULL, 100000), 2);
 	ptr[1] = 0;
 	env = ft_envp(ptr, NULL, env);

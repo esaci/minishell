@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 15:28:39 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 01:08:30 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 03:00:04 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	init_pip2(t_lexer *l)
 		n = n->right;
 	}
 	l->pip->ppd = malloc(sizeof(int) * (3));
+	if (!l->pip->ppd)
+		return (1);
 	if (free_pip_2(l) == 1)
 		return (1);
 	if (pipe(l->pip->ppd) == -1)

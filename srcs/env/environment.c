@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:24:28 by Jules             #+#    #+#             */
-/*   Updated: 2021/10/30 12:08:28 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 02:46:18 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char	**generate_custom_envp(t_list *v_env)
 
 	count = utils_strlen_env(v_env);
 	ptr = malloc(sizeof(char *) * (count + 3));
+	if (!ptr)
+		return (NULL);
 	ptr[count] = NULL;
 	tmp = v_env;
 	count = 0;

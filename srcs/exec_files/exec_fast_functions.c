@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:26:50 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 19:24:57 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 02:46:49 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ char	*merge_twoarray(char *s, char *d, int mode)
 
 	count = ft_strlen(s) + ft_strlen(d);
 	ptr = malloc(sizeof(char) * (count + 2));
+	if (!ptr)
+		return (NULL);
 	ptr[count + 1] = 0;
 	count = 0;
 	count2 = 0;

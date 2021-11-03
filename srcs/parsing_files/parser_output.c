@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_output.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esaci <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 07:07:57 by esaci             #+#    #+#             */
-/*   Updated: 2021/09/29 07:08:02 by esaci            ###   ########.fr       */
+/*   Updated: 2021/11/03 02:59:20 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	malloc_buffer(t_lexer *lexer)
 		count++;
 	}
 	lexer->buffer = malloc(sizeof(char *) * (count + 100));
+	if (!lexer->buffer)
+		return (1);
 	count2 = 0;
 	while (count2 < (count + 2))
 		lexer->buffer[count2++] = NULL;

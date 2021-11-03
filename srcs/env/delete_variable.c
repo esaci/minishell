@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 13:27:01 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/30 12:30:15 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 02:46:04 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	*add_apo_envp(char *env)
 	int		count2;
 
 	ptr = malloc(sizeof(char) * (ft_strlen(env) + 3));
+	if (!ptr)
+		return (NULL);
 	count = 0;
 	count2 = 0;
 	while (env && env[count] && env[count] != '=')

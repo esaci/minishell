@@ -6,11 +6,24 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 04:31:23 by elias             #+#    #+#             */
-/*   Updated: 2021/11/02 17:35:28 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 02:58:58 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
+
+int	*no_fd(char *str, t_lexer *l)
+{
+	int	*ptr;
+
+	ptr = malloc(sizeof(int) * 2);
+	if (!ptr)
+		return (NULL);
+	ptr[0] = -1;
+	ptr[1] = -1;
+	exec_in_heredoc(str, ptr, l);
+	return (ptr);
+}
 
 int	*join_int(int *fd, char *str, t_lexer *l)
 {
@@ -18,17 +31,13 @@ int	*join_int(int *fd, char *str, t_lexer *l)
 	int	count;
 
 	if (!fd)
-	{
-		ptr = malloc(sizeof(int) * 2);
-		ptr[0] = -1;
-		ptr[1] = -1;
-		exec_in_heredoc(str, ptr, l);
-		return (ptr);
-	}
+		return (no_fd(str, l));
 	count = 0;
 	while (fd && fd[count] != -1)
 		count++;
 	ptr = malloc(sizeof(int) * (count + 2));
+	if (!ptr)
+		return (NULL);
 	count = 0;
 	while (fd && fd[count] != -1)
 	{
