@@ -10,9 +10,9 @@ LIBFT = libft.a
 
 LIBFTD = ./fcts//libft/
 
-COMPILE = clang -fPIE -fpie
+COMPILE = gcc
 
-CFLAGS = -g
+CFLAGS = -Werror -Wextra -Wall -g $(COMPILE1)
 
 SRCD = ./srcs/
 
@@ -94,14 +94,16 @@ $(NAME) : $(OBJ) $(SRCD)/main.c
 		ranlib $(MIND)$(MIN)
 		$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2) $(SRCD)/main.c  $(MIND)$(MIN) -L/usr/include -lreadline
 
-malloc_test: $(OBJ) malloc_test
+ub: $(NAME)
+	$(OBJ) $(SRCD)/main.c
 	rm -rf $(NAME)
 	make -C $(LIBFTD)
 	cp $(LIBFTD)$(LIBFT) $(MIND)$(MIN)
 	ar rc $(MIND)$(MIN) $(OBJ)
 	rm -f $(LIBFT)
 	ranlib $(MIND)$(MIN)
-	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic  -o $@ $(COMPILE2) $(SRCD)/main.c $(MIND)$(MIN) -L/usr/include -lreadline -L. -lmallocator  -ldl -lcrypto
+	$(COMPILE) $(CFLAGS) -o $(NAME) $(COMPILE2U) $(SRCD)/main.c  $(MIND)$(MIN)
+
 
 clean:
 	rm -rf $(OBJ)
@@ -113,4 +115,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean all re malloc_test
+.PHONY: clean fclean all re

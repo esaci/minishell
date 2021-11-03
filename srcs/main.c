@@ -60,7 +60,7 @@ void	init_path_pwd(t_lexer *l, int mode)
 	gest_malloc(ptr, l);
 	l->pwd = ft_split(ptr, 1);
 	free(ptr);
-	gest_malloc(l->pwd , l);
+	gest_malloc(l->pwd, l);
 }
 
 int	main(int ac, char *av[], char *envp[])
