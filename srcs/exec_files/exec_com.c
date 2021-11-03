@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 20:17:45 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/03 17:24:25 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 21:53:37 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ void	free_lexer_tmp(t_lexer *l, t_node *n, int tmp)
 	}
 }
 
+void	close_fd(t_lexer *l, char **ptr, int fd[2])
+{
+	if (fd[0] < 0)
+		close(fd[1]);
+	if (fd[1] < 0)
+		close(fd[0]);
+	exit(check_order_redirection(l, ptr));
+}
+
 void	init_ptr(t_lexer *l, t_node *n, int fd[2])
 {
 	char	**ptr;
@@ -43,7 +52,7 @@ void	init_ptr(t_lexer *l, t_node *n, int fd[2])
 	ptr[0] = open_infiles(n->left, &(fd[0]));
 	ptr[1] = open_outfiles(n->right, &(fd[1]));
 	if (fd[0] < 0 || fd[1] < 0)
-		exit(check_order_redirection(l, ptr));
+		close_fd(l, ptr, fd);
 	free(ptr[0]);
 	free(ptr[1]);
 	free(ptr);
