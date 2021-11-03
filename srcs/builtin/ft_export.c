@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:19:14 by julpelle          #+#    #+#             */
-/*   Updated: 2021/10/30 12:02:44 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 21:28:02 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ int	ft_export(char **args, t_list *e, int flag)
 	}
 	while (args && *args && flag == 0)
 	{
-		flag2 = loop_identifier_mini(args);
+		flag2 += loop_identifier_mini(args);
 		if (flag2 != 1)
 			export_cases(*args, e);
 		args++;
 	}
-	return (flag2);
+	if (flag2)
+		return (1);
+	return (0);
 }
