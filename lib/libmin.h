@@ -220,10 +220,12 @@ void				error_pipe(t_lexer *l, int count);
 void				execve_check_error(t_lexer *l, t_node *n, char **p, int t);
 void				check_redirection_suite(t_lexer *l, char **ptr, char *c);
 int					check_order_redirection(t_lexer *l, char **ptr);
-void				handle_old_fd(int oldfd, int fd);
+int					handle_old_fd(int oldfd, int fd, int mode);
 int					search_chevg(t_node *n, t_token *t, t_lexer *l, int *count);
 int					search_chevd(t_node *n, t_token *t, t_lexer *l, int *count);
 void				free_loop_fd_in(t_node *n);
 void				free_loop_fd_out(t_node *n);
 void				infile_exit_code(void);
+void				init_infiles(int *fd, int *count, int *oldfd, t_node *n);
+void				init_outfile(int *fd, int *count, int *oldfd, t_node *n);
 #endif

@@ -48,10 +48,11 @@ int	check_order_redirection(t_lexer *l, char **ptr)
 	return (small_free(l, NULL, NULL, 0));
 }
 
-void	handle_old_fd(int oldfd, int fd)
+int	handle_old_fd(int oldfd, int fd, int mode)
 {
 	if (!oldfd)
-		return ;
+		return (mode);
 	if (fd > -1)
 		close(fd);
+	return (mode);
 }

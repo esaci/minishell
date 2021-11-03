@@ -55,6 +55,7 @@ SRC =	$(GNLD)get_next_line.c							\
 		$(SRCD)$(SRCEXEC)exec_fast_functions.c			\
 		$(SRCD)$(SRCEXEC)exec_waiter.c					\
 		$(SRCD)$(SRCEXEC)exec_redirections.c			\
+		$(SRCD)$(SRCEXEC)exec_redir_utils.c				\
 		$(SRCD)$(SRCEXEC)exec_heredoc.c					\
 		$(SRCD)$(SRCEXEC)exec_pipe.c					\
 		$(SRCD)$(SRCEXEC)exec_utils1.c					\
