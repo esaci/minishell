@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 11:55:01 by julespellet       #+#    #+#             */
-/*   Updated: 2021/10/30 12:08:00 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 01:27:37 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	print_env(t_list *env)
 {
 	while (env)
 	{
+		print_custom("declare -x ",1 ,1, 0);
 		if (env->content && !env->content[0])
 		{
 			free(env->content);
