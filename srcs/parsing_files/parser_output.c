@@ -41,7 +41,7 @@ int	malloc_buffer(t_lexer *lexer)
 	}
 	lexer->buffer = malloc(sizeof(char *) * (count + 100));
 	if (!lexer->buffer)
-		return (1);
+		exit(small_free(lexer, NULL, NULL, 1));
 	count2 = 0;
 	while (count2 < (count + 2))
 		lexer->buffer[count2++] = NULL;
@@ -64,7 +64,7 @@ int	fill_buffer(t_lexer *lexer)
 		len = poutput_strlen(toktmp);
 		lexer->buffer[count] = malloc(sizeof(char) * (len + 2));
 		if (!lexer->buffer[count])
-			return (1);
+			exit(small_free(lexer, NULL, NULL, 1));
 		copy_buffer(&(lexer->buffer[count]), toktmp, fd);
 		toktmp = toktmp->n_token;
 		count++;

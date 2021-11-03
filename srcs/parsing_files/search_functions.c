@@ -79,7 +79,7 @@ int	search_infile(t_node *n, t_token *t, t_lexer *l)
 	int	count;
 
 	if (malloc_node_redir(n, t, CHAR_DCHEVG, CHAR_CHEVG))
-		return (1);
+		exit(small_free(NULL, NULL, NULL, 1));
 	signal_wait_heredoc();
 	count = 0;
 	while (t && t->type != CHAR_PIPE)

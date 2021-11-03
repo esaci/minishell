@@ -73,13 +73,13 @@ t_token	*tree_init_node(t_lexer *l, t_token *t, t_node **node)
 	if (!n)
 		return (NULL);
 	if (search_pipe(n, t, l))
-		return (NULL);
+		exit(small_free(l, NULL, NULL, 1));
 	if (tree_define_command(n, t, l))
-		return (NULL);
+		exit(small_free(l, NULL, NULL, 1));
 	if (tree_define_left(n, t, l))
-		return (NULL);
+		exit(small_free(l, NULL, NULL, 1));
 	if (tree_define_right(n, t, l))
-		return (NULL);
+		exit(small_free(l, NULL, NULL, 1));
 	while (t && (t->type != CHAR_PIPE))
 		t = t->n_token;
 	if (t)

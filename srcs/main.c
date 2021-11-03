@@ -31,6 +31,13 @@ char	*correct_path(char *ptr)
 	return (ptr);
 }
 
+void	gest_malloc(char *ptr, t_lexer *l)
+{
+	if (ptr)
+		return ;
+	exit(small_free(l, NULL, NULL, 1));
+}
+
 void	init_path_pwd(t_lexer *l, int mode)
 {
 	t_list	*c_envp;
@@ -45,11 +52,15 @@ void	init_path_pwd(t_lexer *l, int mode)
 			double_free(l->pwd);
 	}
 	ptr = custom_getenv(c_envp, "PATH", 0);
+	gest_malloc(ptr, l);
 	l->pathptr = ft_split(ptr, ':');
 	free(ptr);
+	gest_malloc(l->pathptr, l);
 	ptr = custom_getenv(c_envp, "PWD", 0);
+	gest_malloc(ptr, l);
 	l->pwd = ft_split(ptr, 1);
 	free(ptr);
+	gest_malloc(l->pwd , l);
 }
 
 int	main(int ac, char *av[], char *envp[])

@@ -49,7 +49,7 @@ int	init_pip2(t_lexer *l)
 	}
 	l->pip->ppd = malloc(sizeof(int) * (3));
 	if (!l->pip->ppd)
-		return (1);
+		exit(small_free(l, NULL, NULL, 1));
 	if (free_pip_2(l) == 1)
 		return (1);
 	if (pipe(l->pip->ppd) == -1)
@@ -64,11 +64,11 @@ int	init_pip(t_lexer *l)
 
 	l->pip = malloc(sizeof(t_pip) * 2);
 	if (!l->pip)
-		return (1);
+		exit(small_free(l, NULL, NULL, 1));
 	count = count_right_nodes(l);
 	l->pip->pid = malloc(sizeof(int) * ((count * 2) + 10));
 	if (!l->pip->pid)
-		return (1);
+		exit(small_free(l, NULL, NULL, 1));
 	count2 = 0;
 	while (count2 < (count * 2 + 9))
 		l->pip->pid[count2++] = -2;

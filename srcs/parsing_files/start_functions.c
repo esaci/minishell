@@ -93,7 +93,7 @@ int	start_fonction(t_list *c_envp, int last_exit, char *ptr)
 
 	lexer = malloc(sizeof(t_lexer) * 2);
 	if (!lexer)
-		return (1);
+		return (free_env(c_envp));
 	envp_init(c_envp, lexer);
 	ptr = readline("Minishell$ ");
 	if (wave_readline(ptr, lexer, &last_exit) != -1)

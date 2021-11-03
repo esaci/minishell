@@ -83,10 +83,10 @@ t_lexer	*parser_input(t_lexer *lexer)
 	if (!lexer->line_buffer)
 		return (lexer);
 	if (lexer_start(lexer, 0))
-		return (NULL);
+		return (lexer);
 	if (parser_lexer(lexer))
 		return (NULL);
 	if (parser_output(lexer))
-		return (NULL);
+		return (lexer);
 	return (lexer);
 }

@@ -50,6 +50,8 @@ enum TOKENTYPE	lexer_check_type(t_token *tok, char *oldstr)
 
 int	init_lexer(t_lexer *lexer)
 {
+	if (!lexer)
+		return (1);
 	lexer->len = 0;
 	lexer->tok = NULL;
 	lexer->buffer = NULL;
@@ -86,6 +88,8 @@ int	lexer_start(t_lexer *lexer, int mode)
 		mode++;
 	lexer->tok = lexer_token(lexer->line_buffer + mode,
 			lexer->line_buffer + mode);
+	if (!lexer->tok)
+		return (1);
 	toktmp = &(lexer->tok->n_token);
 	if (!lexer->line_buffer[mode])
 		return (0);
@@ -94,12 +98,9 @@ int	lexer_start(t_lexer *lexer, int mode)
 	{
 		(*toktmp) = lexer_token(lexer->line_buffer + mode,
 				lexer->line_buffer + mode - 1);
-		lexer->len++;
 		if (!(*toktmp))
-		{
-			free_lexer_tokens(lexer, 1);
-			return (1);
-		}
+			return (free_lexer_tokens(lexer, 1));
+		lexer->len++;
 		toktmp = &((*toktmp)->n_token);
 		mode++;
 	}

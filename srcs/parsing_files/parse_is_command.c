@@ -72,7 +72,7 @@ char	*parse_is_command(char *arg_list, t_lexer *l, int count, int mode)
 	if (!arg_list || !arg_list[0] || arg_list[0] == '.')
 		return (return_free(copieur(arg_list), NULL, arg_list, mode));
 	ptr2 = copieur(arg_list);
-	if (ptr2[0] != '/')
+	if (ptr2 && ptr2[0] != '/')
 	{
 		free(ptr2);
 		ptr2 = ft_strjoin("/", arg_list);

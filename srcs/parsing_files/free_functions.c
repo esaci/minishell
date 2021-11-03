@@ -28,6 +28,7 @@ int	free_lexer_tokens(t_lexer *lexer, int mode)
 			free(ltmp);
 			ltmp = ltmp2;
 		}
+		lexer->tok = NULL;
 	}
 	if (!lexer->buffer)
 		return (mode);
@@ -72,6 +73,7 @@ int	free_lexer_nodes(t_lexer *l, int mode)
 		free(oldnode->str);
 		free(oldnode);
 	}
+	l->node = NULL;
 	if (mode)
 		init_lexer(l);
 	return (0);

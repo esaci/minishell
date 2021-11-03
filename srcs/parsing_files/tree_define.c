@@ -38,7 +38,7 @@ int	tree_define_left(t_node *n, t_token *t, t_lexer *l)
 		return (0);
 	left = malloc(sizeof(t_node) * 2);
 	if (!left)
-		return (1);
+		exit(small_free(l, NULL, NULL, 1));
 	n->left = left;
 	left->fd = NULL;
 	left->archive_fd = NULL;

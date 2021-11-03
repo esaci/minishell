@@ -53,7 +53,7 @@ t_list	*ft_del_variable(char *ptr, t_list *env)
 	return (env);
 }
 
-t_list	*free_env(t_list *env)
+int	free_env(t_list *env)
 {
 	t_list	*tmp;
 
@@ -66,7 +66,7 @@ t_list	*free_env(t_list *env)
 		if (tmp)
 			free(tmp);
 	}
-	return (NULL);
+	return (1);
 }
 
 char	*add_apo_envp(char *env)
