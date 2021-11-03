@@ -45,8 +45,6 @@ int	malloc_buffer(t_lexer *lexer)
 	count2 = 0;
 	while (count2 < (count + 2))
 		lexer->buffer[count2++] = NULL;
-	if (!lexer->buffer)
-		return (1);
 	return (0);
 }
 
