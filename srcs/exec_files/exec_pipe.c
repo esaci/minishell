@@ -6,11 +6,17 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 01:03:51 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/03 17:25:26 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 22:29:31 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
+
+void	close_fd(int fd)
+{
+	if (fd > -1)
+		close(fd);
+}
 
 void	exec_pipe_split(t_lexer *l, t_node *n, int count, int fdin)
 {
@@ -31,12 +37,10 @@ void	exec_pipe_split(t_lexer *l, t_node *n, int count, int fdin)
 		if (count > 0)
 		{
 			dup2(fdin, STDIN_FILENO);
-			if (fdin > -1)
-				close(fdin);
+			close_fd(fdin);
 		}
 		dup2(l->pip->ppd[1], STDOUT_FILENO);
-		if (l->pip->ppd[1] > -1)
-			close(l->pip->ppd[1]);
+		close_fd(l->pip->ppd[1]);
 		exit_code = exec_com(l, n->left, count);
 		exit(exit_code);
 	}

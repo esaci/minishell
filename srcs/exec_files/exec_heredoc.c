@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 23:17:53 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/03 17:15:20 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/03 22:25:00 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ int	exec_in_heredoc(char *limiter, int *fdu, t_lexer *l)
 		print_custom(">", 2, 1, 0);
 		if (countain_doll(ptr))
 			ptr = apply_doll(ptr, l);
-		write(fd, ptr, ft_strlen(ptr));
-		write(fd, "\n", 1);
+		print_custom(ptr, fd, 1, 1);
 		free(ptr);
 	}
 	if (ptr)
