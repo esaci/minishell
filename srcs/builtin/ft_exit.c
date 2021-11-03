@@ -66,7 +66,7 @@ int	ft_exit_suite(t_lexer *l, char **args)
 
 int	ft_exit(t_lexer *l, char **args)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = ft_exit_suite(l, args);
 	if (tmp)

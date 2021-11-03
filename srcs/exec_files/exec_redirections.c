@@ -68,52 +68,54 @@ char	*open_infiles(t_node *n, int *fd)
 	return (NULL);
 }
 
-char	*open_outfiles_suite(t_node *n, int *fd, int *count, int mode)
+char	*open_outfiles_suite(t_node *n, int *fd
+	, int count[2], int mode)
 {
-	int	oldfd;
-
-	oldfd = 0;
 	if (mode == 1)
 	{
-		handle_old_fd(oldfd, *fd);
-		oldfd = 1;
-		*fd = open(n->str[*count + 1],
+		handle_old_fd(count[1], *fd);
+		count[1] = 1;
+		*fd = open(n->str[count[0] + 1],
 				O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (*fd < 0)
-			return (n->str[*count + 1]);
+			return (n->str[count[0] + 1]);
 	}
 	if (mode == 2)
 	{
-		handle_old_fd(oldfd, *fd);
-		oldfd = 1;
-		*fd = open(n->str[*count + 1],
+		handle_old_fd(count[1], *fd);
+		count[1] = 1;
+		*fd = open(n->str[count[0] + 1],
 				O_WRONLY | O_CREAT | O_APPEND, 0777);
 		if (*fd < 0)
-			return (n->str[*count + 1]);
+			return (n->str[count[0] + 1]);
 	}
 	return (NULL);
 }
 
 char	*open_outfiles(t_node *n, int *fd)
 {
-	int	count;
+	int		c[2];
+	char	*tmp;
 
 	*fd = 1;
-	count = 0;
+	c[0] = 0;
+	c[1] = 0;
 	n->archive_fd = n->fd;
-	while (n->str[count] && (!ft_memcmp(n->str[count], ">", \
-		ft_strlen(n->str[count])) || !ft_memcmp(n->str[count], \
-		">>", ft_strlen(n->str[count]))))
+	while (n->str[c[0]] && (!ft_memcmp(n->str[c[0]], ">", \
+		ft_strlen(n->str[c[0]])) || !ft_memcmp(n->str[c[0]], \
+		">>", ft_strlen(n->str[c[0]]))))
 	{
-		if (!n->str[count + 1])
+		if (!n->str[c[0] + 1])
 			break ;
-		if (!ft_memcmp(n->str[count], ">", ft_strlen(n->str[count])))
-			return (open_outfiles_suite(n, fd, &count, 1));
-		else if (!ft_memcmp(n->str[count], ">>", ft_strlen(n->str[count])))
-			return (open_outfiles_suite(n, fd, &count, 2));
+		if (!ft_memcmp(n->str[c[0]], ">", ft_strlen(n->str[c[0]])))
+			tmp = open_outfiles_suite(n, fd, c, 1);
+		else if (!ft_memcmp(n->str[c[0]], ">>", ft_strlen(n->str[c[0]])))
+			tmp = open_outfiles_suite(n, fd, c, 2);
 		else
 			break ;
-		count += 2;
+		if (tmp)
+			return (tmp);
+		c[0] += 2;
 	}
 	return (NULL);
 }
