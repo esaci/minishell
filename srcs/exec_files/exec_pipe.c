@@ -6,13 +6,13 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 01:03:51 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/03 22:29:31 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/04 00:38:55 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libmin.h"
 
-void	close_fd(int fd)
+void	close_fd_pipe(int fd)
 {
 	if (fd > -1)
 		close(fd);
@@ -35,12 +35,10 @@ void	exec_pipe_split(t_lexer *l, t_node *n, int count, int fdin)
 			exit(in);
 		}
 		if (count > 0)
-		{
 			dup2(fdin, STDIN_FILENO);
-			close_fd(fdin);
-		}
+		close_fd_pipe(fdin);
 		dup2(l->pip->ppd[1], STDOUT_FILENO);
-		close_fd(l->pip->ppd[1]);
+		close_fd_pipe(l->pip->ppd[1]);
 		exit_code = exec_com(l, n->left, count);
 		exit(exit_code);
 	}

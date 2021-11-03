@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:15:38 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/03 21:24:49 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/04 00:41:19 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,8 @@ int	menu(char *command, char **args, t_lexer *l)
 	exit(0);
 }
 
-int	check_com(char *command, char **args, t_lexer *l)
+int	check_com_return(char **args, t_lexer *l)
 {
-	if (!ft_memcmp(command, "unset", 6))
-		return (0);
-	else if (!ft_memcmp(command, "cd", 3))
-		return (0);
-	else if (!ft_memcmp(command, "export", 7))
-		return (0);
-	else if (ft_memcmp(command, "exit", 5))
-		return (-1);
-	if (!args || !args[0])
-		return (0);
-	l->last_exit = 2;
 	if (args[0] && args[1])
 	{
 		l->last_exit = 1;
@@ -65,6 +54,25 @@ int	check_com(char *command, char **args, t_lexer *l)
 	}
 	return (print_custom("Minishell$: exit: \
 	numeric argument required", 2, 0, 1));
+}
+
+int	check_com(char *command, char **args, t_lexer *l)
+{
+	if (!ft_memcmp(command, "unset", 6))
+		return (0);
+	else if (!ft_memcmp(command, "cd", 3))
+	{
+		l->last_exit = ft_cd(args, l->envp);
+		return (0);
+	}
+	else if (!ft_memcmp(command, "export", 7))
+		return (0);
+	else if (ft_memcmp(command, "exit", 5))
+		return (-1);
+	if (!args || !args[0])
+		return (0);
+	l->last_exit = 2;
+	return (check_com_return(args, l));
 }
 
 int	new_menu(char *command, char **args, t_lexer *lex)

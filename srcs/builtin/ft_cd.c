@@ -6,7 +6,7 @@
 /*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 18:42:13 by julpelle          #+#    #+#             */
-/*   Updated: 2021/11/02 19:26:04 by julpelle         ###   ########.fr       */
+/*   Updated: 2021/11/04 00:41:41 by julpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,23 @@ void	ft_swap_env_pwd(char *arg, t_list *e)
 void	ft_cd_noargs(t_list *e, int *last_exit)
 {
 	char	*arg;
+	char	*tmp;
 
 	arg = custom_getenv(e, "HOME", 0);
-	if (!arg || !arg[0])
+	tmp = custom_getenv(e, "HOME", 1);
+	if ((!arg || !arg[0]) && (!tmp || !tmp[0]))
 	{
 		ft_putstr_fd("Minishell : cd : HOME doesn't exist\n", 2);
 		*last_exit = 1;
 	}
+	else if (!arg || !arg[0])
+		*last_exit = 0;
 	else if (chdir(arg) != 0)
 		error_chdir(NULL, last_exit);
 	else
 		ft_swap_env_pwd(arg, e);
 	free(arg);
+	free(tmp);
 }
 
 int	ft_cd(char **args, t_list *l)
@@ -92,7 +97,10 @@ int	ft_cd(char **args, t_list *l)
 		if (test != -1)
 			ft_swap_env_pwd(*args, l);
 		else
+		{
+			print_custom("cd : file does not exist", 2, 1, 1);
 			error_chdir(*args, &last_exit);
+		}
 	}
 	return (last_exit);
 }
