@@ -14,8 +14,8 @@
 
 void	check_redirection_suite(t_lexer *l, char **ptr, char *c)
 {
-	print_custom(c, 1, 1, 0);
-	print_custom(" file can't be read/write", 1, 1, 1);
+	print_custom(c, 2, 1, 0);
+	print_custom(" file can't be read/write", 2, 1, 1);
 	free(ptr);
 	close_pipes(l, 1);
 	small_free(l, NULL, NULL, 1);

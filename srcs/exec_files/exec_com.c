@@ -34,9 +34,9 @@ void	free_lexer_tmp(t_lexer *l, t_node *n, int tmp)
 
 void	close_fd(t_lexer *l, char **ptr, int fd[2])
 {
-	if (fd[0] < 0)
+	if (fd[1] > 1)
 		close(fd[1]);
-	if (fd[1] < 0)
+	if (fd[0] > 0)
 		close(fd[0]);
 	exit(check_order_redirection(l, ptr));
 }
