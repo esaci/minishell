@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julpelle <julpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esaci <esaci@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:35:04 by esaci             #+#    #+#             */
-/*   Updated: 2021/11/02 17:33:30 by julpelle         ###   ########.fr       */
+/*   Updated: 2022/02/25 15:50:27 by esaci            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef enum NODETYPE
 	NODE_ARG = 'A',
 }	t_NODETYPE;
 
-int						*g_exit_code;
+extern int						*g_exit_code;
 
 typedef struct s_list	t_list;
 
